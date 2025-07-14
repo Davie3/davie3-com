@@ -8,7 +8,7 @@ const navLinks = [
 
 export function Header() {
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-[color:var(--color-navy)]/80 backdrop-blur-md">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-[color:var(--color-navy-light)]/80 backdrop-blur-md">
       <nav className="container mx-auto flex items-center justify-between p-4">
         <Link href="/" className="text-2xl font-bold text-[color:var(--color-accent)]">
           Davie3
