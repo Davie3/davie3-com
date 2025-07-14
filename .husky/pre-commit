@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+# Execute lint-staged using the absolute path to the npm shim
+/home/dave/.local/share/mise/shims/npm exec --no -- lint-staged
+
