@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 /* Define the color palette using CSS variables */
 :root {
@@ -36,20 +36,25 @@ body {
     /* Faint, angled tech lines */
     linear-gradient(115deg, rgba(100, 255, 218, 0.04) 1px, transparent 1px),
     /* More varied star layers for a deeper skyscape */
-    radial-gradient(circle, rgba(204, 214, 246, 0.4) 0.5px, transparent 1px),
+      radial-gradient(circle, rgba(204, 214, 246, 0.4) 0.5px, transparent 1px),
     radial-gradient(circle, rgba(204, 214, 246, 0.2) 1px, transparent 1.5px),
     radial-gradient(circle, rgba(204, 214, 246, 0.1) 1.5px, transparent 2px),
     radial-gradient(circle, rgba(204, 214, 246, 0.3) 1px, transparent 2px),
     radial-gradient(circle, rgba(204, 214, 246, 0.15) 2px, transparent 3px);
-  background-size: 
-    350px 350px, /* Tech lines */
-    50px 50px,   /* Stars layer 1 */
-    120px 120px, /* Stars layer 2 */
-    220px 220px, /* Stars layer 3 */
-    180px 180px, /* Stars layer 4 */
-    300px 300px; /* Stars layer 5 */
-  background-position: 
-    0 0, 10px 20px, 60px 80px, 110px 150px, 90px 40px, 150px 200px;
+  background-size:
+    350px 350px,
+    /* Tech lines */ 50px 50px,
+    /* Stars layer 1 */ 120px 120px,
+    /* Stars layer 2 */ 220px 220px,
+    /* Stars layer 3 */ 180px 180px,
+    /* Stars layer 4 */ 300px 300px; /* Stars layer 5 */
+  background-position:
+    0 0,
+    10px 20px,
+    60px 80px,
+    110px 150px,
+    90px 40px,
+    150px 200px;
 }
 
 /* Optional: Style for links to use the accent color */
