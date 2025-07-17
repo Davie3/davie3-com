@@ -1,3 +1,6 @@
+'use client';
+
+import { motion } from 'framer-motion';
 import Link from 'next/link';
 
 const navLinks = [
@@ -6,9 +9,36 @@ const navLinks = [
   { name: 'GitHub', href: 'https://github.com/Davie3', isExternal: true },
 ];
 
+const navContainerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.2,
+    },
+  },
+};
+
+const navItemVariants = {
+  hidden: { y: -20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.3,
+    },
+  },
+};
+
 export function Header() {
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-[color:var(--color-navy-light)]/80 backdrop-blur-md">
+    <motion.header
+      className="fixed top-0 left-0 right-0 z-50 bg-[color:var(--color-navy-light)]/80 backdrop-blur-md"
+      initial={{ y: -100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
       <nav className="container mx-auto flex items-center justify-between p-4">
         <Link
           href="/"
@@ -16,9 +46,14 @@ export function Header() {
         >
           Davie3
         </Link>
-        <ul className="flex items-center gap-6">
+        <motion.ul
+          className="flex items-center gap-6"
+          variants={navContainerVariants}
+          initial="hidden"
+          animate="visible"
+        >
           {navLinks.map((link) => (
-            <li key={link.name}>
+            <motion.li key={link.name} variants={navItemVariants}>
               <Link
                 href={link.href}
                 target={link.isExternal ? '_blank' : undefined}
@@ -27,10 +62,10 @@ export function Header() {
               >
                 {link.name}
               </Link>
-            </li>
+            </motion.li>
           ))}
-        </ul>
+        </motion.ul>
       </nav>
-    </header>
+    </motion.header>
   );
 }
