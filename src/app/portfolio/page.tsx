@@ -10,7 +10,7 @@ const gitHubRepoSchema = z.array(
   z.object({
     name: z.string(),
     description: z.string().nullable(),
-    html_url: z.string().url(),
+    html_url: z.url(),
     language: z.string().nullable(),
     stargazers_count: z.number(),
     forks_count: z.number(),
