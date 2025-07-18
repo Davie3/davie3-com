@@ -1,21 +1,14 @@
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 import sgMail from '@sendgrid/mail';
+import sanitizeHtml from 'sanitize-html';
+import xss from 'xss';
 
-if (process.env.SENDGRID_API_KEY) {
-  sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-} else {
-  console.warn('SENDGRID_API_KEY is not set. Email sending will be disabled.');
-}
+import { env } from '@/env';
+
+sgMail.setApiKey(env.SENDGRID_API_KEY);
 
 export async function POST(request: NextRequest): Promise<NextResponse> {
-  if (!process.env.SENDGRID_API_KEY) {
-    return NextResponse.json(
-      { error: 'Email sending is not configured.' },
-      { status: 500 },
-    );
-  }
-
   try {
     const { name, email, message } = await request.json();
 
@@ -26,19 +19,23 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       );
     }
 
+    const sanitizedName = xss(sanitizeHtml(name));
+    const sanitizedEmail = xss(sanitizeHtml(email));
+    const sanitizedMessage = xss(sanitizeHtml(message));
+
     const msg = {
-      to: process.env.SENDGRID_TO_EMAIL as string,
-      from: process.env.SENDGRID_FROM_EMAIL as string,
-      subject: `New Contact Form Submission from ${name}`,
-      text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
-      html: `<p><strong>Name:</strong> ${name}</p><p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p><p><strong>Message:</strong></p><p>${message.replace(/\n/g, '<br>')}</p>`,
+      to: env.SENDGRID_TO_EMAIL,
+      from: env.SENDGRID_FROM_EMAIL,
+      subject: `New Contact Form Submission from ${sanitizedName}`,
+      text: `Name: ${sanitizedName}\nEmail: ${sanitizedEmail}\n\nMessage:\n${sanitizedMessage}`,
+      html: `<p><strong>Name:</strong> ${sanitizedName}</p><p><strong>Email:</strong> <a href="mailto:${sanitizedEmail}">${sanitizedEmail}</a></p><p><strong>Message:</strong></p><p>${sanitizedMessage.replace(/\n/g, '<br>')}</p>`,
     };
 
     await sgMail.send(msg);
 
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error('Error sending email:', error);
+    console.error('Error in contact API:', error);
     return NextResponse.json(
       { error: 'Failed to send message.' },
       { status: 500 },
