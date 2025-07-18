@@ -14,14 +14,6 @@
   --color-accent: var(--color-blue-accent);
 }
 
-/* Define theme variables for Tailwind */
-@theme {
-  --color-background: var(--color-background);
-  --color-foreground: var(--color-foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
 /* Apply base styles */
 html {
   scroll-behavior: smooth;
