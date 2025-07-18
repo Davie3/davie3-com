@@ -2,11 +2,21 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
-const navLinks = [
+type NavLink = {
+  name: string;
+  href: string;
+  openInNewTab?: boolean;
+};
+
+const navLinks: NavLink[] = [
   { name: 'Home', href: '/' },
-  { name: 'Projects', href: '/projects' },
-  { name: 'GitHub', href: 'https://github.com/Davie3', isExternal: true },
+  { name: 'About', href: '/about' },
+  { name: 'Portfolio', href: '/portfolio' },
+  { name: 'Blog', href: 'https://blog.davie3.com', openInNewTab: true },
+  { name: 'Tech Blog', href: 'https://tech.davie3.com', openInNewTab: true },
+  { name: 'Contact', href: '/contact' },
 ];
 
 const navContainerVariants = {
@@ -32,6 +42,8 @@ const navItemVariants = {
 };
 
 export function Header() {
+  const pathname = usePathname();
+
   return (
     <motion.header
       className="fixed top-0 left-0 right-0 z-50 bg-[color:var(--color-navy-light)]/80 backdrop-blur-md"
@@ -44,7 +56,7 @@ export function Header() {
           href="/"
           className="text-2xl font-bold text-[color:var(--color-accent)]"
         >
-          Davie3
+          DG
         </Link>
         <motion.ul
           className="flex items-center gap-6"
@@ -52,18 +64,22 @@ export function Header() {
           initial="hidden"
           animate="visible"
         >
-          {navLinks.map((link) => (
-            <motion.li key={link.name} variants={navItemVariants}>
-              <Link
-                href={link.href}
-                target={link.isExternal ? '_blank' : undefined}
-                rel={link.isExternal ? 'noopener noreferrer' : undefined}
-                className="text-[color:var(--color-slate-light)] hover:text-[color:var(--color-accent)] transition-colors duration-300"
-              >
-                {link.name}
-              </Link>
-            </motion.li>
-          ))}
+          {navLinks.map((link) => {
+            const isActive = pathname === link.href;
+
+            return (
+              <motion.li key={link.name} variants={navItemVariants}>
+                <Link
+                  href={link.href}
+                  target={link.openInNewTab ? '_blank' : undefined}
+                  rel={link.openInNewTab ? 'noopener noreferrer' : undefined}
+                  className={`transition-colors duration-300 ${isActive ? 'text-[color:var(--color-accent)]' : 'text-[color:var(--color-slate-light)] hover:text-[color:var(--color-accent)]'}`}
+                >
+                  {link.name}
+                </Link>
+              </motion.li>
+            );
+          })}
         </motion.ul>
       </nav>
     </motion.header>

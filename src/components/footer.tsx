@@ -22,7 +22,7 @@ export function Footer() {
 
   return (
     <footer
-      className={`w-full py-8 text-center text-sm text-[color:var(--color-slate-dark)] transition-all duration-700 ease-in-out ${
+      className={`w-full py-8 text-center text-sm text-muted-foreground transition-all duration-700 ease-in-out ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
       }`}
     >
@@ -32,12 +32,12 @@ export function Footer() {
             href="https://github.com/Davie3"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-[color:var(--color-accent)] transition-colors duration-300"
+            className="hover:text-primary transition-colors duration-300"
           >
             Designed & Built by David Griffin
           </a>
           <p>Created with an AI assistant 🤖</p>
-          <p>© {yearText} All Rights Reserved.</p>
+          <p> {yearText} All Rights Reserved.</p>
         </div>
       </div>
     </footer>

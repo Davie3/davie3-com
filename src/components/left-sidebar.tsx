@@ -1,11 +1,18 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { FiGithub, FiInstagram, FiLinkedin, FiTwitch } from 'react-icons/fi';
 import { FaXTwitter } from 'react-icons/fa6';
 import { SiBluesky } from 'react-icons/si';
-import { FiGithub, FiInstagram, FiLinkedin, FiTwitch } from 'react-icons/fi';
+import { JSX } from 'react';
 
-const socialLinks = [
+type SocialLink = {
+  name: string;
+  href: string;
+  icon: JSX.Element;
+};
+
+const socialLinks: SocialLink[] = [
   {
     name: 'GitHub',
     href: 'https://github.com/davie3',
@@ -53,14 +60,14 @@ export function LeftSidebar() {
             href={link.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[color:var(--color-slate-dark)] hover:text-[color:var(--color-accent)] transition-transform duration-300 hover:-translate-y-1"
+            className="text-muted-foreground transition-transform duration-300 hover:text-primary hover:-translate-y-1"
             aria-label={link.name}
           >
             {link.icon}
           </a>
         ))}
       </div>
-      <div className="mt-6 w-px h-24 bg-[color:var(--color-slate-dark)]"></div>
+      <div className="mt-6 w-px h-24 bg-muted-foreground"></div>
     </motion.div>
   );
 }
