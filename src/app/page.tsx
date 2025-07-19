@@ -11,7 +11,10 @@ const GITHUB_URL = 'https://github.com/davie3';
  */
 export default function Home(): JSX.Element {
   return (
-    <main className="flex flex-col items-center justify-center min-h-screen p-8 text-center bg-background">
+    <main
+      className="flex flex-col items-center justify-center p-4 text-center md:p-8"
+      style={{ minHeight: 'calc(100vh - 4rem)' }}
+    >
       <div className="max-w-3xl">
         <h1 className="text-6xl font-bold tracking-tight text-primary sm:text-7xl md:text-8xl">
           David Griffin
