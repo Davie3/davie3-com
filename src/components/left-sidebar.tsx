@@ -67,7 +67,7 @@ export function LeftSidebar() {
           </a>
         ))}
       </div>
-      <div className="mt-6 w-px h-24 bg-muted-foreground"></div>
+      <div className="mt-6 h-24 w-px bg-[color:var(--color-slate-dark)]"></div>
     </motion.div>
   );
 }
