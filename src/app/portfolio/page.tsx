@@ -1,10 +1,14 @@
 import type { JSX } from 'react';
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { GitFork, Star } from 'lucide-react';
 
 import { EXTERNAL_URLS } from '@/constants/urls';
 import { GITHUB_REPO_SCHEMA, GITHUB_CONFIG } from '@/constants/github';
+import { PAGE_METADATA } from '@/constants/page-metadata';
 import type { GitHubRepo } from '@/types/api';
+
+export const metadata: Metadata = PAGE_METADATA.PORTFOLIO;
 
 async function getGitHubRepos(): Promise<GitHubRepo[]> {
   try {

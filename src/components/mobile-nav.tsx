@@ -51,6 +51,7 @@ export function MobileNav(): JSX.Element {
     if (isOpen) {
       setIsOpen(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
   const toggleMenu = () => {

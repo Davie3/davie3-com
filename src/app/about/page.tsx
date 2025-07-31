@@ -1,6 +1,10 @@
 import type { JSX } from 'react';
+import type { Metadata } from 'next';
 
 import { SKILLS, EXPERIENCES } from '@/constants/personal';
+import { PAGE_METADATA } from '@/constants/page-metadata';
+
+export const metadata: Metadata = PAGE_METADATA.ABOUT;
 
 /**
  * Renders the about page, showcasing professional experience and skills.
