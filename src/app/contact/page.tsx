@@ -3,16 +3,11 @@
 import type { JSX } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
 import { useState } from 'react';
 
-const contactFormSchema = z.object({
-  name: z.string().min(2, 'Name must be at least 2 characters.'),
-  email: z.email('Please enter a valid email address.'),
-  message: z.string().min(10, 'Message must be at least 10 characters.'),
-});
-
-type ContactFormValues = z.infer<typeof contactFormSchema>;
+import { CONTACT_FORM_SCHEMA, FORM_MESSAGES } from '@/constants/forms';
+import { INTERNAL_ROUTES } from '@/constants/urls';
+import type { ContactFormValues } from '@/constants/forms';
 
 /**
  * Renders the contact page with a functional contact form.
@@ -29,7 +24,7 @@ export default function ContactPage(): JSX.Element {
     formState: { errors },
     reset,
   } = useForm<ContactFormValues>({
-    resolver: zodResolver(contactFormSchema),
+    resolver: zodResolver(CONTACT_FORM_SCHEMA),
   });
 
   const onSubmit = async (data: ContactFormValues) => {
@@ -37,7 +32,7 @@ export default function ContactPage(): JSX.Element {
     setFormStatus(null);
 
     try {
-      const response = await fetch('/api/contact', {
+      const response = await fetch(INTERNAL_ROUTES.API_CONTACT, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -46,13 +41,13 @@ export default function ContactPage(): JSX.Element {
       });
 
       if (!response.ok) {
-        throw new Error('Failed to send message.');
+        throw new Error(FORM_MESSAGES.ERROR);
       }
 
-      setFormStatus('success');
+      setFormStatus(FORM_MESSAGES.SUCCESS);
       reset();
     } catch {
-      setFormStatus('error');
+      setFormStatus(FORM_MESSAGES.ERROR);
     } finally {
       setIsSubmitting(false);
     }
@@ -135,12 +130,12 @@ export default function ContactPage(): JSX.Element {
           </button>
         </div>
 
-        {formStatus === 'success' && (
+        {formStatus === FORM_MESSAGES.SUCCESS && (
           <p className="text-center text-green-500">
             Message sent successfully! Thank you for reaching out.
           </p>
         )}
-        {formStatus === 'error' && (
+        {formStatus === FORM_MESSAGES.ERROR && (
           <p className="text-center text-red-500">
             Something went wrong. Please try again later.
           </p>

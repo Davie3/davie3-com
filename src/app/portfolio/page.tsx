@@ -1,29 +1,16 @@
 import type { JSX } from 'react';
 import Link from 'next/link';
 import { GitFork, Star } from 'lucide-react';
-import { z } from 'zod';
 
-const GITHUB_API_URL =
-  'https://api.github.com/search/repositories?q=user:davie3+fork:false&sort=stars&direction=desc';
-
-const gitHubRepoSchema = z.array(
-  z.object({
-    name: z.string(),
-    description: z.string().nullable(),
-    html_url: z.url(),
-    language: z.string().nullable(),
-    stargazers_count: z.number(),
-    forks_count: z.number(),
-  }),
-);
-
-type GitHubRepo = z.infer<typeof gitHubRepoSchema>[number];
+import { EXTERNAL_URLS } from '@/constants/urls';
+import { GITHUB_REPO_SCHEMA, GITHUB_CONFIG } from '@/constants/github';
+import type { GitHubRepo } from '@/constants/github';
 
 async function getGitHubRepos(): Promise<GitHubRepo[]> {
   try {
-    const response = await fetch(GITHUB_API_URL, {
+    const response = await fetch(EXTERNAL_URLS.GITHUB_API, {
       // Revalidate data at most once per hour
-      next: { revalidate: 3600 },
+      next: { revalidate: GITHUB_CONFIG.REVALIDATE_INTERVAL },
     });
 
     if (!response.ok) {
@@ -32,7 +19,7 @@ async function getGitHubRepos(): Promise<GitHubRepo[]> {
     }
 
     const data = await response.json();
-    const validationResult = gitHubRepoSchema.safeParse(data.items);
+    const validationResult = GITHUB_REPO_SCHEMA.safeParse(data.items);
 
     if (!validationResult.success) {
       console.error('GitHub repo validation failed:', validationResult.error);
