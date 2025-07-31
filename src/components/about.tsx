@@ -1,4 +1,6 @@
-export function About() {
+import type { JSX } from 'react';
+
+export function About(): JSX.Element {
   return (
     <section id="about" className="py-20">
       <h2 className="text-4xl font-bold text-center">About Me</h2>

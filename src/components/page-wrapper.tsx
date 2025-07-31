@@ -1,18 +1,30 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import type { ReactNode, JSX } from 'react';
 
-interface PageWrapperProps {
-  children: React.ReactNode;
-}
+import { ANIMATION_DURATIONS } from '@/constants/animation';
 
-export function PageWrapper({ children }: PageWrapperProps) {
+type PageWrapperProps = {
+  children: ReactNode;
+};
+
+const PAGE_ANIMATION = {
+  DURATION: ANIMATION_DURATIONS.SLOW,
+  DELAY: 0.4,
+  Y_OFFSET: 20,
+} as const;
+
+export function PageWrapper({ children }: PageWrapperProps): JSX.Element {
   return (
     <motion.main
       className="container mx-auto px-6 md:px-12 lg:px-24"
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: PAGE_ANIMATION.Y_OFFSET }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: 0.4 }}
+      transition={{
+        duration: PAGE_ANIMATION.DURATION,
+        delay: PAGE_ANIMATION.DELAY,
+      }}
     >
       {children}
     </motion.main>

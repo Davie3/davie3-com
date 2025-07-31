@@ -1,48 +1,36 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, type Variants } from 'framer-motion';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import type { JSX } from 'react';
+
 import { MobileNav } from '@/components/mobile-nav';
+import { NAV_LINKS, NAV_ANIMATION } from '@/constants/navigation';
 
-type NavLink = {
-  name: string;
-  href: string;
-  openInNewTab?: boolean;
-};
-
-const navLinks: NavLink[] = [
-  { name: 'Home', href: '/' },
-  { name: 'About', href: '/about' },
-  { name: 'Portfolio', href: '/portfolio' },
-  { name: 'Blog', href: 'https://blog.davie3.com', openInNewTab: true },
-  { name: 'Tech Blog', href: 'https://tech.davie3.com', openInNewTab: true },
-  { name: 'Contact', href: '/contact' },
-];
-
-const navContainerVariants = {
+const navContainerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.2,
+      staggerChildren: NAV_ANIMATION.STAGGER_DELAY,
+      delayChildren: NAV_ANIMATION.CHILDREN_DELAY,
     },
   },
 };
 
-const navItemVariants = {
+const navItemVariants: Variants = {
   hidden: { y: -20, opacity: 0 },
   visible: {
     y: 0,
     opacity: 1,
     transition: {
-      duration: 0.3,
+      duration: NAV_ANIMATION.ITEM_DURATION,
     },
   },
 };
 
-export function Header() {
+export function Header(): JSX.Element {
   const pathname = usePathname();
 
   return (
@@ -50,7 +38,7 @@ export function Header() {
       className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-md"
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: NAV_ANIMATION.HEADER_DURATION }}
     >
       <nav className="container mx-auto flex items-center justify-between p-4">
         <Link href="/" className="text-2xl font-bold text-primary">
@@ -64,7 +52,7 @@ export function Header() {
             initial="hidden"
             animate="visible"
           >
-            {navLinks.map((link) => {
+            {NAV_LINKS.map((link) => {
               const isActive = pathname === link.href;
               return (
                 <motion.li key={link.name} variants={navItemVariants}>

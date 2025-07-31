@@ -4,48 +4,31 @@ import { motion } from 'framer-motion';
 import { FiGithub, FiInstagram, FiLinkedin, FiTwitch } from 'react-icons/fi';
 import { FaXTwitter } from 'react-icons/fa6';
 import { SiBluesky } from 'react-icons/si';
-import { JSX } from 'react';
+import type { JSX } from 'react';
 
-type SocialLink = {
-  name: string;
-  href: string;
-  icon: JSX.Element;
+import { SOCIAL_LINKS_DATA, type SocialLinkData } from '@/constants/social';
+
+const getIcon = (iconName: SocialLinkData['iconName']): JSX.Element => {
+  const iconProps = { size: 20 };
+  switch (iconName) {
+    case 'github':
+      return <FiGithub {...iconProps} />;
+    case 'linkedin':
+      return <FiLinkedin {...iconProps} />;
+    case 'twitch':
+      return <FiTwitch {...iconProps} />;
+    case 'x':
+      return <FaXTwitter {...iconProps} />;
+    case 'instagram':
+      return <FiInstagram {...iconProps} />;
+    case 'bluesky':
+      return <SiBluesky {...iconProps} />;
+    default:
+      return <FiGithub {...iconProps} />;
+  }
 };
 
-const socialLinks: SocialLink[] = [
-  {
-    name: 'GitHub',
-    href: 'https://github.com/davie3',
-    icon: <FiGithub size={20} />,
-  },
-  {
-    name: 'LinkedIn',
-    href: 'https://www.linkedin.com/in/davie3',
-    icon: <FiLinkedin size={20} />,
-  },
-  {
-    name: 'Twitch',
-    href: 'https://www.twitch.tv/davie3',
-    icon: <FiTwitch size={20} />,
-  },
-  {
-    name: 'X',
-    href: 'https://x.com/itsdavie3/',
-    icon: <FaXTwitter size={20} />,
-  },
-  {
-    name: 'Instagram',
-    href: 'https://www.instagram.com/itsdavie3/',
-    icon: <FiInstagram size={20} />,
-  },
-  {
-    name: 'Bluesky',
-    href: 'https://bsky.app/profile/itsdavie3.bsky.social',
-    icon: <SiBluesky size={20} />,
-  },
-];
-
-export function LeftSidebar() {
+export function LeftSidebar(): JSX.Element {
   return (
     <motion.div
       className="hidden md:flex flex-col items-center fixed bottom-0 left-10 w-10"
@@ -54,7 +37,7 @@ export function LeftSidebar() {
       transition={{ duration: 0.5, delay: 1.5 }}
     >
       <div className="flex flex-col items-center gap-6">
-        {socialLinks.map((link) => (
+        {SOCIAL_LINKS_DATA.map((link) => (
           <a
             key={link.name}
             href={link.href}
@@ -63,7 +46,7 @@ export function LeftSidebar() {
             className="text-muted-foreground transition-transform duration-300 hover:text-primary hover:-translate-y-1"
             aria-label={link.name}
           >
-            {link.icon}
+            {getIcon(link.iconName)}
           </a>
         ))}
       </div>

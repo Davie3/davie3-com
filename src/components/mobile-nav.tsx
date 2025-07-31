@@ -1,25 +1,12 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, type JSX } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { motion, AnimatePresence, Variants } from 'framer-motion';
+import { motion, AnimatePresence, type Variants } from 'framer-motion';
+
 import { useLockBody } from '@/hooks/use-lock-body';
-
-type NavLink = {
-  name: string;
-  href: string;
-  openInNewTab?: boolean;
-};
-
-const navLinks: NavLink[] = [
-  { name: 'Home', href: '/' },
-  { name: 'About', href: '/about' },
-  { name: 'Portfolio', href: '/portfolio' },
-  { name: 'Blog', href: 'https://blog.davie3.com', openInNewTab: true },
-  { name: 'Tech Blog', href: 'https://tech.davie3.com', openInNewTab: true },
-  { name: 'Contact', href: '/contact' },
-];
+import { NAV_LINKS, NAV_ANIMATION } from '@/constants/navigation';
 
 const menuVariants: Variants = {
   initial: {
@@ -30,7 +17,7 @@ const menuVariants: Variants = {
     opacity: 1,
     x: 0,
     transition: {
-      duration: 0.3,
+      duration: NAV_ANIMATION.ITEM_DURATION,
       ease: 'easeInOut',
     },
   },
@@ -38,7 +25,7 @@ const menuVariants: Variants = {
     opacity: 0,
     x: '100%',
     transition: {
-      duration: 0.3,
+      duration: NAV_ANIMATION.ITEM_DURATION,
       ease: 'easeInOut',
     },
   },
@@ -50,12 +37,12 @@ const navItemVariants: Variants = {
     y: 0,
     opacity: 1,
     transition: {
-      duration: 0.3,
+      duration: NAV_ANIMATION.ITEM_DURATION,
     },
   },
 };
 
-export function MobileNav() {
+export function MobileNav(): JSX.Element {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
   useLockBody(isOpen);
@@ -112,7 +99,7 @@ export function MobileNav() {
             >
               <nav className="mt-16">
                 <ul className="flex flex-col items-center gap-8">
-                  {navLinks.map((link) => {
+                  {NAV_LINKS.map((link) => {
                     const isActive = pathname === link.href;
                     return (
                       <motion.li key={link.name} variants={navItemVariants}>

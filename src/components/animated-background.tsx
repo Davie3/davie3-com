@@ -1,52 +1,52 @@
 'use client';
 
-import { motion, Variants } from 'framer-motion';
-import { useMemo } from 'react';
+import { motion, type Variants } from 'framer-motion';
+import { useMemo, type JSX } from 'react';
 
-const STAR_COUNT = 500;
-
-interface Star {
-  id: number;
-  x: number;
-  y: number;
-  size: number;
-  opacity: number;
-  color: string;
-  gradientStop: number;
-}
+import { STAR_CONFIG, ANIMATION_DURATIONS, Star } from '@/constants/animation';
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.01,
+      staggerChildren: STAR_CONFIG.STAGGER_DELAY,
     },
   },
 };
-
-const STAR_COLORS = ['#FFFFFF', '#CCD6F6', '#64FFDA'];
 
 const starVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
     transition: {
-      duration: 0.5,
+      duration: ANIMATION_DURATIONS.SLOW,
     },
   },
 };
 
-export function AnimatedBackground() {
+export function AnimatedBackground(): JSX.Element {
   const stars: Star[] = useMemo(() => {
-    return Array.from({ length: STAR_COUNT }, (_, i) => ({
+    return Array.from({ length: STAR_CONFIG.COUNT }, (_, i) => ({
       id: i,
       x: Math.random() * 100,
       y: Math.random() * 100,
-      size: Math.random() * 2.5 + 0.5, // Allow for larger stars
-      opacity: Math.random() * 0.5 + 0.4, // Increased opacity
-      color: STAR_COLORS[Math.floor(Math.random() * STAR_COLORS.length)],
-      gradientStop: Math.random() * 30 + 50, // Larger core, less fade
+      size:
+        Math.random() *
+          (STAR_CONFIG.SIZE_RANGE.MAX - STAR_CONFIG.SIZE_RANGE.MIN) +
+        STAR_CONFIG.SIZE_RANGE.MIN,
+      opacity:
+        Math.random() *
+          (STAR_CONFIG.OPACITY_RANGE.MAX - STAR_CONFIG.OPACITY_RANGE.MIN) +
+        STAR_CONFIG.OPACITY_RANGE.MIN,
+      color:
+        STAR_CONFIG.COLORS[
+          Math.floor(Math.random() * STAR_CONFIG.COLORS.length)
+        ],
+      gradientStop:
+        Math.random() *
+          (STAR_CONFIG.GRADIENT_RANGE.MAX - STAR_CONFIG.GRADIENT_RANGE.MIN) +
+        STAR_CONFIG.GRADIENT_RANGE.MIN,
     }));
   }, []);
 
@@ -64,10 +64,18 @@ export function AnimatedBackground() {
           className="absolute rounded-full"
           animate={{ opacity: [0, star.opacity, 0] }}
           transition={{
-            duration: Math.random() * 2 + 2,
+            duration:
+              Math.random() *
+                (STAR_CONFIG.TWINKLE_DURATION.MAX -
+                  STAR_CONFIG.TWINKLE_DURATION.MIN) +
+              STAR_CONFIG.TWINKLE_DURATION.MIN,
             repeat: Infinity,
             repeatType: 'reverse',
-            delay: Math.random() * 3 + 0.5, // Add delay to offset from initial fade-in
+            delay:
+              Math.random() *
+                (STAR_CONFIG.TWINKLE_DELAY.MAX -
+                  STAR_CONFIG.TWINKLE_DELAY.MIN) +
+              STAR_CONFIG.TWINKLE_DELAY.MIN,
           }}
           style={{
             left: `${star.x}%`,

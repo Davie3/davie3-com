@@ -1,0 +1,227 @@
+# Davie3.com Coding Standards
+
+## Project Overview
+Next.js 15 personal website with TypeScript, React 19, Tailwind CSS 4, and Framer Motion.
+
+## TypeScript Standards
+
+### Types vs Interfaces
+- Use `type` for unions, primitives, computed types, and simple object shapes
+- Use `interface` only for extensible object contracts or when declaration merging is needed
+- Prefer `type` for component props and configuration objects
+
+```typescript
+// Preferred
+type ButtonProps = {
+  variant: 'primary' | 'secondary';
+  size: 'sm' | 'md' | 'lg';
+  disabled?: boolean;
+};
+
+// Only when extensibility is required
+interface ExtensibleConfig {
+  baseUrl: string;
+}
+```
+
+### Type Declarations
+- Always declare types for function parameters and return values
+- Avoid `any` - use `unknown` or proper typing
+- Use `const` assertions for literal types: `as const`
+- Prefer explicit return types for exported functions
+
+### Zod Integration
+- Use zod for all environment variables, API schemas, and form validation
+- Export inferred types using `z.infer<typeof schema>`
+- Place schemas in dedicated files when shared across components
+
+```typescript
+// env.ts pattern (already established)
+const envSchema = z.object({
+  SENDGRID_API_KEY: z.string().min(1),
+});
+export const env = envSchema.parse(process.env);
+export type Env = z.infer<typeof envSchema>;
+```
+
+## File and Directory Naming
+
+### Conventions
+- Use kebab-case for all files and directories: `animated-background.tsx`
+- Component files: `component-name.tsx`
+- Utility files: `utility-name.ts`
+- Type files: `types.ts` or `component-name.types.ts`
+- Constants: `constants.ts` or `component-name.constants.ts`
+
+### Directory Structure
+```
+src/
+├── app/                 # Next.js App Router
+├── components/          # React components
+├── hooks/              # Custom hooks
+├── lib/                # Utilities and configurations
+├── types/              # Shared type definitions
+└── constants/          # Application constants
+```
+
+## Component Standards
+
+### Component Structure
+```typescript
+'use client'; // Only when needed
+
+import { type ComponentProps } from 'react';
+import { motion, type Variants } from 'framer-motion';
+
+// Constants (extract to separate file if >3 items)
+const ANIMATION_DURATION = 0.3;
+
+// Types
+type ComponentNameProps = {
+  title: string;
+  variant?: 'default' | 'highlighted';
+  onAction?: () => void;
+};
+
+// Variants for animations
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1 },
+};
+
+export function ComponentName({ title, variant = 'default', onAction }: ComponentNameProps) {
+  return (
+    <motion.div
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+    >
+      {title}
+    </motion.div>
+  );
+}
+```
+
+### Constants Management
+- Extract constants to separate files when >3 constants per component
+- Use UPPER_SNAKE_CASE for constants
+- Group related constants in objects with `as const`
+
+```typescript
+// constants/animation.ts
+export const ANIMATION_DURATIONS = {
+  FAST: 0.2,
+  NORMAL: 0.3,
+  SLOW: 0.5,
+} as const;
+
+export const STAR_COUNT = 500;
+```
+
+## React Patterns
+
+### Function Components
+- Use function declarations: `export function ComponentName()`
+- Prefer early returns to reduce nesting
+- Extract complex logic to custom hooks
+- Use default parameter values instead of defaultProps
+
+### State and Effects
+- Use descriptive state variable names
+- Prefer `useMemo` for expensive calculations
+- Use `useCallback` for stable function references in dependencies
+- Keep effects focused and single-purpose
+
+## Styling with Tailwind
+
+### Class Organization
+- Group classes logically: layout, spacing, colors, typography
+- Use CSS variables for theme colors: `text-[color:var(--color-slate-dark)]`
+- Prefer Tailwind utilities over custom CSS
+- Use responsive prefixes consistently: `md:text-2xl`
+
+### Custom Properties
+- Define CSS custom properties in globals.css
+- Use semantic naming: `--color-primary`, `--spacing-section`
+
+## Code Quality
+
+### Functions
+- Keep functions focused and single-purpose
+- Use descriptive names that explain intent
+- Prefer pure functions when possible
+- Use RO-RO pattern for functions with multiple parameters
+
+### Error Handling
+- Use proper error boundaries for React components
+- Handle async operations with proper error states
+- Validate external data with zod schemas
+
+### Performance
+- Use `React.memo` judiciously for expensive components
+- Prefer `useMemo` and `useCallback` for optimization
+- Lazy load components when appropriate
+
+## Import Organization
+
+### Import Order
+1. React and Next.js imports
+2. Third-party libraries
+3. Internal utilities and hooks
+4. Components
+5. Types (with `type` keyword)
+6. Constants
+
+```typescript
+import { useState, type ComponentProps } from 'react';
+import { motion, type Variants } from 'framer-motion';
+import { z } from 'zod';
+
+import { useLocalStorage } from '@/hooks/use-local-storage';
+import { Button } from '@/components/button';
+
+import type { User } from '@/types/user';
+import { API_ENDPOINTS } from '@/constants/api';
+```
+
+## Documentation
+
+### JSDoc Comments
+- Document all exported functions and components
+- Include parameter descriptions and examples for complex APIs
+- Use `@example` tags for usage examples
+
+```typescript
+/**
+ * Animated background component with floating stars
+ * @param starCount - Number of stars to render (default: 500)
+ * @param colors - Array of star colors
+ * @example
+ * <AnimatedBackground starCount={300} colors={['#fff', '#64FFDA']} />
+ */
+```
+
+## Git and Formatting
+
+### Commit Messages
+- Use conventional commits: `feat:`, `fix:`, `docs:`, `refactor:`
+- Keep first line under 50 characters
+- Use present tense: "Add feature" not "Added feature"
+
+### Code Formatting
+- Prettier handles formatting automatically
+- ESLint enforces code quality rules
+- Use lint-staged for pre-commit hooks (already configured)
+
+## Testing Considerations
+
+### Component Testing
+- Test user interactions, not implementation details
+- Use semantic queries: `getByRole`, `getByLabelText`
+- Mock external dependencies appropriately
+- Test error states and loading states
+
+### Type Safety
+- Prefer compile-time checks over runtime checks
+- Use zod for runtime validation of external data
+- Leverage TypeScript strict mode (already enabled)

@@ -1,55 +1,41 @@
 'use client';
 
-import { useEffect, useState, JSX } from 'react';
+import { useEffect, useState, type JSX } from 'react';
 import { FiGithub, FiInstagram, FiLinkedin, FiTwitch } from 'react-icons/fi';
 import { FaXTwitter } from 'react-icons/fa6';
 import { SiBluesky } from 'react-icons/si';
 
-type SocialLink = {
-  name: string;
-  href: string;
-  icon: JSX.Element;
+import {
+  SOCIAL_LINKS_DATA,
+  FOOTER_CONFIG,
+  type SocialLinkData,
+} from '@/constants/social';
+
+const getIcon = (iconName: SocialLinkData['iconName']): JSX.Element => {
+  const iconProps = { size: 24 };
+  switch (iconName) {
+    case 'github':
+      return <FiGithub {...iconProps} />;
+    case 'linkedin':
+      return <FiLinkedin {...iconProps} />;
+    case 'twitch':
+      return <FiTwitch {...iconProps} />;
+    case 'x':
+      return <FaXTwitter {...iconProps} />;
+    case 'instagram':
+      return <FiInstagram {...iconProps} />;
+    case 'bluesky':
+      return <SiBluesky {...iconProps} />;
+    default:
+      return <FiGithub {...iconProps} />;
+  }
 };
 
-const socialLinks: SocialLink[] = [
-  {
-    name: 'GitHub',
-    href: 'https://github.com/davie3',
-    icon: <FiGithub size={24} />,
-  },
-  {
-    name: 'LinkedIn',
-    href: 'https://www.linkedin.com/in/davie3',
-    icon: <FiLinkedin size={24} />,
-  },
-  {
-    name: 'Twitch',
-    href: 'https://www.twitch.tv/davie3',
-    icon: <FiTwitch size={24} />,
-  },
-  {
-    name: 'X',
-    href: 'https://x.com/itsdavie3/',
-    icon: <FaXTwitter size={24} />,
-  },
-  {
-    name: 'Instagram',
-    href: 'https://www.instagram.com/itsdavie3/',
-    icon: <FiInstagram size={24} />,
-  },
-  {
-    name: 'Bluesky',
-    href: 'https://bsky.app/profile/itsdavie3.bsky.social',
-    icon: <SiBluesky size={24} />,
-  },
-];
-
-export function Footer() {
-  const STARTING_YEAR = 2025;
+export function Footer(): JSX.Element {
   const currentYear = new Date().getFullYear();
   const yearText =
-    currentYear !== STARTING_YEAR
-      ? `${STARTING_YEAR} - ${currentYear}`
+    currentYear !== FOOTER_CONFIG.STARTING_YEAR
+      ? `${FOOTER_CONFIG.STARTING_YEAR} - ${currentYear}`
       : currentYear;
 
   const [isVisible, setIsVisible] = useState(false);
@@ -57,8 +43,7 @@ export function Footer() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsVisible(true);
-    }, 2000); // Delay to allow other elements to render first
-
+    }, FOOTER_CONFIG.ANIMATION_DELAY);
     return () => clearTimeout(timer);
   }, []);
 
@@ -71,7 +56,7 @@ export function Footer() {
       <div className="container mx-auto px-6">
         <div className="mb-4 md:hidden">
           <div className="flex justify-center gap-6">
-            {socialLinks.map((link) => (
+            {SOCIAL_LINKS_DATA.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
@@ -80,7 +65,7 @@ export function Footer() {
                 className="text-muted-foreground transition-transform duration-300 hover:text-primary hover:-translate-y-1"
                 aria-label={link.name}
               >
-                {link.icon}
+                {getIcon(link.iconName)}
               </a>
             ))}
           </div>

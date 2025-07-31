@@ -1,8 +1,9 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import type { JSX } from 'react';
 
-export function RightSidebar() {
+export function RightSidebar(): JSX.Element {
   return (
     <motion.div
       className="hidden md:flex flex-col items-center fixed bottom-0 right-10 w-10"
