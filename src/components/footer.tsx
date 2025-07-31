@@ -5,11 +5,8 @@ import { FiGithub, FiInstagram, FiLinkedin, FiTwitch } from 'react-icons/fi';
 import { FaXTwitter } from 'react-icons/fa6';
 import { SiBluesky } from 'react-icons/si';
 
-import {
-  SOCIAL_LINKS_DATA,
-  FOOTER_CONFIG,
-  type SocialLinkData,
-} from '@/constants/social';
+import { SOCIAL_LINKS_DATA, FOOTER_CONFIG } from '@/constants/social';
+import type { SocialLinkData } from '@/types/social';
 
 const getIcon = (iconName: SocialLinkData['iconName']): JSX.Element => {
   const iconProps = { size: 24 };

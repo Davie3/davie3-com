@@ -12,7 +12,7 @@ import type { GitHubRepo, ApiError } from '@/types/api';
 export const fetchGitHubRepos = async (): Promise<GitHubRepo[]> => {
   try {
     const response = await fetch(EXTERNAL_URLS.GITHUB_API, {
-      next: { revalidate: GITHUB_CONFIG.REVALIDATE_INTERVAL },
+      next: { revalidate: GITHUB_CONFIG.revalidateInterval },
     });
 
     if (!response.ok) {

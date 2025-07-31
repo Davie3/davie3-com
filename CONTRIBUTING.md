@@ -72,11 +72,13 @@ src/
 │   ├── utils.ts           # General utilities (cn, formatDate, etc.)
 │   └── validations.ts     # Zod schemas and validation helpers
 ├── types/                 # TypeScript type definitions
-│   ├── api.ts             # API-related types
-│   ├── components.ts      # Component prop types
-│   ├── forms.ts           # Form and validation types
-│   ├── index.ts           # Main type exports
-│   └── personal.ts        # Personal/domain-specific types
+│   ├── api.ts             # API-related types (GitHubRepo, ApiResponse, ApiError)
+│   ├── components.ts      # Component prop types (ComponentProps, PageProps, etc.)
+│   ├── config.ts          # Configuration types (GitHubConfig, AnimationConfig)
+│   ├── forms.ts           # Form and validation types (ContactFormValues, FormStatus)
+│   ├── index.ts           # Main type exports (re-exports from other files)
+│   ├── personal.ts        # Personal/domain-specific types (Experience, PersonalInfo)
+│   └── social.ts          # Social media types (SocialLinkData, SocialIconName)
 └── env.ts                 # Environment variable validation
 ```
 

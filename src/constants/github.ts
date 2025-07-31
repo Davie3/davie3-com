@@ -1,12 +1,16 @@
 import { z } from 'zod';
+import type { GitHubConfig } from '@/types/config';
 
 /**
- * GitHub API related constants and schemas.
+ * GitHub API configuration constants.
  */
-export const GITHUB_CONFIG = {
-  REVALIDATE_INTERVAL: 3600, // 1 hour in seconds
+export const GITHUB_CONFIG: GitHubConfig = {
+  revalidateInterval: 3600, // 1 hour in seconds
 } as const;
 
+/**
+ * Zod schema for validating GitHub repository API responses.
+ */
 export const GITHUB_REPO_SCHEMA = z.array(
   z.object({
     name: z.string(),

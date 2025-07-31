@@ -1,38 +1,38 @@
-export type SocialLinkData = {
-  name: string;
-  href: string;
-  iconName: 'github' | 'linkedin' | 'twitch' | 'x' | 'instagram' | 'bluesky';
-};
+import type { SocialLinkData } from '@/types/social';
+import { EXTERNAL_URLS } from './urls';
 
-export const SOCIAL_LINKS_DATA: SocialLinkData[] = [
+/**
+ * Social media links configuration.
+ */
+export const SOCIAL_LINKS_DATA: readonly SocialLinkData[] = [
   {
     name: 'GitHub',
-    href: 'https://github.com/davie3',
+    href: EXTERNAL_URLS.GITHUB_PROFILE,
     iconName: 'github',
   },
   {
     name: 'LinkedIn',
-    href: 'https://www.linkedin.com/in/davie3',
+    href: EXTERNAL_URLS.LINKEDIN,
     iconName: 'linkedin',
   },
   {
     name: 'Twitch',
-    href: 'https://www.twitch.tv/davie3',
+    href: EXTERNAL_URLS.TWITCH,
     iconName: 'twitch',
   },
   {
     name: 'X',
-    href: 'https://x.com/itsdavie3/',
+    href: EXTERNAL_URLS.X_TWITTER,
     iconName: 'x',
   },
   {
     name: 'Instagram',
-    href: 'https://www.instagram.com/itsdavie3/',
+    href: EXTERNAL_URLS.INSTAGRAM,
     iconName: 'instagram',
   },
   {
     name: 'Bluesky',
-    href: 'https://bsky.app/profile/itsdavie3.bsky.social',
+    href: EXTERNAL_URLS.BLUESKY,
     iconName: 'bluesky',
   },
 ];

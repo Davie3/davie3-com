@@ -77,12 +77,29 @@ src/
 
 #### `/src/types/` - Type Definitions
 - `index.ts` - Main type exports (re-exports from other files)
-- `api.ts` - API-related types
-- `forms.ts` - Form and validation types
-- `components.ts` - Component prop types
-- `personal.ts` - Domain-specific types
+- `api.ts` - API-related types (GitHubRepo, ApiResponse, ApiError)
+- `components.ts` - Component prop types (ComponentProps, PageProps, etc.)
+- `config.ts` - Configuration types (GitHubConfig, AnimationConfig)
+- `forms.ts` - Form and validation types (ContactFormValues, FormStatus)
+- `personal.ts` - Domain-specific types (Experience, PersonalInfo, Skill)
+- `social.ts` - Social media types (SocialLinkData, SocialIconName)
 - Use explicit type definitions over inferred types for public APIs
 - Prefer `type` over `interface` for simple object shapes
+- All types should be `readonly` where appropriate
+
+#### `/src/constants/` - Application Constants
+- Organize constants by domain/feature
+- Use UPPER_SNAKE_CASE for constant names
+- Apply `as const` for immutability and literal type inference
+- Reference other constants to avoid duplication (e.g., social.ts uses urls.ts)
+- Keep types separate in `/src/types/` directory
+- Group related constants logically:
+  - `urls.ts` - External URLs and internal routes (organized by category)
+  - `social.ts` - Social media links configuration
+  - `personal.ts` - Personal information, skills, experience
+  - `forms.ts` - Form schemas and messages
+  - `github.ts` - GitHub API configuration
+  - `metadata.ts` - Site metadata for SEO
 
 ## Component Standards
 
