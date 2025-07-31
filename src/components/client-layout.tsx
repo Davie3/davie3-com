@@ -1,5 +1,6 @@
 'use client';
 
+import { AnimatePresence } from 'framer-motion';
 import type { ReactNode, JSX } from 'react';
 
 import { Header } from '@/components/header';
@@ -19,7 +20,9 @@ export function ClientLayout({ children }: ClientLayoutProps): JSX.Element {
       <Header />
       <LeftSidebar />
       <RightSidebar />
-      <PageWrapper>{children}</PageWrapper>
+      <AnimatePresence mode="wait">
+        <PageWrapper>{children}</PageWrapper>
+      </AnimatePresence>
     </>
   );
 }
