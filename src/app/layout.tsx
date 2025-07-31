@@ -1,20 +1,10 @@
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
 
 import { Footer } from '@/components/footer';
 import { ClientLayout } from '@/components/client-layout';
 import { SITE_METADATA } from '@/constants/metadata';
+import { fontVariables } from '@/lib/fonts';
 import './globals.css';
-
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-});
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
-});
 
 export const metadata: Metadata = SITE_METADATA;
 
@@ -26,7 +16,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased pt-16 bg-black text-white`}
+        className={`${fontVariables} antialiased pt-16 bg-black text-white`}
       >
         <ClientLayout>{children}</ClientLayout>
         <Footer />

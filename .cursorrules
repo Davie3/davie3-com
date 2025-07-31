@@ -56,13 +56,33 @@ export type Env = z.infer<typeof envSchema>;
 ### Directory Structure
 ```
 src/
-├── app/                 # Next.js App Router
-├── components/          # React components
-├── hooks/              # Custom hooks
-├── lib/                # Utilities and configurations
-├── types/              # Shared type definitions
-└── constants/          # Application constants
+├── app/              # Next.js App Router pages
+├── components/       # React components
+├── constants/        # Application constants
+├── hooks/           # Custom React hooks
+├── lib/             # Utility functions and configurations
+├── types/           # TypeScript type definitions
+└── env.ts           # Environment configuration
 ```
+
+### New Directory Guidelines
+
+#### `/src/lib/` - Utilities and Configurations
+- `utils.ts` - General utility functions (cn, formatDate, etc.)
+- `validations.ts` - Zod schemas and validation helpers
+- `api.ts` - API client functions and error handling
+- `fonts.ts` - Font configurations
+- Keep functions pure and well-tested
+- Export individual functions, not default exports
+
+#### `/src/types/` - Type Definitions
+- `index.ts` - Main type exports (re-exports from other files)
+- `api.ts` - API-related types
+- `forms.ts` - Form and validation types
+- `components.ts` - Component prop types
+- `personal.ts` - Domain-specific types
+- Use explicit type definitions over inferred types for public APIs
+- Prefer `type` over `interface` for simple object shapes
 
 ## Component Standards
 

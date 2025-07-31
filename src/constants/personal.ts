@@ -1,3 +1,5 @@
+import type { Experience } from '@/types/personal';
+
 /**
  * Personal information constants for David Griffin's website.
  */
@@ -21,13 +23,6 @@ export const SKILLS = [
   'Network Engineering',
   'Software Development',
 ] as const;
-
-export type Experience = {
-  readonly role: string;
-  readonly company: string;
-  readonly period: string;
-  readonly description: string;
-};
 
 export const EXPERIENCES: readonly Experience[] = [
   {

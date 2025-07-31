@@ -50,9 +50,33 @@ src/
 │   ├── about/             # About page
 │   ├── contact/           # Contact page
 │   ├── portfolio/         # Portfolio page
-│   └── api/               # API routes
+│   ├── api/               # API routes
+│   ├── globals.css        # Global styles
+│   ├── layout.tsx         # Root layout
+│   └── page.tsx           # Home page
 ├── components/            # Reusable React components
+├── constants/             # Application constants
+│   ├── animation.ts       # Animation configurations
+│   ├── forms.ts           # Form schemas and messages
+│   ├── github.ts          # GitHub API configuration
+│   ├── metadata.ts        # Site metadata
+│   ├── navigation.ts      # Navigation links
+│   ├── personal.ts        # Personal information
+│   ├── social.ts          # Social media links
+│   └── urls.ts            # URL constants
 ├── hooks/                 # Custom React hooks
+│   └── use-lock-body.ts   # Body scroll lock hook
+├── lib/                   # Utility functions and configurations
+│   ├── api.ts             # API client functions
+│   ├── fonts.ts           # Font configurations
+│   ├── utils.ts           # General utilities (cn, formatDate, etc.)
+│   └── validations.ts     # Zod schemas and validation helpers
+├── types/                 # TypeScript type definitions
+│   ├── api.ts             # API-related types
+│   ├── components.ts      # Component prop types
+│   ├── forms.ts           # Form and validation types
+│   ├── index.ts           # Main type exports
+│   └── personal.ts        # Personal/domain-specific types
 └── env.ts                 # Environment variable validation
 ```
 

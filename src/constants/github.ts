@@ -17,5 +17,3 @@ export const GITHUB_REPO_SCHEMA = z.array(
     forks_count: z.number(),
   }),
 );
-
-export type GitHubRepo = z.infer<typeof GITHUB_REPO_SCHEMA>[number];

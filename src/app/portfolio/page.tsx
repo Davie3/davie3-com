@@ -4,7 +4,7 @@ import { GitFork, Star } from 'lucide-react';
 
 import { EXTERNAL_URLS } from '@/constants/urls';
 import { GITHUB_REPO_SCHEMA, GITHUB_CONFIG } from '@/constants/github';
-import type { GitHubRepo } from '@/constants/github';
+import type { GitHubRepo } from '@/types/api';
 
 async function getGitHubRepos(): Promise<GitHubRepo[]> {
   try {

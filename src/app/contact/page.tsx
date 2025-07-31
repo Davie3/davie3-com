@@ -7,7 +7,7 @@ import { useState } from 'react';
 
 import { CONTACT_FORM_SCHEMA, FORM_MESSAGES } from '@/constants/forms';
 import { INTERNAL_ROUTES } from '@/constants/urls';
-import type { ContactFormValues } from '@/constants/forms';
+import type { ContactFormValues } from '@/types/forms';
 
 /**
  * Renders the contact page with a functional contact form.

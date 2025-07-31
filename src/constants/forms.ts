@@ -9,8 +9,6 @@ export const CONTACT_FORM_SCHEMA = z.object({
   message: z.string().min(10, 'Message must be at least 10 characters.'),
 });
 
-export type ContactFormValues = z.infer<typeof CONTACT_FORM_SCHEMA>;
-
 export const FORM_MESSAGES = {
   SUCCESS: "Thank you for your message! I'll get back to you soon.",
   ERROR: 'There was an error sending your message. Please try again.',
