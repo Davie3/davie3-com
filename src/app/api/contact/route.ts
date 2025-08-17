@@ -8,13 +8,36 @@ import { env } from '@/env';
 
 sgMail.setApiKey(env.SENDGRID_API_KEY);
 
+const TURNSTILE_VERIFY_ENDPOINT =
+  'https://challenges.cloudflare.com/turnstile/v0/siteverify';
+
 export async function POST(request: NextRequest): Promise<NextResponse> {
   try {
-    const { name, email, message } = await request.json();
+    const { name, email, message, token } = await request.json();
 
-    if (!name || !email || !message) {
+    if (!name || !email || !message || !token) {
       return NextResponse.json(
         { error: 'Missing required fields.' },
+        { status: 400 },
+      );
+    }
+
+    const turnstileResponse = await fetch(TURNSTILE_VERIFY_ENDPOINT, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        secret: env.TURNSTILE_SECRET_KEY,
+        response: token,
+      }),
+    });
+
+    const turnstileData = await turnstileResponse.json();
+
+    if (!turnstileData.success) {
+      return NextResponse.json(
+        { error: 'Invalid CAPTCHA. Please try again.' },
         { status: 400 },
       );
     }

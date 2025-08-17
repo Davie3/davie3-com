@@ -42,3 +42,6 @@ next-env.d.ts
 
 # text files
 *.txt
+
+# misc
+website-enhancement-recommendations.md

@@ -8,6 +8,7 @@ import { useState } from 'react';
 import { CONTACT_FORM_SCHEMA, FORM_MESSAGES } from '@/constants/forms';
 import { INTERNAL_ROUTES } from '@/constants/urls';
 import type { ContactFormValues } from '@/types/forms';
+import { Turnstile } from '@/components/turnstile';
 
 /**
  * Renders the contact page with a functional contact form.
@@ -17,6 +18,7 @@ import type { ContactFormValues } from '@/types/forms';
 export default function ContactPage(): JSX.Element {
   const [formStatus, setFormStatus] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [token, setToken] = useState<string>('');
 
   const {
     register,
@@ -28,6 +30,10 @@ export default function ContactPage(): JSX.Element {
   });
 
   const onSubmit = async (data: ContactFormValues) => {
+    if (!token) {
+      setFormStatus('Please complete the CAPTCHA.');
+      return;
+    }
     setIsSubmitting(true);
     setFormStatus(null);
 
@@ -37,7 +43,7 @@ export default function ContactPage(): JSX.Element {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ ...data, token }),
       });
 
       if (!response.ok) {
@@ -119,6 +125,8 @@ export default function ContactPage(): JSX.Element {
             </p>
           )}
         </div>
+
+        <Turnstile onSuccess={setToken} />
 
         <div>
           <button
