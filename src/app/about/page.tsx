@@ -17,14 +17,26 @@ export default function AboutPage(): JSX.Element {
       <section id="about">
         <h1 className="text-4xl font-bold text-primary">About Me</h1>
         <p className="mt-4 text-lg text-muted-foreground">
-          I am a seasoned IT professional with a deep background in system and
+          My career is a story of progression, starting from hands-on IT support
+          and network administration, where I built a strong foundation in
+          managing robust infrastructures. This experience paved the way for a
+          transition into system administration, where I honed my skills in
+          automation, cloud technologies, and enterprise-level systems
+          management using tools like Terraform and Okta. Today, as a Systems
+          Development Engineer, I leverage that deep technical background to
+          design and build scalable, cloud-native software solutions with a
+          focus on Node.js, TypeScript, and Generative AI, turning complex
+          engineering challenges into elegant and efficient systems.
+        </p>
+        {/* <p>
+        I am a seasoned IT professional with a deep background in system and
           network administration, software development, and technical support.
           With extensive experience managing both Windows and Linux
           environments, I specialize in building and maintaining robust,
           scalable IT infrastructures. My recent focus has been on leveraging
           modern cloud technologies, including AWS, Terraform, and Okta, to
           drive efficiency and security in enterprise systems.
-        </p>
+        </p> */}
       </section>
 
       <section id="skills" className="mt-12">

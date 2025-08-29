@@ -12,38 +12,52 @@ export const PERSONAL_INFO = {
 } as const;
 
 export const SKILLS = [
-  'SaaS',
-  'Okta',
-  'Terraform',
-  'AWS CDK',
+  'Node.js',
   'TypeScript',
+  'React.js',
+  'Generative AI',
+  'Terraform',
+  'AWS CloudFormation',
   'Amazon Web Services (AWS)',
-  'ITIL',
+  'Okta',
   'System Administration',
-  'Network Engineering',
   'Software Development',
 ] as const;
 
 export const EXPERIENCES: readonly Experience[] = [
   {
+    role: 'System Development Engineer II',
+    company: 'Twitch',
+    period: 'Aug 2025 - Present',
+    description:
+      'Leading systems development with a focus on modern cloud-native solutions using TypeScript, Node.js, AWS CloudFormation, and Terraform. Driving the architecture and implementation of generative AI features.',
+  },
+  {
     role: 'System Admin Engineer II',
     company: 'Twitch',
-    period: '2018 - Present',
+    period: 'Jul 2023 - Aug 2025',
     description:
-      'Promoted through various IT engineering roles, currently managing high-level IT systems. My work involves extensive use of SaaS platforms, Okta for identity management, Terraform for infrastructure as code, and AWS CDK with TypeScript for cloud solutions.',
+      'Managed and automated critical IT systems using Terraform, Python, and TypeScript. Specialized in SaaS platform administration and identity management with Okta, ensuring robust and scalable infrastructure.',
+  },
+  {
+    role: 'IT Support Engineer I & II',
+    company: 'Twitch',
+    period: 'May 2018 - Jul 2023',
+    description:
+      'Provided foundational IT support, growing into a senior role responsible for technical escalations, process automation, and mentoring. Developed skills in Okta, ITIL, and technical writing.',
   },
   {
     role: 'Network Technician',
     company: 'Velociter Wireless, Inc.',
-    period: '2015 - 2018',
+    period: 'Nov 2015 - May 2018',
     description:
-      'Provided technical support for a Wireless Internet Provider, maintained network infrastructure, managed monitoring systems, and deployed Linux and Windows systems via VMware ESXi.',
+      'Managed network infrastructure for a wireless ISP, providing on-site and remote support. Maintained monitoring systems and deployed both Linux and Windows servers in a VMware environment.',
   },
   {
     role: 'IT Consultant',
     company: 'Parsons Pipe Organ Builders',
-    period: '2011 - 2016',
+    period: 'Apr 2011 - Apr 2016',
     description:
-      "Managed the company's Windows Server domain, provided comprehensive technical support, and designed and implemented a disaster recovery plan. Led server migration and virtualization projects.",
+      'Oversaw the entire IT infrastructure, including Windows Server administration, disaster recovery planning, and technical support for all hardware and software needs.',
   },
 ] as const;
