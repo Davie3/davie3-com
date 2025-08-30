@@ -1,6 +1,6 @@
-import { EXTERNAL_URLS } from '@/constants/urls';
-import { GITHUB_CONFIG } from '@/constants/github';
-import type { GitHubRepo, ApiError } from '@/types/api';
+import { EXTERNAL_URLS } from '../constants/url-constants';
+import { GITHUB_CONFIG } from './config/github-config';
+import type { GitHubRepo, ApiError } from '../types/api-types';
 
 /**
  * API client configuration and helper functions.

@@ -1,4 +1,4 @@
-import type { Experience } from '@/types/personal';
+import type { Experience } from '../types/personal-types';
 
 /**
  * Personal information constants for David Griffin's website.

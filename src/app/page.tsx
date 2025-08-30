@@ -2,8 +2,8 @@ import type { JSX } from 'react';
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
-import { PERSONAL_INFO } from '@/constants/personal';
-import { EXTERNAL_URLS, INTERNAL_ROUTES } from '@/constants/urls';
+import { PERSONAL_INFO } from '@/constants/personal-info';
+import { EXTERNAL_URLS, INTERNAL_ROUTES } from '@/constants/url-constants';
 
 /**
  * Renders the home page of the personal website.

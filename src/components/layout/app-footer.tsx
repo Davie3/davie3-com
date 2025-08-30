@@ -5,8 +5,11 @@ import { FiGithub, FiInstagram, FiLinkedin, FiTwitch } from 'react-icons/fi';
 import { FaXTwitter } from 'react-icons/fa6';
 import { SiBluesky } from 'react-icons/si';
 
-import { SOCIAL_LINKS_DATA, FOOTER_CONFIG } from '@/constants/social';
-import type { SocialLinkData } from '@/types/social';
+import {
+  SOCIAL_LINKS_DATA,
+  FOOTER_CONFIG,
+} from '../../lib/config/social-config';
+import type { SocialLinkData } from '../../types/social-types';
 
 const getIcon = (iconName: SocialLinkData['iconName']): JSX.Element => {
   const iconProps = { size: 24 };
@@ -28,7 +31,7 @@ const getIcon = (iconName: SocialLinkData['iconName']): JSX.Element => {
   }
 };
 
-export function Footer(): JSX.Element {
+export function AppFooter(): JSX.Element {
   const currentYear = new Date().getFullYear();
   const yearText =
     currentYear !== FOOTER_CONFIG.STARTING_YEAR

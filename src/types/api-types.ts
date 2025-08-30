@@ -1,5 +1,5 @@
 import type { z } from 'zod';
-import type { GITHUB_REPO_SCHEMA } from '@/constants/github';
+import type { GITHUB_REPO_SCHEMA } from '../lib/config/github-config';
 
 /**
  * API-related type definitions.

@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 
-import { Footer } from '@/components/footer';
-import { ClientLayout } from '@/components/client-layout';
-import { SITE_METADATA } from '@/constants/metadata';
+import { AppFooter } from '@/components/layout/app-footer';
+import { ClientLayout } from '@/components/ui/client-layout';
+import { SITE_METADATA } from '@/lib/config/site-metadata';
 import { fontVariables } from '@/lib/fonts';
 import './globals.css';
 
@@ -19,7 +19,7 @@ export default function RootLayout({
         className={`${fontVariables} antialiased pt-16 bg-black text-white`}
       >
         <ClientLayout>{children}</ClientLayout>
-        <Footer />
+        <AppFooter />
       </body>
     </html>
   );

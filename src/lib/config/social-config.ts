@@ -1,5 +1,5 @@
-import type { SocialLinkData } from '@/types/social';
-import { EXTERNAL_URLS } from './urls';
+import type { SocialLinkData } from '../../types/social-types';
+import { EXTERNAL_URLS } from '../../constants/url-constants';
 
 /**
  * Social media links configuration.

@@ -5,8 +5,12 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import type { JSX } from 'react';
 
-import { MobileNav } from '@/components/mobile-nav';
-import { NAV_LINKS, NAV_ANIMATION } from '@/constants/navigation';
+import {
+  NAV_LINKS,
+  NAV_ANIMATION,
+  type NavLink,
+} from '../../lib/config/navigation-config';
+import { MobileNavigation } from './mobile-navigation';
 
 const navContainerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -30,7 +34,7 @@ const navItemVariants: Variants = {
   },
 };
 
-export function Header(): JSX.Element {
+export function AppHeader(): JSX.Element {
   const pathname = usePathname();
 
   return (
@@ -54,7 +58,7 @@ export function Header(): JSX.Element {
             initial="hidden"
             animate="visible"
           >
-            {NAV_LINKS.map((link) => {
+            {NAV_LINKS.map((link: NavLink) => {
               const isActive = pathname === link.href;
               return (
                 <motion.li key={link.name} variants={navItemVariants}>
@@ -79,7 +83,7 @@ export function Header(): JSX.Element {
           </motion.ul>
         </div>
 
-        <MobileNav />
+        <MobileNavigation />
       </nav>
     </motion.header>
   );

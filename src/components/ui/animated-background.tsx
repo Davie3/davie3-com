@@ -3,7 +3,11 @@
 import { motion, type Variants } from 'framer-motion';
 import { useMemo, type JSX } from 'react';
 
-import { STAR_CONFIG, ANIMATION_DURATIONS, Star } from '@/constants/animation';
+import {
+  STAR_CONFIG,
+  ANIMATION_DURATIONS,
+  type Star,
+} from '../../lib/config/animation-config';
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },

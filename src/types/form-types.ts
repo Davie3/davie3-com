@@ -1,5 +1,5 @@
 import type { z } from 'zod';
-import type { CONTACT_FORM_SCHEMA } from '@/constants/forms';
+import type { CONTACT_FORM_SCHEMA } from '../constants/form-schemas';
 
 /**
  * Form-related type definitions.

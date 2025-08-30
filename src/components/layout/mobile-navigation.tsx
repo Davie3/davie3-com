@@ -6,7 +6,11 @@ import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence, type Variants } from 'framer-motion';
 
 import { useLockBody } from '@/hooks/use-lock-body';
-import { NAV_LINKS, NAV_ANIMATION } from '@/constants/navigation';
+import {
+  NAV_LINKS,
+  NAV_ANIMATION,
+  type NavLink,
+} from '../../lib/config/navigation-config';
 
 const menuVariants: Variants = {
   initial: {
@@ -42,7 +46,7 @@ const navItemVariants: Variants = {
   },
 };
 
-export function MobileNav(): JSX.Element {
+export function MobileNavigation(): JSX.Element {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
   useLockBody(isOpen);
@@ -100,7 +104,7 @@ export function MobileNav(): JSX.Element {
             >
               <nav className="mt-16">
                 <ul className="flex flex-col items-center gap-8">
-                  {NAV_LINKS.map((link) => {
+                  {NAV_LINKS.map((link: NavLink) => {
                     const isActive = pathname === link.href;
                     return (
                       <motion.li key={link.name} variants={navItemVariants}>

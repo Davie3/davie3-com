@@ -1,6 +1,6 @@
 import { ImageResponse } from 'next/og';
 
-import { PERSONAL_INFO } from '@/constants/personal';
+import { PERSONAL_INFO } from '@/constants/personal-info';
 
 export const runtime = 'edge';
 export const alt = `${PERSONAL_INFO.FULL_NAME} - ${PERSONAL_INFO.TITLE}`;

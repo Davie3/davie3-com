@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 import type { ReactNode, JSX } from 'react';
 
-import { ANIMATION_DURATIONS } from '@/constants/animation';
+import { ANIMATION_DURATIONS } from '../../lib/config/animation-config';
 
 type PageWrapperProps = {
   children: ReactNode;

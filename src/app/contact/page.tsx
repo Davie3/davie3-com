@@ -5,10 +5,10 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
 
-import { CONTACT_FORM_SCHEMA, FORM_MESSAGES } from '@/constants/forms';
-import { INTERNAL_ROUTES } from '@/constants/urls';
-import type { ContactFormValues } from '@/types/forms';
-import { Turnstile } from '@/components/turnstile';
+import { CONTACT_FORM_SCHEMA, FORM_MESSAGES } from '@/constants/form-schemas';
+import { INTERNAL_ROUTES } from '@/constants/url-constants';
+import type { ContactFormValues } from '@/types/form-types';
+import { Turnstile } from '@/components/ui/turnstile-widget';
 
 /**
  * Renders the contact page with a functional contact form.

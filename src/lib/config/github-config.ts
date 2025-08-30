@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import type { GitHubConfig } from '@/types/config';
+import type { GitHubConfig } from '@/types/config-types';
 
 /**
  * GitHub API configuration constants.
