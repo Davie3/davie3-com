@@ -103,7 +103,7 @@ export function MobileNavigation(): JSX.Element {
               onClick={(e) => e.stopPropagation()}
             >
               <nav className="mt-16">
-                <ul className="flex flex-col items-center gap-8">
+                <ul className="flex flex-col items-center gap-6">
                   {NAV_LINKS.map((link: NavLink) => {
                     const isActive = pathname === link.href;
                     return (

@@ -16,10 +16,12 @@ export const SKILLS = [
   'TypeScript',
   'React.js',
   'Generative AI',
+  'MCP Servers',
   'Terraform',
-  'AWS CloudFormation',
   'Amazon Web Services (AWS)',
+  'AWS CloudFormation',
   'Okta',
+  'CloudFlare',
   'System Administration',
   'Software Development',
 ] as const;
@@ -40,24 +42,17 @@ export const EXPERIENCES: readonly Experience[] = [
       'Managed and automated critical IT systems using Terraform, Python, and TypeScript. Specialized in SaaS platform administration and identity management with Okta, ensuring robust and scalable infrastructure.',
   },
   {
-    role: 'IT Support Engineer I & II',
+    role: 'IT Support Engineer II',
     company: 'Twitch',
-    period: 'May 2018 - Jul 2023',
+    period: 'Apr 2021 - Jul 2023',
     description:
-      'Provided foundational IT support, growing into a senior role responsible for technical escalations, process automation, and mentoring. Developed skills in Okta, ITIL, and technical writing.',
+      'Advanced to senior IT support role responsible for technical escalations, process automation, and mentoring. Developed expertise in Okta, ITIL, and technical writing.',
   },
   {
-    role: 'Network Technician',
-    company: 'Velociter Wireless, Inc.',
-    period: 'Nov 2015 - May 2018',
+    role: 'IT Support Engineer I',
+    company: 'Twitch',
+    period: 'May 2018 - Apr 2021',
     description:
-      'Managed network infrastructure for a wireless ISP, providing on-site and remote support. Maintained monitoring systems and deployed both Linux and Windows servers in a VMware environment.',
-  },
-  {
-    role: 'IT Consultant',
-    company: 'Parsons Pipe Organ Builders',
-    period: 'Apr 2011 - Apr 2016',
-    description:
-      'Oversaw the entire IT infrastructure, including Windows Server administration, disaster recovery planning, and technical support for all hardware and software needs.',
+      'Provided foundational IT support and technical assistance. Built strong foundation in enterprise systems and support methodologies.',
   },
 ] as const;

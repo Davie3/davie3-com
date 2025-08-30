@@ -8,8 +8,6 @@ export const NAV_LINKS: NavLink[] = [
   { name: 'Home', href: '/' },
   { name: 'About', href: '/about' },
   { name: 'Portfolio', href: '/portfolio' },
-  { name: 'Blog', href: 'https://blog.davie3.com', openInNewTab: true },
-  { name: 'Tech Blog', href: 'https://tech.davie3.com', openInNewTab: true },
   { name: 'Contact', href: '/contact' },
 ];
 

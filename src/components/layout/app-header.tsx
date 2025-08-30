@@ -53,7 +53,7 @@ export function AppHeader(): JSX.Element {
 
         <div className="hidden md:block">
           <motion.ul
-            className="flex items-center gap-6"
+            className="flex items-center gap-4"
             variants={navContainerVariants}
             initial="hidden"
             animate="visible"
