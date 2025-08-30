@@ -46,12 +46,13 @@ export function Footer(): JSX.Element {
 
   return (
     <footer
-      className={`w-full py-8 text-center text-sm text-muted-foreground transition-all duration-700 ease-in-out ${
+      className={`w-full py-12 text-center transition-all duration-700 ease-in-out ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
       }`}
     >
       <div className="container mx-auto px-6">
-        <div className="mb-4 md:hidden">
+        {/* Social Links */}
+        <div className="mb-8 md:hidden">
           <div className="flex justify-center gap-6">
             {SOCIAL_LINKS_DATA.map((link) => (
               <a
@@ -59,7 +60,7 @@ export function Footer(): JSX.Element {
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-muted-foreground transition-transform duration-300 hover:text-primary hover:-translate-y-1"
+                className="w-12 h-12 glass rounded-xl flex items-center justify-center text-slate-light transition-all duration-300 hover:text-blue-accent hover:scale-110 hover:bg-navy-accent/50"
                 aria-label={link.name}
               >
                 {getIcon(link.iconName)}
@@ -67,17 +68,32 @@ export function Footer(): JSX.Element {
             ))}
           </div>
         </div>
-        <div className="flex flex-col items-center justify-center gap-2">
-          <a
-            href="https://github.com/Davie3"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-primary transition-colors duration-300"
-          >
-            Designed & Built by David Griffin
-          </a>
-          <p>Created with an AI assistant 🤖</p>
-          <p> {yearText} All Rights Reserved.</p>
+
+        {/* Footer Content */}
+        <div className="glass rounded-2xl p-6 md:p-8">
+          <div className="flex flex-col items-center justify-center gap-4">
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 bg-gradient-to-r from-blue-accent to-purple-accent rounded-lg flex items-center justify-center">
+                <span className="text-navy font-bold text-sm">DG</span>
+              </div>
+              <a
+                href="https://github.com/Davie3"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-slate-light hover:text-blue-accent transition-colors duration-300 font-medium"
+              >
+                Designed & Built by David Griffin
+              </a>
+            </div>
+
+            <div className="flex flex-col items-center gap-2 text-sm text-slate-dark">
+              <p className="flex items-center gap-2">
+                Created with an AI assistant
+                <span className="text-base">🤖</span>
+              </p>
+              <p className="text-xs">© {yearText} All Rights Reserved.</p>
+            </div>
+          </div>
         </div>
       </div>
     </footer>

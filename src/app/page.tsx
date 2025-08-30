@@ -13,33 +13,41 @@ import { EXTERNAL_URLS, INTERNAL_ROUTES } from '@/constants/urls';
 export default function Home(): JSX.Element {
   return (
     <main
-      className="flex flex-col items-center justify-center p-4 text-center md:p-8"
+      className="flex flex-col items-center justify-center p-4 text-center md:p-8 relative overflow-hidden"
       style={{ minHeight: 'calc(100vh - 4rem)' }}
     >
-      <div className="max-w-3xl">
-        <h1 className="text-6xl font-bold tracking-tight text-primary sm:text-7xl md:text-8xl">
+      {/* Hero background glow */}
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-accent/10 via-transparent to-purple-accent/10 pointer-events-none" />
+
+      <div className="max-w-4xl relative z-10">
+        <h1 className="text-6xl font-bold tracking-tight gradient-text sm:text-7xl md:text-8xl lg:text-9xl mb-6">
           {PERSONAL_INFO.FULL_NAME}
         </h1>
-        <h2 className="mt-4 text-2xl font-medium tracking-tight text-secondary sm:text-3xl md:text-4xl">
+
+        <h2 className="mt-4 text-2xl font-medium tracking-tight text-slate-light sm:text-3xl md:text-4xl lg:text-5xl">
           {PERSONAL_INFO.TITLE}
         </h2>
-        <p className="mt-6 text-lg leading-8 text-muted-foreground md:text-xl">
+
+        <p className="mt-8 text-lg leading-relaxed text-slate-dark md:text-xl lg:text-2xl max-w-3xl mx-auto">
           {PERSONAL_INFO.DESCRIPTION}
         </p>
-        <div className="mt-10 flex items-center justify-center gap-x-6">
+
+        <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-6">
           <Link
             href={INTERNAL_ROUTES.PORTFOLIO}
-            className="rounded-md bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground shadow-sm hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            className="group relative px-8 py-4 bg-gradient-to-r from-blue-accent to-purple-accent rounded-xl font-semibold text-navy transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-accent/25 glow-on-hover"
           >
-            View My Work
+            <span className="relative z-10">View My Work</span>
           </Link>
+
           <a
             href={EXTERNAL_URLS.GITHUB_PROFILE}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 text-sm font-semibold leading-6 text-foreground hover:text-muted-foreground"
+            className="group flex items-center gap-3 px-6 py-4 glass rounded-xl font-semibold text-slate-light transition-all duration-300 hover:scale-105 hover:bg-navy-accent/50"
           >
-            GitHub <ArrowRight className="w-4 h-4" />
+            <span>GitHub</span>
+            <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
           </a>
         </div>
       </div>

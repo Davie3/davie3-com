@@ -15,9 +15,24 @@ const config: Config = {
         accent: 'var(--color-accent)',
         navy: 'var(--color-navy)',
         'navy-light': 'var(--color-navy-light)',
+        'navy-accent': 'var(--color-navy-accent)',
         'slate-light': 'var(--color-slate-light)',
         'slate-dark': 'var(--color-slate-dark)',
         'blue-accent': 'var(--color-blue-accent)',
+        'purple-accent': 'var(--color-purple-accent)',
+        'cyan-accent': 'var(--color-cyan-accent)',
+        primary: {
+          DEFAULT: 'var(--color-blue-accent)',
+          foreground: 'var(--color-navy)',
+        },
+        secondary: {
+          DEFAULT: 'var(--color-navy-accent)',
+          foreground: 'var(--color-slate-light)',
+        },
+        muted: {
+          DEFAULT: 'var(--color-navy-light)',
+          foreground: 'var(--color-slate-dark)',
+        },
       },
       fontFamily: {
         sans: ['var(--font-geist-sans)'],
