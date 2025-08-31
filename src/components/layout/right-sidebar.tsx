@@ -16,7 +16,7 @@ export function RightSidebar(): JSX.Element {
         className="p-2 text-[color:var(--color-slate-dark)] hover:text-[color:var(--color-accent)] transition-transform duration-300 hover:-translate-y-1 text-sm"
         style={{ writingMode: 'vertical-rl' }}
       >
-        your-email@example.com
+        Davie3 / David Griffin
       </a>
       <div className="mt-6 w-px h-24 bg-[color:var(--color-slate-dark)]"></div>
     </motion.div>
