@@ -1,20 +1,40 @@
 @import 'tailwindcss';
 
-/* Define the color palette using CSS variables */
+/* Define the enhanced color palette using CSS variables */
 :root {
-  /* Dark Theme Colors */
-  --color-navy: #0a192f; /* Deep navy blue for background */
-  --color-navy-light: #112240; /* Lighter navy for header */
-  --color-slate-light: #ccd6f6; /* Light slate for primary text */
-  --color-slate-dark: #8892b0; /* Darker slate for secondary text */
-  --color-blue-accent: #64ffda; /* A bright, techy accent color */
+  /* Enhanced Dark Theme Colors */
+  --color-navy: #0a0e1a; /* Deeper navy for better contrast */
+  --color-navy-light: #1a1f2e; /* Refined lighter navy */
+  --color-navy-accent: #2a2f3e; /* Mid-tone navy for cards */
+  --color-slate-light: #e2e8f0; /* Brighter slate for better readability */
+  --color-slate-dark: #94a3b8; /* Softer slate for secondary text */
+  --color-blue-accent: #60a5fa; /* More vibrant blue accent */
+  --color-purple-accent: #a855f7; /* Purple accent for variety */
+  --color-cyan-accent: #06b6d4; /* Cyan accent for highlights */
   --color-background: var(--color-navy);
   --color-foreground: var(--color-slate-light);
   --color-foreground-dark: var(--color-slate-dark);
   --color-accent: var(--color-blue-accent);
+
+  /* Gradient definitions */
+  --gradient-primary: linear-gradient(
+    135deg,
+    var(--color-blue-accent),
+    var(--color-purple-accent)
+  );
+  --gradient-secondary: linear-gradient(
+    135deg,
+    var(--color-cyan-accent),
+    var(--color-blue-accent)
+  );
+  --gradient-background: linear-gradient(
+    180deg,
+    var(--color-navy) 0%,
+    #0f172a 100%
+  );
 }
 
-/* Apply base styles */
+/* Apply enhanced base styles */
 html {
   scroll-behavior: smooth;
 }
@@ -22,15 +42,78 @@ html {
 body {
   color: var(--color-foreground);
   font-family: var(--font-sans);
-  background-color: var(--color-background);
+  background: var(--gradient-background);
+  min-height: 100vh;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Optional: Style for links to use the accent color */
+/* Enhanced link styles */
 a {
   color: var(--color-accent);
-  transition: color 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
 }
 
 a:hover {
-  filter: brightness(1.2);
+  color: var(--color-purple-accent);
+  text-shadow: 0 0 8px rgba(96, 165, 250, 0.3);
+}
+
+/* Glass morphism effect */
+.glass {
+  background: rgba(26, 31, 46, 0.8);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* Gradient text effect */
+.gradient-text {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Enhanced card styles */
+.card {
+  background: rgba(26, 31, 46, 0.6);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  border-color: rgba(96, 165, 250, 0.3);
+}
+
+/* Glow effect for buttons */
+.glow-on-hover {
+  position: relative;
+  overflow: hidden;
+}
+
+.glow-on-hover::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  transition: left 0.5s;
+}
+
+.glow-on-hover:hover::before {
+  left: 100%;
 }
