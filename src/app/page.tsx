@@ -1,6 +1,7 @@
 import type { JSX } from 'react';
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 import { PERSONAL_INFO } from '@/constants/personal-info';
 import { EXTERNAL_URLS, INTERNAL_ROUTES } from '@/constants/url-constants';
@@ -20,6 +21,16 @@ export default function Home(): JSX.Element {
       <div className="absolute inset-0 bg-gradient-to-br from-blue-accent/10 via-transparent to-purple-accent/10 pointer-events-none" />
 
       <div className="max-w-4xl relative z-10">
+        <div className="mb-8">
+          <Image
+            src="/profile.png"
+            alt="David Griffin"
+            width={200}
+            height={200}
+            className="rounded-2xl mx-auto shadow-2xl ring-4 ring-blue-accent/20"
+            priority
+          />
+        </div>
         <h1 className="text-6xl font-bold tracking-tight gradient-text sm:text-7xl md:text-8xl lg:text-9xl mb-6">
           {PERSONAL_INFO.FULL_NAME}
         </h1>
