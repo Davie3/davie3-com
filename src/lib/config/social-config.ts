@@ -1,5 +1,5 @@
 import type { SocialLinkData } from '../../types/social-types';
-import { EXTERNAL_URLS } from '../../constants/url-constants';
+import { EXTERNAL_URLS, SOCIAL_URLS } from '../../constants/urls';
 
 /**
  * Social media links configuration.
@@ -12,27 +12,27 @@ export const SOCIAL_LINKS_DATA: readonly SocialLinkData[] = [
   },
   {
     name: 'LinkedIn',
-    href: EXTERNAL_URLS.LINKEDIN,
+    href: SOCIAL_URLS.LINKEDIN,
     iconName: 'linkedin',
   },
   {
     name: 'Twitch',
-    href: EXTERNAL_URLS.TWITCH,
+    href: SOCIAL_URLS.TWITCH,
     iconName: 'twitch',
   },
   {
-    name: 'X',
-    href: EXTERNAL_URLS.X_TWITTER,
+    name: 'X (Twitter)',
+    href: SOCIAL_URLS.X_TWITTER,
     iconName: 'x',
   },
   {
     name: 'Instagram',
-    href: EXTERNAL_URLS.INSTAGRAM,
+    href: SOCIAL_URLS.INSTAGRAM,
     iconName: 'instagram',
   },
   {
     name: 'Bluesky',
-    href: EXTERNAL_URLS.BLUESKY,
+    href: SOCIAL_URLS.BLUESKY,
     iconName: 'bluesky',
   },
 ];

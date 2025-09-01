@@ -1,6 +1,9 @@
 import type { Metadata } from 'next';
+import type { JSX } from 'react';
 
+import { CloudFlareAnalytics } from '@/components/analytics/cloudflare-analytics';
 import { AppFooter } from '@/components/layout/app-footer';
+import { StructuredData } from '@/components/seo/structured-data';
 import { ClientLayout } from '@/components/ui/client-layout';
 import { SITE_METADATA } from '@/lib/config/site-metadata';
 import { fontVariables } from '@/lib/fonts';
@@ -12,14 +15,18 @@ export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
-}>) {
+}>): JSX.Element {
   return (
     <html lang="en">
+      <head>
+        <StructuredData pageType="website" />
+      </head>
       <body
         className={`${fontVariables} antialiased pt-16 bg-black text-white`}
       >
         <ClientLayout>{children}</ClientLayout>
         <AppFooter />
+        <CloudFlareAnalytics />
       </body>
     </html>
   );

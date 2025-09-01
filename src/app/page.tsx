@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 import { PERSONAL_INFO } from '@/constants/personal-info';
-import { EXTERNAL_URLS, INTERNAL_ROUTES } from '@/constants/url-constants';
+import { EXTERNAL_URLS, INTERNAL_ROUTES } from '@/constants/urls';
 
 /**
  * Renders the home page of the personal website.

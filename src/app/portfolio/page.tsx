@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { GitFork, Star } from 'lucide-react';
 
-import { EXTERNAL_URLS } from '@/constants/url-constants';
+import { EXTERNAL_URLS } from '@/constants/urls';
 import { GITHUB_REPO_SCHEMA, GITHUB_CONFIG } from '@/lib/config/github-config';
 import { PAGE_METADATA } from '@/lib/config/site-metadata';
 import type { GitHubRepo } from '@/types/api-types';
