@@ -47,6 +47,7 @@ export const INTERNAL_ROUTES = {
   ABOUT: '/about',
   CONTACT: '/contact',
   PORTFOLIO: '/portfolio',
+  PRIVACY: '/privacy',
   API_CONTACT: '/api/contact',
 } as const;
 

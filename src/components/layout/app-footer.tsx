@@ -94,7 +94,16 @@ export function AppFooter(): JSX.Element {
                 Created with an AI assistant
                 <span className="text-base">🤖</span>
               </p>
-              <p className="text-xs">© {yearText} All Rights Reserved.</p>
+              <div className="flex items-center gap-4 text-xs">
+                <p>© {yearText} All Rights Reserved.</p>
+                <span className="text-slate-dark/50">•</span>
+                <a
+                  href="/privacy"
+                  className="text-slate-dark hover:text-blue-accent transition-colors duration-300 underline"
+                >
+                  Privacy Policy
+                </a>
+              </div>
             </div>
           </div>
         </div>
