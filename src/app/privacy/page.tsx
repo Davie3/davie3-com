@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import type { JSX } from 'react';
 
+import { PAGE_LAST_MODIFIED, createPacificDate } from '@/constants/page-dates';
+
 export const metadata: Metadata = {
   title: 'Privacy Policy | David Griffin',
   description:
@@ -17,8 +19,15 @@ export default function PrivacyPage(): JSX.Element {
               Privacy Policy
             </h1>
             <p className="text-slate-dark text-lg">
-              {/* TODO: Update this date whenever the privacy policy content is modified */}
-              Last updated: September 1, 2025
+              Last updated:{' '}
+              {createPacificDate(PAGE_LAST_MODIFIED.PRIVACY).toLocaleDateString(
+                'en-US',
+                {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                },
+              )}
             </p>
           </header>
 
