@@ -30,3 +30,10 @@ export type { Experience, PersonalInfo, Skill } from '@/types/personal-types';
 
 // Social Types
 export type { SocialLinkData, SocialIconName } from '@/types/social-types';
+
+// URL Types
+export type {
+  UrlMapping,
+  RedirectType,
+  RedirectConfig,
+} from '@/types/url-types';
