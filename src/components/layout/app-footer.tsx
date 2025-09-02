@@ -63,7 +63,7 @@ export function AppFooter(): JSX.Element {
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-12 h-12 glass rounded-xl flex items-center justify-center text-slate-light transition-all duration-300 hover:text-blue-accent hover:scale-110 hover:bg-navy-accent/50"
+                className="w-12 h-12 flex items-center justify-center text-slate-light transition-all duration-300 hover:text-blue-accent hover:scale-110"
                 aria-label={link.name}
               >
                 {getIcon(link.iconName)}
