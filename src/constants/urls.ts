@@ -9,7 +9,7 @@
 export const EXTERNAL_URLS = {
   // Site Assets
   SITE_URL: 'https://davie3.com',
-  OG_IMAGE: 'https://davie3.com/profile.png',
+  OG_IMAGE: 'https://davie3.com/images/profile.png',
 
   // GitHub
   GITHUB_PROFILE: 'https://github.com/davie3',
