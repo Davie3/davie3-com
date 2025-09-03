@@ -14,7 +14,8 @@ import { EXTERNAL_URLS, INTERNAL_ROUTES } from '@/constants/urls';
 export default function Home(): JSX.Element {
   return (
     <main
-      className="flex flex-col items-center justify-center p-4 text-center md:p-8 relative overflow-hidden"
+      id="main-content"
+      className="min-h-screen flex items-center justify-center p-4 text-center md:p-8 relative overflow-hidden"
       style={{ minHeight: 'calc(100vh - 4rem)' }}
     >
       {/* Hero background glow */}

@@ -24,6 +24,13 @@ export default function RootLayout({
       <body
         className={`${fontVariables} antialiased pt-16 bg-black text-white`}
       >
+        {/* Skip to main content link for keyboard navigation */}
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-blue-accent focus:text-navy focus:rounded-lg focus:font-semibold"
+        >
+          Skip to main content
+        </a>
         <ClientLayout>{children}</ClientLayout>
         <AppFooter />
         <CloudFlareAnalytics />
