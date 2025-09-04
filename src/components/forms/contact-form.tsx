@@ -19,6 +19,7 @@ export default function ContactForm(): JSX.Element {
   const [formStatus, setFormStatus] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [token, setToken] = useState<string>('');
+  const [captchaError, setCaptchaError] = useState<string | null>(null);
 
   const {
     register,
@@ -31,11 +32,12 @@ export default function ContactForm(): JSX.Element {
 
   const onSubmit = async (data: ContactFormValues) => {
     if (!token) {
-      setFormStatus('Please complete the CAPTCHA.');
+      setCaptchaError('Please complete the CAPTCHA verification.');
       return;
     }
     setIsSubmitting(true);
     setFormStatus(null);
+    setCaptchaError(null);
 
     try {
       const response = await fetch(INTERNAL_ROUTES.API_CONTACT, {
@@ -52,6 +54,8 @@ export default function ContactForm(): JSX.Element {
 
       setFormStatus(FORM_MESSAGES.SUCCESS);
       reset();
+      setToken('');
+      setCaptchaError(null);
     } catch {
       setFormStatus(FORM_MESSAGES.ERROR);
     } finally {
@@ -102,6 +106,27 @@ export default function ContactForm(): JSX.Element {
 
         <div>
           <label
+            htmlFor="subject"
+            className="block text-sm font-medium text-slate-light mb-2"
+          >
+            Subject
+          </label>
+          <input
+            id="subject"
+            type="text"
+            {...register('subject')}
+            className="w-full px-4 py-3 bg-navy-accent/50 border border-slate-dark/30 rounded-xl text-slate-light placeholder-slate-dark focus:border-blue-accent focus:ring-2 focus:ring-blue-accent/20 focus:outline-none transition-colors duration-200"
+            placeholder="What's this about?"
+          />
+          {errors.subject && (
+            <p className="mt-2 text-sm text-red-400">
+              {errors.subject.message}
+            </p>
+          )}
+        </div>
+
+        <div>
+          <label
             htmlFor="message"
             className="block text-sm font-medium text-slate-light mb-2"
           >
@@ -122,8 +147,20 @@ export default function ContactForm(): JSX.Element {
         </div>
 
         <div className="flex justify-center">
-          <Turnstile onSuccess={setToken} />
+          <Turnstile
+            onSuccess={(token) => {
+              setToken(token);
+              setCaptchaError(null);
+            }}
+          />
         </div>
+        {captchaError && (
+          <div className="p-3 bg-red-500/10 border border-red-500/30 rounded-xl">
+            <p className="text-center text-red-400 text-sm font-medium">
+              {captchaError}
+            </p>
+          </div>
+        )}
 
         <button
           type="submit"

@@ -1,0 +1,287 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Form Submission</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      .email-container {
+        max-width: 600px;
+        margin: 0 auto;
+      }
+      .email-wrapper {
+        background-color: #f3f4f6;
+        padding: 40px 20px;
+      }
+      .email-content {
+        background: white;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+      .header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 40px 30px;
+        text-align: center;
+      }
+      @media (prefers-color-scheme: dark) {
+        .email-wrapper {
+          background-color: #111827 !important;
+        }
+        .email-content {
+          background-color: #1f2937 !important;
+        }
+        .card {
+          background-color: #374151 !important;
+          border-color: #4b5563 !important;
+        }
+        .card h2 {
+          color: #f3f4f6 !important;
+          border-bottom-color: #6b7280 !important;
+        }
+        .card .text-primary {
+          color: #e5e7eb !important;
+        }
+        .card .text-secondary {
+          color: #9ca3af !important;
+        }
+        .main-content {
+          background-color: #1f2937 !important;
+        }
+        .tech-details {
+          background-color: #374151 !important;
+          border-color: #4b5563 !important;
+        }
+        .tech-details summary {
+          color: #9ca3af !important;
+        }
+        .tech-details div {
+          color: #9ca3af !important;
+        }
+        .message-content {
+          background-color: #374151 !important;
+          color: #e5e7eb !important;
+          border-left-color: #3b82f6 !important;
+        }
+      }
+    </style>
+  </head>
+  <body
+    style="
+      font-family:
+        -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    "
+  >
+    <div
+      class="email-wrapper"
+      style="background-color: #f3f4f6; padding: 40px 20px"
+    >
+      <div class="email-container" style="max-width: 600px; margin: 0 auto">
+        <div
+          class="email-content"
+          style="
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          "
+        >
+          <div
+            class="header"
+            style="
+              background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+              color: white;
+              padding: 40px 30px;
+              text-align: center;
+            "
+          >
+            <h1
+              style="
+                margin: 0;
+                font-size: 24px;
+                font-weight: 600;
+                line-height: 1.2;
+              "
+            >
+              💬 New Contact Message
+            </h1>
+            <p style="margin: 15px 0 0 0; opacity: 0.9; font-size: 16px">
+              davie3.com
+            </p>
+          </div>
+
+          <div class="main-content" style="background: #f8fafc; padding: 30px">
+            <div
+              class="card"
+              style="
+                background: white;
+                padding: 25px;
+                border-radius: 12px;
+                margin-bottom: 20px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                border: 1px solid #e2e8f0;
+              "
+            >
+              <h2
+                style="
+                  margin: 0 0 20px 0;
+                  color: #1e293b;
+                  font-size: 18px;
+                  border-bottom: 2px solid #e2e8f0;
+                  padding-bottom: 10px;
+                "
+              >
+                Contact Details
+              </h2>
+
+              <div style="margin-bottom: 15px">
+                <strong
+                  style="color: #475569; display: inline-block; width: 90px"
+                  >👤 Name:</strong
+                >
+                <span class="text-primary" style="color: #1e293b"
+                  >{{name}}</span
+                >
+              </div>
+
+              <div style="margin-bottom: 15px">
+                <strong
+                  style="color: #475569; display: inline-block; width: 90px"
+                  >📧 Email:</strong
+                >
+                <a
+                  href="mailto:{{email}}"
+                  style="color: #3b82f6; text-decoration: none"
+                  >{{email}}</a
+                >
+              </div>
+
+              <div style="margin-bottom: 15px">
+                <strong
+                  style="color: #475569; display: inline-block; width: 90px"
+                  >📝 Subject:</strong
+                >
+                <span class="text-primary" style="color: #1e293b"
+                  >{{subject}}</span
+                >
+              </div>
+
+              <div style="margin-bottom: 15px">
+                <strong
+                  style="color: #475569; display: inline-block; width: 90px"
+                  >🕒 Time:</strong
+                >
+                <span
+                  class="text-secondary"
+                  style="color: #64748b; font-size: 14px"
+                  >{{timestamp}}</span
+                >
+              </div>
+            </div>
+
+            <div
+              class="card"
+              style="
+                background: white;
+                padding: 25px;
+                border-radius: 12px;
+                margin-bottom: 20px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                border: 1px solid #e2e8f0;
+              "
+            >
+              <h2
+                style="
+                  margin: 0 0 15px 0;
+                  color: #1e293b;
+                  font-size: 18px;
+                  border-bottom: 2px solid #e2e8f0;
+                  padding-bottom: 10px;
+                "
+              >
+                💭 Message
+              </h2>
+              <div
+                class="message-content"
+                style="
+                  background: #f1f5f9;
+                  padding: 20px;
+                  border-radius: 8px;
+                  border-left: 4px solid #3b82f6;
+                  white-space: pre-wrap;
+                  font-family: 'SF Mono', Monaco, monospace;
+                  font-size: 14px;
+                  line-height: 1.5;
+                  color: #334155;
+                "
+              >
+                {{message}}
+              </div>
+            </div>
+
+            <div
+              style="
+                background: #fef3c7;
+                border: 1px solid #f59e0b;
+                padding: 15px;
+                border-radius: 12px;
+                margin-bottom: 20px;
+              "
+            >
+              <p style="margin: 0; color: #92400e; font-size: 14px">
+                <strong>💡 Quick Reply:</strong> Simply reply to this email to
+                respond directly to {{name}}.
+              </p>
+            </div>
+
+            <details
+              class="tech-details"
+              style="
+                background: white;
+                padding: 20px;
+                border-radius: 12px;
+                border: 1px solid #e2e8f0;
+              "
+            >
+              <summary
+                style="
+                  cursor: pointer;
+                  color: #64748b;
+                  font-size: 14px;
+                  margin-bottom: 10px;
+                "
+              >
+                🔍 Technical Details
+              </summary>
+              <div
+                style="
+                  font-size: 12px;
+                  color: #64748b;
+                  font-family: 'SF Mono', Monaco, monospace;
+                  line-height: 1.4;
+                "
+              >
+                <div><strong>IP Address:</strong> {{ipAddress}}</div>
+                <div style="margin-top: 5px">
+                  <strong>User Agent:</strong> {{userAgent}}
+                </div>
+                <div style="margin-top: 5px">
+                  <strong>Timestamp:</strong> {{isoTimestamp}}
+                </div>
+              </div>
+            </details>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -37,3 +37,6 @@ export type {
   RedirectType,
   RedirectConfig,
 } from '@/types/url-types';
+
+// Email Types
+export type { ContactFormTemplateData } from '@/types/email-types';

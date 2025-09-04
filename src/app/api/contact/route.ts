@@ -3,8 +3,12 @@ import { NextResponse } from 'next/server';
 import sgMail from '@sendgrid/mail';
 import sanitizeHtml from 'sanitize-html';
 import xss from 'xss';
-
 import { env } from '@/env';
+import { formatEmailTimestamp } from '@/lib/utils/date-utils';
+import {
+  renderContactFormTemplate,
+  generateContactFormText,
+} from '@/lib/utils/email-template';
 
 sgMail.setApiKey(env.SENDGRID_API_KEY);
 
@@ -13,9 +17,9 @@ const TURNSTILE_VERIFY_ENDPOINT =
 
 export async function POST(request: NextRequest): Promise<NextResponse> {
   try {
-    const { name, email, message, token } = await request.json();
+    const { name, email, subject, message, token } = await request.json();
 
-    if (!name || !email || !message || !token) {
+    if (!name || !email || !subject || !message || !token) {
       return NextResponse.json(
         { error: 'Missing required fields.' },
         { status: 400 },
@@ -44,14 +48,35 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
     const sanitizedName = xss(sanitizeHtml(name));
     const sanitizedEmail = xss(sanitizeHtml(email));
+    const sanitizedSubject = xss(sanitizeHtml(subject));
     const sanitizedMessage = xss(sanitizeHtml(message));
+
+    const timestamp = formatEmailTimestamp();
+
+    const userAgent = request.headers.get('user-agent') || 'Unknown';
+    const forwardedFor =
+      request.headers.get('x-forwarded-for') ||
+      request.headers.get('x-real-ip') ||
+      'Unknown';
+
+    const templateData = {
+      name: sanitizedName,
+      email: sanitizedEmail,
+      subject: sanitizedSubject,
+      message: sanitizedMessage,
+      timestamp,
+      ipAddress: forwardedFor,
+      userAgent,
+      isoTimestamp: new Date().toISOString(),
+    };
 
     const msg = {
       to: env.SENDGRID_TO_EMAIL,
       from: env.SENDGRID_FROM_EMAIL,
-      subject: `New Contact Form Submission from ${sanitizedName}`,
-      text: `Name: ${sanitizedName}\nEmail: ${sanitizedEmail}\n\nMessage:\n${sanitizedMessage}`,
-      html: `<p><strong>Name:</strong> ${sanitizedName}</p><p><strong>Email:</strong> <a href="mailto:${sanitizedEmail}">${sanitizedEmail}</a></p><p><strong>Message:</strong></p><p>${sanitizedMessage.replace(/\n/g, '<br>')}</p>`,
+      replyTo: sanitizedEmail,
+      subject: `💬 Contact: ${sanitizedSubject} - from ${sanitizedName}`,
+      text: generateContactFormText(templateData),
+      html: renderContactFormTemplate(templateData),
     };
 
     await sgMail.send(msg);
