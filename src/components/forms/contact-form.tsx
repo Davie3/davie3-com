@@ -148,6 +148,27 @@ export default function ContactForm(): JSX.Element {
 
         <div>
           <label
+            htmlFor="confirmEmail"
+            className="block text-sm font-medium text-slate-light mb-2"
+          >
+            Confirm Email
+          </label>
+          <input
+            id="confirmEmail"
+            type="email"
+            {...register('confirmEmail')}
+            className="w-full px-4 py-3 bg-navy-accent/50 border border-slate-dark/30 rounded-xl text-slate-light placeholder-slate-dark focus:border-blue-accent focus:ring-2 focus:ring-blue-accent/20 focus:outline-none transition-colors duration-200"
+            placeholder="Confirm your email address"
+          />
+          {errors.confirmEmail && (
+            <p className="mt-2 text-sm text-red-400">
+              {errors.confirmEmail.message}
+            </p>
+          )}
+        </div>
+
+        <div>
+          <label
             htmlFor="subject"
             className="block text-sm font-medium text-slate-light mb-2"
           >

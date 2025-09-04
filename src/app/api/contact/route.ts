@@ -26,9 +26,10 @@ function sanitizeInput(input: string): string {
 
 export async function POST(request: NextRequest): Promise<NextResponse> {
   try {
-    const { name, email, subject, message, token } = await request.json();
+    const { name, email, confirmEmail, subject, message, token } =
+      await request.json();
 
-    if (!name || !email || !subject || !message || !token) {
+    if (!name || !email || !confirmEmail || !subject || !message || !token) {
       return NextResponse.json(
         { error: 'Missing required fields.' },
         { status: 400 },
