@@ -1,4 +1,9 @@
 #!/usr/bin/env sh
-# Execute lint-staged using the absolute path to the npm shim
-/home/dave/.local/share/mise/shims/npm exec --no -- lint-staged
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Run type checking first (fail fast)
+npm run type-check
+
+# Run lint-staged for formatting and linting
+npm exec --no -- lint-staged
 
