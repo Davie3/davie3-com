@@ -3,7 +3,22 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="supported-color-schemes" content="light dark" />
     <title>Contact Form Submission</title>
+    <style>
+      @media (prefers-color-scheme: dark) {
+        .header-bg {
+          background: #1a202c !important;
+        }
+        .header-text {
+          color: #ffffff !important;
+        }
+        .header-subtitle {
+          color: #e2e8f0 !important;
+        }
+      }
+    </style>
   </head>
   <body
     style="
@@ -27,28 +42,41 @@
       "
     >
       <!-- Header -->
-      <div
-        style="
-          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-          color: white;
-          padding: 40px 30px;
-          text-align: center;
-        "
-      >
-        <h1
-          style="
-            margin: 0;
-            font-size: 28px;
-            font-weight: 600;
-            letter-spacing: -0.025em;
-          "
-        >
-          💬 New Contact Message
-        </h1>
-        <p style="margin: 12px 0 0 0; font-size: 16px; opacity: 0.9">
-          davie3.com
-        </p>
-      </div>
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td
+            bgcolor="#1f1f1f"
+            style="
+              background: #1f1f1f !important;
+              background-color: #1f1f1f !important;
+              color: #fefefe !important;
+              padding: 40px 30px;
+              text-align: center;
+            "
+          >
+            <h1
+              style="
+                margin: 0;
+                font-size: 28px;
+                font-weight: 600;
+                letter-spacing: -0.025em;
+                color: #fefefe !important;
+              "
+            >
+              💬 New Contact Message
+            </h1>
+            <p
+              style="
+                margin: 12px 0 0 0;
+                font-size: 16px;
+                color: #efefef !important;
+              "
+            >
+              davie3.com
+            </p>
+          </td>
+        </tr>
+      </table>
 
       <!-- Content -->
       <div style="padding: 30px">
