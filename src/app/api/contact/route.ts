@@ -53,21 +53,12 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
     const timestamp = formatEmailTimestamp();
 
-    const userAgent = request.headers.get('user-agent') || 'Unknown';
-    const forwardedFor =
-      request.headers.get('x-forwarded-for') ||
-      request.headers.get('x-real-ip') ||
-      'Unknown';
-
     const templateData = {
       name: sanitizedName,
       email: sanitizedEmail,
       subject: sanitizedSubject,
       message: sanitizedMessage,
       timestamp,
-      ipAddress: forwardedFor,
-      userAgent,
-      isoTimestamp: new Date().toISOString(),
     };
 
     const msg = {

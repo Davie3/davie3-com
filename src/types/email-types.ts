@@ -4,7 +4,4 @@ export type ContactFormTemplateData = {
   subject: string;
   message: string;
   timestamp: string;
-  ipAddress: string;
-  userAgent: string;
-  isoTimestamp: string;
 };

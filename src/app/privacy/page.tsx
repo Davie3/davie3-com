@@ -74,6 +74,7 @@ export default function PrivacyPage(): JSX.Element {
               <ul className="list-disc list-inside text-slate-light space-y-2 ml-4">
                 <li>Your name</li>
                 <li>Your email address</li>
+                <li>Your subject line</li>
                 <li>The message content you provide</li>
               </ul>
             </section>

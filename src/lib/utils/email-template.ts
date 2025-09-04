@@ -20,10 +20,7 @@ export const renderContactFormTemplate = (
     .replace(/\{\{email\}\}/g, data.email)
     .replace(/\{\{subject\}\}/g, data.subject)
     .replace(/\{\{message\}\}/g, data.message)
-    .replace(/\{\{timestamp\}\}/g, data.timestamp)
-    .replace(/\{\{ipAddress\}\}/g, data.ipAddress)
-    .replace(/\{\{userAgent\}\}/g, data.userAgent)
-    .replace(/\{\{isoTimestamp\}\}/g, data.isoTimestamp);
+    .replace(/\{\{timestamp\}\}/g, data.timestamp);
 };
 
 /**
@@ -40,8 +37,6 @@ CONTACT FORM SUBMISSION
 📧 Email: ${data.email}
 📝 Subject: ${data.subject}
 🕒 Received: ${data.timestamp}
-🌐 IP: ${data.ipAddress}
-🖥️ User Agent: ${data.userAgent}
 
 MESSAGE:
 ────────
