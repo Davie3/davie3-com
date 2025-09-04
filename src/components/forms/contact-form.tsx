@@ -63,6 +63,48 @@ export default function ContactForm(): JSX.Element {
     }
   };
 
+  if (formStatus === FORM_MESSAGES.SUCCESS) {
+    return (
+      <div className="bg-navy-accent/60 backdrop-blur-xl border border-slate-dark/20 rounded-3xl p-8 md:p-12">
+        <div className="text-center space-y-6">
+          <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto">
+            <svg
+              className="w-8 h-8 text-green-400"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M5 13l4 4L19 7"
+              />
+            </svg>
+          </div>
+          <h3 className="text-2xl font-bold text-slate-light">
+            Message Sent Successfully!
+          </h3>
+          <p className="text-slate-dark text-lg">
+            Thank you for reaching out. I&apos;ll get back to you as soon as
+            possible.
+          </p>
+          <button
+            onClick={() => {
+              setFormStatus(null);
+              reset();
+              setToken('');
+              setCaptchaError(null);
+            }}
+            className="px-6 py-3 bg-blue-accent/20 hover:bg-blue-accent/30 rounded-xl text-blue-accent border border-blue-accent/30 hover:border-blue-accent/50 transition-all duration-200"
+          >
+            Send Another Message
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="bg-navy-accent/60 backdrop-blur-xl border border-slate-dark/20 rounded-3xl p-8 md:p-12">
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
@@ -173,13 +215,6 @@ export default function ContactForm(): JSX.Element {
           <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-200" />
         </button>
 
-        {formStatus === FORM_MESSAGES.SUCCESS && (
-          <div className="p-4 bg-green-500/10 border border-green-500/30 rounded-xl">
-            <p className="text-center text-green-400 font-medium">
-              Message sent successfully! Thank you for reaching out.
-            </p>
-          </div>
-        )}
         {formStatus === FORM_MESSAGES.ERROR && (
           <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
             <p className="text-center text-red-400 font-medium">
