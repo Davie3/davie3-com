@@ -15,6 +15,15 @@ sgMail.setApiKey(env.SENDGRID_API_KEY);
 const TURNSTILE_VERIFY_ENDPOINT =
   'https://challenges.cloudflare.com/turnstile/v0/siteverify';
 
+/**
+ * Sanitizes user input to prevent XSS attacks
+ * @param input - The string to sanitize
+ * @returns Sanitized string safe for use in emails and responses
+ */
+function sanitizeInput(input: string): string {
+  return xss(sanitizeHtml(input));
+}
+
 export async function POST(request: NextRequest): Promise<NextResponse> {
   try {
     const { name, email, subject, message, token } = await request.json();
@@ -46,10 +55,10 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       );
     }
 
-    const sanitizedName = xss(sanitizeHtml(name));
-    const sanitizedEmail = xss(sanitizeHtml(email));
-    const sanitizedSubject = xss(sanitizeHtml(subject));
-    const sanitizedMessage = xss(sanitizeHtml(message));
+    const sanitizedName = sanitizeInput(name);
+    const sanitizedEmail = sanitizeInput(email);
+    const sanitizedSubject = sanitizeInput(subject);
+    const sanitizedMessage = sanitizeInput(message);
 
     const timestamp = formatEmailTimestamp();
 
