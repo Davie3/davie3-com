@@ -5,7 +5,8 @@ import type { Experience } from '../types/personal-types';
  */
 export const PERSONAL_INFO = {
   FULL_NAME: 'David Griffin',
-  TITLE: 'Software Engineer',
+  NICKNAME: 'Davie3',
+  TITLE: 'Systems Development Engineer',
   DESCRIPTION:
     'I build and scale resilient, high-performance software systems. With a passion for elegant code and innovative solutions, I transform complex challenges into seamless user experiences.',
   TWITTER_HANDLE: '@itsdavie3',
