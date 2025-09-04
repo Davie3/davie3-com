@@ -58,10 +58,7 @@ export function MobileNavigation(): JSX.Element {
   }, []);
 
   useEffect(() => {
-    if (isOpen) {
-      setIsOpen(false);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    setIsOpen(false);
   }, [pathname]);
 
   const toggleMenu = () => {
@@ -79,17 +76,20 @@ export function MobileNavigation(): JSX.Element {
           onClick={toggleMenu}
         >
           <motion.div
+            id="mobile-menu"
             className="fixed top-0 right-0 bottom-0 w-3/4 max-w-sm bg-[color:var(--color-navy)] p-10 z-[10000]"
             variants={menuVariants}
             initial="initial"
             animate="animate"
             exit="exit"
             onClick={(e) => e.stopPropagation()}
+            role="navigation"
+            aria-label="Mobile navigation menu"
           >
             <button
               onClick={toggleMenu}
-              className="absolute top-4 right-4 p-2 text-white hover:text-[color:var(--color-accent)] transition-colors"
-              aria-label="Close menu"
+              className="absolute top-4 right-4 p-2 text-white hover:text-[color:var(--color-accent)] transition-colors focus:outline-none focus:ring-2 focus:ring-blue-accent rounded-lg"
+              aria-label="Close navigation menu"
             >
               <svg
                 width="24"
@@ -138,8 +138,10 @@ export function MobileNavigation(): JSX.Element {
     <div className="md:hidden">
       <button
         onClick={toggleMenu}
-        className="z-50 relative p-2 focus:outline-none"
-        aria-label="Toggle menu"
+        className="z-50 relative p-2 focus:outline-none focus:ring-2 focus:ring-blue-accent focus:ring-offset-2 focus:ring-offset-navy rounded-lg"
+        aria-label={isOpen ? 'Close navigation menu' : 'Open navigation menu'}
+        aria-expanded={isOpen}
+        aria-controls="mobile-menu"
       >
         <div className="space-y-1.5">
           <motion.span

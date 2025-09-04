@@ -1,5 +1,31 @@
 @import 'tailwindcss';
 
+/* Screen reader only utility */
+@layer utilities {
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  .not-sr-only {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+  }
+}
+
 /* Define the enhanced color palette using CSS variables */
 :root {
   /* Enhanced Dark Theme Colors */
@@ -34,9 +60,27 @@
   );
 }
 
+/* Focus styles for better accessibility */
+*:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--color-navy),
+    0 0 0 4px var(--color-blue-accent);
+  border-radius: 0.5rem;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--color-navy),
+    0 0 0 4px var(--color-blue-accent);
+}
+
 /* Apply enhanced base styles */
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 5rem; /* Account for fixed header */
 }
 
 body {
@@ -52,7 +96,7 @@ body {
 /* Enhanced link styles */
 a {
   color: var(--color-accent);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  @apply transition-colors duration-200;
   text-decoration: none;
 }
 
@@ -88,8 +132,28 @@ a:hover {
 
 .card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-  border-color: rgba(96, 165, 250, 0.3);
+  box-shadow: 0 20px 40px rgba(96, 165, 250, 0.15);
+}
+
+/* Smooth transitions for interactive elements */
+button,
+a,
+input,
+textarea,
+select {
+  transition: all 0.2s ease;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 /* Glow effect for buttons */

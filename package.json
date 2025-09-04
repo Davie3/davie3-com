@@ -4,11 +4,13 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "rm -rf .next && npm run format && npm run lint && next build",
+    "build": "rm -rf .next && npm run format && npm run lint && npm run type-check && next build",
     "start": "next start",
     "lint": "next lint",
+    "type-check": "tsc --noEmit",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
+    "fix": "npm run format && npm run lint -- --fix",
     "prepare": "husky"
   },
   "dependencies": {
@@ -33,14 +35,22 @@
     "*.{js,jsx,ts,tsx}": [
       "prettier --write",
       "next lint --fix --file"
+    ],
+    "*.{json,css,md}": [
+      "prettier --write"
     ]
+  },
+  "engines": {
+    "node": ">=22.0.0",
+    "npm": ">=10.0.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
-    "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
+    "@tailwindcss/postcss": "^4.1.12",
+    "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "autoprefixer": "^10.4.21",
     "eslint": "^9",
     "eslint-config-next": "15.3.5",
     "eslint-config-prettier": "^10.1.5",

@@ -32,13 +32,13 @@ export const SITE_METADATA: Metadata = {
     title: `${PERSONAL_INFO.FULL_NAME} - ${PERSONAL_INFO.TITLE}`,
     description: SEO_DESCRIPTIONS.SITE_EXTENDED,
     url: EXTERNAL_URLS.SITE_URL,
-    siteName: `${PERSONAL_INFO.FULL_NAME} - Davie3`,
+    siteName: `${PERSONAL_INFO.FULL_NAME} - ${PERSONAL_INFO.NICKNAME}`,
     images: [
       {
         url: EXTERNAL_URLS.OG_IMAGE,
         width: 1200,
         height: 630,
-        alt: `${PERSONAL_INFO.FULL_NAME} - Software Developer and Content Creator`,
+        alt: `${PERSONAL_INFO.FULL_NAME} - ${PERSONAL_INFO.TITLE}`,
       },
     ],
     locale: 'en_US',
@@ -52,7 +52,7 @@ export const SITE_METADATA: Metadata = {
     site: PERSONAL_INFO.TWITTER_HANDLE,
     images: {
       url: EXTERNAL_URLS.OG_IMAGE,
-      alt: `${PERSONAL_INFO.FULL_NAME} - Software Developer and Content Creator`,
+      alt: `${PERSONAL_INFO.FULL_NAME} - ${PERSONAL_INFO.TITLE}`,
     },
   },
   robots: {

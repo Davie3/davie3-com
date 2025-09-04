@@ -18,7 +18,10 @@ async function getGitHubRepos(): Promise<GitHubRepo[]> {
     });
 
     if (!response.ok) {
-      console.error('Failed to fetch GitHub repos:', response.statusText);
+      // Log error only in development
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Failed to fetch GitHub repos:', response.statusText);
+      }
       return [];
     }
 
@@ -26,13 +29,19 @@ async function getGitHubRepos(): Promise<GitHubRepo[]> {
     const validationResult = GITHUB_REPO_SCHEMA.safeParse(data.items);
 
     if (!validationResult.success) {
-      console.error('GitHub repo validation failed:', validationResult.error);
+      // Log validation errors only in development
+      if (process.env.NODE_ENV === 'development') {
+        console.error('GitHub repo validation failed:', validationResult.error);
+      }
       return [];
     }
 
     return validationResult.data;
   } catch (error) {
-    console.error('Error fetching GitHub repos:', error);
+    // Log errors only in development
+    if (process.env.NODE_ENV === 'development') {
+      console.error('Error fetching GitHub repos:', error);
+    }
     return [];
   }
 }
