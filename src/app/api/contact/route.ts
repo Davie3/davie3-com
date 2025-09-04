@@ -16,12 +16,29 @@ const TURNSTILE_VERIFY_ENDPOINT =
   'https://challenges.cloudflare.com/turnstile/v0/siteverify';
 
 /**
- * Sanitizes user input to prevent XSS attacks
+ * Sanitizes user input to prevent XSS attacks and HTML injection
  * @param input - The string to sanitize
  * @returns Sanitized string safe for use in emails and responses
  */
 function sanitizeInput(input: string): string {
-  return xss(sanitizeHtml(input));
+  // First pass: strip all HTML tags
+  const htmlStripped = sanitizeHtml(input, {
+    allowedTags: [], // No HTML tags allowed
+    allowedAttributes: {}, // No attributes allowed
+    disallowedTagsMode: 'discard', // Remove disallowed tags entirely
+    allowedSchemes: [], // No URL schemes allowed
+    allowedSchemesByTag: {},
+    allowedSchemesAppliedToAttributes: [],
+    allowProtocolRelative: false,
+    enforceHtmlBoundary: false,
+  });
+
+  // Second pass: additional XSS protection
+  return xss(htmlStripped, {
+    allowList: {}, // No tags allowed
+    stripIgnoreTag: true,
+    stripIgnoreTagBody: ['script'],
+  }).trim();
 }
 
 export async function POST(request: NextRequest): Promise<NextResponse> {

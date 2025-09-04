@@ -15,11 +15,14 @@ export const renderContactFormTemplate = (
   );
   const template = readFileSync(templatePath, 'utf-8');
 
+  // Convert newlines to HTML breaks for proper email display
+  const messageWithBreaks = data.message.replace(/\n/g, '<br>');
+
   return template
     .replace(/\{\{name\}\}/g, data.name)
     .replace(/\{\{email\}\}/g, data.email)
     .replace(/\{\{subject\}\}/g, data.subject)
-    .replace(/\{\{message\}\}/g, data.message)
+    .replace(/\{\{message\}\}/g, messageWithBreaks)
     .replace(/\{\{timestamp\}\}/g, data.timestamp);
 };
 
