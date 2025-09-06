@@ -41,28 +41,28 @@ export const EXPERIENCES = [
     company: 'Twitch',
     period: 'Aug 2025 - Present',
     description:
-      'Leading systems development with a focus on modern cloud-native solutions using TypeScript, Node.js, AWS CloudFormation, and Terraform. Driving the architecture and implementation of generative AI features.',
+      "These days I'm architecting cloud-native systems with TypeScript and Node.js, while diving deep into AWS CloudFormation and Terraform. My favorite part? Getting to pioneer some really cool generative AI features that are changing how people interact with our platform.",
   },
   {
     role: 'System Admin Engineer II',
     company: 'Twitch',
     period: 'Jul 2023 - Aug 2025',
     description:
-      'Managed and automated critical IT systems using Terraform, Python, and TypeScript. Specialized in SaaS platform administration and identity management with Okta, ensuring robust and scalable infrastructure.',
+      'I spent these years automating everything I could get my hands on with Terraform, Python, and TypeScript. Became the go-to person for Okta identity management and built systems that could scale without breaking a sweat.',
   },
   {
     role: 'IT Support Engineer II',
     company: 'Twitch',
     period: 'Apr 2021 - Jul 2023',
     description:
-      'Advanced to senior IT support role responsible for technical escalations, process automation, and mentoring. Developed expertise in Okta, ITIL, and technical writing.',
+      'Got promoted to handle the tough technical escalations nobody else wanted to touch. Started my automation journey here and discovered I love teaching others. This is where I really got comfortable with Okta and learned how to write docs people actually want to read.',
   },
   {
     role: 'IT Support Engineer I',
     company: 'Twitch',
     period: 'May 2018 - Apr 2021',
     description:
-      'Provided foundational IT support and technical assistance. Built strong foundation in enterprise systems and support methodologies.',
+      'My first role at Twitch! Started with the classics - troubleshooting, ticket management, and making friends with the coffee machine. This is where I built my foundation in enterprise systems and figured out how things really work behind the scenes.',
   },
 ] as const;
 

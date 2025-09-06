@@ -29,34 +29,34 @@ export const PROFESSIONAL_TITLES = {
 export const PAGE_DESCRIPTIONS = {
   // Core messaging
   PRIMARY_DESCRIPTION:
-    'I build and scale resilient, high-performance software systems. With a passion for elegant code and innovative solutions, I transform complex challenges into seamless user experiences.',
+    "I love building systems that just work, no matter the scale or pressure. When I'm not experimenting with new technologies in my homelab, I'm finding creative ways to turn tricky problems into experiences that feel effortless for users.",
 
   PROFESSIONAL_SUMMARY:
-    'System Development Engineer at Twitch with expertise in TypeScript, Node.js, AWS CloudFormation, Terraform, and generative AI. Leading architecture and implementation of modern cloud-native solutions.',
+    "At Twitch, I wear the System Development Engineer hat, diving deep into TypeScript, Node.js, and the AWS ecosystem. These days, I'm particularly excited about bringing generative AI into our cloud-native architecture.",
 
   SKILLS_SUMMARY:
-    'Expertise in TypeScript, Node.js, React.js, AWS, Terraform, Okta, and system administration. Specializing in cloud-native architecture and generative AI implementation.',
+    "My toolbox includes TypeScript, Node.js, React, and a healthy dose of AWS magic. I've got a soft spot for cloud-native architecture and lately I've been having a blast implementing generative AI solutions.",
 
   CAREER_JOURNEY:
-    'My career is a story of progression, starting from hands-on IT support and network administration, where I built a strong foundation in managing robust infrastructures. This experience paved the way for a transition into system administration, where I honed my skills in automation, cloud technologies, and enterprise-level systems management using tools like Terraform and Okta. Today, as a Systems Development Engineer, I leverage that deep technical background to design and build scalable, cloud-native software solutions with a focus on Node.js, TypeScript, and Generative AI, turning complex engineering challenges into elegant and efficient systems.',
+    'I started with C# and programming early in my career, which gave me a strong foundation in software development. Later, I transitioned to IT Support where I gained hands-on experience with real-world systems and user needs. From there, I progressed through deployments and system administration into my current role as a Systems Development Engineer. This unique path has given me both development expertise and operational insight, which helps me create solutions that are both powerful and practical.',
 
   // Page-specific descriptions for SEO and meta tags
-  HOME: 'System Development Engineer at Twitch specializing in TypeScript, Node.js, AWS, and generative AI. Building resilient cloud-native solutions and creating tech content.',
+  HOME: "Hey, I'm a System Development Engineer at Twitch who loves TypeScript, Node.js, and all things AWS. When I'm not building cloud-native solutions, you'll find me creating tech content online.",
 
   ABOUT:
-    "Learn about David Griffin's journey from IT support to System Development Engineer at Twitch, with expertise in cloud architecture, automation, and modern web development.",
+    "Curious how I went from fixing printers to building cloud systems at Twitch? My journey's been all about learning, growing, and finding creative ways to solve tech problems.",
 
   CONTACT:
-    'Get in touch with David Griffin for collaboration opportunities, technical consulting, or to discuss modern software development and cloud architecture solutions.',
+    "Got a cool project idea or just want to chat about cloud architecture? Drop me a line! I'm always up for collaboration, consulting, or just geeking out about tech.",
 
   PORTFOLIO:
-    "Explore David Griffin's software projects and GitHub repositories showcasing expertise in TypeScript, Node.js, AWS, and modern web development technologies.",
+    'Check out some of my public projects! In addition to these, I have extensive experience developing and maintaining internal tools and systems for enterprise environments.',
 
   PRIVACY:
-    'Privacy policy for davie3.com outlining data collection, usage, and protection practices for website visitors and users.',
+    'The not-so-exciting but important stuff: how I handle your data when you visit davie3.com, what I collect, and how I keep it safe.',
 
   SITE_EXTENDED:
-    'David Griffin is a System Development Engineer at Twitch and content creator specializing in modern cloud-native solutions, TypeScript, Node.js, AWS, and generative AI. Building resilient systems while creating tech content on YouTube and Twitch.',
+    "By day, I'm a System Development Engineer at Twitch building cloud-native solutions with TypeScript, Node.js, and AWS. In my free time, I tinker with my homelab setup, experimenting with new technologies and occasionally stream on Twitch to share what I've learned along the way.",
 } as const;
 
 /**
@@ -66,7 +66,7 @@ export const TECHNOLOGIES = {
   LANGUAGES: ['TypeScript', 'Node.js', 'Python'],
   FRONTEND: ['React.js', 'Next.js'],
   CLOUD: ['Amazon Web Services (AWS)', 'AWS CloudFormation'],
-  INFRASTRUCTURE: ['Terraform', 'System Administration'],
+  INFRASTRUCTURE: ['Terraform', 'Docker', 'Ansible', 'System Administration'],
   IDENTITY: ['Okta'],
   CDN: ['CloudFlare'],
   EMERGING: ['Generative AI', 'MCP Servers'],
