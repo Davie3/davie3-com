@@ -54,8 +54,9 @@ export default function PrivacyPage(): JSX.Element {
                 Analytics Data
               </h3>
               <p className="text-slate-light leading-relaxed mb-4">
-                I use Cloudflare Web Analytics to understand how visitors
-                interact with my website. This service collects:
+                I use privacy-focused analytics tools, including Vercel
+                Analytics and Cloudflare Web Analytics, to understand how
+                visitors interact with my website. These services collect:
               </p>
               <ul className="list-disc list-inside text-slate-light space-y-2 mb-6 ml-4">
                 <li>Page views and navigation patterns</li>
@@ -116,6 +117,17 @@ export default function PrivacyPage(): JSX.Element {
               </p>
 
               <h3 className="text-xl font-medium mb-3 text-purple-accent">
+                Vercel Analytics & Speed Insights
+              </h3>
+              <p className="text-slate-light leading-relaxed mb-4">
+                I also use Vercel Analytics and Speed Insights for performance
+                monitoring and to understand user engagement. Like Cloudflare
+                Analytics, Vercel&apos;s tools are privacy-friendly, do not use
+                cookies for tracking, and anonymize visitor data. All data is
+                processed in compliance with GDPR.
+              </p>
+
+              <h3 className="text-xl font-medium mb-3 text-purple-accent">
                 Hosting & CDN
               </h3>
               <p className="text-slate-light leading-relaxed">
@@ -134,8 +146,9 @@ export default function PrivacyPage(): JSX.Element {
               </h2>
               <ul className="list-disc list-inside text-slate-light space-y-2 ml-4">
                 <li>
-                  <strong>Analytics Data:</strong> Retained by Cloudflare
-                  according to their data retention policies
+                  <strong>Analytics Data:</strong> Retained by Vercel and
+                  Cloudflare according to their respective data retention
+                  policies
                 </li>
                 <li>
                   <strong>Contact Form Data:</strong> Retained for as long as
@@ -169,10 +182,10 @@ export default function PrivacyPage(): JSX.Element {
                 Cookies
               </h2>
               <p className="text-slate-light leading-relaxed">
-                My website uses minimal cookies for essential functionality.
-                Cloudflare Analytics does not use cookies and is designed to be
-                privacy-preserving. I do not use tracking cookies or third-party
-                advertising cookies.
+                My website uses minimal cookies for essential functionality. My
+                analytics providers (Vercel and Cloudflare) do not use cookies
+                for tracking and are designed to be privacy-preserving. I do not
+                use tracking cookies or third-party advertising cookies.
               </p>
             </section>
 
