@@ -124,12 +124,5 @@
       ]
     }
   ],
-  "redirects": [
-    {
-      "source": "/.well-known/acme-challenge/(.*)",
-      "destination": "/.well-known/acme-challenge/$1",
-      "permanent": false,
-      "statusCode": 200
-    }
-  ]
+  "redirects": []
 }
