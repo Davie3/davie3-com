@@ -6,7 +6,7 @@ import {
   PROFESSIONAL_TITLES,
   SEO_DATA,
 } from '@/constants/shared';
-import { EXTERNAL_URLS, URL_COLLECTIONS } from '@/constants/site-config';
+import { EXTERNAL_URLS, ALL_PLATFORMS } from '@/constants/site-config';
 
 type StructuredDataProps = {
   readonly pageType?: 'website' | 'person' | 'article';
@@ -35,7 +35,7 @@ export function StructuredData({
       '@type': 'Person',
       name: PERSONAL_INFO.FULL_NAME,
       url: EXTERNAL_URLS.MAIN,
-      sameAs: URL_COLLECTIONS.ALL_PLATFORMS,
+      sameAs: ALL_PLATFORMS,
     },
   };
 
@@ -53,7 +53,7 @@ export function StructuredData({
       ...SEO_DATA.WORKS_FOR,
     },
     knowsAbout: SEO_DATA.KNOWS_ABOUT,
-    sameAs: URL_COLLECTIONS.ALL_PLATFORMS,
+    sameAs: ALL_PLATFORMS,
   };
 
   const structuredData =

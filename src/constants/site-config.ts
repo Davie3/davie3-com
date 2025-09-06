@@ -7,20 +7,11 @@ import type { UrlMapping } from '../types/url-types';
 import { PERSONAL_INFO, PROFESSIONAL_TITLES, TECHNOLOGIES } from './shared';
 
 /**
- * Site and API URLs
+ * Site-specific URLs
  */
 export const SITE_URLS = {
   MAIN: 'https://davie3.com',
   OG_IMAGE: 'https://davie3.com/images/profile.png',
-} as const;
-
-/**
- * Development platform URLs
- */
-export const DEVELOPMENT_URLS = {
-  GITHUB_PROFILE: 'https://github.com/davie3',
-  GITHUB_API:
-    'https://api.github.com/search/repositories?q=user:davie3+fork:false&sort=stars&direction=desc',
 } as const;
 
 /**
@@ -38,20 +29,20 @@ export const CONTENT_URLS = {
  * Social media platform URLs
  */
 export const SOCIAL_URLS = {
-  X_TWITTER: 'https://x.com/itsdavie3',
-  TWITTER_OLD: 'https://twitter.com/ItsDavie3',
-  LINKEDIN: 'https://www.linkedin.com/in/davie3',
-  INSTAGRAM: 'https://instagram.com/itsdavie3',
   BLUESKY: 'https://bsky.app/profile/davie3.com',
   FACEBOOK: 'https://www.facebook.com/Davie3.Griffin',
+  GITHUB_PROFILE: 'https://github.com/davie3',
+  INSTAGRAM: 'https://instagram.com/itsdavie3',
+  LINKEDIN: 'https://www.linkedin.com/in/davie3',
+  TWITTER_OLD: 'https://twitter.com/ItsDavie3',
+  X_TWITTER: 'https://x.com/itsdavie3',
 } as const;
 
 /**
- * Combined external URLs for easy access
+ * All external URLs combined for easy access
  */
 export const EXTERNAL_URLS = {
   ...SITE_URLS,
-  ...DEVELOPMENT_URLS,
   ...CONTENT_URLS,
   ...SOCIAL_URLS,
 } as const;
@@ -69,38 +60,32 @@ export const INTERNAL_ROUTES = {
 } as const;
 
 /**
- * Organized URL collections for different contexts
+ * URL collections for different contexts
  */
 export const URL_COLLECTIONS = {
-  ALL_SOCIAL: [
-    SOCIAL_URLS.X_TWITTER,
-    SOCIAL_URLS.LINKEDIN,
-    SOCIAL_URLS.INSTAGRAM,
-    SOCIAL_URLS.BLUESKY,
-    SOCIAL_URLS.FACEBOOK,
-  ],
-  ALL_CONTENT: [
-    CONTENT_URLS.YOUTUBE_MAIN,
-    CONTENT_URLS.YOUTUBE_TECH,
-    CONTENT_URLS.YOUTUBE_GAMES,
-    CONTENT_URLS.TWITCH,
-  ],
+  SOCIAL: Object.values(SOCIAL_URLS),
+  CONTENT: Object.values(CONTENT_URLS),
   PROFESSIONAL: [
     SOCIAL_URLS.X_TWITTER,
     SOCIAL_URLS.LINKEDIN,
-    DEVELOPMENT_URLS.GITHUB_PROFILE,
+    SOCIAL_URLS.GITHUB_PROFILE,
   ],
-  CONTENT_CREATION: [
-    CONTENT_URLS.YOUTUBE_MAIN,
-    CONTENT_URLS.YOUTUBE_TECH,
-    CONTENT_URLS.YOUTUBE_GAMES,
-    CONTENT_URLS.TWITCH,
-  ],
-  ALL_PLATFORMS: [
-    ...Object.values(SOCIAL_URLS),
-    ...Object.values(CONTENT_URLS),
-    DEVELOPMENT_URLS.GITHUB_PROFILE,
-  ],
+} as const;
+
+/**
+ * Computed collection of all platform URLs
+ */
+export const ALL_PLATFORMS = [
+  ...URL_COLLECTIONS.SOCIAL,
+  ...URL_COLLECTIONS.CONTENT,
+] as const;
+
+/**
+ * Extended URL collections including computed values
+ */
+export const URL_COLLECTIONS_EXTENDED = {
+  ...URL_COLLECTIONS,
+  ALL_PLATFORMS,
 } as const;
 
 /**

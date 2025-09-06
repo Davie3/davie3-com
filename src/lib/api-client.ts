@@ -1,4 +1,3 @@
-import { EXTERNAL_URLS } from '../constants/site-config';
 import { GITHUB_CONFIG } from './config/github-config';
 import type { GitHubRepo, ApiError } from '../types/api-types';
 
@@ -6,12 +5,15 @@ import type { GitHubRepo, ApiError } from '../types/api-types';
  * API client configuration and helper functions.
  */
 
+const GITHUB_API =
+  'https://api.github.com/search/repositories?q=user:davie3+fork:false&sort=stars&direction=desc';
+
 /**
  * Fetches GitHub repositories for the user.
  */
 export const fetchGitHubRepos = async (): Promise<GitHubRepo[]> => {
   try {
-    const response = await fetch(EXTERNAL_URLS.GITHUB_API, {
+    const response = await fetch(GITHUB_API, {
       next: { revalidate: GITHUB_CONFIG.revalidateInterval },
     });
 

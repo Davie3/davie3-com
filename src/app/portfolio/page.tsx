@@ -3,7 +3,6 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { GitFork, Star } from 'lucide-react';
 
-import { EXTERNAL_URLS } from '@/constants/site-config';
 import { GITHUB_REPO_SCHEMA } from '@/types/api-types';
 import { GITHUB_CONFIG } from '@/lib/config/github-config';
 import { PAGE_METADATA } from '@/lib/config/site-metadata';
@@ -11,9 +10,12 @@ import type { GitHubRepo } from '@/types/api-types';
 
 export const metadata: Metadata = PAGE_METADATA.PORTFOLIO;
 
+const GITHUB_API =
+  'https://api.github.com/search/repositories?q=user:davie3+fork:false&sort=stars&direction=desc';
+
 async function getGitHubRepos(): Promise<GitHubRepo[]> {
   try {
-    const response = await fetch(EXTERNAL_URLS.GITHUB_API, {
+    const response = await fetch(GITHUB_API, {
       // Revalidate data at most once per hour
       next: { revalidate: GITHUB_CONFIG.revalidateInterval },
     });
@@ -158,7 +160,7 @@ export default async function PortfolioPage(): Promise<JSX.Element> {
         {/* View More Link */}
         <div className="mt-12 text-center">
           <Link
-            href={EXTERNAL_URLS.GITHUB_PROFILE}
+            href="https://github.com/davie3"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-3 px-8 py-4 glass rounded-xl font-semibold text-slate-light transition-all duration-300 hover:scale-105 hover:bg-navy-accent/50 group"
