@@ -76,11 +76,29 @@ export const SITE_METADATA: Metadata = {
       'dailymotion-domain-verification': 'dmx2g5c3lage9isw5',
     },
   },
-  icons: {
-    icon: '/favicon.ico',
-    shortcut: '/favicon-16x16.png',
-    apple: '/apple-touch-icon.png',
-  },
+  icons: [
+    {
+      rel: 'icon',
+      url: '/icons/favicon.ico',
+      sizes: 'any',
+    },
+    {
+      rel: 'icon',
+      type: 'image/png',
+      sizes: '16x16',
+      url: '/icons/favicon-16x16.png',
+    },
+    {
+      rel: 'icon',
+      type: 'image/png',
+      sizes: '32x32',
+      url: '/icons/favicon-32x32.png',
+    },
+    {
+      rel: 'apple-touch-icon',
+      url: '/icons/apple-touch-icon.png',
+    },
+  ],
 } as const;
 
 export const PAGE_METADATA = {
