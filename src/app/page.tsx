@@ -8,7 +8,7 @@ import {
   PROFESSIONAL_TITLES,
   PAGE_DESCRIPTIONS,
 } from '@/constants/shared';
-import { EXTERNAL_URLS, INTERNAL_ROUTES } from '@/constants/site-config';
+import { EXTERNAL_URLS, INTERNAL_ROUTES } from '../constants/urls';
 
 /**
  * Renders the home page of the personal website.

@@ -1,5 +1,5 @@
 import type { NextConfig } from 'next';
-import { URL_MAPPINGS } from './src/constants/site-config';
+import { URL_MAPPINGS } from './src/lib/config/redirect-config';
 
 const cspHeader = `
     default-src 'self';

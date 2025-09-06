@@ -81,32 +81,6 @@ export const TECHNOLOGIES = {
   ],
 } as const;
 
-// PAGE_DESCRIPTIONS consolidated above with CORE_MESSAGES
-
-/**
- * SEO and structured data constants
- */
-export const SEO_DATA = {
-  ALTERNATE_NAMES: [PERSONAL_INFO.NICKNAME, PERSONAL_INFO.ALTERNATE_NICKNAME],
-  WORKS_FOR: {
-    name: 'Twitch',
-    url: 'https://www.twitch.tv',
-  },
-  KNOWS_ABOUT: [
-    ...TECHNOLOGIES.LANGUAGES,
-    ...TECHNOLOGIES.FRONTEND,
-    ...TECHNOLOGIES.EMERGING,
-    ...TECHNOLOGIES.CLOUD,
-    ...TECHNOLOGIES.INFRASTRUCTURE,
-    ...TECHNOLOGIES.IDENTITY,
-    ...TECHNOLOGIES.CDN,
-    ...TECHNOLOGIES.DEVELOPMENT,
-    ...TECHNOLOGIES.DEVELOPMENT_EXTENDED,
-    ...TECHNOLOGIES.CONTENT,
-    ...TECHNOLOGIES.GENERAL,
-  ],
-} as const;
-
 /**
  * Form and UI messaging
  */

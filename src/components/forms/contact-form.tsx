@@ -7,7 +7,7 @@ import { useState } from 'react';
 
 import { CONTACT_FORM_SCHEMA } from '@/types/form-types';
 import { FORM_MESSAGES } from '@/constants/ui-components';
-import { INTERNAL_ROUTES } from '@/constants/site-config';
+import { INTERNAL_ROUTES } from '../../constants/urls';
 import type { ContactFormValues } from '@/types/form-types';
 import { Turnstile } from '@/components/ui/turnstile-widget';
 

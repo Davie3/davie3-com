@@ -4,8 +4,8 @@ import {
   PAGE_DESCRIPTIONS,
   PROFESSIONAL_TITLES,
 } from '../../constants/shared';
-import { COMBINED_KEYWORDS } from '../../constants/site-config';
-import { EXTERNAL_URLS } from '../../constants/site-config';
+import { EXTERNAL_URLS } from '../../constants/urls';
+import { COMBINED_KEYWORDS } from './seo-config';
 
 /**
  * Site metadata configuration constants for the website.

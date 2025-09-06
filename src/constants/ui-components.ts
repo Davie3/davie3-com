@@ -61,3 +61,12 @@ export const FORM_MESSAGES = {
   SUBMITTING: UI_MESSAGES.FORM_SUBMITTING,
   SUBMIT: UI_MESSAGES.FORM_SUBMIT,
 } as const;
+
+/**
+ * Footer component configuration
+ */
+export const FOOTER_CONFIG = {
+  STARTING_YEAR: 2025,
+  ANIMATION_DELAY: 2000,
+  ICON_SIZE: 24,
+} as const;

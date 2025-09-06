@@ -4,9 +4,9 @@ import {
   PERSONAL_INFO,
   PAGE_DESCRIPTIONS,
   PROFESSIONAL_TITLES,
-  SEO_DATA,
 } from '@/constants/shared';
-import { EXTERNAL_URLS, ALL_PLATFORMS } from '@/constants/site-config';
+import { SEO_DATA } from '@/lib/config/seo-config';
+import { EXTERNAL_URLS, ALL_PLATFORMS } from '../../constants/urls';
 
 type StructuredDataProps = {
   readonly pageType?: 'website' | 'person' | 'article';

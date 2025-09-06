@@ -5,10 +5,8 @@ import { FiGithub, FiInstagram, FiLinkedin, FiTwitch } from 'react-icons/fi';
 import { FaXTwitter } from 'react-icons/fa6';
 import { SiBluesky } from 'react-icons/si';
 
-import {
-  SOCIAL_LINKS_DATA,
-  FOOTER_CONFIG,
-} from '../../lib/config/social-config';
+import { SOCIAL_LINKS_DATA } from '../../lib/config/social-config';
+import { FOOTER_CONFIG } from '../../constants/ui-components';
 import type { SocialLinkData } from '../../types/social-types';
 
 const getIcon = (iconName: SocialLinkData['iconName']): JSX.Element => {

@@ -1,5 +1,5 @@
 import type { SocialLinkData } from '../../types/social-types';
-import { EXTERNAL_URLS } from '../../constants/site-config';
+import { EXTERNAL_URLS } from '../../constants/urls';
 
 /**
  * Social media links configuration.
@@ -36,9 +36,3 @@ export const SOCIAL_LINKS_DATA: readonly SocialLinkData[] = [
     iconName: 'bluesky',
   },
 ];
-
-export const FOOTER_CONFIG = {
-  STARTING_YEAR: 2025,
-  ANIMATION_DELAY: 2000,
-  ICON_SIZE: 24,
-} as const;

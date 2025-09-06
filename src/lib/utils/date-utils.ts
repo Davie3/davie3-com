@@ -22,3 +22,18 @@ export const formatEmailTimestamp = (
     timeStyle: 'short',
   });
 };
+
+/**
+ * Timezone configuration
+ */
+export const TIMEZONE = {
+  PACIFIC_OFFSET: '-08:00',
+  PACIFIC_NAME: 'America/Los_Angeles',
+} as const;
+
+/**
+ * Helper function to create Pacific timezone Date objects
+ */
+export const createPacificDate = (dateString: string): Date => {
+  return new Date(dateString + `T00:00:00${TIMEZONE.PACIFIC_OFFSET}`);
+};

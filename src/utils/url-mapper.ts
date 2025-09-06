@@ -1,5 +1,8 @@
 import type { UrlMapping } from '../types/url-types';
-import { URL_MAPPINGS, findMappingBySource } from '../constants/site-config';
+import {
+  URL_MAPPINGS,
+  findMappingBySource,
+} from '../lib/config/redirect-config';
 
 /**
  * URL mapping utilities for managing redirects
