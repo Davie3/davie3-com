@@ -1,9 +1,9 @@
 import { ImageResponse } from 'next/og';
 
-import { PERSONAL_INFO } from '@/constants/personal-info';
+import { PERSONAL_INFO, PROFESSIONAL_TITLES } from '@/constants/shared';
 
 export const runtime = 'edge';
-export const alt = `${PERSONAL_INFO.FULL_NAME} - ${PERSONAL_INFO.TITLE}`;
+export const alt = `${PERSONAL_INFO.FULL_NAME} - ${PROFESSIONAL_TITLES.CURRENT}`;
 export const size = {
   width: 1200,
   height: 630,
@@ -53,7 +53,7 @@ export default async function Image(): Promise<ImageResponse> {
               color: '#94a3b8',
             }}
           >
-            {PERSONAL_INFO.TITLE}
+            {PROFESSIONAL_TITLES.CURRENT}
           </p>
         </div>
       </div>

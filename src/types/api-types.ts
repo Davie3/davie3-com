@@ -1,5 +1,18 @@
-import type { z } from 'zod';
-import type { GITHUB_REPO_SCHEMA } from '../lib/config/github-config';
+import { z } from 'zod';
+
+/**
+ * Zod schema for validating GitHub repository API responses.
+ */
+export const GITHUB_REPO_SCHEMA = z.array(
+  z.object({
+    name: z.string(),
+    description: z.string().nullable(),
+    html_url: z.url(),
+    language: z.string().nullable(),
+    stargazers_count: z.number(),
+    forks_count: z.number(),
+  }),
+);
 
 /**
  * API-related type definitions.

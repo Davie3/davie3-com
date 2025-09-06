@@ -1,11 +1,8 @@
 import { z } from 'zod';
 
 /**
- * Centralized validation schemas using Zod.
- * Re-exports schemas from constants for consistency.
+ * Additional validation utilities using Zod.
  */
-export { CONTACT_FORM_SCHEMA } from '../../constants/form-schemas';
-export { GITHUB_REPO_SCHEMA } from '../config/github-config';
 
 /**
  * Additional validation utilities.

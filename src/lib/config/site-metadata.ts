@@ -1,21 +1,22 @@
 import type { Metadata } from 'next';
-import { PERSONAL_INFO } from '../../constants/personal-info';
-import { EXTERNAL_URLS } from '../../constants/urls';
 import {
-  SEO_DESCRIPTIONS,
-  COMBINED_KEYWORDS,
-} from '../../constants/seo-descriptions';
+  PERSONAL_INFO,
+  PAGE_DESCRIPTIONS,
+  PROFESSIONAL_TITLES,
+} from '../../constants/shared';
+import { COMBINED_KEYWORDS } from '../../constants/site-config';
+import { EXTERNAL_URLS } from '../../constants/site-config';
 
 /**
  * Site metadata configuration constants for the website.
  */
 export const SITE_METADATA: Metadata = {
   title: {
-    default: `${PERSONAL_INFO.FULL_NAME} - ${PERSONAL_INFO.TITLE}`,
+    default: `${PERSONAL_INFO.FULL_NAME} - ${PROFESSIONAL_TITLES.CURRENT}`,
     template: `%s | ${PERSONAL_INFO.FULL_NAME}`,
   },
-  description: SEO_DESCRIPTIONS.SITE_EXTENDED,
-  keywords: COMBINED_KEYWORDS.HOME,
+  description: PAGE_DESCRIPTIONS.SITE_EXTENDED,
+  keywords: [...COMBINED_KEYWORDS.HOME],
   authors: [{ name: PERSONAL_INFO.FULL_NAME }],
   creator: PERSONAL_INFO.FULL_NAME,
   publisher: PERSONAL_INFO.FULL_NAME,
@@ -24,21 +25,21 @@ export const SITE_METADATA: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL(EXTERNAL_URLS.SITE_URL),
+  metadataBase: new URL(EXTERNAL_URLS.MAIN),
   alternates: {
-    canonical: EXTERNAL_URLS.SITE_URL,
+    canonical: EXTERNAL_URLS.MAIN,
   },
   openGraph: {
-    title: `${PERSONAL_INFO.FULL_NAME} - ${PERSONAL_INFO.TITLE}`,
-    description: SEO_DESCRIPTIONS.SITE_EXTENDED,
-    url: EXTERNAL_URLS.SITE_URL,
+    title: `${PERSONAL_INFO.FULL_NAME} - ${PROFESSIONAL_TITLES.CURRENT}`,
+    description: PAGE_DESCRIPTIONS.SITE_EXTENDED,
+    url: EXTERNAL_URLS.MAIN,
     siteName: `${PERSONAL_INFO.FULL_NAME} - ${PERSONAL_INFO.NICKNAME}`,
     images: [
       {
         url: EXTERNAL_URLS.OG_IMAGE,
         width: 1200,
         height: 630,
-        alt: `${PERSONAL_INFO.FULL_NAME} - ${PERSONAL_INFO.TITLE}`,
+        alt: `${PERSONAL_INFO.FULL_NAME} - ${PROFESSIONAL_TITLES.CURRENT}`,
       },
     ],
     locale: 'en_US',
@@ -46,13 +47,13 @@ export const SITE_METADATA: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: `${PERSONAL_INFO.FULL_NAME} - ${PERSONAL_INFO.TITLE}`,
-    description: SEO_DESCRIPTIONS.SITE_PRIMARY,
+    title: `${PERSONAL_INFO.FULL_NAME} - ${PROFESSIONAL_TITLES.CURRENT}`,
+    description: PAGE_DESCRIPTIONS.PRIMARY_DESCRIPTION,
     creator: PERSONAL_INFO.TWITTER_HANDLE,
     site: PERSONAL_INFO.TWITTER_HANDLE,
     images: {
       url: EXTERNAL_URLS.OG_IMAGE,
-      alt: `${PERSONAL_INFO.FULL_NAME} - ${PERSONAL_INFO.TITLE}`,
+      alt: `${PERSONAL_INFO.FULL_NAME} - ${PROFESSIONAL_TITLES.CURRENT}`,
     },
   },
   robots: {
@@ -79,18 +80,18 @@ export const SITE_METADATA: Metadata = {
 
 export const PAGE_METADATA = {
   ABOUT: {
-    title: `About | ${PERSONAL_INFO.FULL_NAME} - ${PERSONAL_INFO.TITLE}`,
-    description: SEO_DESCRIPTIONS.PROFESSIONAL_SUMMARY,
-    keywords: COMBINED_KEYWORDS.ABOUT,
+    title: `About | ${PERSONAL_INFO.FULL_NAME} - ${PROFESSIONAL_TITLES.CURRENT}`,
+    description: PAGE_DESCRIPTIONS.PROFESSIONAL_SUMMARY,
+    keywords: [...COMBINED_KEYWORDS.ABOUT],
   },
   CONTACT: {
     title: `Contact | ${PERSONAL_INFO.FULL_NAME} - Get In Touch`,
-    description: SEO_DESCRIPTIONS.CONTACT_DESCRIPTION,
-    keywords: COMBINED_KEYWORDS.CONTACT,
+    description: PAGE_DESCRIPTIONS.CONTACT,
+    keywords: [...COMBINED_KEYWORDS.CONTACT],
   },
   PORTFOLIO: {
     title: `Portfolio | ${PERSONAL_INFO.FULL_NAME} - Software Projects & GitHub`,
-    description: SEO_DESCRIPTIONS.PORTFOLIO_DESCRIPTION,
-    keywords: COMBINED_KEYWORDS.PORTFOLIO,
+    description: PAGE_DESCRIPTIONS.PORTFOLIO,
+    keywords: [...COMBINED_KEYWORDS.PORTFOLIO],
   },
-} as const;
+};

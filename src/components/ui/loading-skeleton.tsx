@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils/class-utils';
 import {
   SKELETON_BASE_CLASSES,
   SKELETON_VARIANTS,
-} from '@/constants/ui-constants';
+} from '@/constants/ui-components';
 
 export function Skeleton({
   className = '',

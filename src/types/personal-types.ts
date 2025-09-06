@@ -16,3 +16,10 @@ export type PersonalInfo = {
 };
 
 export type Skill = string;
+
+export type Education = {
+  readonly degree: string;
+  readonly institution: string;
+  readonly period: string;
+  readonly emoji: string;
+};

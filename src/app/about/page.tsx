@@ -1,7 +1,12 @@
 import type { JSX } from 'react';
 import type { Metadata } from 'next';
 
-import { SKILLS, EXPERIENCES } from '@/constants/personal-info';
+import {
+  EXPERIENCES,
+  EDUCATION,
+  ABOUT_CONTENT,
+  SKILLS,
+} from '@/constants/about-page';
 import { PAGE_METADATA } from '@/lib/config/site-metadata';
 
 export const metadata: Metadata = PAGE_METADATA.ABOUT;
@@ -26,22 +31,14 @@ export default function AboutPage(): JSX.Element {
               <h1 className="text-4xl md:text-5xl font-bold gradient-text">
                 About Me
               </h1>
-              <p className="text-slate-dark mt-1">My journey in technology</p>
+              <p className="text-slate-dark mt-1">
+                {ABOUT_CONTENT.HERO_SUBTITLE}
+              </p>
             </div>
           </div>
 
           <p className="text-lg md:text-xl leading-relaxed text-slate-light">
-            My career is a story of progression, starting from hands-on IT
-            support and network administration, where I built a strong
-            foundation in managing robust infrastructures. This experience paved
-            the way for a transition into system administration, where I honed
-            my skills in automation, cloud technologies, and enterprise-level
-            systems management using tools like Terraform and Okta. Today, as a
-            Systems Development Engineer, I leverage that deep technical
-            background to design and build scalable, cloud-native software
-            solutions with a focus on Node.js, TypeScript, and Generative AI,
-            turning complex engineering challenges into elegant and efficient
-            systems.
+            {ABOUT_CONTENT.CAREER_JOURNEY}
           </p>
         </div>
       </section>
@@ -52,7 +49,7 @@ export default function AboutPage(): JSX.Element {
           <h2 className="text-3xl md:text-4xl font-bold gradient-text mb-2">
             Skills & Technologies
           </h2>
-          <p className="text-slate-dark">Technologies I work with and love</p>
+          <p className="text-slate-dark">{ABOUT_CONTENT.SKILLS_SUBTITLE}</p>
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
@@ -76,7 +73,7 @@ export default function AboutPage(): JSX.Element {
           <h2 className="text-3xl md:text-4xl font-bold gradient-text mb-2">
             Work Experience
           </h2>
-          <p className="text-slate-dark">My professional journey</p>
+          <p className="text-slate-dark">{ABOUT_CONTENT.EXPERIENCE_SUBTITLE}</p>
         </div>
 
         <div className="space-y-6">
@@ -109,26 +106,32 @@ export default function AboutPage(): JSX.Element {
           <h2 className="text-3xl md:text-4xl font-bold gradient-text mb-2">
             Education
           </h2>
-          <p className="text-slate-dark">Academic foundation</p>
+          <p className="text-slate-dark">{ABOUT_CONTENT.EDUCATION_SUBTITLE}</p>
         </div>
 
-        <div className="card p-6 md:p-8">
-          <div className="flex items-start gap-4">
-            <div className="w-12 h-12 bg-gradient-to-r from-cyan-accent to-blue-accent rounded-xl flex items-center justify-center flex-shrink-0">
-              <span className="text-navy font-bold text-lg">🎓</span>
+        <div className="space-y-6">
+          {EDUCATION.map((edu) => (
+            <div key={edu.institution} className="card p-6 md:p-8">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 bg-gradient-to-r from-cyan-accent to-blue-accent rounded-xl flex items-center justify-center flex-shrink-0">
+                  <span className="text-navy font-bold text-lg">
+                    {edu.emoji}
+                  </span>
+                </div>
+                <div>
+                  <h3 className="text-xl md:text-2xl font-bold text-slate-light">
+                    {edu.degree}
+                  </h3>
+                  <p className="text-cyan-accent font-medium mt-1">
+                    {edu.institution}
+                  </p>
+                  <span className="text-sm text-slate-dark bg-navy-accent px-3 py-1 rounded-full inline-block mt-2">
+                    {edu.period}
+                  </span>
+                </div>
+              </div>
             </div>
-            <div>
-              <h3 className="text-xl md:text-2xl font-bold text-slate-light">
-                Associate of Science, Computer Science
-              </h3>
-              <p className="text-cyan-accent font-medium mt-1">
-                Finger Lakes Community College
-              </p>
-              <span className="text-sm text-slate-dark bg-navy-accent px-3 py-1 rounded-full inline-block mt-2">
-                2010 - 2013
-              </span>
-            </div>
-          </div>
+          ))}
         </div>
       </section>
     </main>

@@ -1,4 +1,4 @@
-import { EXTERNAL_URLS } from '../constants/urls';
+import { EXTERNAL_URLS } from '../constants/site-config';
 import { GITHUB_CONFIG } from './config/github-config';
 import type { GitHubRepo, ApiError } from '../types/api-types';
 

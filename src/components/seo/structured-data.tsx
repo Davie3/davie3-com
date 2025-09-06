@@ -1,8 +1,12 @@
 import Script from 'next/script';
 import type { JSX } from 'react';
-import { PERSONAL_INFO } from '@/constants/personal-info';
-import { SEO_DESCRIPTIONS } from '@/constants/seo-descriptions';
-import { EXTERNAL_URLS, SOCIAL_URL_ARRAYS } from '@/constants/urls';
+import {
+  PERSONAL_INFO,
+  PAGE_DESCRIPTIONS,
+  PROFESSIONAL_TITLES,
+  SEO_DATA,
+} from '@/constants/shared';
+import { EXTERNAL_URLS, URL_COLLECTIONS } from '@/constants/site-config';
 
 type StructuredDataProps = {
   readonly pageType?: 'website' | 'person' | 'article';
@@ -18,19 +22,20 @@ export function StructuredData({
   pageType = 'website',
   title,
   description,
-  url = EXTERNAL_URLS.SITE_URL,
+  url = EXTERNAL_URLS.MAIN,
 }: StructuredDataProps): JSX.Element {
   const baseStructuredData = {
     '@context': 'https://schema.org',
     '@type': pageType === 'person' ? 'Person' : 'WebSite',
-    name: title || `${PERSONAL_INFO.FULL_NAME} - ${PERSONAL_INFO.TITLE}`,
-    description: description || SEO_DESCRIPTIONS.SITE_EXTENDED,
+    name:
+      title || `${PERSONAL_INFO.FULL_NAME} - ${PROFESSIONAL_TITLES.CURRENT}`,
+    description: description || PAGE_DESCRIPTIONS.PROFESSIONAL_SUMMARY,
     url,
     author: {
       '@type': 'Person',
       name: PERSONAL_INFO.FULL_NAME,
-      url: EXTERNAL_URLS.SITE_URL,
-      sameAs: SOCIAL_URL_ARRAYS.ALL_PLATFORMS,
+      url: EXTERNAL_URLS.MAIN,
+      sameAs: URL_COLLECTIONS.ALL_PLATFORMS,
     },
   };
 
@@ -38,34 +43,17 @@ export function StructuredData({
     '@context': 'https://schema.org',
     '@type': 'Person',
     name: PERSONAL_INFO.FULL_NAME,
-    alternateName: ['Davie3', 'ItsDavie3'],
-    description: SEO_DESCRIPTIONS.PROFESSIONAL_SUMMARY,
-    url: EXTERNAL_URLS.SITE_URL,
+    alternateName: SEO_DATA.ALTERNATE_NAMES,
+    description: PAGE_DESCRIPTIONS.PROFESSIONAL_SUMMARY,
+    url: EXTERNAL_URLS.MAIN,
     image: EXTERNAL_URLS.OG_IMAGE,
-    jobTitle: PERSONAL_INFO.TITLE,
+    jobTitle: PROFESSIONAL_TITLES.CURRENT,
     worksFor: {
       '@type': 'Organization',
-      name: 'Twitch',
-      url: 'https://www.twitch.tv',
+      ...SEO_DATA.WORKS_FOR,
     },
-    knowsAbout: [
-      'TypeScript',
-      'Node.js',
-      'React.js',
-      'AWS',
-      'AWS CloudFormation',
-      'Terraform',
-      'Generative AI',
-      'System Administration',
-      'Cloud Architecture',
-      'Software Development',
-      'Web Development',
-      'Content Creation',
-      'YouTube',
-      'Gaming',
-      'Technology',
-    ],
-    sameAs: SOCIAL_URL_ARRAYS.ALL_PLATFORMS,
+    knowsAbout: SEO_DATA.KNOWS_ABOUT,
+    sameAs: URL_COLLECTIONS.ALL_PLATFORMS,
   };
 
   const structuredData =

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import type { JSX } from 'react';
 
-import { PAGE_LAST_MODIFIED, createPacificDate } from '@/constants/page-dates';
+import { PAGE_LAST_MODIFIED, createPacificDate } from '@/constants/site-config';
 
 export const metadata: Metadata = {
   title: 'Privacy Policy | David Griffin',

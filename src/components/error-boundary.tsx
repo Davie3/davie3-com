@@ -7,7 +7,7 @@ import type {
   ErrorBoundaryState,
   ErrorBoundaryProps,
 } from '@/types/component-types';
-import { ERROR_MESSAGES } from '@/constants/ui-constants';
+import { ERROR_MESSAGES } from '@/constants/ui-components';
 
 export default class ErrorBoundary extends React.Component<
   ErrorBoundaryProps,

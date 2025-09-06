@@ -1,6 +1,9 @@
 /**
  * UI component constants and configurations
+ * Button styles, skeleton variants, and component-specific settings
  */
+
+import { UI_MESSAGES } from './shared';
 
 /**
  * Button component configuration
@@ -43,9 +46,18 @@ export const SKELETON_VARIANTS = {
  * Error boundary configuration
  */
 export const ERROR_MESSAGES = {
-  DEFAULT_TITLE: 'Something went wrong',
-  DEFAULT_DESCRIPTION:
-    'An unexpected error occurred. Please try refreshing the page.',
-  BUTTON_REFRESH: 'Refresh Page',
-  BUTTON_HOME: 'Go Home',
+  DEFAULT_TITLE: UI_MESSAGES.ERROR_DEFAULT_TITLE,
+  DEFAULT_DESCRIPTION: UI_MESSAGES.ERROR_DEFAULT_DESCRIPTION,
+  BUTTON_REFRESH: UI_MESSAGES.ERROR_BUTTON_REFRESH,
+  BUTTON_HOME: UI_MESSAGES.ERROR_BUTTON_HOME,
+} as const;
+
+/**
+ * Form messages configuration
+ */
+export const FORM_MESSAGES = {
+  SUCCESS: UI_MESSAGES.FORM_SUCCESS,
+  ERROR: UI_MESSAGES.FORM_ERROR,
+  SUBMITTING: UI_MESSAGES.FORM_SUBMITTING,
+  SUBMIT: UI_MESSAGES.FORM_SUBMIT,
 } as const;

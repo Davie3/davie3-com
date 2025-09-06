@@ -1,33 +1,41 @@
-import type { Experience } from '../types/personal-types';
+/**
+ * About page constants
+ * Content, data, and configuration specific to the about page
+ */
+
+import type { Education } from '@/types/personal-types';
+import { PAGE_DESCRIPTIONS, TECHNOLOGIES } from './shared';
 
 /**
- * Personal information constants for David Griffin's website.
+ * About page content
  */
-export const PERSONAL_INFO = {
-  FULL_NAME: 'David Griffin',
-  NICKNAME: 'Davie3',
-  TITLE: 'Systems Development Engineer',
-  DESCRIPTION:
-    'I build and scale resilient, high-performance software systems. With a passion for elegant code and innovative solutions, I transform complex challenges into seamless user experiences.',
-  TWITTER_HANDLE: '@itsdavie3',
+export const ABOUT_CONTENT = {
+  HERO_SUBTITLE: 'My journey in technology',
+  CAREER_JOURNEY: PAGE_DESCRIPTIONS.CAREER_JOURNEY,
+  SKILLS_SUBTITLE: 'Technologies I work with and love',
+  EXPERIENCE_SUBTITLE: 'My professional journey',
+  EDUCATION_SUBTITLE: 'Academic foundation',
 } as const;
 
+/**
+ * Skills array for about page display
+ * Core technologies and expertise areas showcased on the about page
+ */
 export const SKILLS = [
-  'Node.js',
-  'TypeScript',
-  'React.js',
-  'Generative AI',
-  'MCP Servers',
-  'Terraform',
-  'Amazon Web Services (AWS)',
-  'AWS CloudFormation',
-  'Okta',
-  'CloudFlare',
-  'System Administration',
-  'Software Development',
+  ...TECHNOLOGIES.DEVELOPMENT,
+  ...TECHNOLOGIES.LANGUAGES,
+  ...TECHNOLOGIES.FRONTEND,
+  ...TECHNOLOGIES.EMERGING,
+  ...TECHNOLOGIES.CLOUD,
+  ...TECHNOLOGIES.INFRASTRUCTURE,
+  ...TECHNOLOGIES.IDENTITY,
+  ...TECHNOLOGIES.CDN,
 ] as const;
 
-export const EXPERIENCES: readonly Experience[] = [
+/**
+ * Experience data
+ */
+export const EXPERIENCES = [
   {
     role: 'System Development Engineer II',
     company: 'Twitch',
@@ -55,5 +63,17 @@ export const EXPERIENCES: readonly Experience[] = [
     period: 'May 2018 - Apr 2021',
     description:
       'Provided foundational IT support and technical assistance. Built strong foundation in enterprise systems and support methodologies.',
+  },
+] as const;
+
+/**
+ * Education data
+ */
+export const EDUCATION: readonly Education[] = [
+  {
+    degree: 'Associate of Science, Computer Science',
+    institution: 'Finger Lakes Community College',
+    period: '2010 - 2013',
+    emoji: '🎓',
   },
 ] as const;

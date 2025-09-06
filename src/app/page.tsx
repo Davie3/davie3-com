@@ -3,8 +3,12 @@ import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 
-import { PERSONAL_INFO } from '@/constants/personal-info';
-import { EXTERNAL_URLS, INTERNAL_ROUTES } from '@/constants/urls';
+import {
+  PERSONAL_INFO,
+  PROFESSIONAL_TITLES,
+  PAGE_DESCRIPTIONS,
+} from '@/constants/shared';
+import { EXTERNAL_URLS, INTERNAL_ROUTES } from '@/constants/site-config';
 
 /**
  * Renders the home page of the personal website.
@@ -37,11 +41,11 @@ export default function Home(): JSX.Element {
         </h1>
 
         <h2 className="mt-4 text-2xl font-medium tracking-tight text-slate-light sm:text-3xl md:text-4xl lg:text-5xl">
-          {PERSONAL_INFO.TITLE}
+          {PROFESSIONAL_TITLES.CURRENT}
         </h2>
 
         <p className="mt-8 text-lg leading-relaxed text-slate-dark md:text-xl lg:text-2xl max-w-3xl mx-auto">
-          {PERSONAL_INFO.DESCRIPTION}
+          {PAGE_DESCRIPTIONS.PRIMARY_DESCRIPTION}
         </p>
 
         <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-6">

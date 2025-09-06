@@ -1,10 +1,13 @@
 import type { MetadataRoute } from 'next';
 
-import { EXTERNAL_URLS } from '@/constants/urls';
-import { PAGE_LAST_MODIFIED, createPacificDate } from '@/constants/page-dates';
+import {
+  EXTERNAL_URLS,
+  PAGE_LAST_MODIFIED,
+  createPacificDate,
+} from '@/constants/site-config';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = EXTERNAL_URLS.SITE_URL || 'https://davie3.com';
+  const baseUrl = EXTERNAL_URLS.MAIN || 'https://davie3.com';
 
   return [
     {

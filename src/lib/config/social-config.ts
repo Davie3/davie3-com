@@ -1,5 +1,9 @@
 import type { SocialLinkData } from '../../types/social-types';
-import { EXTERNAL_URLS, SOCIAL_URLS } from '../../constants/urls';
+import {
+  EXTERNAL_URLS,
+  SOCIAL_URLS,
+  CONTENT_URLS,
+} from '../../constants/site-config';
 
 /**
  * Social media links configuration.
@@ -17,7 +21,7 @@ export const SOCIAL_LINKS_DATA: readonly SocialLinkData[] = [
   },
   {
     name: 'Twitch',
-    href: SOCIAL_URLS.TWITCH,
+    href: CONTENT_URLS.TWITCH,
     iconName: 'twitch',
   },
   {

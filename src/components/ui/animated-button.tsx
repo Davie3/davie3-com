@@ -8,7 +8,7 @@ import {
   BUTTON_SIZES,
   BUTTON_VARIANTS,
   BUTTON_BASE_CLASSES,
-} from '@/constants/ui-constants';
+} from '@/constants/ui-components';
 
 export function AnimatedButton({
   href,
