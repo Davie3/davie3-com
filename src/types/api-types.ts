@@ -11,6 +11,7 @@ export const GITHUB_REPO_SCHEMA = z.array(
     language: z.string().nullable(),
     stargazers_count: z.number(),
     forks_count: z.number(),
+    size: z.number(),
   }),
 );
 

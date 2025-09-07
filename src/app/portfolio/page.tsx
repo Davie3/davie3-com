@@ -11,7 +11,7 @@ import type { GitHubRepo } from '@/types/api-types';
 export const metadata: Metadata = PAGE_METADATA.PORTFOLIO;
 
 const GITHUB_API =
-  'https://api.github.com/search/repositories?q=user:davie3+fork:false&sort=stars&direction=desc';
+  'https://api.github.com/search/repositories?q=user:davie3+fork:false';
 
 async function getGitHubRepos(): Promise<GitHubRepo[]> {
   try {
@@ -39,7 +39,8 @@ async function getGitHubRepos(): Promise<GitHubRepo[]> {
       return [];
     }
 
-    return validationResult.data;
+    // Sort repositories by size from high to low
+    return validationResult.data.sort((a, b) => b.size - a.size);
   } catch (error) {
     // Log errors only in development
     if (process.env.NODE_ENV === 'development') {
