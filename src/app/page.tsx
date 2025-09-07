@@ -51,16 +51,22 @@ export default function Home(): JSX.Element {
         <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-6">
           <Link
             href={INTERNAL_ROUTES.ABOUT}
-            className="group relative px-8 py-4 bg-gradient-to-r from-purple-accent to-blue-accent rounded-xl font-semibold text-navy transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-purple-accent/25 glow-on-hover"
+            className="group relative px-8 py-4 bg-gradient-to-r from-purple-accent to-blue-accent rounded-xl font-semibold text-navy transition-all duration-300 hover:scale-110 hover:shadow-2xl hover:shadow-purple-accent/40 glow-on-hover cursor-pointer transform hover:-translate-y-1 active:scale-95"
           >
-            <span className="relative z-10">About Me</span>
+            <span className="relative z-10 flex items-center gap-2">
+              About Me
+              <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+            </span>
           </Link>
 
           <Link
             href={INTERNAL_ROUTES.PORTFOLIO}
-            className="group relative px-8 py-4 bg-gradient-to-r from-blue-accent to-purple-accent rounded-xl font-semibold text-navy transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-accent/25 glow-on-hover"
+            className="group relative px-8 py-4 bg-gradient-to-r from-blue-accent to-purple-accent rounded-xl font-semibold text-navy transition-all duration-300 hover:scale-110 hover:shadow-2xl hover:shadow-blue-accent/40 glow-on-hover cursor-pointer transform hover:-translate-y-1 active:scale-95"
           >
-            <span className="relative z-10">View My Work</span>
+            <span className="relative z-10 flex items-center gap-2">
+              View My Work
+              <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+            </span>
           </Link>
 
           <a
