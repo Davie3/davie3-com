@@ -1,33 +1,10 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { FiGithub, FiInstagram, FiLinkedin, FiTwitch } from 'react-icons/fi';
-import { FaXTwitter } from 'react-icons/fa6';
-import { SiBluesky } from 'react-icons/si';
 import type { JSX } from 'react';
 
 import { SOCIAL_LINKS_DATA } from '@/lib/config/social-config';
-import type { SocialLinkData } from '@/types/social-types';
-
-const getIcon = (iconName: SocialLinkData['iconName']): JSX.Element => {
-  const iconProps = { size: 20 };
-  switch (iconName) {
-    case 'github':
-      return <FiGithub {...iconProps} />;
-    case 'linkedin':
-      return <FiLinkedin {...iconProps} />;
-    case 'twitch':
-      return <FiTwitch {...iconProps} />;
-    case 'x':
-      return <FaXTwitter {...iconProps} />;
-    case 'instagram':
-      return <FiInstagram {...iconProps} />;
-    case 'bluesky':
-      return <SiBluesky {...iconProps} />;
-    default:
-      return <FiGithub {...iconProps} />;
-  }
-};
+import { getSocialIcon } from '@/utils/social-icons';
 
 export function LeftSidebar(): JSX.Element {
   return (
@@ -47,7 +24,7 @@ export function LeftSidebar(): JSX.Element {
             className="text-muted-foreground transition-transform duration-300 hover:text-primary hover:-translate-y-1"
             aria-label={link.name}
           >
-            {getIcon(link.iconName)}
+            {getSocialIcon(link.iconName, 20)}
           </a>
         ))}
       </div>

@@ -1,33 +1,10 @@
 'use client';
 
 import { useEffect, useState, type JSX } from 'react';
-import { FiGithub, FiInstagram, FiLinkedin, FiTwitch } from 'react-icons/fi';
-import { FaXTwitter } from 'react-icons/fa6';
-import { SiBluesky } from 'react-icons/si';
 
 import { SOCIAL_LINKS_DATA } from '../../lib/config/social-config';
 import { FOOTER_CONFIG } from '../../constants/ui-components';
-import type { SocialLinkData } from '../../types/social-types';
-
-const getIcon = (iconName: SocialLinkData['iconName']): JSX.Element => {
-  const iconProps = { size: 24 };
-  switch (iconName) {
-    case 'github':
-      return <FiGithub {...iconProps} />;
-    case 'linkedin':
-      return <FiLinkedin {...iconProps} />;
-    case 'twitch':
-      return <FiTwitch {...iconProps} />;
-    case 'x':
-      return <FaXTwitter {...iconProps} />;
-    case 'instagram':
-      return <FiInstagram {...iconProps} />;
-    case 'bluesky':
-      return <SiBluesky {...iconProps} />;
-    default:
-      return <FiGithub {...iconProps} />;
-  }
-};
+import { getSocialIcon } from '../../utils/social-icons';
 
 export function AppFooter(): JSX.Element {
   const currentYear = new Date().getFullYear();
@@ -64,7 +41,7 @@ export function AppFooter(): JSX.Element {
                 className="w-12 h-12 flex items-center justify-center text-slate-light transition-all duration-300 hover:text-blue-accent hover:scale-110"
                 aria-label={link.name}
               >
-                {getIcon(link.iconName)}
+                {getSocialIcon(link.iconName, 24)}
               </a>
             ))}
           </div>

@@ -1,5 +1,6 @@
 import type { JSX } from 'react';
 import type { Metadata } from 'next';
+import Image from 'next/image';
 
 import {
   EXPERIENCES,
@@ -8,6 +9,8 @@ import {
   SKILLS,
 } from '@/constants/about-page';
 import { PAGE_METADATA } from '@/lib/config/site-metadata';
+import { SOCIAL_LINKS_DATA } from '@/lib/config/social-config';
+import { getSocialIcon } from '@/utils/social-icons';
 
 export const metadata: Metadata = PAGE_METADATA.ABOUT;
 
@@ -23,23 +26,51 @@ export default function AboutPage(): JSX.Element {
       <section className="relative mb-16">
         <div className="absolute inset-0 bg-gradient-to-r from-blue-accent/5 via-purple-accent/5 to-cyan-accent/5 rounded-3xl" />
         <div className="relative glass rounded-3xl p-8 md:p-12">
-          <div className="flex items-center gap-4 mb-6">
-            <div className="w-12 h-12 bg-gradient-to-r from-blue-accent to-purple-accent rounded-full flex items-center justify-center">
-              <span className="text-navy font-bold text-xl">DG</span>
+          <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-6 mb-8">
+            <div className="flex-1">
+              <div className="flex items-center gap-3 mb-2">
+                <span className="text-4xl">👨‍💻</span>
+                <h1 className="text-4xl md:text-5xl font-bold gradient-text">
+                  David Griffin
+                </h1>
+              </div>
+              <p className="text-slate-dark">{ABOUT_CONTENT.HERO_SUBTITLE}</p>
             </div>
-            <div>
-              <h1 className="text-4xl md:text-5xl font-bold gradient-text">
-                About Me
-              </h1>
-              <p className="text-slate-dark mt-1">
-                {ABOUT_CONTENT.HERO_SUBTITLE}
-              </p>
+            <div className="flex justify-center sm:justify-end">
+              <Image
+                src="/images/profile_square.png"
+                alt="David Griffin"
+                width={112}
+                height={112}
+                className="w-24 h-24 md:w-28 md:h-28 rounded-2xl object-cover border-2 border-slate-dark/20 shadow-lg"
+              />
             </div>
           </div>
 
           <p className="text-lg md:text-xl leading-relaxed text-slate-light">
             {ABOUT_CONTENT.CAREER_JOURNEY}
           </p>
+
+          {/* Social Links */}
+          <div className="mt-8 pt-6 border-t border-slate-dark/20">
+            <h3 className="text-lg font-semibold text-slate-light mb-4">
+              Connect with me
+            </h3>
+            <div className="flex flex-wrap gap-3">
+              {SOCIAL_LINKS_DATA.map((link) => (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-4 py-2 bg-navy-accent/50 hover:bg-navy-accent/80 text-slate-light hover:text-blue-accent rounded-full transition-all duration-300 hover:scale-105"
+                >
+                  {getSocialIcon(link.iconName, 20)}
+                  <span className="text-sm font-medium">{link.name}</span>
+                </a>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
