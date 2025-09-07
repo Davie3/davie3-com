@@ -29,7 +29,7 @@ export const PROFESSIONAL_TITLES = {
 export const PAGE_DESCRIPTIONS = {
   // Core messaging
   PRIMARY_DESCRIPTION:
-    "I love building systems that just work, no matter the scale or pressure. When I'm not experimenting with new technologies in my homelab, I'm finding creative ways to turn tricky problems into experiences that feel effortless for users.",
+    "I love building systems that just work, no matter the scale or pressure. When I'm not experimenting with new technologies in my homelab, I'm finding creative ways to turn tricky problems into experiences that feel effortless for users. I also enjoy exploring how AI can streamline development workflows.",
 
   PROFESSIONAL_SUMMARY:
     "At Twitch, I wear the System Development Engineer hat, diving deep into TypeScript, Node.js, and the AWS ecosystem. These days, I'm particularly excited about bringing generative AI into our cloud-native architecture.",
@@ -38,7 +38,7 @@ export const PAGE_DESCRIPTIONS = {
     "My toolbox includes TypeScript, Node.js, React, and a healthy dose of AWS magic. I've got a soft spot for cloud-native architecture and lately I've been having a blast implementing generative AI solutions.",
 
   CAREER_JOURNEY:
-    'I started with C# and programming early in my career, which gave me a strong foundation in software development. Later, I transitioned to IT Support and Network Engineering where I gained hands-on experience with real-world systems and user needs. From there, I progressed through deployments and System Administration into my current role as a Systems Development Engineer. This unique path has given me both development expertise and operational insight, which helps me create solutions that are both powerful and practical.',
+    "I started with C# and programming early in my career, which gave me a strong foundation in software development. Later, I transitioned to IT Support and Network Engineering where I gained hands-on experience with real-world systems and user needs. From there, I progressed through deployments and System Administration into my current role as a Systems Development Engineer. Along the way, I've embraced AI tools and models to enhance my workflow, integrating them into my development process. This unique path has given me both development expertise and operational insight, which helps me create solutions that are both powerful and practical.",
 
   // Page-specific descriptions for SEO and meta tags
   HOME: "Hey, I'm a System Development Engineer at Twitch who loves TypeScript, Node.js, and all things AWS. When I'm not building cloud-native solutions, you'll find me creating tech content online.",
@@ -69,6 +69,14 @@ export const TECHNOLOGIES = {
   INFRASTRUCTURE: ['Terraform', 'Docker', 'Ansible', 'System Administration'],
   IDENTITY: ['Okta'],
   CDN: ['CloudFlare'],
+  AI: [
+    'AI',
+    'Artificial Intelligence',
+    'Agentic AI',
+    'Generative AI',
+    'AI Tools',
+    'AI Development',
+  ],
   EMERGING: ['Generative AI', 'MCP Servers'],
   DEVELOPMENT: ['System Development'],
   DEVELOPMENT_EXTENDED: ['System Development Engineering'],

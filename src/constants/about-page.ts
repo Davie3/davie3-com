@@ -41,7 +41,7 @@ export const EXPERIENCES = [
     company: 'Twitch',
     period: 'Aug 2025 - Present',
     description:
-      "These days I'm architecting cloud-native systems with TypeScript and Node.js, while diving deep into AWS CloudFormation and Terraform. My favorite part? Getting to pioneer some really cool generative AI features that are changing how people interact with our platform.",
+      "These days I'm architecting cloud-native systems with TypeScript and Node.js, while diving deep into AWS CloudFormation and Terraform. I regularly use AI tools and models to enhance my development workflow. I'm also pioneering some really cool generative AI features that are changing how people interact with our internal platforms.",
   },
   {
     role: 'System Admin Engineer II',
