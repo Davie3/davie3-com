@@ -12,7 +12,7 @@ export function RightSidebar(): JSX.Element {
       transition={{ duration: 0.5, delay: 1.5 }}
     >
       <div
-        className="p-2 text-[color:var(--color-accent)] hover:text-[color:var(--color-slate-dark)] transition-transform duration-300 hover:-translate-y-1 text-sm"
+        className="p-2 text-[color:var(--color-accent)] hover:text-[color:var(--color-purple-accent)] transition-all duration-300 hover:-translate-y-1 text-sm"
         style={{ writingMode: 'vertical-rl' }}
       >
         Davie3 / David Griffin
