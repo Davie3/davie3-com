@@ -1,6 +1,8 @@
-# davie3.com
+# Davie3.com
 
 Personal website for David Griffin (Davie3)
+
+Visit [davie3.com](https://davie3.com)
 
 ## Tech Stack
 
@@ -9,7 +11,7 @@ Personal website for David Griffin (Davie3)
 - **Styling:** Tailwind CSS
 - **CDN/Security:** Cloudflare
 - **Deployment:** Vercel
-- **Analytics:** Vercel Analytics & Speed Insights
+- **Analytics:** Cloudflare Analytics, Vercel Analytics & Speed Insights
 
 ## Features
 
@@ -33,5 +35,3 @@ Personal website for David Griffin (Davie3)
 
 This code is provided for educational and portfolio demonstration purposes only.
 All rights reserved. Please do not use this code for your own projects.
-
-Visit [davie3.com](https://davie3.com)
