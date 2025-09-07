@@ -1,7 +1,7 @@
 import type { JSX } from 'react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { GitFork, Star } from 'lucide-react';
+import { GitFork, Star, ArrowRight } from 'lucide-react';
 
 import { GITHUB_REPO_SCHEMA } from '@/types/api-types';
 import { GITHUB_CONFIG } from '@/lib/config/github-config';
@@ -167,7 +167,7 @@ export default async function PortfolioPage(): Promise<JSX.Element> {
             className="inline-flex items-center gap-3 px-8 py-4 glass rounded-xl font-semibold text-slate-light transition-all duration-300 hover:scale-105 hover:bg-navy-accent/50 group"
           >
             <span>View All Projects on GitHub</span>
-            <div className="w-5 h-5 bg-gradient-to-r from-blue-accent to-purple-accent rounded transition-transform duration-300 group-hover:scale-110" />
+            <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
           </Link>
         </div>
       </section>
