@@ -11,13 +11,12 @@ export function RightSidebar(): JSX.Element {
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.5, delay: 1.5 }}
     >
-      <a
-        href="mailto:your-email@example.com"
-        className="p-2 text-[color:var(--color-slate-dark)] hover:text-[color:var(--color-accent)] transition-transform duration-300 hover:-translate-y-1 text-sm"
+      <div
+        className="p-2 text-[color:var(--color-accent)] hover:text-[color:var(--color-slate-dark)] transition-transform duration-300 hover:-translate-y-1 text-sm"
         style={{ writingMode: 'vertical-rl' }}
       >
         Davie3 / David Griffin
-      </a>
+      </div>
       <div className="mt-6 w-px h-24 bg-[color:var(--color-slate-dark)]"></div>
     </motion.div>
   );
