@@ -50,6 +50,13 @@ export default function Home(): JSX.Element {
 
         <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-6">
           <Link
+            href={INTERNAL_ROUTES.ABOUT}
+            className="group relative px-8 py-4 bg-gradient-to-r from-purple-accent to-blue-accent rounded-xl font-semibold text-navy transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-purple-accent/25 glow-on-hover"
+          >
+            <span className="relative z-10">About Me</span>
+          </Link>
+
+          <Link
             href={INTERNAL_ROUTES.PORTFOLIO}
             className="group relative px-8 py-4 bg-gradient-to-r from-blue-accent to-purple-accent rounded-xl font-semibold text-navy transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-accent/25 glow-on-hover"
           >
