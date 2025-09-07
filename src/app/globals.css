@@ -119,6 +119,13 @@ a:hover {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  /* Fix text cutoff for descenders */
+  line-height: 1.2;
+  padding-bottom: 0.1em;
+  display: inline-block;
+  /* Ensure proper rendering */
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
 }
 
 /* Enhanced card styles */
@@ -128,11 +135,33 @@ a:hover {
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 16px;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  /* Fix text cutoff issues */
+  overflow: visible;
+  line-height: 1.6;
 }
 
 .card:hover {
   transform: translateY(-4px);
   box-shadow: 0 20px 40px rgba(96, 165, 250, 0.15);
+}
+
+/* Fix text cutoff in skill cards and other text containers */
+.card span,
+.card p,
+.card h1,
+.card h2,
+.card h3,
+.card h4,
+.card h5,
+.card h6 {
+  line-height: 1.6;
+  overflow: visible;
+}
+
+/* Ensure proper spacing for text with descenders */
+.text-container {
+  padding-bottom: 0.25rem;
+  overflow: visible;
 }
 
 /* Smooth transitions for interactive elements */
