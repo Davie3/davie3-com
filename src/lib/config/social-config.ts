@@ -21,7 +21,12 @@ export const SOCIAL_LINKS_DATA: readonly SocialLinkData[] = [
     iconName: 'twitch',
   },
   {
-    name: 'X (Twitter)',
+    name: 'Bluesky',
+    href: EXTERNAL_URLS.BLUESKY,
+    iconName: 'bluesky',
+  },
+  {
+    name: 'X',
     href: EXTERNAL_URLS.X_TWITTER,
     iconName: 'x',
   },
@@ -29,10 +34,5 @@ export const SOCIAL_LINKS_DATA: readonly SocialLinkData[] = [
     name: 'Instagram',
     href: EXTERNAL_URLS.INSTAGRAM,
     iconName: 'instagram',
-  },
-  {
-    name: 'Bluesky',
-    href: EXTERNAL_URLS.BLUESKY,
-    iconName: 'bluesky',
   },
 ];
