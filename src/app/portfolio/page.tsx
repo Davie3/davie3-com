@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { GitFork, Star, ArrowRight } from 'lucide-react';
 
 import { GITHUB_REPO_SCHEMA } from '@/types/api-types';
+import { PAGE_DESCRIPTIONS } from '@/constants/shared';
 import { GITHUB_CONFIG } from '@/lib/config/github-config';
 import { PAGE_METADATA } from '@/lib/config/site-metadata';
 import type { GitHubRepo } from '@/types/api-types';
@@ -73,15 +74,13 @@ export default async function PortfolioPage(): Promise<JSX.Element> {
                 My Portfolio
               </h1>
               <p className="text-slate-dark mt-1">
-                Public projects and contributions
+                {PAGE_DESCRIPTIONS.PORTFOLIO_HERO_SUBTITLE}
               </p>
             </div>
           </div>
 
           <p className="text-lg md:text-xl leading-relaxed text-slate-light">
-            Here is a selection of my public projects from GitHub. In addition
-            to these, I have extensive experience developing and maintaining
-            internal tools and systems for enterprise environments.
+            {PAGE_DESCRIPTIONS.PORTFOLIO_PAGE_INTRO}
           </p>
         </div>
       </section>

@@ -3,19 +3,21 @@ import {
   PERSONAL_INFO,
   PAGE_DESCRIPTIONS,
   PROFESSIONAL_TITLES,
-} from '../../constants/shared';
-import { EXTERNAL_URLS } from '../../constants/urls';
-import { COMBINED_KEYWORDS } from './seo-config';
+} from '@/constants/shared';
+import { EXTERNAL_URLS } from '@/constants/urls';
+import { COMBINED_KEYWORDS } from '@/lib/config/seo-config';
 
 /**
- * Site metadata configuration constants for the website.
+ * Site metadata for SEO (titles, descriptions, OpenGraph, Twitter, etc.).
+ * Note: Descriptions here should use SEO-focused strings in PAGE_DESCRIPTIONS.
+ * Page body copy should use the content-only keys (e.g., ABOUT_*, PORTFOLIO_*).
  */
 export const SITE_METADATA: Metadata = {
   title: {
     default: `${PERSONAL_INFO.FULL_NAME} - ${PROFESSIONAL_TITLES.CURRENT}`,
     template: `%s | ${PERSONAL_INFO.FULL_NAME}`,
   },
-  description: PAGE_DESCRIPTIONS.SITE_EXTENDED,
+  description: PAGE_DESCRIPTIONS.SEO_DESCRIPTION,
   keywords: [...COMBINED_KEYWORDS.HOME],
   authors: [{ name: PERSONAL_INFO.FULL_NAME }],
   creator: PERSONAL_INFO.FULL_NAME,
@@ -31,7 +33,7 @@ export const SITE_METADATA: Metadata = {
   },
   openGraph: {
     title: `${PERSONAL_INFO.FULL_NAME} - ${PROFESSIONAL_TITLES.CURRENT}`,
-    description: PAGE_DESCRIPTIONS.SITE_EXTENDED,
+    description: PAGE_DESCRIPTIONS.OPENGRAPH_DESCRIPTION,
     url: EXTERNAL_URLS.MAIN,
     siteName: `${PERSONAL_INFO.FULL_NAME} - ${PERSONAL_INFO.NICKNAME}`,
     images: [
@@ -48,7 +50,7 @@ export const SITE_METADATA: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: `${PERSONAL_INFO.FULL_NAME} - ${PROFESSIONAL_TITLES.CURRENT}`,
-    description: PAGE_DESCRIPTIONS.PRIMARY_DESCRIPTION,
+    description: PAGE_DESCRIPTIONS.OPENGRAPH_DESCRIPTION,
     creator: PERSONAL_INFO.TWITTER_HANDLE,
     site: PERSONAL_INFO.TWITTER_HANDLE,
     images: {
@@ -104,17 +106,17 @@ export const SITE_METADATA: Metadata = {
 export const PAGE_METADATA = {
   ABOUT: {
     title: `About | ${PERSONAL_INFO.FULL_NAME} - ${PROFESSIONAL_TITLES.CURRENT}`,
-    description: PAGE_DESCRIPTIONS.PROFESSIONAL_SUMMARY,
+    description: PAGE_DESCRIPTIONS.ABOUT_PAGE_INTRO,
     keywords: [...COMBINED_KEYWORDS.ABOUT],
   },
   CONTACT: {
     title: `Contact | ${PERSONAL_INFO.FULL_NAME} - Get In Touch`,
-    description: PAGE_DESCRIPTIONS.CONTACT,
+    description: PAGE_DESCRIPTIONS.CONTACT_PAGE_INTRO,
     keywords: [...COMBINED_KEYWORDS.CONTACT],
   },
   PORTFOLIO: {
     title: `Portfolio | ${PERSONAL_INFO.FULL_NAME} - Software Projects & GitHub`,
-    description: PAGE_DESCRIPTIONS.PORTFOLIO,
+    description: PAGE_DESCRIPTIONS.PORTFOLIO_PAGE_INTRO,
     keywords: [...COMBINED_KEYWORDS.PORTFOLIO],
   },
 };

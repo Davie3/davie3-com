@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { Mail } from 'lucide-react';
 
 import { PAGE_METADATA } from '@/lib/config/site-metadata';
+import { PAGE_DESCRIPTIONS } from '@/constants/shared';
 import ContactForm from '@/components/forms/contact-form';
 
 export const metadata: Metadata = PAGE_METADATA.CONTACT;
@@ -28,15 +29,13 @@ export default function ContactPage(): JSX.Element {
                 Get In Touch
               </h1>
               <p className="text-slate-dark mt-1">
-                Let&apos;s start a conversation
+                {PAGE_DESCRIPTIONS.CONTACT_HERO_SUBTITLE}
               </p>
             </div>
           </div>
 
           <p className="text-lg md:text-xl leading-relaxed text-slate-light">
-            Have a question, want to collaborate on a project, or just want to
-            say hello? I&apos;d love to hear from you. Fill out the form below
-            and I&apos;ll get back to you as soon as possible.
+            {PAGE_DESCRIPTIONS.CONTACT_PAGE_INTRO}
           </p>
         </div>
       </section>
@@ -48,7 +47,7 @@ export default function ContactPage(): JSX.Element {
             Send a Message
           </h2>
           <p className="text-slate-dark">
-            Fill out the form below and I&apos;ll get back to you soon
+            {PAGE_DESCRIPTIONS.CONTACT_FORM_HELP}
           </p>
         </div>
 

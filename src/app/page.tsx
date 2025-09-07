@@ -45,7 +45,7 @@ export default function Home(): JSX.Element {
         </h2>
 
         <p className="mt-8 text-lg leading-relaxed text-slate-dark md:text-xl lg:text-2xl max-w-3xl mx-auto">
-          {PAGE_DESCRIPTIONS.PRIMARY_DESCRIPTION}
+          {PAGE_DESCRIPTIONS.HOME_DESCRIPTION}
         </p>
 
         <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-6">

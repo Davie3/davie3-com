@@ -29,7 +29,7 @@ export function StructuredData({
     '@type': pageType === 'person' ? 'Person' : 'WebSite',
     name:
       title || `${PERSONAL_INFO.FULL_NAME} - ${PROFESSIONAL_TITLES.CURRENT}`,
-    description: description || PAGE_DESCRIPTIONS.PROFESSIONAL_SUMMARY,
+    description: description || PAGE_DESCRIPTIONS.SEO_DESCRIPTION,
     url,
     author: {
       '@type': 'Person',
@@ -44,7 +44,7 @@ export function StructuredData({
     '@type': 'Person',
     name: PERSONAL_INFO.FULL_NAME,
     alternateName: SEO_DATA.ALTERNATE_NAMES,
-    description: PAGE_DESCRIPTIONS.PROFESSIONAL_SUMMARY,
+    description: PAGE_DESCRIPTIONS.ABOUT_PAGE_INTRO,
     url: EXTERNAL_URLS.MAIN,
     image: EXTERNAL_URLS.OG_IMAGE,
     jobTitle: PROFESSIONAL_TITLES.CURRENT,
