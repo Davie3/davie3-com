@@ -29,4 +29,9 @@ Personal website for David Griffin (Davie3)
 - Organized codebase with clear separation of concerns
 - Professional coding standards and documentation
 
+## License
+
+This code is provided for educational and portfolio demonstration purposes only.
+All rights reserved. Please do not use this code for your own projects.
+
 Visit [davie3.com](https://davie3.com)
