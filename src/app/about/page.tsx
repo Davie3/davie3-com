@@ -56,7 +56,7 @@ export default function AboutPage(): JSX.Element {
             <h3 className="text-lg font-semibold text-slate-light mb-4">
               Connect with me
             </h3>
-            <div className="flex flex-wrap gap-3">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
               {SOCIAL_LINKS_DATA.map((link) => (
                 <a
                   key={link.name}
