@@ -26,7 +26,7 @@ export const CONTENT_URLS = {
  * Social media platform URLs
  */
 export const SOCIAL_URLS = {
-  BLUESKY: 'https://bsky.app/profile/davie3.com',
+  BLUESKY: 'https://bsky.app/profile/itsdavie3.bsky.social',
   FACEBOOK: 'https://www.facebook.com/Davie3.Griffin',
   GITHUB_PROFILE: 'https://github.com/davie3',
   INSTAGRAM: 'https://instagram.com/itsdavie3',
