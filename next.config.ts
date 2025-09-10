@@ -3,16 +3,16 @@ import { URL_MAPPINGS } from './src/lib/config/redirect-config';
 
 const cspHeader = `
     default-src 'self';
-    script-src 'self' 'unsafe-eval' 'unsafe-inline' static.cloudflareinsights.com challenges.cloudflare.com *.vercel-insights.com *.vercel-analytics.com vercel.live *.vercel.app;
-    style-src 'self' 'unsafe-inline';
-    img-src 'self' blob: data:;
-    font-src 'self';
+    script-src 'self' 'unsafe-eval' 'unsafe-inline' static.cloudflareinsights.com challenges.cloudflare.com *.vercel-insights.com *.vercel-analytics.com https://vercel.live *.vercel.app;
+    style-src 'self' https://vercel.live 'unsafe-inline';
+    img-src 'self' https://vercel.live https://vercel.com blob: data:;
+    font-src 'self' https://vercel.live https://assets.vercel.com;
     object-src 'none';
     base-uri 'self';
     form-action 'self';
     frame-ancestors 'none';
-    frame-src 'self' challenges.cloudflare.com vercel.live;
-    connect-src 'self' cloudflareinsights.com *.vercel-insights.com *.vercel-analytics.com vitals.vercel-insights.com vercel.live *.vercel.app;
+    frame-src 'self' challenges.cloudflare.com https://vercel.live;
+    connect-src 'self' cloudflareinsights.com *.vercel-insights.com *.vercel-analytics.com vitals.vercel-insights.com https://vercel.live *.vercel.app wss://ws-us3.pusher.com;
     upgrade-insecure-requests;
 `;
 
