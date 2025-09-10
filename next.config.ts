@@ -3,7 +3,7 @@ import { URL_MAPPINGS } from './src/lib/config/redirect-config';
 
 const cspHeader = `
     default-src 'self';
-    script-src 'self' 'unsafe-eval' 'unsafe-inline' static.cloudflareinsights.com challenges.cloudflare.com *.vercel-insights.com *.vercel-analytics.com;
+    script-src 'self' 'unsafe-eval' 'unsafe-inline' static.cloudflareinsights.com challenges.cloudflare.com *.vercel-insights.com *.vercel-analytics.com vercel.live *.vercel.app;
     style-src 'self' 'unsafe-inline';
     img-src 'self' blob: data:;
     font-src 'self';
@@ -12,7 +12,7 @@ const cspHeader = `
     form-action 'self';
     frame-ancestors 'none';
     frame-src 'self' challenges.cloudflare.com;
-    connect-src 'self' cloudflareinsights.com *.vercel-insights.com *.vercel-analytics.com vitals.vercel-insights.com;
+    connect-src 'self' cloudflareinsights.com *.vercel-insights.com *.vercel-analytics.com vitals.vercel-insights.com vercel.live *.vercel.app;
     upgrade-insecure-requests;
 `;
 
