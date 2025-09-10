@@ -41,6 +41,35 @@ export default function RootLayout({
             />
           </>
         )}
+
+        {/* Speculation rules for internal route prefetching */}
+        <script
+          type="speculationrules"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              prerender: [
+                {
+                  where: { href_matches: '/about' },
+                  eagerness: 'moderate',
+                },
+                {
+                  where: { href_matches: '/portfolio' },
+                  eagerness: 'moderate',
+                },
+                {
+                  where: { href_matches: '/contact' },
+                  eagerness: 'conservative',
+                },
+              ],
+              prefetch: [
+                {
+                  where: { href_matches: '/privacy' },
+                  eagerness: 'conservative',
+                },
+              ],
+            }),
+          }}
+        />
       </head>
       <body
         className={`${fontVariables} antialiased pt-16 bg-black text-white`}
