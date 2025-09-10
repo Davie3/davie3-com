@@ -1,9 +1,8 @@
 import type { Metadata } from 'next';
 import type { JSX } from 'react';
 
-import { Analytics } from '@vercel/analytics/next';
-import { SpeedInsights } from '@vercel/speed-insights/next';
 import { CloudFlareAnalytics } from '@/components/analytics/cloudflare-analytics';
+import { VercelAnalytics } from '@/components/analytics/vercel-analytics';
 import { AppFooter } from '@/components/layout/app-footer';
 import { StructuredData } from '@/components/seo/structured-data';
 import { ClientLayout } from '@/components/ui/client-layout';
@@ -36,8 +35,7 @@ export default function RootLayout({
         <ClientLayout>{children}</ClientLayout>
         <AppFooter />
         <CloudFlareAnalytics />
-        <SpeedInsights />
-        <Analytics />
+        <VercelAnalytics />
       </body>
     </html>
   );

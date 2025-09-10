@@ -61,6 +61,24 @@ export function MobileNavigation(): JSX.Element {
     setIsOpen(false);
   }, [pathname]);
 
+  // Prevent hydration mismatch by ensuring client-side rendering
+  if (!mounted) {
+    return (
+      <div className="md:hidden">
+        <button
+          className="z-50 relative p-2 focus:outline-none focus:ring-2 focus:ring-blue-accent focus:ring-offset-2 focus:ring-offset-navy rounded-lg"
+          aria-label="Open navigation menu"
+        >
+          <div className="space-y-1.5">
+            <span className="block w-6 h-0.5 bg-white"></span>
+            <span className="block w-6 h-0.5 bg-white"></span>
+            <span className="block w-6 h-0.5 bg-white"></span>
+          </div>
+        </button>
+      </div>
+    );
+  }
+
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
