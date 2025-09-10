@@ -38,11 +38,12 @@ export default function AboutPage(): JSX.Element {
             </div>
             <div className="flex justify-center sm:justify-end">
               <Image
-                src="/images/profile_square.png"
+                src="/images/profile_square_200.webp"
                 alt="David Griffin"
                 width={112}
                 height={112}
                 className="w-24 h-24 md:w-28 md:h-28 rounded-2xl object-cover border-2 border-slate-dark/20 shadow-lg"
+                sizes="(max-width: 768px) 96px, 112px"
               />
             </div>
           </div>

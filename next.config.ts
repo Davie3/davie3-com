@@ -38,6 +38,9 @@ const nextConfig: NextConfig = {
       permanent: mapping.permanent,
     }));
   },
+  images: {
+    formats: ['image/avif', 'image/webp'],
+  },
 };
 
 export default nextConfig;
