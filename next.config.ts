@@ -11,7 +11,7 @@ const cspHeader = `
     base-uri 'self';
     form-action 'self';
     frame-ancestors 'none';
-    frame-src 'self' challenges.cloudflare.com;
+    frame-src 'self' challenges.cloudflare.com vercel.live;
     connect-src 'self' cloudflareinsights.com *.vercel-insights.com *.vercel-analytics.com vitals.vercel-insights.com vercel.live *.vercel.app;
     upgrade-insecure-requests;
 `;
