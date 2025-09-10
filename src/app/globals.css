@@ -96,7 +96,7 @@ body {
 /* Enhanced link styles */
 a {
   color: var(--color-accent);
-  @apply transition-colors duration-200;
+  transition: color 0.2s ease;
   text-decoration: none;
 }
 
@@ -111,6 +111,14 @@ a:hover {
   backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* Optimized glass effect for mobile devices */
+@media (max-width: 768px) {
+  .glass {
+    backdrop-filter: blur(6px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  }
 }
 
 /* Gradient text effect */
@@ -143,6 +151,18 @@ a:hover {
 .card:hover {
   transform: translateY(-4px);
   box-shadow: 0 20px 40px rgba(96, 165, 250, 0.15);
+}
+
+/* Optimized card effects for mobile devices */
+@media (max-width: 768px) {
+  .card {
+    backdrop-filter: blur(4px);
+  }
+
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(96, 165, 250, 0.1);
+  }
 }
 
 /* Fix text cutoff in skill cards and other text containers */
@@ -182,6 +202,31 @@ select {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+
+  /* Disable expensive effects when motion is reduced */
+  .glass,
+  .card {
+    backdrop-filter: none !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+  }
+}
+
+/* Additional mobile performance optimizations */
+@media (max-width: 480px) {
+  /* Further reduce effects on small screens */
+  .glass {
+    backdrop-filter: blur(3px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  .card {
+    backdrop-filter: blur(2px);
+  }
+
+  .card:hover {
+    transform: none;
+    box-shadow: 0 4px 8px rgba(96, 165, 250, 0.08);
   }
 }
 
@@ -391,6 +436,14 @@ select {
   inset: 0;
   background-color: rgba(0, 0, 0, 0.8);
   backdrop-filter: blur(4px);
+}
+
+/* Optimized mobile menu backdrop for low-end devices */
+@media (max-width: 768px) and (max-resolution: 150dpi) {
+  .mobile-menu-backdrop {
+    backdrop-filter: none;
+    background-color: rgba(0, 0, 0, 0.9);
+  }
 }
 
 .mobile-menu-panel {
