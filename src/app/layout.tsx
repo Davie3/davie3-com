@@ -21,6 +21,26 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <StructuredData pageType="website" />
+        {/* Preconnect hints for analytics domains (production only) */}
+        {process.env.VERCEL_ENV === 'production' && (
+          <>
+            <link
+              rel="preconnect"
+              href="https://static.cloudflareinsights.com"
+              crossOrigin="anonymous"
+            />
+            <link
+              rel="preconnect"
+              href="https://vitals.vercel-insights.com"
+              crossOrigin="anonymous"
+            />
+            <link
+              rel="preconnect"
+              href="https://vitals.vercel-analytics.com"
+              crossOrigin="anonymous"
+            />
+          </>
+        )}
       </head>
       <body
         className={`${fontVariables} antialiased pt-16 bg-black text-white`}
