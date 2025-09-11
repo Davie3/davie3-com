@@ -1,9 +1,8 @@
 import type { Metadata } from 'next';
 import type { JSX } from 'react';
 
-import { Analytics } from '@vercel/analytics/next';
-import { SpeedInsights } from '@vercel/speed-insights/next';
 import { CloudFlareAnalytics } from '@/components/analytics/cloudflare-analytics';
+import { VercelAnalytics } from '@/components/analytics/vercel-analytics';
 import { AppFooter } from '@/components/layout/app-footer';
 import { StructuredData } from '@/components/seo/structured-data';
 import { ClientLayout } from '@/components/ui/client-layout';
@@ -22,6 +21,55 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <StructuredData pageType="website" />
+        {/* Preconnect hints for analytics domains (production only) */}
+        {process.env.VERCEL_ENV === 'production' && (
+          <>
+            <link
+              rel="preconnect"
+              href="https://static.cloudflareinsights.com"
+              crossOrigin="anonymous"
+            />
+            <link
+              rel="preconnect"
+              href="https://vitals.vercel-insights.com"
+              crossOrigin="anonymous"
+            />
+            <link
+              rel="preconnect"
+              href="https://vitals.vercel-analytics.com"
+              crossOrigin="anonymous"
+            />
+          </>
+        )}
+
+        {/* Speculation rules for internal route prefetching */}
+        <script
+          type="speculationrules"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              prerender: [
+                {
+                  where: { href_matches: '/about' },
+                  eagerness: 'moderate',
+                },
+                {
+                  where: { href_matches: '/portfolio' },
+                  eagerness: 'moderate',
+                },
+                {
+                  where: { href_matches: '/contact' },
+                  eagerness: 'conservative',
+                },
+              ],
+              prefetch: [
+                {
+                  where: { href_matches: '/privacy' },
+                  eagerness: 'conservative',
+                },
+              ],
+            }),
+          }}
+        />
       </head>
       <body
         className={`${fontVariables} antialiased pt-16 bg-black text-white`}
@@ -36,8 +84,7 @@ export default function RootLayout({
         <ClientLayout>{children}</ClientLayout>
         <AppFooter />
         <CloudFlareAnalytics />
-        <SpeedInsights />
-        <Analytics />
+        <VercelAnalytics />
       </body>
     </html>
   );

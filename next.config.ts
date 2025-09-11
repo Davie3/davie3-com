@@ -3,17 +3,25 @@ import { URL_MAPPINGS } from './src/lib/config/redirect-config';
 
 const cspHeader = `
     default-src 'self';
-    script-src 'self' 'unsafe-eval' 'unsafe-inline' static.cloudflareinsights.com challenges.cloudflare.com;
-    style-src 'self' 'unsafe-inline';
-    img-src 'self' blob: data:;
-    font-src 'self';
+    script-src 'self' 'unsafe-eval' 'unsafe-inline' 
+        static.cloudflareinsights.com challenges.cloudflare.com *.cloudflare.com
+        *.vercel-insights.com *.vercel-analytics.com https://vercel.live *.vercel.app;
+    style-src 'self' 'unsafe-inline'
+        https://vercel.live;
+    img-src 'self' blob: data:
+        https://vercel.live https://vercel.com;
+    font-src 'self'
+        https://vercel.live https://assets.vercel.com;
     object-src 'none';
     base-uri 'self';
     form-action 'self';
     frame-ancestors 'none';
-    frame-src 'self' challenges.cloudflare.com;
-    connect-src 'self' cloudflareinsights.com;
-    block-all-mixed-content;
+    frame-src 'self'
+        challenges.cloudflare.com *.cloudflare.com
+        https://vercel.live;
+    connect-src 'self'
+        cloudflareinsights.com challenges.cloudflare.com *.cloudflare.com
+        *.vercel-insights.com *.vercel-analytics.com vitals.vercel-insights.com https://vercel.live *.vercel.app wss://ws-us3.pusher.com;
     upgrade-insecure-requests;
 `;
 
@@ -37,6 +45,9 @@ const nextConfig: NextConfig = {
       destination: mapping.destination,
       permanent: mapping.permanent,
     }));
+  },
+  images: {
+    formats: ['image/avif', 'image/webp'],
   },
 };
 

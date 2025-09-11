@@ -28,11 +28,12 @@ export default function Home(): JSX.Element {
       <div className="max-w-4xl relative z-10">
         <div className="mb-8">
           <Image
-            src="/images/profile_square.png"
+            src="/images/profile_square.webp"
             alt="David Griffin"
             width={200}
             height={200}
             className="rounded-2xl mx-auto shadow-2xl ring-4 ring-blue-accent/20"
+            sizes="200px"
             priority
           />
         </div>

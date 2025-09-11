@@ -1,0 +1,123 @@
+'use client';
+
+import { useState, useEffect, type JSX } from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { createPortal } from 'react-dom';
+
+import { useLockBody } from '@/hooks/use-lock-body';
+import { NAV_LINKS, type NavLink } from '../../lib/config/navigation-config';
+
+export function ClientMobileNav(): JSX.Element {
+  const [isOpen, setIsOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  const pathname = usePathname();
+  useLockBody(isOpen);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    setIsOpen(false);
+  }, [pathname]);
+
+  const toggleMenu = (): void => {
+    setIsOpen(!isOpen);
+  };
+
+  const mobileMenu = (
+    <div className={`mobile-menu-overlay ${isOpen ? 'open' : ''}`}>
+      <div
+        className="mobile-menu-backdrop"
+        onClick={toggleMenu}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            toggleMenu();
+          }
+        }}
+      />
+      <div
+        id="mobile-menu"
+        className="mobile-menu-panel"
+        role="navigation"
+        aria-label="Mobile navigation menu"
+      >
+        <button
+          onClick={toggleMenu}
+          className="mobile-menu-close"
+          aria-label="Close navigation menu"
+        >
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+          >
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+        <nav className="mt-16">
+          <ul className="flex flex-col items-center gap-6">
+            {NAV_LINKS.map((link: NavLink, index) => {
+              const isActive = pathname === link.href;
+              return (
+                <li
+                  key={link.name}
+                  className="mobile-nav-item"
+                  style={{ animationDelay: `${index * 0.1}s` }}
+                >
+                  <Link
+                    href={link.href}
+                    target={link.openInNewTab ? '_blank' : undefined}
+                    rel={link.openInNewTab ? 'noopener noreferrer' : undefined}
+                    className={`text-2xl transition-colors duration-300 ${
+                      isActive
+                        ? 'text-blue-accent'
+                        : 'text-slate-light hover:text-blue-accent'
+                    }`}
+                  >
+                    {link.name}
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </nav>
+      </div>
+    </div>
+  );
+
+  return (
+    <div className="md:hidden">
+      <button
+        onClick={toggleMenu}
+        className="hamburger-button"
+        aria-label={isOpen ? 'Close navigation menu' : 'Open navigation menu'}
+        aria-expanded={isOpen}
+        aria-controls="mobile-menu"
+      >
+        <div className="hamburger-lines">
+          <span
+            className={`hamburger-line ${isOpen ? 'rotate-45' : ''}`}
+          ></span>
+          <span
+            className={`hamburger-line ${isOpen ? 'opacity-0' : ''}`}
+          ></span>
+          <span
+            className={`hamburger-line ${isOpen ? '-rotate-45' : ''}`}
+          ></span>
+        </div>
+      </button>
+
+      {mounted &&
+        typeof document !== 'undefined' &&
+        createPortal(mobileMenu, document.body)}
+    </div>
+  );
+}
