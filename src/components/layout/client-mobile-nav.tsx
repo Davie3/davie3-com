@@ -96,20 +96,20 @@ export function ClientMobileNav(): JSX.Element {
     <div className="md:hidden">
       <button
         onClick={toggleMenu}
-        className="hamburger-button"
+        className="z-50 relative p-2 rounded-lg border-0 bg-transparent cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-accent"
         aria-label={isOpen ? 'Close navigation menu' : 'Open navigation menu'}
         aria-expanded={isOpen}
         aria-controls="mobile-menu"
       >
-        <div className="hamburger-lines">
+        <div className="flex flex-col gap-1.5">
           <span
-            className={`hamburger-line ${isOpen ? 'rotate-45' : ''}`}
+            className={`block w-6 h-0.5 bg-white transition-all duration-300 ${isOpen ? 'rotate-45 translate-y-1.5' : ''}`}
           ></span>
           <span
-            className={`hamburger-line ${isOpen ? 'opacity-0' : ''}`}
+            className={`block w-6 h-0.5 bg-white transition-all duration-300 ${isOpen ? 'opacity-0' : ''}`}
           ></span>
           <span
-            className={`hamburger-line ${isOpen ? '-rotate-45' : ''}`}
+            className={`block w-6 h-0.5 bg-white transition-all duration-300 ${isOpen ? '-rotate-45 -translate-y-1.5' : ''}`}
           ></span>
         </div>
       </button>

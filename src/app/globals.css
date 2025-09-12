@@ -409,33 +409,6 @@ select {
   animation: fadeInUp 0.3s ease-out both;
 }
 
-/* Navigation Styles */
-.nav-list {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.nav-link {
-  position: relative;
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
-  font-weight: 500;
-  transition: all 0.3s ease;
-  color: var(--color-slate-light);
-  text-decoration: none;
-}
-
-.nav-link:hover {
-  color: var(--color-blue-accent);
-  background-color: rgba(42, 47, 62, 0.3);
-}
-
-.nav-link[aria-current='page'] {
-  color: var(--color-blue-accent);
-  background-color: rgba(42, 47, 62, 0.5);
-}
-
 /* Active nav link indicator - Complex pseudo-element, keep as CSS */
 .nav-link[aria-current='page']::after {
   content: '';
@@ -447,45 +420,6 @@ select {
   height: 0.25rem;
   background-color: var(--color-blue-accent);
   border-radius: 50%;
-}
-
-/* Mobile Navigation Styles */
-.hamburger-button {
-  z-index: 50;
-  position: relative;
-  padding: 0.5rem;
-  border-radius: 0.5rem;
-  border: none;
-  background: transparent;
-  cursor: pointer;
-}
-
-.hamburger-button:focus {
-  outline: none;
-  box-shadow: 0 0 0 2px var(--color-blue-accent);
-}
-
-.hamburger-lines {
-  display: flex;
-  flex-direction: column;
-  gap: 0.375rem;
-}
-
-.hamburger-line {
-  display: block;
-  width: 1.5rem;
-  height: 0.125rem;
-  background-color: white;
-  transition: all 0.3s ease;
-}
-
-/* Mobile Navigation - Complex state-dependent styles, keep as CSS */
-.hamburger-line.rotate-45 {
-  transform: rotate(45deg) translateY(6px);
-}
-
-.hamburger-line.-rotate-45 {
-  transform: rotate(-45deg) translateY(-6px);
 }
 
 /* Mobile menu overlay state management - Complex conditional styles */
