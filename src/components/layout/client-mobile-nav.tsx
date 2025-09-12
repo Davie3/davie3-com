@@ -118,6 +118,7 @@ export function ClientMobileNav(): JSX.Element {
 
       {mounted &&
         typeof document !== 'undefined' &&
+        isOpen &&
         createPortal(mobileMenu, document.body)}
     </div>
   );
