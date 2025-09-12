@@ -86,7 +86,7 @@ html {
 body {
   color: var(--color-foreground);
   font-family: var(--font-sans);
-  background: var(--gradient-background);
+  background: var(--color-navy);
   min-height: 100vh;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
