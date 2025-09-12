@@ -104,8 +104,7 @@ export default async function PortfolioPage(): Promise<JSX.Element> {
                 href={project.html_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group card p-6 flex flex-col justify-between h-full"
-                style={{ animationDelay: `${index * 100}ms` }}
+                className={`group card p-6 flex flex-col justify-between h-full portfolio-delay-${Math.min(index + 1, 9)}`}
               >
                 <div className="flex-1">
                   <div className="flex items-start justify-between mb-3">

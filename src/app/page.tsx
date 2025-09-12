@@ -19,8 +19,7 @@ export default function Home(): JSX.Element {
   return (
     <main
       id="main-content"
-      className="min-h-screen flex items-center justify-center p-4 text-center md:p-8 relative overflow-hidden"
-      style={{ minHeight: 'calc(100vh - 4rem)' }}
+      className="min-h-screen-minus-header flex items-center justify-center p-4 text-center md:p-8 relative overflow-hidden"
     >
       {/* Hero background glow */}
       <div className="absolute inset-0 bg-gradient-to-br from-blue-accent/10 via-transparent to-purple-accent/10 pointer-events-none" />

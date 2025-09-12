@@ -33,8 +33,7 @@ export function AppHeader(): JSX.Element {
             {NAV_LINKS.map((link: NavLink, index) => (
               <li
                 key={link.name}
-                className="nav-item"
-                style={{ animationDelay: `${index * 0.1}s` }}
+                className={`nav-item animate-delay-${Math.min(index + 1, 6)}`}
               >
                 <ClientNavLink
                   href={link.href}

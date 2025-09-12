@@ -69,8 +69,7 @@ export function ClientMobileNav(): JSX.Element {
               return (
                 <li
                   key={link.name}
-                  className="mobile-nav-item"
-                  style={{ animationDelay: `${index * 0.1}s` }}
+                  className={`mobile-nav-item animate-delay-${Math.min(index + 1, 6)}`}
                 >
                   <Link
                     href={link.href}
