@@ -193,7 +193,7 @@ select {
   transition: all 0.2s ease;
 }
 
-/* Navigation animation delay utilities */
+/* Navigation animation delay utilities - Keep these as they're component-specific */
 .animate-delay-1 {
   animation-delay: 0.1s;
 }
@@ -210,7 +210,7 @@ select {
   animation-delay: 0.4s;
 }
 
-/* Layout utilities */
+/* Layout utilities - Now available as Tailwind utilities */
 .min-h-screen-minus-header {
   min-height: calc(100vh - 4rem);
 }
@@ -399,68 +399,17 @@ select {
   }
 }
 
-/* Header Animation */
+/* Header Animation - Now using Tailwind animation */
 .app-header-animation {
   animation: slideInFromTop 0.5s ease-out;
 }
 
-/* Logo Styles */
-.logo-link {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.logo {
-  width: 2.5rem;
-  height: 2.5rem;
-  background: linear-gradient(
-    to right,
-    var(--color-blue-accent),
-    var(--color-purple-accent)
-  );
-  border-radius: 0.75rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.3s ease;
-}
-
-.logo-link:hover .logo {
-  transform: scale(1.1);
-}
-
-/* Navigation Styles */
-.nav-list {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
+/* Navigation item animation - Keep as component-specific */
 .nav-item {
   animation: fadeInUp 0.3s ease-out both;
 }
 
-.nav-link {
-  position: relative;
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
-  font-weight: 500;
-  transition: all 0.3s ease;
-  color: var(--color-slate-light);
-  text-decoration: none;
-}
-
-.nav-link:hover {
-  color: var(--color-blue-accent);
-  background-color: rgba(42, 47, 62, 0.3);
-}
-
-.nav-link[aria-current='page'] {
-  color: var(--color-blue-accent);
-  background-color: rgba(42, 47, 62, 0.5);
-}
-
+/* Active nav link indicator - Complex pseudo-element, keep as CSS */
 .nav-link[aria-current='page']::after {
   content: '';
   position: absolute;
@@ -473,36 +422,7 @@ select {
   border-radius: 50%;
 }
 
-/* Mobile Navigation Styles */
-.hamburger-button {
-  z-index: 50;
-  position: relative;
-  padding: 0.5rem;
-  border-radius: 0.5rem;
-  border: none;
-  background: transparent;
-  cursor: pointer;
-}
-
-.hamburger-button:focus {
-  outline: none;
-  box-shadow: 0 0 0 2px var(--color-blue-accent);
-}
-
-.hamburger-lines {
-  display: flex;
-  flex-direction: column;
-  gap: 0.375rem;
-}
-
-.hamburger-line {
-  display: block;
-  width: 1.5rem;
-  height: 0.125rem;
-  background-color: white;
-  transition: all 0.3s ease;
-}
-
+/* Mobile Navigation - Complex state-dependent styles, keep as CSS */
 .hamburger-line.rotate-45 {
   transform: rotate(45deg) translateY(6px);
 }
@@ -511,14 +431,8 @@ select {
   transform: rotate(-45deg) translateY(-6px);
 }
 
-.hamburger-line.opacity-0 {
-  opacity: 0;
-}
-
+/* Mobile menu overlay state management - Complex conditional styles */
 .mobile-menu-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.3s ease-in-out;
@@ -529,61 +443,19 @@ select {
   pointer-events: auto;
 }
 
-.mobile-menu-backdrop {
-  position: absolute;
-  inset: 0;
-  background-color: rgba(0, 0, 0, 0.8);
-  backdrop-filter: blur(4px);
+.mobile-menu-overlay.open .mobile-menu-panel {
+  transform: translateX(0);
+}
+
+/* Mobile navigation item animation */
+.mobile-nav-item {
+  animation: fadeInUp 0.3s ease-out both;
 }
 
 /* Optimized mobile menu backdrop for low-end devices */
 @media (max-width: 768px) and (max-resolution: 150dpi) {
   .mobile-menu-backdrop {
-    backdrop-filter: none;
-    background-color: rgba(0, 0, 0, 0.9);
+    backdrop-filter: none !important;
+    background-color: rgba(0, 0, 0, 0.9) !important;
   }
-}
-
-.mobile-menu-panel {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  width: 75%;
-  max-width: 24rem;
-  background-color: var(--color-navy);
-  padding: 2.5rem;
-  z-index: 10000;
-  transform: translateX(100%);
-  transition: transform 0.3s ease-in-out;
-}
-
-.mobile-menu-overlay.open .mobile-menu-panel {
-  transform: translateX(0);
-}
-
-.mobile-menu-close {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  padding: 0.5rem;
-  color: white;
-  background: transparent;
-  border: none;
-  border-radius: 0.5rem;
-  cursor: pointer;
-  transition: color 0.3s ease;
-}
-
-.mobile-menu-close:hover {
-  color: var(--color-blue-accent);
-}
-
-.mobile-menu-close:focus {
-  outline: none;
-  box-shadow: 0 0 0 2px var(--color-blue-accent);
-}
-
-.mobile-nav-item {
-  animation: fadeInUp 0.3s ease-out both;
 }
