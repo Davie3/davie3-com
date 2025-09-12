@@ -109,8 +109,11 @@ export default function AboutPage(): JSX.Element {
         </div>
 
         <div className="space-y-6">
-          {EXPERIENCES.map((exp) => (
-            <div key={exp.company} className="card p-6 md:p-8 group">
+          {EXPERIENCES.map((exp, index) => (
+            <div
+              key={`${exp.company}-${index}`}
+              className="card p-6 md:p-8 group"
+            >
               <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-4">
                 <div>
                   <h3 className="text-xl md:text-2xl font-bold text-slate-light group-hover:text-blue-accent transition-colors duration-300">
