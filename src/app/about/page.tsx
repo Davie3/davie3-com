@@ -88,7 +88,8 @@ export default function AboutPage(): JSX.Element {
           {SKILLS.map((skill, index) => (
             <div
               key={skill}
-              className={`card p-4 text-center group cursor-default skill-delay-${Math.min(index + 1, 12)}`}
+              className="card p-4 text-center group cursor-default"
+              style={{ animationDelay: `${index * 50}ms` }}
             >
               <span className="text-sm md:text-base font-medium text-slate-light group-hover:text-blue-accent transition-colors duration-300">
                 {skill}

@@ -33,7 +33,7 @@ export function AppHeader(): JSX.Element {
             {NAV_LINKS.map((link: NavLink, index) => (
               <li
                 key={link.name}
-                className={`nav-item animate-delay-${Math.min(index + 1, 6)}`}
+                className={`nav-item animate-delay-${index + 1}`}
               >
                 <ClientNavLink
                   href={link.href}
