@@ -28,7 +28,7 @@ export function AppHeader(): JSX.Element {
         <Link
           href="/"
           className="group flex items-center gap-2"
-          aria-label="Go to homepage"
+          aria-label="DG - Go to homepage"
         >
           <div className="w-10 h-10 bg-gradient-to-r from-blue-accent to-purple-accent rounded-xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
             <span className="text-navy font-bold text-lg">DG</span>
