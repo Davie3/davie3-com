@@ -39,6 +39,12 @@ export default function RootLayout({
               href="https://vitals.vercel-analytics.com"
               crossOrigin="anonymous"
             />
+            {/* Speed Insights script preload for mobile */}
+            <link
+              rel="modulepreload"
+              href="/_vercel/speed-insights/script.js"
+              crossOrigin="anonymous"
+            />
           </>
         )}
 
