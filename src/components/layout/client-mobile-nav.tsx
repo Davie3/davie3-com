@@ -33,8 +33,10 @@ export function ClientMobileNav(): JSX.Element {
         onClick={toggleMenu}
         role="button"
         tabIndex={0}
+        aria-label="Close navigation menu"
         onKeyDown={(e) => {
           if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
             toggleMenu();
           }
         }}

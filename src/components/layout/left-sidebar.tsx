@@ -8,11 +8,12 @@ import { getSocialIcon } from '@/utils/social-icons';
 
 export function LeftSidebar(): JSX.Element {
   return (
-    <motion.div
+    <motion.aside
       className="hidden md:flex flex-col items-center fixed bottom-0 left-10 w-10"
       initial={{ opacity: 0, x: -20 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.5, delay: 1.5 }}
+      aria-label="Social media links"
     >
       <div className="flex flex-col items-center gap-6">
         {SOCIAL_LINKS_DATA.map((link) => (
@@ -28,7 +29,10 @@ export function LeftSidebar(): JSX.Element {
           </a>
         ))}
       </div>
-      <div className="mt-6 h-24 w-px bg-[color:var(--color-slate-dark)]"></div>
-    </motion.div>
+      <div
+        className="mt-6 h-24 w-px bg-[color:var(--color-slate-dark)]"
+        aria-hidden="true"
+      ></div>
+    </motion.aside>
   );
 }
