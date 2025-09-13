@@ -8,6 +8,7 @@ import { StructuredData } from '@/components/seo/structured-data';
 import { ClientLayout } from '@/components/ui/client-layout';
 import { SITE_METADATA } from '@/lib/config/site-metadata';
 import { fontVariables } from '@/lib/fonts';
+import { shouldEnableAnalytics } from '@/lib/utils/environment';
 import './globals.css';
 
 export const metadata: Metadata = SITE_METADATA;
@@ -21,30 +22,32 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <StructuredData pageType="website" />
-        {/* Preconnect hints for analytics domains (all environments) */}
-        <>
-          <link
-            rel="preconnect"
-            href="https://static.cloudflareinsights.com"
-            crossOrigin="anonymous"
-          />
-          <link
-            rel="preconnect"
-            href="https://vitals.vercel-insights.com"
-            crossOrigin="anonymous"
-          />
-          <link
-            rel="preconnect"
-            href="https://vitals.vercel-analytics.com"
-            crossOrigin="anonymous"
-          />
-          {/* Speed Insights script preload for mobile */}
-          <link
-            rel="modulepreload"
-            href="/_vercel/speed-insights/script.js"
-            crossOrigin="anonymous"
-          />
-        </>
+        {/* Preconnect hints for analytics domains */}
+        {shouldEnableAnalytics && (
+          <>
+            <link
+              rel="preconnect"
+              href="https://static.cloudflareinsights.com"
+              crossOrigin="anonymous"
+            />
+            <link
+              rel="preconnect"
+              href="https://vitals.vercel-insights.com"
+              crossOrigin="anonymous"
+            />
+            <link
+              rel="preconnect"
+              href="https://vitals.vercel-analytics.com"
+              crossOrigin="anonymous"
+            />
+            {/* Speed Insights script preload for mobile */}
+            <link
+              rel="modulepreload"
+              href="/_vercel/speed-insights/script.js"
+              crossOrigin="anonymous"
+            />
+          </>
+        )}
 
         {/* Speculation rules for internal route prefetching */}
         <script
@@ -87,8 +90,13 @@ export default function RootLayout({
         </a>
         <ClientLayout>{children}</ClientLayout>
         <AppFooter />
-        <CloudFlareAnalytics />
-        <VercelAnalytics />
+        {/* Analytics components - controlled by ENABLE_ANALYTICS env var */}
+        {shouldEnableAnalytics && (
+          <>
+            <CloudFlareAnalytics />
+            <VercelAnalytics />
+          </>
+        )}
       </body>
     </html>
   );

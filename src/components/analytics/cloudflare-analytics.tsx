@@ -5,7 +5,7 @@ import type { JSX } from 'react';
 
 /**
  * CloudFlare Web Analytics component
- * Loads in all environments for testing and monitoring
+ * Environment gating handled at parent level (layout.tsx)
  */
 export function CloudFlareAnalytics(): JSX.Element {
   return (

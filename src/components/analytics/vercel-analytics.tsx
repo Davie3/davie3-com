@@ -7,7 +7,7 @@ import type { JSX } from 'react';
 
 /**
  * Vercel Analytics wrapper component
- * Loads in all environments for testing and monitoring
+ * Environment gating handled at parent level (layout.tsx)
  */
 export function VercelAnalytics(): JSX.Element {
   const [mounted, setMounted] = useState(false);
