@@ -38,6 +38,43 @@ const config: Config = {
         sans: ['var(--font-geist-sans)'],
         mono: ['var(--font-geist-mono)'],
       },
+      backgroundImage: {
+        'gradient-primary': 'var(--gradient-primary)',
+        'gradient-secondary': 'var(--gradient-secondary)',
+        'gradient-background': 'var(--gradient-background)',
+      },
+      animation: {
+        'fade-in-up': 'fadeInUp 0.3s ease-out both',
+        'slide-in-top': 'slideInFromTop 0.5s ease-out',
+        'slide-in-right': 'slideInFromRight 0.3s ease-in-out',
+        'slide-out-right': 'slideOutToRight 0.3s ease-in-out',
+      },
+      keyframes: {
+        fadeInUp: {
+          from: { transform: 'translateY(20px)', opacity: '0' },
+          to: { transform: 'translateY(0)', opacity: '1' },
+        },
+        slideInFromTop: {
+          from: { transform: 'translateY(-100px)', opacity: '0' },
+          to: { transform: 'translateY(0)', opacity: '1' },
+        },
+        slideInFromRight: {
+          from: { transform: 'translateX(100%)', opacity: '0' },
+          to: { transform: 'translateX(0)', opacity: '1' },
+        },
+        slideOutToRight: {
+          from: { transform: 'translateX(0)', opacity: '1' },
+          to: { transform: 'translateX(100%)', opacity: '0' },
+        },
+      },
+      spacing: {
+        'screen-minus-header': 'calc(100vh - 4rem)',
+      },
+      backdropBlur: {
+        glass: '16px',
+        'glass-mobile': '6px',
+        'glass-light': '4px',
+      },
     },
   },
   plugins: [],

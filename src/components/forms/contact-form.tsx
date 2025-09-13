@@ -110,103 +110,78 @@ export default function ContactForm(): JSX.Element {
     <div className="bg-navy-accent/60 backdrop-blur-xl border border-slate-dark/20 rounded-3xl p-8 md:p-12">
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         <div>
-          <label
-            htmlFor="name"
-            className="block text-sm font-medium text-slate-light mb-2"
-          >
+          <label htmlFor="name" className="form-label">
             Name
           </label>
           <input
             id="name"
             type="text"
             {...register('name')}
-            className="w-full px-4 py-3 bg-navy-accent/50 border border-slate-dark/30 rounded-xl text-slate-light placeholder-slate-dark focus:border-blue-accent focus:ring-2 focus:ring-blue-accent/20 focus:outline-none transition-colors duration-200"
+            className="form-input"
             placeholder="Your full name"
           />
-          {errors.name && (
-            <p className="mt-2 text-sm text-red-400">{errors.name.message}</p>
-          )}
+          {errors.name && <p className="form-error">{errors.name.message}</p>}
         </div>
 
         <div>
-          <label
-            htmlFor="email"
-            className="block text-sm font-medium text-slate-light mb-2"
-          >
+          <label htmlFor="email" className="form-label">
             Email
           </label>
           <input
             id="email"
             type="email"
             {...register('email')}
-            className="w-full px-4 py-3 bg-navy-accent/50 border border-slate-dark/30 rounded-xl text-slate-light placeholder-slate-dark focus:border-blue-accent focus:ring-2 focus:ring-blue-accent/20 focus:outline-none transition-colors duration-200"
+            className="form-input"
             placeholder="your.email@example.com"
           />
-          {errors.email && (
-            <p className="mt-2 text-sm text-red-400">{errors.email.message}</p>
-          )}
+          {errors.email && <p className="form-error">{errors.email.message}</p>}
         </div>
 
         <div>
-          <label
-            htmlFor="confirmEmail"
-            className="block text-sm font-medium text-slate-light mb-2"
-          >
+          <label htmlFor="confirmEmail" className="form-label">
             Confirm Email
           </label>
           <input
             id="confirmEmail"
             type="email"
             {...register('confirmEmail')}
-            className="w-full px-4 py-3 bg-navy-accent/50 border border-slate-dark/30 rounded-xl text-slate-light placeholder-slate-dark focus:border-blue-accent focus:ring-2 focus:ring-blue-accent/20 focus:outline-none transition-colors duration-200"
+            className="form-input"
             placeholder="Confirm your email address"
           />
           {errors.confirmEmail && (
-            <p className="mt-2 text-sm text-red-400">
-              {errors.confirmEmail.message}
-            </p>
+            <p className="form-error">{errors.confirmEmail.message}</p>
           )}
         </div>
 
         <div>
-          <label
-            htmlFor="subject"
-            className="block text-sm font-medium text-slate-light mb-2"
-          >
+          <label htmlFor="subject" className="form-label">
             Subject
           </label>
           <input
             id="subject"
             type="text"
             {...register('subject')}
-            className="w-full px-4 py-3 bg-navy-accent/50 border border-slate-dark/30 rounded-xl text-slate-light placeholder-slate-dark focus:border-blue-accent focus:ring-2 focus:ring-blue-accent/20 focus:outline-none transition-colors duration-200"
+            className="form-input"
             placeholder="What's this about?"
           />
           {errors.subject && (
-            <p className="mt-2 text-sm text-red-400">
-              {errors.subject.message}
-            </p>
+            <p className="form-error">{errors.subject.message}</p>
           )}
         </div>
 
         <div>
-          <label
-            htmlFor="message"
-            className="block text-sm font-medium text-slate-light mb-2"
-          >
+          <label htmlFor="message" className="form-label">
             Message
           </label>
           <textarea
             id="message"
             rows={5}
             {...register('message')}
-            className="w-full px-4 py-3 bg-navy-accent/50 border border-slate-dark/30 rounded-xl text-slate-light placeholder-slate-dark focus:border-blue-accent focus:ring-2 focus:ring-blue-accent/20 focus:outline-none transition-colors duration-200 resize-none"
+            className="form-input resize-none"
             placeholder="Tell me about your project or inquiry..."
           />
           {errors.message && (
-            <p className="mt-2 text-sm text-red-400">
-              {errors.message.message}
-            </p>
+            <p className="form-error">{errors.message.message}</p>
           )}
         </div>
 

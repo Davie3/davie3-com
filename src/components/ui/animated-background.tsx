@@ -60,6 +60,8 @@ export function AnimatedBackground(): JSX.Element {
       variants={containerVariants}
       initial="hidden"
       animate="visible"
+      aria-hidden="true"
+      role="presentation"
     >
       {stars.map((star) => (
         <motion.div

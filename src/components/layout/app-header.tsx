@@ -21,8 +21,15 @@ const ClientMobileNav = dynamic(
 export function AppHeader(): JSX.Element {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 glass app-header-animation">
-      <nav className="container mx-auto flex items-center justify-between p-4">
-        <Link href="/" className="group flex items-center gap-2">
+      <nav
+        className="container mx-auto flex items-center justify-between p-4"
+        aria-label="Main navigation"
+      >
+        <Link
+          href="/"
+          className="group flex items-center gap-2"
+          aria-label="DG - Go to homepage"
+        >
           <div className="w-10 h-10 bg-gradient-to-r from-blue-accent to-purple-accent rounded-xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
             <span className="text-navy font-bold text-lg">DG</span>
           </div>
@@ -33,8 +40,7 @@ export function AppHeader(): JSX.Element {
             {NAV_LINKS.map((link: NavLink, index) => (
               <li
                 key={link.name}
-                className="nav-item"
-                style={{ animationDelay: `${index * 0.1}s` }}
+                className={`nav-item animate-delay-${index + 1}`}
               >
                 <ClientNavLink
                   href={link.href}

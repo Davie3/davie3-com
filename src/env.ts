@@ -11,6 +11,12 @@ const envSchema = z.object({
   NEXT_PUBLIC_TURNSTILE_SITE_KEY: z
     .string()
     .min(1, 'NEXT_PUBLIC_TURNSTILE_SITE_KEY is required.'),
+
+  // Analytics control
+  ENABLE_ANALYTICS: z
+    .string()
+    .optional()
+    .transform((val) => val === 'true'),
 });
 
 export const env = envSchema.parse(process.env);

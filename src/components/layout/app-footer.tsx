@@ -31,7 +31,10 @@ export function AppFooter(): JSX.Element {
       <div className="container mx-auto px-6">
         {/* Social Links */}
         <div className="mb-8 md:hidden">
-          <div className="flex justify-center gap-6">
+          <nav
+            className="flex justify-center gap-6"
+            aria-label="Social media links"
+          >
             {SOCIAL_LINKS_DATA.map((link) => (
               <a
                 key={link.name}
@@ -44,7 +47,7 @@ export function AppFooter(): JSX.Element {
                 {getSocialIcon(link.iconName, 24)}
               </a>
             ))}
-          </div>
+          </nav>
         </div>
 
         {/* Footer Content */}
