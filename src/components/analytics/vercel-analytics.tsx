@@ -6,8 +6,8 @@ import { useEffect, useState } from 'react';
 import type { JSX } from 'react';
 
 /**
- * Vercel Analytics wrapper component with environment gating
- * Only loads in production environment for optimal performance
+ * Vercel Analytics wrapper component
+ * Loads in all environments for testing and monitoring
  */
 export function VercelAnalytics(): JSX.Element {
   const [mounted, setMounted] = useState(false);
@@ -15,11 +15,6 @@ export function VercelAnalytics(): JSX.Element {
   useEffect(() => {
     setMounted(true);
   }, []);
-
-  // Only load analytics in production environment
-  if (process.env.VERCEL_ENV !== 'production') {
-    return <></>;
-  }
 
   if (!mounted) {
     return <></>;

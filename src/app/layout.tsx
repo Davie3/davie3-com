@@ -21,32 +21,30 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <StructuredData pageType="website" />
-        {/* Preconnect hints for analytics domains (production only) */}
-        {process.env.VERCEL_ENV === 'production' && (
-          <>
-            <link
-              rel="preconnect"
-              href="https://static.cloudflareinsights.com"
-              crossOrigin="anonymous"
-            />
-            <link
-              rel="preconnect"
-              href="https://vitals.vercel-insights.com"
-              crossOrigin="anonymous"
-            />
-            <link
-              rel="preconnect"
-              href="https://vitals.vercel-analytics.com"
-              crossOrigin="anonymous"
-            />
-            {/* Speed Insights script preload for mobile */}
-            <link
-              rel="modulepreload"
-              href="/_vercel/speed-insights/script.js"
-              crossOrigin="anonymous"
-            />
-          </>
-        )}
+        {/* Preconnect hints for analytics domains (all environments) */}
+        <>
+          <link
+            rel="preconnect"
+            href="https://static.cloudflareinsights.com"
+            crossOrigin="anonymous"
+          />
+          <link
+            rel="preconnect"
+            href="https://vitals.vercel-insights.com"
+            crossOrigin="anonymous"
+          />
+          <link
+            rel="preconnect"
+            href="https://vitals.vercel-analytics.com"
+            crossOrigin="anonymous"
+          />
+          {/* Speed Insights script preload for mobile */}
+          <link
+            rel="modulepreload"
+            href="/_vercel/speed-insights/script.js"
+            crossOrigin="anonymous"
+          />
+        </>
 
         {/* Speculation rules for internal route prefetching */}
         <script

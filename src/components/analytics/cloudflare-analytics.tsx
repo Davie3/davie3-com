@@ -5,14 +5,9 @@ import type { JSX } from 'react';
 
 /**
  * CloudFlare Web Analytics component
- * Only loads in production environment for optimal performance
+ * Loads in all environments for testing and monitoring
  */
 export function CloudFlareAnalytics(): JSX.Element {
-  // Only load analytics in production environment
-  if (process.env.VERCEL_ENV !== 'production') {
-    return <></>;
-  }
-
   return (
     <Script
       defer

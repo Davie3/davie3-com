@@ -6,6 +6,7 @@ const cspHeader = `
     script-src 'self' 'unsafe-eval' 'unsafe-inline'
         static.cloudflareinsights.com challenges.cloudflare.com *.cloudflare.com
         *.vercel-insights.com *.vercel-analytics.com https://vercel.live *.vercel.app
+        https://www.davie3.com/cdn-cgi/ https://davie3.com/cdn-cgi/
         'wasm-unsafe-eval';
     style-src 'self' 'unsafe-inline'
         https://vercel.live;
