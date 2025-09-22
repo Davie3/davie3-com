@@ -8,7 +8,7 @@ import {
   SKELETON_VARIANTS,
 } from '@/constants/ui-components';
 
-export function Skeleton({
+function Skeleton({
   className = '',
   variant = 'text',
   width,
@@ -56,26 +56,6 @@ export function ProjectCardSkeleton(): JSX.Element {
           <Skeleton variant="text" width="40px" />
         </div>
       </div>
-    </div>
-  );
-}
-
-export function ExperienceCardSkeleton(): JSX.Element {
-  return (
-    <div className="card p-6 md:p-8">
-      <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-4">
-        <div className="flex-1">
-          <Skeleton variant="text" width="70%" height="28px" className="mb-2" />
-          <Skeleton variant="text" width="150px" height="20px" />
-        </div>
-        <Skeleton
-          variant="rectangular"
-          width="120px"
-          height="28px"
-          className="mt-2 md:mt-0"
-        />
-      </div>
-      <Skeleton variant="text" count={3} />
     </div>
   );
 }

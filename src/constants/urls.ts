@@ -4,28 +4,21 @@
  */
 
 /**
- * Site-specific URLs
+ * All external URLs combined for easy access
  */
-export const SITE_URLS = {
+export const EXTERNAL_URLS = {
+  // Site-specific URLs
   MAIN: 'https://davie3.com',
   OG_IMAGE: 'https://davie3.com/images/profile.png',
-} as const;
 
-/**
- * Content creation platform URLs
- */
-export const CONTENT_URLS = {
+  // Content creation platform URLs
   YOUTUBE_MAIN: 'https://www.youtube.com/Davie3TV',
   YOUTUBE_TECH: 'https://www.youtube.com/Davie3Tech',
   YOUTUBE_GAMES: 'https://www.youtube.com/Davie3Games',
   YOUTUBE_VLOG: 'https://www.youtube.com/ItsDavie3',
   TWITCH: 'https://www.twitch.tv/Davie3',
-} as const;
 
-/**
- * Social media platform URLs
- */
-export const SOCIAL_URLS = {
+  // Social media platform URLs
   BLUESKY: 'https://bsky.app/profile/itsdavie3.bsky.social',
   FACEBOOK: 'https://www.facebook.com/Davie3.Griffin',
   GITHUB_PROFILE: 'https://github.com/davie3',
@@ -33,15 +26,6 @@ export const SOCIAL_URLS = {
   LINKEDIN: 'https://www.linkedin.com/in/davie3',
   TWITTER_OLD: 'https://twitter.com/ItsDavie3',
   X_TWITTER: 'https://x.com/itsdavie3',
-} as const;
-
-/**
- * All external URLs combined for easy access
- */
-export const EXTERNAL_URLS = {
-  ...SITE_URLS,
-  ...CONTENT_URLS,
-  ...SOCIAL_URLS,
 } as const;
 
 /**
@@ -57,30 +41,22 @@ export const INTERNAL_ROUTES = {
 } as const;
 
 /**
- * URL collections for different contexts
- */
-export const URL_COLLECTIONS = {
-  SOCIAL: Object.values(SOCIAL_URLS),
-  CONTENT: Object.values(CONTENT_URLS),
-  PROFESSIONAL: [
-    SOCIAL_URLS.X_TWITTER,
-    SOCIAL_URLS.LINKEDIN,
-    SOCIAL_URLS.GITHUB_PROFILE,
-  ],
-} as const;
-
-/**
  * Computed collection of all platform URLs
  */
 export const ALL_PLATFORMS = [
-  ...URL_COLLECTIONS.SOCIAL,
-  ...URL_COLLECTIONS.CONTENT,
-] as const;
+  // Social media platforms
+  EXTERNAL_URLS.BLUESKY,
+  EXTERNAL_URLS.FACEBOOK,
+  EXTERNAL_URLS.GITHUB_PROFILE,
+  EXTERNAL_URLS.INSTAGRAM,
+  EXTERNAL_URLS.LINKEDIN,
+  EXTERNAL_URLS.TWITTER_OLD,
+  EXTERNAL_URLS.X_TWITTER,
 
-/**
- * Extended URL collections including computed values
- */
-export const URL_COLLECTIONS_EXTENDED = {
-  ...URL_COLLECTIONS,
-  ALL_PLATFORMS,
-} as const;
+  // Content creation platforms
+  EXTERNAL_URLS.YOUTUBE_MAIN,
+  EXTERNAL_URLS.YOUTUBE_TECH,
+  EXTERNAL_URLS.YOUTUBE_GAMES,
+  EXTERNAL_URLS.YOUTUBE_VLOG,
+  EXTERNAL_URLS.TWITCH,
+] as const;

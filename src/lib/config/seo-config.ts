@@ -9,31 +9,22 @@ import {
  */
 
 /**
- * Technology keywords for SEO (flattened for search optimization)
+ * Combined keyword arrays for different page types
  */
-export const TECHNOLOGY_KEYWORDS = [
-  ...TECHNOLOGIES.CLOUD,
-  ...TECHNOLOGIES.INFRASTRUCTURE,
-  ...TECHNOLOGIES.IDENTITY,
-  ...TECHNOLOGIES.CDN,
-  ...TECHNOLOGIES.AI,
-  ...TECHNOLOGIES.EMERGING,
-  ...TECHNOLOGIES.DEVELOPMENT,
-] as const;
-
-/**
- * SEO keywords organized by category
- */
-export const SEO_KEYWORDS = {
-  PROFESSIONAL: [
+export const COMBINED_KEYWORDS = {
+  HOME: [
     PERSONAL_INFO.FULL_NAME,
     PROFESSIONAL_TITLES.CURRENT,
     'Twitch',
     ...TECHNOLOGIES.LANGUAGES,
     ...TECHNOLOGIES.FRONTEND,
-  ],
-  TECHNOLOGY: TECHNOLOGY_KEYWORDS,
-  BRANDING: [
+    ...TECHNOLOGIES.CLOUD,
+    ...TECHNOLOGIES.INFRASTRUCTURE,
+    ...TECHNOLOGIES.IDENTITY,
+    ...TECHNOLOGIES.CDN,
+    ...TECHNOLOGIES.AI,
+    ...TECHNOLOGIES.EMERGING,
+    ...TECHNOLOGIES.DEVELOPMENT,
     PERSONAL_INFO.NICKNAME.toLowerCase(),
     PERSONAL_INFO.TWITTER_HANDLE.replace('@', ''),
     'software development',
@@ -41,27 +32,48 @@ export const SEO_KEYWORDS = {
     'modern web development',
     'technical consulting',
   ],
-} as const;
-
-/**
- * Combined keyword arrays for different page types
- */
-export const COMBINED_KEYWORDS = {
-  HOME: [
-    ...SEO_KEYWORDS.PROFESSIONAL,
-    ...SEO_KEYWORDS.TECHNOLOGY,
-    ...SEO_KEYWORDS.BRANDING,
+  ABOUT: [
+    PERSONAL_INFO.FULL_NAME,
+    PROFESSIONAL_TITLES.CURRENT,
+    'Twitch',
+    ...TECHNOLOGIES.LANGUAGES,
+    ...TECHNOLOGIES.FRONTEND,
+    ...TECHNOLOGIES.CLOUD,
+    ...TECHNOLOGIES.INFRASTRUCTURE,
+    ...TECHNOLOGIES.IDENTITY,
+    ...TECHNOLOGIES.CDN,
+    ...TECHNOLOGIES.AI,
+    ...TECHNOLOGIES.EMERGING,
+    ...TECHNOLOGIES.DEVELOPMENT,
   ],
-  ABOUT: [...SEO_KEYWORDS.PROFESSIONAL, ...SEO_KEYWORDS.TECHNOLOGY],
   CONTACT: [
-    ...SEO_KEYWORDS.PROFESSIONAL,
-    ...SEO_KEYWORDS.BRANDING,
+    PERSONAL_INFO.FULL_NAME,
+    PROFESSIONAL_TITLES.CURRENT,
+    'Twitch',
+    ...TECHNOLOGIES.LANGUAGES,
+    ...TECHNOLOGIES.FRONTEND,
+    PERSONAL_INFO.NICKNAME.toLowerCase(),
+    PERSONAL_INFO.TWITTER_HANDLE.replace('@', ''),
+    'software development',
+    'cloud architecture',
+    'modern web development',
+    'technical consulting',
     'collaboration',
     'technical consulting',
   ],
   PORTFOLIO: [
-    ...SEO_KEYWORDS.PROFESSIONAL,
-    ...SEO_KEYWORDS.TECHNOLOGY,
+    PERSONAL_INFO.FULL_NAME,
+    PROFESSIONAL_TITLES.CURRENT,
+    'Twitch',
+    ...TECHNOLOGIES.LANGUAGES,
+    ...TECHNOLOGIES.FRONTEND,
+    ...TECHNOLOGIES.CLOUD,
+    ...TECHNOLOGIES.INFRASTRUCTURE,
+    ...TECHNOLOGIES.IDENTITY,
+    ...TECHNOLOGIES.CDN,
+    ...TECHNOLOGIES.AI,
+    ...TECHNOLOGIES.EMERGING,
+    ...TECHNOLOGIES.DEVELOPMENT,
     'GitHub',
     'open source',
     'projects',
