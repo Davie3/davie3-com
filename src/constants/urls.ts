@@ -76,11 +76,3 @@ export const ALL_PLATFORMS = [
   ...URL_COLLECTIONS.SOCIAL,
   ...URL_COLLECTIONS.CONTENT,
 ] as const;
-
-/**
- * Extended URL collections including computed values
- */
-export const URL_COLLECTIONS_EXTENDED = {
-  ...URL_COLLECTIONS,
-  ALL_PLATFORMS,
-} as const;

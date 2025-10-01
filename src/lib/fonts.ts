@@ -5,14 +5,14 @@ import { Geist, Geist_Mono } from 'next/font/google';
  * Centralized font setup for consistency across the app.
  */
 
-export const geistSans = Geist({
+const geistSans = Geist({
   variable: '--font-geist-sans',
   subsets: ['latin'],
   display: 'swap',
   preload: true,
 });
 
-export const geistMono = Geist_Mono({
+const geistMono = Geist_Mono({
   variable: '--font-geist-mono',
   subsets: ['latin'],
   display: 'swap',
