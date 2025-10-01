@@ -7,16 +7,15 @@ updates:
     open-pull-requests-limit: 10
     versioning-strategy: auto
 
+    labels:
+      - 'dependencies'
+
     groups:
       # Security updates (all dependencies, auto-merge)
       security-updates:
         applies-to: security-updates
         patterns:
           - '*'
-        labels:
-          - 'dependencies'
-          - 'security'
-          - 'automerge'
 
       # React ecosystem (minor/patch only)
       react-minor-patch:
@@ -29,10 +28,6 @@ updates:
           - 'react-dom'
           - '@types/react*'
           - 'react-*'
-        labels:
-          - 'dependencies'
-          - 'react'
-          - 'automerge'
 
       # React major updates
       react-major:
@@ -44,10 +39,6 @@ updates:
           - 'react-dom'
           - '@types/react*'
           - 'react-*'
-        labels:
-          - 'dependencies'
-          - 'react'
-          - 'major'
 
       # Next.js ecosystem (minor/patch only)
       next-minor-patch:
@@ -58,10 +49,6 @@ updates:
         patterns:
           - 'next'
           - 'eslint-config-next'
-        labels:
-          - 'dependencies'
-          - 'next'
-          - 'automerge'
 
       # Next.js major updates
       next-major:
@@ -71,10 +58,6 @@ updates:
         patterns:
           - 'next'
           - 'eslint-config-next'
-        labels:
-          - 'dependencies'
-          - 'next'
-          - 'major'
 
       # Tailwind ecosystem (minor/patch only)
       tailwind-minor-patch:
@@ -86,10 +69,6 @@ updates:
           - 'tailwindcss'
           - '@tailwindcss/*'
           - 'tailwind-*'
-        labels:
-          - 'dependencies'
-          - 'tailwind'
-          - 'automerge'
 
       # Tailwind major updates
       tailwind-major:
@@ -100,10 +79,6 @@ updates:
           - 'tailwindcss'
           - '@tailwindcss/*'
           - 'tailwind-*'
-        labels:
-          - 'dependencies'
-          - 'tailwind'
-          - 'major'
 
       # TypeScript ecosystem (minor/patch only)
       typescript-minor-patch:
@@ -116,10 +91,6 @@ updates:
           - '@types/*'
         exclude-patterns:
           - '@types/react*'
-        labels:
-          - 'dependencies'
-          - 'typescript'
-          - 'automerge'
 
       # TypeScript major updates
       typescript-major:
@@ -131,10 +102,6 @@ updates:
           - '@types/*'
         exclude-patterns:
           - '@types/react*'
-        labels:
-          - 'dependencies'
-          - 'typescript'
-          - 'major'
 
       # All other minor/patch updates
       all-other-minor-patch:
@@ -156,9 +123,6 @@ updates:
           - 'tailwind-*'
           - 'typescript'
           - '@types/*'
-        labels:
-          - 'dependencies'
-          - 'automerge'
 
       # All other major updates
       all-other-major:
@@ -179,9 +143,6 @@ updates:
           - 'tailwind-*'
           - 'typescript'
           - '@types/*'
-        labels:
-          - 'dependencies'
-          - 'major'
 
     # Commit message configuration
     commit-message:

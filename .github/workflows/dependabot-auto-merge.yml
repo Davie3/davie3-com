@@ -14,35 +14,76 @@ jobs:
     runs-on: ubuntu-latest
     if: github.actor == 'dependabot[bot]'
     steps:
-      - name: Check if PR should be auto-merged
+      - name: Fetch Dependabot metadata
+        id: metadata
+        uses: dependabot/fetch-metadata@v2
+        with:
+          github-token: '${{ secrets.GITHUB_TOKEN }}'
+          alert-lookup: true
+          compat-lookup: true
+
+      - name: Determine auto-merge eligibility
         id: check-automerge
         uses: actions/github-script@v7
         with:
           script: |
-            const pr = context.payload.pull_request;
-            const labels = pr.labels.map(label => label.name);
+            const metadata = {
+              updateType: '${{ steps.metadata.outputs.update-type }}',
+              alertState: '${{ steps.metadata.outputs.alert-state }}',
+              compatScore: '${{ steps.metadata.outputs.compatibility-score }}',
+              dependencyGroup: '${{ steps.metadata.outputs.dependency-group }}',
+              dependencyNames: '${{ steps.metadata.outputs.dependency-names }}',
+              previousVersion: '${{ steps.metadata.outputs.previous-version }}',
+              newVersion: '${{ steps.metadata.outputs.new-version }}',
+              packageEcosystem: '${{ steps.metadata.outputs.package-ecosystem }}'
+            };
 
-            // Don't auto-merge major updates (unless they're security updates)
-            if (labels.includes('major') && !labels.includes('security')) {
+            console.log('📊 Metadata:', JSON.stringify(metadata, null, 2));
+
+            // Security updates: auto-merge immediately (any version)
+            if (metadata.alertState && metadata.alertState !== '') {
+              console.log('✅ Security update detected - eligible for auto-merge');
+              core.setOutput('should-merge', 'true');
+              core.setOutput('merge-reason', 'security');
+              return true;
+            }
+
+            // Major updates: require manual review (non-security)
+            if (metadata.updateType === 'version-update:semver-major') {
               console.log('❌ Major update detected (non-security) - skipping auto-merge');
+              core.setOutput('should-merge', 'false');
+              core.setOutput('merge-reason', 'major-version');
               return false;
             }
 
-            // Only auto-merge PRs with 'automerge' label
-            if (!labels.includes('automerge')) {
-              console.log('❌ No automerge label - skipping auto-merge');
-              return false;
+            // Minor/patch updates: check compatibility score
+            if (metadata.updateType === 'version-update:semver-minor' ||
+                metadata.updateType === 'version-update:semver-patch') {
+
+              // Check compatibility score if available
+              if (metadata.compatScore && metadata.compatScore !== '') {
+                const score = parseInt(metadata.compatScore, 10);
+                if (score < 80) {
+                  console.log(`⚠️ Low compatibility score (${score}%) - skipping auto-merge`);
+                  core.setOutput('should-merge', 'false');
+                  core.setOutput('merge-reason', 'low-compatibility');
+                  return false;
+                }
+                console.log(`✅ Minor/patch update with good compatibility (${score}%) - eligible for auto-merge`);
+              } else {
+                console.log('✅ Minor/patch update - eligible for auto-merge');
+              }
+
+              core.setOutput('should-merge', 'true');
+              core.setOutput('merge-reason', 'minor-patch');
+              return true;
             }
 
-            // Log the merge type
-            if (labels.includes('security')) {
-              console.log('✅ Security update - eligible for auto-merge');
-            } else {
-              console.log('✅ Minor/patch update - eligible for auto-merge');
-            }
-
-            core.setOutput('should-merge', 'true');
-            return true;
+            // Unknown update type
+            console.log('❌ Unknown update type - skipping auto-merge');
+            core.setOutput('should-merge', 'false');
+            core.setOutput('merge-reason', 'unknown');
+            return false;
 
       - name: Wait for CI checks
         if: steps.check-automerge.outputs.should-merge == 'true'
@@ -91,22 +132,111 @@ jobs:
               throw error;
             }
 
-      - name: Add success comment
+      - name: Add detailed status comment
         if: steps.check-automerge.outputs.should-merge == 'true'
         uses: actions/github-script@v7
         with:
           script: |
-            const pr = context.payload.pull_request;
-            const labels = pr.labels.map(label => label.name);
+            const metadata = {
+              updateType: '${{ steps.metadata.outputs.update-type }}',
+              alertState: '${{ steps.metadata.outputs.alert-state }}',
+              ghsaId: '${{ steps.metadata.outputs.ghsa-id }}',
+              cvss: '${{ steps.metadata.outputs.cvss }}',
+              compatScore: '${{ steps.metadata.outputs.compatibility-score }}',
+              dependencyGroup: '${{ steps.metadata.outputs.dependency-group }}',
+              dependencyNames: '${{ steps.metadata.outputs.dependency-names }}',
+              previousVersion: '${{ steps.metadata.outputs.previous-version }}',
+              newVersion: '${{ steps.metadata.outputs.new-version }}'
+            };
 
-            let updateType = 'Minor/patch version update';
-            if (labels.includes('security')) {
-              updateType = 'Security update';
+            const mergeReason = '${{ steps.check-automerge.outputs.merge-reason }}';
+
+            let updateTypeLabel = 'Unknown update';
+            let additionalInfo = '';
+
+            if (mergeReason === 'security') {
+              updateTypeLabel = '🔒 Security update';
+              if (metadata.ghsaId) {
+                additionalInfo += `\n- **Advisory:** ${metadata.ghsaId}`;
+              }
+              if (metadata.cvss) {
+                additionalInfo += `\n- **CVSS Score:** ${metadata.cvss}`;
+              }
+            } else if (metadata.updateType === 'version-update:semver-patch') {
+              updateTypeLabel = '🔧 Patch update';
+            } else if (metadata.updateType === 'version-update:semver-minor') {
+              updateTypeLabel = '✨ Minor update';
             }
+
+            if (metadata.compatScore && metadata.compatScore !== '') {
+              additionalInfo += `\n- **Compatibility Score:** ${metadata.compatScore}%`;
+            }
+
+            if (metadata.dependencyGroup && metadata.dependencyGroup !== '') {
+              additionalInfo += `\n- **Dependency Group:** \`${metadata.dependencyGroup}\``;
+            }
+
+            const versionInfo = metadata.previousVersion && metadata.newVersion
+              ? `\n- **Version:** ${metadata.previousVersion} → ${metadata.newVersion}`
+              : '';
+
+            const comment = [
+              '🤖 This PR has been auto-approved and will be merged automatically once all checks pass.',
+              '',
+              '**Auto-merge criteria met:**',
+              `- ✅ ${updateTypeLabel}`,
+              '- ✅ Passed eligibility checks',
+              `- ✅ All CI checks passing${versionInfo}${additionalInfo}`,
+              '',
+              '**Note:** Major updates (except security) require manual review.'
+            ].join('\n');
 
             await github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              issue_number: pr.number,
-              body: `🤖 This PR has been auto-approved and will be merged automatically once all checks pass.\n\n**Auto-merge criteria met:**\n- ✅ ${updateType}\n- ✅ Has \`automerge\` label\n- ✅ All CI checks passing\n\n**Note:** Major updates (except security) require manual review.`
+              issue_number: context.payload.pull_request.number,
+              body: comment
+            });
+
+      - name: Add manual review comment
+        if: steps.check-automerge.outputs.should-merge == 'false'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const metadata = {
+              updateType: '${{ steps.metadata.outputs.update-type }}',
+              dependencyNames: '${{ steps.metadata.outputs.dependency-names }}',
+              previousVersion: '${{ steps.metadata.outputs.previous-version }}',
+              newVersion: '${{ steps.metadata.outputs.new-version }}',
+              compatScore: '${{ steps.metadata.outputs.compatibility-score }}'
+            };
+
+            const mergeReason = '${{ steps.check-automerge.outputs.merge-reason }}';
+
+            let reason = '';
+            if (mergeReason === 'major-version') {
+              reason = 'This is a **major version update** that may contain breaking changes.';
+            } else if (mergeReason === 'low-compatibility') {
+              reason = `This update has a **low compatibility score** (${metadata.compatScore}%).`;
+            } else {
+              reason = 'This update requires manual review.';
+            }
+
+            const versionInfo = metadata.previousVersion && metadata.newVersion
+              ? `\n- **Version:** ${metadata.previousVersion} → ${metadata.newVersion}`
+              : '';
+
+            const comment = [
+              '👀 This PR requires manual review before merging.',
+              '',
+              `**Reason:** ${reason}${versionInfo}`,
+              '',
+              'Please review the changes and merge manually if appropriate.'
+            ].join('\n');
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.payload.pull_request.number,
+              body: comment
             });
