@@ -1,32 +1,144 @@
 version: 2
 updates:
-  # Configuration for npm
   - package-ecosystem: 'npm'
     directory: '/'
     schedule:
       interval: 'weekly'
-    open-pull-requests-limit: 5
+    open-pull-requests-limit: 10
     versioning-strategy: auto
-    # Group updates by framework
+
     groups:
-      # React ecosystem (separate from other packages)
-      react-updates:
+      # Security updates (all dependencies, auto-merge)
+      security-updates:
+        applies-to: security-updates
+        patterns:
+          - '*'
+        labels:
+          - 'dependencies'
+          - 'security'
+          - 'automerge'
+
+      # React ecosystem (minor/patch only)
+      react-minor-patch:
+        applies-to: version-updates
         update-types:
           - 'minor'
           - 'patch'
         patterns:
           - 'react'
-          - 'react-*'
+          - 'react-dom'
           - '@types/react*'
-      # Next.js ecosystem (separate from other packages)
-      nextjs-updates:
+          - 'react-*'
+        labels:
+          - 'dependencies'
+          - 'react'
+          - 'automerge'
+
+      # React major updates
+      react-major:
+        applies-to: version-updates
+        update-types:
+          - 'major'
+        patterns:
+          - 'react'
+          - 'react-dom'
+          - '@types/react*'
+          - 'react-*'
+        labels:
+          - 'dependencies'
+          - 'react'
+          - 'major'
+
+      # Next.js ecosystem (minor/patch only)
+      next-minor-patch:
+        applies-to: version-updates
         update-types:
           - 'minor'
           - 'patch'
         patterns:
           - 'next'
-      # All other minor/patch updates grouped together
-      other-updates:
+          - 'eslint-config-next'
+        labels:
+          - 'dependencies'
+          - 'next'
+          - 'automerge'
+
+      # Next.js major updates
+      next-major:
+        applies-to: version-updates
+        update-types:
+          - 'major'
+        patterns:
+          - 'next'
+          - 'eslint-config-next'
+        labels:
+          - 'dependencies'
+          - 'next'
+          - 'major'
+
+      # Tailwind ecosystem (minor/patch only)
+      tailwind-minor-patch:
+        applies-to: version-updates
+        update-types:
+          - 'minor'
+          - 'patch'
+        patterns:
+          - 'tailwindcss'
+          - '@tailwindcss/*'
+          - 'tailwind-*'
+        labels:
+          - 'dependencies'
+          - 'tailwind'
+          - 'automerge'
+
+      # Tailwind major updates
+      tailwind-major:
+        applies-to: version-updates
+        update-types:
+          - 'major'
+        patterns:
+          - 'tailwindcss'
+          - '@tailwindcss/*'
+          - 'tailwind-*'
+        labels:
+          - 'dependencies'
+          - 'tailwind'
+          - 'major'
+
+      # TypeScript ecosystem (minor/patch only)
+      typescript-minor-patch:
+        applies-to: version-updates
+        update-types:
+          - 'minor'
+          - 'patch'
+        patterns:
+          - 'typescript'
+          - '@types/*'
+        exclude-patterns:
+          - '@types/react*'
+        labels:
+          - 'dependencies'
+          - 'typescript'
+          - 'automerge'
+
+      # TypeScript major updates
+      typescript-major:
+        applies-to: version-updates
+        update-types:
+          - 'major'
+        patterns:
+          - 'typescript'
+          - '@types/*'
+        exclude-patterns:
+          - '@types/react*'
+        labels:
+          - 'dependencies'
+          - 'typescript'
+          - 'major'
+
+      # All other minor/patch updates
+      all-other-minor-patch:
+        applies-to: version-updates
         update-types:
           - 'minor'
           - 'patch'
@@ -34,20 +146,57 @@ updates:
           - '*'
         exclude-patterns:
           - 'react'
-          - 'react-*'
+          - 'react-dom'
           - '@types/react*'
+          - 'react-*'
           - 'next'
-      # Major updates kept separate for careful review
-      major-updates:
+          - 'eslint-config-next'
+          - 'tailwindcss'
+          - '@tailwindcss/*'
+          - 'tailwind-*'
+          - 'typescript'
+          - '@types/*'
+        labels:
+          - 'dependencies'
+          - 'automerge'
+
+      # All other major updates
+      all-other-major:
+        applies-to: version-updates
         update-types:
           - 'major'
         patterns:
           - '*'
-    # Labels to apply to pull requests
-    labels:
-      - 'dependencies'
+        exclude-patterns:
+          - 'react'
+          - 'react-dom'
+          - '@types/react*'
+          - 'react-*'
+          - 'next'
+          - 'eslint-config-next'
+          - 'tailwindcss'
+          - '@tailwindcss/*'
+          - 'tailwind-*'
+          - 'typescript'
+          - '@types/*'
+        labels:
+          - 'dependencies'
+          - 'major'
+
     # Commit message configuration
     commit-message:
       prefix: 'deps'
       prefix-development: 'dev-deps'
       include: 'scope'
+
+  # GitHub Actions updates
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+    labels:
+      - 'dependencies'
+      - 'github-actions'
+      - 'automerge'
+    commit-message:
+      prefix: 'ci'
