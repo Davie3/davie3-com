@@ -1,78 +1,55 @@
 version: 2
 updates:
+  # Configuration for npm
   - package-ecosystem: 'npm'
     directory: '/'
     schedule:
       interval: 'weekly'
-    open-pull-requests-limit: 4
+    open-pull-requests-limit: 5
     versioning-strategy: auto
-
+    # Group updates by framework
     groups:
-      # React ecosystem
+      # React ecosystem (separate from other packages)
       react-updates:
-        update-types: [minor, patch]
+        update-types:
+          - 'minor'
+          - 'patch'
         patterns:
           - 'react'
           - 'react-*'
           - '@types/react*'
-        labels: ['dependencies', 'react']
-        schedule:
-          interval: 'daily'
-
-      # Next.js ecosystem
+      # Next.js ecosystem (separate from other packages)
       nextjs-updates:
-        update-types: [minor, patch]
+        update-types:
+          - 'minor'
+          - 'patch'
         patterns:
           - 'next'
           - 'eslint-config-next'
-        labels: ['dependencies', 'next']
-        schedule:
-          interval: 'daily'
-
-      # Tailwind CSS ecosystem
-      tailwind-updates:
-        update-types: [minor, patch] # Only safe minor/patch updates auto-merge
-        patterns:
-          - 'tailwind*'
-          - 'autoprefixer'
-          - '@tailwindcss/*'
-        labels: ['dependencies', 'tailwind', 'automerge']
-
-      # TypeScript & @types
-      typescript-updates:
-        update-types: [minor, patch] # Only safe minor/patch updates auto-merge
-        patterns:
-          - 'typescript'
-          - '@types/*'
-        labels: ['dependencies', 'typescript', 'automerge']
-
-      # Security updates
-      security-updates:
-        update-types: [security]
-        patterns: ['*']
-        labels: ['dependencies', 'security', 'automerge']
-
-      # All other minor/patch updates
+      # All other minor/patch updates grouped together
       other-updates:
-        update-types: [minor, patch]
-        patterns: ['*']
-        labels: ['dependencies']
-
-      # Major updates (manual review)
+        update-types:
+          - 'minor'
+          - 'patch'
+        patterns:
+          - '*'
+        exclude-patterns:
+          - 'react'
+          - 'react-*'
+          - '@types/react*'
+          - 'next'
+          - 'eslint-config-next'
+      # Major updates kept separate for careful review
       major-updates:
-        update-types: [major]
-        patterns: ['*']
-        labels: ['dependencies', 'major']
-
+        update-types:
+          - 'major'
+        patterns:
+          - '*'
+    # Labels to apply to pull requests
+    labels:
+      - 'dependencies'
     # Commit message configuration
     commit-message:
       prefix: 'deps'
       prefix-development: 'dev-deps'
       include: 'scope'
-
-    # Assign yourself for PR reviews
-    reviewers:
-      - 'davie3'
-
-    # Always create security PRs if applicable
-    security-updates: true
