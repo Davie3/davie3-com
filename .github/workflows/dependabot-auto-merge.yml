@@ -22,6 +22,50 @@ jobs:
           alert-lookup: true
           compat-lookup: true
 
+      - name: Add labels to PR
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const metadata = {
+              updateType: '${{ steps.metadata.outputs.update-type }}',
+              alertState: '${{ steps.metadata.outputs.alert-state }}',
+              dependencyGroup: '${{ steps.metadata.outputs.dependency-group }}',
+              packageEcosystem: '${{ steps.metadata.outputs.package-ecosystem }}'
+            };
+
+            const labels = ['dependencies'];
+
+            // Add ecosystem-specific labels
+            const depGroup = metadata.dependencyGroup || '';
+            if (depGroup.includes('react') || metadata.packageEcosystem === 'npm' && depGroup.match(/react/i)) {
+              labels.push('react');
+            } else if (depGroup.includes('next')) {
+              labels.push('next');
+            } else if (depGroup.includes('tailwind')) {
+              labels.push('tailwind');
+            } else if (depGroup.includes('typescript')) {
+              labels.push('typescript');
+            } else if (metadata.packageEcosystem === 'github-actions') {
+              labels.push('github-actions');
+            }
+
+            // Add update type labels
+            if (metadata.alertState && metadata.alertState !== '') {
+              labels.push('security');
+            }
+            if (metadata.updateType === 'version-update:semver-major') {
+              labels.push('major');
+            }
+
+            console.log('🏷️ Adding labels:', labels);
+
+            await github.rest.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.payload.pull_request.number,
+              labels: labels
+            });
+
       - name: Determine auto-merge eligibility
         id: check-automerge
         uses: actions/github-script@v8
@@ -45,6 +89,15 @@ jobs:
               console.log('✅ Security update detected - eligible for auto-merge');
               core.setOutput('should-merge', 'true');
               core.setOutput('merge-reason', 'security');
+
+              // Add automerge label
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.payload.pull_request.number,
+                labels: ['automerge']
+              });
+
               return true;
             }
 
@@ -74,6 +127,14 @@ jobs:
                 console.log('✅ Minor/patch update - eligible for auto-merge');
               }
 
+              // Add automerge label
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.payload.pull_request.number,
+                labels: ['automerge']
+              });
+
               core.setOutput('should-merge', 'true');
               core.setOutput('merge-reason', 'minor-patch');
               return true;
@@ -87,7 +148,9 @@ jobs:
 
       - name: Wait for CI checks
         if: steps.check-automerge.outputs.should-merge == 'true'
-        uses: lewagon/wait-on-check-action@v1.4.1
+        id: wait-for-checks
+        continue-on-error: true
+        uses: lewagon/wait-on-check-action@v1.3.4
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           repo-token: ${{ secrets.GITHUB_TOKEN }}
@@ -95,15 +158,55 @@ jobs:
           running-workflow-name: 'auto-merge'
           allowed-conclusions: success,skipped
 
+      - name: Handle CI check failures
+        if: steps.check-automerge.outputs.should-merge == 'true' && steps.wait-for-checks.outcome == 'failure'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            // Add review label
+            await github.rest.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.payload.pull_request.number,
+              labels: ['review']
+            });
+
+            // Request review from davie3
+            await github.rest.pulls.requestReviewers({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.payload.pull_request.number,
+              reviewers: ['davie3']
+            });
+
+            // Post failure comment
+            const comment = [
+              '⚠️ CI checks have failed for this Dependabot PR.',
+              '',
+              '**This PR was eligible for auto-merge but CI checks did not pass.**',
+              '',
+              '@davie3 please review the failures. If you approve this PR after fixing/reviewing, it will be automatically merged.'
+            ].join('\n');
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.payload.pull_request.number,
+              body: comment
+            });
+
+            // Exit with error to prevent auto-merge from continuing
+            core.setFailed('CI checks failed - auto-merge blocked');
+
       - name: Auto-approve PR
-        if: steps.check-automerge.outputs.should-merge == 'true'
+        if: steps.check-automerge.outputs.should-merge == 'true' && steps.wait-for-checks.outcome == 'success'
         uses: hmarr/auto-approve-action@v4
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Enable auto-merge with squash
-        if: steps.check-automerge.outputs.should-merge == 'true'
-        uses: actions/github-script@v8
+        if: steps.check-automerge.outputs.should-merge == 'true' && steps.wait-for-checks.outcome == 'success'
+        uses: actions/github-script@v7
         with:
           script: |
             const pr = context.payload.pull_request;
@@ -133,8 +236,8 @@ jobs:
             }
 
       - name: Add detailed status comment
-        if: steps.check-automerge.outputs.should-merge == 'true'
-        uses: actions/github-script@v8
+        if: steps.check-automerge.outputs.should-merge == 'true' && steps.wait-for-checks.outcome == 'success'
+        uses: actions/github-script@v7
         with:
           script: |
             const metadata = {
@@ -198,7 +301,7 @@ jobs:
               body: comment
             });
 
-      - name: Add manual review comment
+      - name: Add manual review comment and request review
         if: steps.check-automerge.outputs.should-merge == 'false'
         uses: actions/github-script@v8
         with:
@@ -231,9 +334,26 @@ jobs:
               '',
               `**Reason:** ${reason}${versionInfo}`,
               '',
-              'Please review the changes and merge manually if appropriate.'
+              '@davie3 please review this update. If approved, the PR will be automatically merged.'
             ].join('\n');
 
+            // Add review label
+            await github.rest.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.payload.pull_request.number,
+              labels: ['review']
+            });
+
+            // Request review from davie3
+            await github.rest.pulls.requestReviewers({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.payload.pull_request.number,
+              reviewers: ['davie3']
+            });
+
+            // Post comment
             await github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
