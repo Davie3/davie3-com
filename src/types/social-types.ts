@@ -1,7 +1,7 @@
 /**
  * Social media related type definitions.
  */
-export type SocialIconName =
+type SocialIconName =
   | 'github'
   | 'linkedin'
   | 'twitch'

@@ -34,28 +34,3 @@ export const isDevelopment =
  */
 export const isPreview =
   process.env.VERCEL_ENV === 'preview' || (!isProduction && !isDevelopment);
-
-/**
- * Get the current environment name
- * Returns a standardized environment string
- */
-export const getEnvironment = (): 'production' | 'development' | 'preview' => {
-  if (isProduction) return 'production';
-  if (isDevelopment) return 'development';
-  return 'preview';
-};
-
-/**
- * Environment information object
- * Useful for debugging and logging
- */
-export const environment = {
-  isProduction,
-  isDevelopment,
-  isPreview,
-  shouldEnableAnalytics,
-  name: getEnvironment(),
-  vercelEnv: process.env.VERCEL_ENV,
-  nodeEnv: process.env.NODE_ENV,
-  enableAnalytics: env.ENABLE_ANALYTICS,
-} as const;

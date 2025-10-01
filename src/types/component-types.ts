@@ -1,5 +1,3 @@
-import type { JSX } from 'react';
-
 /**
  * Component-related type definitions.
  */
@@ -8,31 +6,8 @@ export type ComponentProps = {
   readonly className?: string;
 };
 
-export type PageProps = {
-  readonly params?: Record<string, string>;
-  readonly searchParams?: Record<string, string | string[] | undefined>;
-};
-
 export type LayoutProps = {
   readonly children: React.ReactNode;
-};
-
-export type ComponentWithChildren<T = Record<string, unknown>> = T & {
-  readonly children: React.ReactNode;
-};
-
-export type ComponentReturn = JSX.Element;
-
-/**
- * Error boundary component types
- */
-export type ErrorBoundaryState = {
-  readonly hasError: boolean;
-  readonly error?: Error;
-};
-
-export type ErrorBoundaryProps = ComponentProps & {
-  readonly fallback?: React.ComponentType<{ error?: Error; reset: () => void }>;
 };
 
 /**

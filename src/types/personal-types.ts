@@ -8,15 +8,6 @@ export type Experience = {
   readonly description: string;
 };
 
-export type PersonalInfo = {
-  readonly fullName: string;
-  readonly title: string;
-  readonly description: string;
-  readonly twitterHandle: string;
-};
-
-export type Skill = string;
-
 export type Education = {
   readonly degree: string;
   readonly institution: string;

@@ -25,7 +25,6 @@ updates:
           - 'patch'
         patterns:
           - 'next'
-          - 'eslint-config-next'
       # All other minor/patch updates grouped together
       other-updates:
         update-types:
@@ -38,7 +37,6 @@ updates:
           - 'react-*'
           - '@types/react*'
           - 'next'
-          - 'eslint-config-next'
       # Major updates kept separate for careful review
       major-updates:
         update-types:

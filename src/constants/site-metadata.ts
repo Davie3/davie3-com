@@ -13,5 +13,3 @@ export const PAGE_LAST_MODIFIED = {
   PRIVACY: '2025-09-13',
   CONTACT: '2025-09-01',
 } as const;
-
-export type PageKey = keyof typeof PAGE_LAST_MODIFIED;
