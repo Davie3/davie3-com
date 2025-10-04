@@ -192,38 +192,7 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Enable auto-merge with squash
-        if: steps.check-automerge.outputs.should-merge == 'true' && steps.wait-for-checks.outcome == 'success'
-        uses: actions/github-script@v8
-        with:
-          script: |
-            const pr = context.payload.pull_request;
-
-            try {
-              // Enable auto-merge with squash method
-              await github.rest.pulls.createReview({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                pull_number: pr.number,
-                event: 'APPROVE',
-                body: '✅ Auto-approving safe dependency update'
-              });
-
-              // Post comment to trigger Dependabot merge
-              await github.rest.issues.createComment({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: pr.number,
-                body: '@dependabot squash and merge'
-              });
-
-              console.log('✅ Posted squash and merge command');
-            } catch (error) {
-              console.error('❌ Error:', error);
-              throw error;
-            }
-
-      - name: Add detailed status comment
+      - name: Enable auto-merge and post status
         if: steps.check-automerge.outputs.should-merge == 'true' && steps.wait-for-checks.outcome == 'success'
         uses: actions/github-script@v8
         with:
@@ -267,7 +236,7 @@ jobs:
               : '';
 
             const comment = [
-              '🤖 This PR has been auto-approved and will be merged automatically once all checks pass.',
+              '🤖 Auto-merge enabled with squash method. PR will merge automatically once all checks pass.',
               '',
               '**Auto-merge criteria met:**',
               `- ✅ ${updateTypeLabel}`,
@@ -283,6 +252,12 @@ jobs:
               issue_number: context.payload.pull_request.number,
               body: comment
             });
+
+      - name: Enable auto-merge with squash
+        if: steps.check-automerge.outputs.should-merge == 'true' && steps.wait-for-checks.outcome == 'success'
+        run: gh pr merge --auto --squash ${{ github.event.pull_request.number }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Add manual review comment and request review
         if: steps.check-automerge.outputs.should-merge == 'false'

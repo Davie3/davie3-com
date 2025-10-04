@@ -29,22 +29,22 @@ jobs:
 
             core.setOutput('has-review-label', hasReviewLabel.toString());
 
-      - name: Trigger Dependabot merge
+      - name: Post approval comment
         if: steps.check-label.outputs.has-review-label == 'true'
         uses: actions/github-script@v8
         with:
           script: |
-            const comment = [
-              '✅ Approved by @davie3 - triggering automatic merge.',
-              '',
-              '@dependabot squash and merge'
-            ].join('\n');
-
             await github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: context.payload.pull_request.number,
-              body: comment
+              body: '✅ Approved by @davie3 - enabling auto-merge with squash method.'
             });
 
-            console.log('✅ Posted squash and merge command for davie3-approved PR');
+            console.log('✅ Posted approval comment for davie3-approved PR');
+
+      - name: Enable auto-merge with squash
+        if: steps.check-label.outputs.has-review-label == 'true'
+        run: gh pr merge --auto --squash ${{ github.event.pull_request.number }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
