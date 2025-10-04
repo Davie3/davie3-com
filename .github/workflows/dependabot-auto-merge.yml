@@ -150,7 +150,7 @@ jobs:
         if: steps.check-automerge.outputs.should-merge == 'true'
         id: wait-for-checks
         continue-on-error: true
-        uses: lewagon/wait-on-check-action@v1.3.4
+        uses: lewagon/wait-on-check-action@v1.4.1
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           repo-token: ${{ secrets.GITHUB_TOKEN }}
