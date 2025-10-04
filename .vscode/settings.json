@@ -1,0 +1,6 @@
+{
+  "git.autofetch": true,
+  "git.autofetchPeriod": 180,
+  "git.confirmSync": false,
+  "git.pullBeforeCheckout": true
+}
