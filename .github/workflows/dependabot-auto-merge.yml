@@ -111,9 +111,18 @@ jobs:
               return false;
             }
 
-            // Minor/patch updates: auto-merge (trust semver)
+            // Minor/patch updates: check for .0 releases first
             if (metadata.updateType === 'version-update:semver-minor' ||
                 metadata.updateType === 'version-update:semver-patch') {
+
+              // Check if this is a .0.0 or .x.0 release (initial major/minor)
+              const newVersion = metadata.newVersion || '';
+              if (newVersion.endsWith('.0.0') || newVersion.match(/\.\d+\.0$/)) {
+                console.log(`❌ Initial release detected (${newVersion}) - requires manual review`);
+                core.setOutput('should-merge', 'false');
+                core.setOutput('merge-reason', 'initial-release');
+                return false;
+              }
 
               const updateLabel = metadata.updateType === 'version-update:semver-minor' ? 'Minor' : 'Patch';
               console.log(`✅ ${updateLabel} update detected - eligible for auto-merge (backwards compatible per semver)`);
@@ -279,6 +288,8 @@ jobs:
             let reason = '';
             if (mergeReason === 'major-version') {
               reason = 'This is a **major version update** that may contain breaking changes.';
+            } else if (mergeReason === 'initial-release') {
+              reason = 'This is an **initial release** (`.0` version) that may contain untested changes.';
             } else {
               reason = 'This update requires manual review.';
             }
