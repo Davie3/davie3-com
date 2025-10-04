@@ -23,7 +23,7 @@ jobs:
           compat-lookup: true
 
       - name: Add labels to PR
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           script: |
             const metadata = {
@@ -160,7 +160,7 @@ jobs:
 
       - name: Handle CI check failures
         if: steps.check-automerge.outputs.should-merge == 'true' && steps.wait-for-checks.outcome == 'failure'
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           script: |
             // Add review label
@@ -206,7 +206,7 @@ jobs:
 
       - name: Enable auto-merge with squash
         if: steps.check-automerge.outputs.should-merge == 'true' && steps.wait-for-checks.outcome == 'success'
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           script: |
             const pr = context.payload.pull_request;
@@ -237,7 +237,7 @@ jobs:
 
       - name: Add detailed status comment
         if: steps.check-automerge.outputs.should-merge == 'true' && steps.wait-for-checks.outcome == 'success'
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           script: |
             const metadata = {

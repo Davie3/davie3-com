@@ -18,7 +18,7 @@ jobs:
     steps:
       - name: Check if review label exists
         id: check-label
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           script: |
             const labels = context.payload.pull_request.labels.map(label => label.name);
@@ -31,7 +31,7 @@ jobs:
 
       - name: Trigger Dependabot merge
         if: steps.check-label.outputs.has-review-label == 'true'
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           script: |
             const comment = [
