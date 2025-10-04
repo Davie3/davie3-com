@@ -16,6 +16,9 @@ jobs:
       github.event.pull_request.user.login == 'dependabot[bot]' &&
       github.event.review.user.login == 'davie3'
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - name: Check if review label exists
         id: check-label
         uses: actions/github-script@v8
