@@ -23,7 +23,7 @@ jobs:
           compat-lookup: true
 
       - name: Add labels to PR
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           script: |
             const metadata = {
@@ -74,7 +74,6 @@ jobs:
             const metadata = {
               updateType: '${{ steps.metadata.outputs.update-type }}',
               alertState: '${{ steps.metadata.outputs.alert-state }}',
-              compatScore: '${{ steps.metadata.outputs.compatibility-score }}',
               dependencyGroup: '${{ steps.metadata.outputs.dependency-group }}',
               dependencyNames: '${{ steps.metadata.outputs.dependency-names }}',
               previousVersion: '${{ steps.metadata.outputs.previous-version }}',
@@ -103,29 +102,18 @@ jobs:
 
             // Major updates: require manual review (non-security)
             if (metadata.updateType === 'version-update:semver-major') {
-              console.log('❌ Major update detected (non-security) - skipping auto-merge');
+              console.log('❌ Major update detected (non-security) - requires manual review');
               core.setOutput('should-merge', 'false');
               core.setOutput('merge-reason', 'major-version');
               return false;
             }
 
-            // Minor/patch updates: check compatibility score
+            // Minor/patch updates: auto-merge (trust semver)
             if (metadata.updateType === 'version-update:semver-minor' ||
                 metadata.updateType === 'version-update:semver-patch') {
 
-              // Check compatibility score if available
-              if (metadata.compatScore && metadata.compatScore !== '') {
-                const score = parseInt(metadata.compatScore, 10);
-                if (score < 80) {
-                  console.log(`⚠️ Low compatibility score (${score}%) - skipping auto-merge`);
-                  core.setOutput('should-merge', 'false');
-                  core.setOutput('merge-reason', 'low-compatibility');
-                  return false;
-                }
-                console.log(`✅ Minor/patch update with good compatibility (${score}%) - eligible for auto-merge`);
-              } else {
-                console.log('✅ Minor/patch update - eligible for auto-merge');
-              }
+              const updateLabel = metadata.updateType === 'version-update:semver-minor' ? 'Minor' : 'Patch';
+              console.log(`✅ ${updateLabel} update detected - eligible for auto-merge (backwards compatible per semver)`);
 
               // Add automerge label
               await github.rest.issues.addLabels({
@@ -141,7 +129,7 @@ jobs:
             }
 
             // Unknown update type
-            console.log('❌ Unknown update type - skipping auto-merge');
+            console.log('❌ Unknown update type - requires manual review');
             core.setOutput('should-merge', 'false');
             core.setOutput('merge-reason', 'unknown');
             return false;
@@ -160,7 +148,7 @@ jobs:
 
       - name: Handle CI check failures
         if: steps.check-automerge.outputs.should-merge == 'true' && steps.wait-for-checks.outcome == 'failure'
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           script: |
             // Add review label
@@ -206,7 +194,7 @@ jobs:
 
       - name: Enable auto-merge with squash
         if: steps.check-automerge.outputs.should-merge == 'true' && steps.wait-for-checks.outcome == 'success'
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           script: |
             const pr = context.payload.pull_request;
@@ -237,7 +225,7 @@ jobs:
 
       - name: Add detailed status comment
         if: steps.check-automerge.outputs.should-merge == 'true' && steps.wait-for-checks.outcome == 'success'
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           script: |
             const metadata = {
@@ -245,7 +233,6 @@ jobs:
               alertState: '${{ steps.metadata.outputs.alert-state }}',
               ghsaId: '${{ steps.metadata.outputs.ghsa-id }}',
               cvss: '${{ steps.metadata.outputs.cvss }}',
-              compatScore: '${{ steps.metadata.outputs.compatibility-score }}',
               dependencyGroup: '${{ steps.metadata.outputs.dependency-group }}',
               dependencyNames: '${{ steps.metadata.outputs.dependency-names }}',
               previousVersion: '${{ steps.metadata.outputs.previous-version }}',
@@ -266,13 +253,9 @@ jobs:
                 additionalInfo += `\n- **CVSS Score:** ${metadata.cvss}`;
               }
             } else if (metadata.updateType === 'version-update:semver-patch') {
-              updateTypeLabel = '🔧 Patch update';
+              updateTypeLabel = '🔧 Patch update (backwards compatible)';
             } else if (metadata.updateType === 'version-update:semver-minor') {
-              updateTypeLabel = '✨ Minor update';
-            }
-
-            if (metadata.compatScore && metadata.compatScore !== '') {
-              additionalInfo += `\n- **Compatibility Score:** ${metadata.compatScore}%`;
+              updateTypeLabel = '✨ Minor update (backwards compatible)';
             }
 
             if (metadata.dependencyGroup && metadata.dependencyGroup !== '') {
@@ -288,8 +271,8 @@ jobs:
               '',
               '**Auto-merge criteria met:**',
               `- ✅ ${updateTypeLabel}`,
-              '- ✅ Passed eligibility checks',
-              `- ✅ All CI checks passing${versionInfo}${additionalInfo}`,
+              '- ✅ All CI checks passing',
+              `- ✅ Trusted per semantic versioning${versionInfo}${additionalInfo}`,
               '',
               '**Note:** Major updates (except security) require manual review.'
             ].join('\n');
@@ -310,8 +293,7 @@ jobs:
               updateType: '${{ steps.metadata.outputs.update-type }}',
               dependencyNames: '${{ steps.metadata.outputs.dependency-names }}',
               previousVersion: '${{ steps.metadata.outputs.previous-version }}',
-              newVersion: '${{ steps.metadata.outputs.new-version }}',
-              compatScore: '${{ steps.metadata.outputs.compatibility-score }}'
+              newVersion: '${{ steps.metadata.outputs.new-version }}'
             };
 
             const mergeReason = '${{ steps.check-automerge.outputs.merge-reason }}';
@@ -319,8 +301,6 @@ jobs:
             let reason = '';
             if (mergeReason === 'major-version') {
               reason = 'This is a **major version update** that may contain breaking changes.';
-            } else if (mergeReason === 'low-compatibility') {
-              reason = `This update has a **low compatibility score** (${metadata.compatScore}%).`;
             } else {
               reason = 'This update requires manual review.';
             }
