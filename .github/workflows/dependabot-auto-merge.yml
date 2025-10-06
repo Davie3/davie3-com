@@ -17,7 +17,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v5
 
+      - name: Check if already approved
+        id: check-approval
+        run: |
+          REVIEW_DECISION=$(gh pr view ${{ github.event.pull_request.number }} --json reviewDecision -q '.reviewDecision')
+          echo "review-decision=$REVIEW_DECISION" >> $GITHUB_OUTPUT
+          echo "PR review decision: $REVIEW_DECISION"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Fetch Dependabot metadata
+        if: steps.check-approval.outputs.review-decision != 'APPROVED'
         id: metadata
         uses: dependabot/fetch-metadata@v2
         with:
@@ -26,6 +36,7 @@ jobs:
           compat-lookup: true
 
       - name: Add labels to PR
+        if: steps.check-approval.outputs.review-decision != 'APPROVED'
         uses: actions/github-script@v8
         with:
           script: |
@@ -70,6 +81,7 @@ jobs:
             });
 
       - name: Determine auto-merge eligibility
+        if: steps.check-approval.outputs.review-decision != 'APPROVED'
         id: check-automerge
         uses: actions/github-script@v8
         with:
@@ -147,7 +159,7 @@ jobs:
             return false;
 
       - name: Wait for CI checks
-        if: steps.check-automerge.outputs.should-merge == 'true'
+        if: steps.check-approval.outputs.review-decision != 'APPROVED' && steps.check-automerge.outputs.should-merge == 'true'
         id: wait-for-checks
         continue-on-error: true
         uses: lewagon/wait-on-check-action@v1.4.1
@@ -159,7 +171,7 @@ jobs:
           allowed-conclusions: success,skipped
 
       - name: Handle CI check failures
-        if: steps.check-automerge.outputs.should-merge == 'true' && steps.wait-for-checks.outcome == 'failure'
+        if: steps.check-approval.outputs.review-decision != 'APPROVED' && steps.check-automerge.outputs.should-merge == 'true' && steps.wait-for-checks.outcome == 'failure'
         uses: actions/github-script@v8
         with:
           script: |
@@ -199,13 +211,13 @@ jobs:
             core.setFailed('CI checks failed - auto-merge blocked');
 
       - name: Auto-approve PR
-        if: steps.check-automerge.outputs.should-merge == 'true' && steps.wait-for-checks.outcome == 'success'
+        if: steps.check-approval.outputs.review-decision != 'APPROVED' && steps.check-automerge.outputs.should-merge == 'true' && steps.wait-for-checks.outcome == 'success'
         uses: hmarr/auto-approve-action@v4
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Enable auto-merge and post status
-        if: steps.check-automerge.outputs.should-merge == 'true' && steps.wait-for-checks.outcome == 'success'
+        if: steps.check-approval.outputs.review-decision != 'APPROVED' && steps.check-automerge.outputs.should-merge == 'true' && steps.wait-for-checks.outcome == 'success'
         uses: actions/github-script@v8
         with:
           script: |
@@ -266,13 +278,13 @@ jobs:
             });
 
       - name: Enable auto-merge with squash
-        if: steps.check-automerge.outputs.should-merge == 'true' && steps.wait-for-checks.outcome == 'success'
+        if: steps.check-approval.outputs.review-decision != 'APPROVED' && steps.check-automerge.outputs.should-merge == 'true' && steps.wait-for-checks.outcome == 'success'
         run: gh pr merge --auto --squash ${{ github.event.pull_request.number }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Update branch if behind
-        if: steps.check-automerge.outputs.should-merge == 'true' && steps.wait-for-checks.outcome == 'success'
+        if: steps.check-approval.outputs.review-decision != 'APPROVED' && steps.check-automerge.outputs.should-merge == 'true' && steps.wait-for-checks.outcome == 'success'
         continue-on-error: true
         run: |
           MERGE_STATE=$(gh pr view ${{ github.event.pull_request.number }} --json mergeStateStatus -q '.mergeStateStatus')
@@ -286,7 +298,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Add manual review comment and request review
-        if: steps.check-automerge.outputs.should-merge == 'false'
+        if: steps.check-approval.outputs.review-decision != 'APPROVED' && steps.check-automerge.outputs.should-merge == 'false'
         uses: actions/github-script@v8
         with:
           script: |
