@@ -41,7 +41,7 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: context.payload.pull_request.number,
-              body: '✅ Approved by @davie3 - enabling auto-merge with squash method.'
+              body: '✅ Approved - enabling auto-merge with squash method.'
             });
 
             console.log('✅ Posted approval comment for davie3-approved PR');
@@ -49,5 +49,19 @@ jobs:
       - name: Enable auto-merge with squash
         if: steps.check-label.outputs.has-review-label == 'true'
         run: gh pr merge --auto --squash ${{ github.event.pull_request.number }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Update branch if behind
+        if: steps.check-label.outputs.has-review-label == 'true'
+        continue-on-error: true
+        run: |
+          MERGE_STATE=$(gh pr view ${{ github.event.pull_request.number }} --json mergeStateStatus -q '.mergeStateStatus')
+          if [ "$MERGE_STATE" = "BEHIND" ]; then
+            echo "PR is behind base branch - updating..."
+            gh api repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/update-branch -X PUT
+          else
+            echo "PR is up to date (state: $MERGE_STATE)"
+          fi
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

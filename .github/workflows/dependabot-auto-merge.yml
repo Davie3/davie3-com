@@ -185,7 +185,7 @@ jobs:
               '',
               '**This PR was eligible for auto-merge but CI checks did not pass.**',
               '',
-              '@davie3 please review the failures. If you approve this PR after fixing/reviewing, it will be automatically merged.'
+              'Please review the failures. If you approve this PR after fixing/reviewing, it will be automatically merged.'
             ].join('\n');
 
             await github.rest.issues.createComment({
@@ -271,6 +271,20 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Update branch if behind
+        if: steps.check-automerge.outputs.should-merge == 'true' && steps.wait-for-checks.outcome == 'success'
+        continue-on-error: true
+        run: |
+          MERGE_STATE=$(gh pr view ${{ github.event.pull_request.number }} --json mergeStateStatus -q '.mergeStateStatus')
+          if [ "$MERGE_STATE" = "BEHIND" ]; then
+            echo "PR is behind base branch - updating..."
+            gh api repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/update-branch -X PUT
+          else
+            echo "PR is up to date (state: $MERGE_STATE)"
+          fi
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Add manual review comment and request review
         if: steps.check-automerge.outputs.should-merge == 'false'
         uses: actions/github-script@v8
@@ -303,7 +317,7 @@ jobs:
               '',
               `**Reason:** ${reason}${versionInfo}`,
               '',
-              '@davie3 please review this update. If approved, the PR will be automatically merged.'
+              'Please review this update. If approved, the PR will be automatically merged.'
             ].join('\n');
 
             // Add review label
