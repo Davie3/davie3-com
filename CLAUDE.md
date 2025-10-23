@@ -2,6 +2,116 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+> 🧭 **Core principle:**
+> Claude is the planner — Zen is the thinker.
+
+Claude’s role is to:
+
+1. Outline and refine plans.
+2. Hand off “thinking” or execution steps to Zen via MCP.
+3. Maintain short, efficient memory using Sequential Thinking.
+
+---
+
+## 🔌 Required MCP Servers
+
+| Server                           | Package                                            | Purpose                                                                       |
+| -------------------------------- | -------------------------------------------------- | ----------------------------------------------------------------------------- |
+| **`server-sequential-thinking`** | `@modelcontextprotocol/server-sequential-thinking` | Keeps stepwise memory compact and outside Claude’s token window.              |
+| **`server-zen`**                 | `@beehiveinnovations/zen-mcp-server`               | Executes deep reasoning, code reviews, or heavy analysis delegated by Claude. |
+
+---
+
+## ⚙️ Setup
+
+```
+npm install \
+  @modelcontextprotocol/server-sequential-thinking \
+  @beehiveinnovations/zen-mcp-server
+```
+
+Claude should **verify** both servers are registered before continuing.
+If not, return an MCP setup message with instructions.
+
+---
+
+## 🧠 Operating Rules
+
+### 1. Planning vs. Thinking
+
+- **Claude (Planner):**
+  - Breaks tasks into clear, executable steps.
+  - Keeps context lightweight.
+  - Calls Zen for any step requiring long reasoning, code search, or analysis.
+
+- **Zen (Thinker):**
+  - Performs the reasoning behind Claude’s plan.
+  - Can run tools, evaluate code, or conduct deep multi-step thought.
+  - Returns concise, actionable results for Claude to integrate.
+
+Claude should always:
+
+> Plan → Send to Zen → Review → Integrate results.
+
+---
+
+### 2. Sequential Thinking Usage
+
+- Use the **Sequential Thinking MCP** to:
+  - Log plans and reasoning steps incrementally.
+  - Retrieve or update only what’s needed for the next step.
+  - Avoid repeating entire context in prompts.
+
+This keeps token usage minimal and reasoning traceable.
+
+---
+
+### 3. Delegation Guidelines
+
+| Task Type                                 | Who Handles It      | Notes                             |
+| ----------------------------------------- | ------------------- | --------------------------------- |
+| High-level planning, summaries            | Claude              | Short reasoning, minimal context. |
+| Deep analysis, code evaluation, debugging | Zen                 | Automatically offload to Zen.     |
+| Multi-step reasoning chains               | Zen                 | Zen executes, Claude reviews.     |
+| Context recall / step continuity          | Sequential Thinking | Keeps context compact.            |
+
+---
+
+### 4. Example Flow
+
+```
+User: Optimize this function.
+
+Claude: (plan)
+1. Analyze performance issues.
+2. Ask Zen to benchmark alternatives.
+3. Integrate Zen’s findings and rewrite function.
+
+Claude → Zen: “Think deeply about this function’s complexity.”
+Zen → Claude: Returns optimized solution.
+Claude: Integrates and summarizes final output.
+```
+
+---
+
+### 5. Behavior Summary
+
+✅ Claude focuses on **short, strategic prompts**.
+✅ Zen handles **thinking-heavy** or **context-expensive** operations.
+✅ Sequential Thinking ensures **long-running memory efficiency**.
+✅ Never duplicate large context or file contents unless necessary.
+
+---
+
+### 6. Fallback
+
+If Zen or Sequential Thinking MCPs are unavailable:
+
+- Run only minimal reasoning locally.
+- Notify the user that deeper “thinking” delegation requires the missing MCP.
+
+# Project Specific
+
 ## Response Guidelines
 
 **Optimize for low token usage while maintaining quality:**
@@ -85,13 +195,17 @@ npm run fix               # Run format + lint --fix
 ### Type System Organization
 
 - **src/types/**: Centralized type definitions
-  - `api-types.ts` - GitHub API, ApiError structures
-  - `component-types.ts` - Component props
+  - `api-types.ts` - GitHub API response types, Zod schemas
+  - `component-types.ts` - Component prop types
+  - `config-types.ts` - Configuration object types
+  - `email-types.ts` - Email template types
   - `form-types.ts` - Form validation types
-  - `personal-types.ts` - Domain-specific types
+  - `personal-types.ts` - Domain-specific types (Experience, Skill, etc.)
   - `social-types.ts` - Social media types
+  - `url-types.ts` - URL mapping types
 - Types are separate from implementation
 - Prefer `type` over `interface` per coding standards
+- All types should be `readonly` where appropriate
 
 ### Constants Organization
 
@@ -99,69 +213,81 @@ npm run fix               # Run format + lint --fix
 - Use UPPER_SNAKE_CASE naming
 - Apply `as const` for immutability
 - Constants reference each other to avoid duplication
-- Organized by domain (urls, social, personal, forms, github, metadata)
+- Organized by domain:
+  - `urls.ts` - External URLs and internal routes
+  - `site-metadata.ts` - Site metadata for SEO
+  - `shared.ts` - Shared constants across pages
+  - `about-page.ts` - About page specific constants
+  - `ui-components.ts` - UI component constants
+- Extract constants to separate files when >3 constants per component
 
 ### Component Organization
 
 Components follow strict structure:
 
-1. Type imports with `type` keyword
-2. Internal constants (or extract if >3)
-3. Component props type definition
-4. Framer Motion variants (if animated)
-5. Component function
+1. `'use client'` directive (only when needed)
+2. React and Next.js imports
+3. Third-party library imports
+4. Internal utilities and hooks
+5. Components
+6. Type imports (with `type` keyword)
+7. Constants (extract to separate file if >3 constants)
+8. Component props type definition
+9. Framer Motion variants (if animated)
+10. Component function
 
 Component categories:
 
-- **src/components/layout/**: Header, footer, navigation, sidebars
-- **src/components/ui/**: Reusable UI components (buttons, backgrounds, loading)
-- **src/components/forms/**: Form components with validation
-- **src/components/analytics/**: Analytics integration
-- **src/components/seo/**: Structured data, metadata
+- **src/components/layout/**: Header, footer, navigation, sidebars (app-header, app-footer, nav-link, left-sidebar, right-sidebar, client-mobile-nav)
+- **src/components/ui/**: Reusable UI components (animated-background, turnstile-widget, loading-skeleton, page-wrapper, client-layout)
+- **src/components/forms/**: Form components with validation (contact-form)
+- **src/components/analytics/**: Analytics integration (vercel-analytics, cloudflare-analytics)
+- **src/components/seo/**: Structured data, metadata (structured-data)
 
 ### Styling System
 
 - Tailwind CSS 4 with custom color system via CSS variables
 - Variables defined in src/app/globals.css
-- Use `var(--color-*)` for theme colors
-- Custom animations defined in tailwind.config.ts
-- Framer Motion for component animations
-- Glass morphism effects with backdrop blur utilities
+- Use semantic color names from Tailwind config (background, foreground, accent, navy, slate-light, etc.)
+- Glass morphism effects via `.glass` utility class (backdrop-blur + bg-opacity)
+- Custom animations defined in tailwind.config.ts (fade-in-up, slide-in-top, slide-in-right, slide-out-right)
+- Framer Motion for interactive component animations
+- Use `cn()` utility from class-utils.ts for conditional class merging
 
-### API Client Pattern
+### API Integration Pattern
 
-- Centralized in src/lib/api-client.ts
-- Standardized error handling via `handleApiError()`
-- GitHub repo fetching with ISR (revalidation)
-- Generic `apiClient<T>()` wrapper for type-safe fetches
+- GitHub API integration in src/app/portfolio/page.tsx
+- Direct fetch with Next.js ISR (Incremental Static Regeneration)
+- Zod schema validation via GITHUB_REPO_SCHEMA
+- Revalidation interval configured in github-config.ts (3600s = 1 hour)
+- Error handling returns empty array on failure (graceful degradation)
 
 ### Utility Organization (src/lib/utils/)
 
-- `async-utils.ts` - Async helpers
-- `class-utils.ts` - Tailwind class utilities (cn)
-- `date-utils.ts` - Date formatting
-- `email-template.ts` - Email template generation
-- `environment.ts` - Environment detection
-- `string-utils.ts` - String manipulation
-- `validation-utils.ts` - Validation helpers
+- `class-utils.ts` - Tailwind class utilities (cn function using clsx + tailwind-merge)
+- `date-utils.ts` - Date formatting utilities
+- `email-template.ts` - Email template generation (HTML + plain text)
+- `environment.ts` - Environment detection helpers
 
 ### File Naming Conventions
 
 - **Always use kebab-case**: component-name.tsx, utility-name.ts
-- Component files: descriptive names (animated-background.tsx)
+- Component files: descriptive names (animated-background.tsx, contact-form.tsx)
 - No index.ts barrel exports in components
-- Configuration files end with -config.ts
-- Type files end with -types.ts
-- Utility files end with -utils.ts
+- Configuration files end with -config.ts (in src/lib/config/)
+- Type files end with -types.ts (in src/types/)
+- Utility files end with -utils.ts (in src/lib/utils/)
+- Page files: page.tsx, layout.tsx, loading.tsx, error.tsx, not-found.tsx
 
 ### TypeScript Standards
 
 - Use `type` over `interface` (except when extensibility required)
 - Always declare function parameter and return types
 - Avoid `any` - use `unknown` or proper typing
-- Zod for runtime validation (env, forms, API)
+- Zod for runtime validation (env, forms, API responses)
 - Export inferred types: `z.infer<typeof schema>`
 - Import types with `type` keyword: `import type { Foo } from 'bar'`
+- Use RO-RO pattern (Receive Object, Return Object) for functions with multiple parameters
 
 ### Import Order
 
@@ -174,10 +300,12 @@ Component categories:
 
 ### Animation Patterns
 
-- Framer Motion variants defined as constants
-- Use ANIMATION_DURATIONS constants
+- Framer Motion variants defined as constants before component
+- Animation configurations in src/lib/config/animation-config.ts
+- Custom Tailwind animations defined in tailwind.config.ts
 - Prefer declarative animations over imperative
-- AnimatedBackground component uses Web Animations API for stars
+- AnimatedBackground component uses Web Animations API for star field effect
+- Use staggered animations for list items via `animationDelay` inline styles
 
 ### Deployment Configuration
 
