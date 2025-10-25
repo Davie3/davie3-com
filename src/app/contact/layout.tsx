@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { PAGE_METADATA } from '@/lib/config/site-metadata';
+import { PAGE_METADATA } from '@/constants/config/site-metadata';
 
 export const metadata: Metadata = PAGE_METADATA.CONTACT;
 

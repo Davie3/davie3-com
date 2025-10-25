@@ -1,8 +1,8 @@
 'use client';
 
 import { useEffect, useState, type JSX } from 'react';
+import { SOCIAL_LINKS_DATA } from '../../constants/config/social-config';
 import { FOOTER_CONFIG } from '../../constants/ui-components';
-import { SOCIAL_LINKS_DATA } from '../../lib/config/social-config';
 import { getSocialIcon } from '../../utils/social-icons';
 
 export function AppFooter(): JSX.Element {

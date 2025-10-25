@@ -6,7 +6,7 @@ import {
   STAR_CONFIG,
   ANIMATION_DURATIONS,
   type Star,
-} from '../../lib/config/animation-config';
+} from '../../constants/config/animation-config';
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },

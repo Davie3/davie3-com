@@ -2,9 +2,9 @@ import { GitFork, Star, ArrowRight } from 'lucide-react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import type { JSX } from 'react';
+import { GITHUB_CONFIG } from '@/constants/config/github-config';
+import { PAGE_METADATA } from '@/constants/config/site-metadata';
 import { PAGE_DESCRIPTIONS } from '@/constants/shared';
-import { GITHUB_CONFIG } from '@/lib/config/github-config';
-import { PAGE_METADATA } from '@/lib/config/site-metadata';
 import { GITHUB_REPO_SCHEMA } from '@/types/api-types';
 import type { GitHubRepo } from '@/types/api-types';
 

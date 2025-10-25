@@ -2,8 +2,8 @@ import { Mail } from 'lucide-react';
 import type { Metadata } from 'next';
 import type { JSX } from 'react';
 import ContactForm from '@/components/forms/contact-form';
+import { PAGE_METADATA } from '@/constants/config/site-metadata';
 import { PAGE_DESCRIPTIONS } from '@/constants/shared';
-import { PAGE_METADATA } from '@/lib/config/site-metadata';
 
 export const metadata: Metadata = PAGE_METADATA.CONTACT;
 

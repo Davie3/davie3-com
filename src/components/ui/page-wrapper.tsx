@@ -3,16 +3,11 @@
 import { motion } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 import type { ReactNode, JSX } from 'react';
-import { ANIMATION_DURATIONS } from '../../lib/config/animation-config';
+import { PAGE_ANIMATION } from '../../constants/config/animation-config';
 
 interface PageWrapperProps {
   children: ReactNode;
 }
-
-const PAGE_ANIMATION = {
-  DURATION: ANIMATION_DURATIONS.NORMAL,
-  Y_OFFSET: 10,
-} as const;
 
 export function PageWrapper({ children }: PageWrapperProps): JSX.Element {
   const pathname = usePathname();

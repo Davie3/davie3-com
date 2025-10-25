@@ -2,7 +2,10 @@ import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import type { JSX } from 'react';
 import { Suspense } from 'react';
-import { NAV_LINKS, type NavLink } from '../../lib/config/navigation-config';
+import {
+  NAV_LINKS,
+  type NavLink,
+} from '../../constants/config/navigation-config';
 import { NavLink as ClientNavLink } from './nav-link';
 
 const ClientMobileNav = dynamic(

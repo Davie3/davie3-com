@@ -7,8 +7,8 @@ import {
   ABOUT_CONTENT,
   SKILLS,
 } from '@/constants/about-page';
-import { PAGE_METADATA } from '@/lib/config/site-metadata';
-import { SOCIAL_LINKS_DATA } from '@/lib/config/social-config';
+import { PAGE_METADATA } from '@/constants/config/site-metadata';
+import { SOCIAL_LINKS_DATA } from '@/constants/config/social-config';
 import { getSocialIcon } from '@/utils/social-icons';
 
 export const metadata: Metadata = PAGE_METADATA.ABOUT;

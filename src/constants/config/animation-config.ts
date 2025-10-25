@@ -1,12 +1,6 @@
-export interface Star {
-  id: number;
-  x: number;
-  y: number;
-  size: number;
-  opacity: number;
-  color: string;
-  gradientStop: number;
-}
+import type { Star } from '@/types/config-types';
+
+export type { Star };
 
 export const ANIMATION_DURATIONS = {
   FAST: 0.2,
@@ -23,4 +17,9 @@ export const STAR_CONFIG = {
   TWINKLE_DURATION: { MIN: 2, MAX: 4 },
   TWINKLE_DELAY: { MIN: 0.5, MAX: 3.5 },
   STAGGER_DELAY: 0.01,
+} as const;
+
+export const PAGE_ANIMATION = {
+  DURATION: ANIMATION_DURATIONS.NORMAL,
+  Y_OFFSET: 10,
 } as const;

@@ -1,8 +1,6 @@
-export interface NavLink {
-  name: string;
-  href: string;
-  openInNewTab?: boolean;
-}
+import type { NavLink } from '@/types/config-types';
+
+export type { NavLink };
 
 export const NAV_LINKS: NavLink[] = [
   { name: 'Home', href: '/' },
