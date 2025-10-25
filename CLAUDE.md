@@ -124,7 +124,7 @@ If Zen or Sequential Thinking MCPs are unavailable:
 
 ## Project Overview
 
-Next.js 15 personal website using TypeScript, React 19, Tailwind CSS 4, and Framer Motion. Deployed on Vercel with Cloudflare CDN and security features.
+Next.js 16 personal website using TypeScript, React 19, Tailwind CSS 4, and Framer Motion. Deployed on Vercel with Cloudflare CDN and security features.
 
 ## Common Commands
 
