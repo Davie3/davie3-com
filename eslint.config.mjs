@@ -15,4 +15,10 @@ export default [
   },
   ...next,
   prettier,
+  {
+    files: ['**/*.ts', '**/*.tsx'],
+    rules: {
+      '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
+    },
+  },
 ];

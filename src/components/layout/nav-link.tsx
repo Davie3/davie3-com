@@ -4,13 +4,13 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import type { JSX } from 'react';
 
-interface NavLinkProps {
+type NavLinkProps = {
   href: string;
   children: React.ReactNode;
   target?: string;
   rel?: string;
   className?: string;
-}
+};
 
 export function NavLink({
   href,

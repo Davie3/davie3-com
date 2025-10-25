@@ -3,10 +3,10 @@
 import { AlertCircle, RefreshCw } from 'lucide-react';
 import type { JSX } from 'react';
 
-interface ErrorProps {
+type ErrorProps = {
   error: Error & { digest?: string };
   reset: () => void;
-}
+};
 
 /**
  * Error boundary component for the portfolio page.

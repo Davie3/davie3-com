@@ -9,8 +9,8 @@ type SocialIconName =
   | 'instagram'
   | 'bluesky';
 
-export interface SocialLinkData {
+export type SocialLinkData = {
   readonly name: string;
   readonly href: string;
   readonly iconName: SocialIconName;
-}
+};

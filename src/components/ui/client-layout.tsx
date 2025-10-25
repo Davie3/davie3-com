@@ -8,9 +8,9 @@ import { RightSidebar } from '@/components/layout/right-sidebar';
 import { AnimatedBackground } from '@/components/ui/animated-background';
 import { PageWrapper } from '@/components/ui/page-wrapper';
 
-interface ClientLayoutProps {
+type ClientLayoutProps = {
   children: ReactNode;
-}
+};
 
 export function ClientLayout({ children }: ClientLayoutProps): JSX.Element {
   return (

@@ -1,14 +1,14 @@
 /**
  * Component-related type definitions.
  */
-export interface ComponentProps {
+export type ComponentProps = {
   readonly children?: React.ReactNode;
   readonly className?: string;
-}
+};
 
-export interface LayoutProps {
+export type LayoutProps = {
   readonly children: React.ReactNode;
-}
+};
 
 /**
  * Loading skeleton component types

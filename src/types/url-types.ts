@@ -2,8 +2,8 @@
  * Types for URL mapping and redirect functionality
  */
 
-export interface UrlMapping {
+export type UrlMapping = {
   readonly source: string;
   readonly destination: string;
   readonly permanent: boolean;
-}
+};

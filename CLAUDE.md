@@ -294,7 +294,7 @@ Component categories:
 
 ### TypeScript Standards
 
-- Use `type` over `interface` (except when extensibility required)
+- **Prefer `type` over `interface`**: Use `type` for all type definitions including component props, data structures, and unions. This promotes consistency (you need `type` for unions/tuples anyway) and immutability (no declaration merging). Automatically enforced by ESLint (`@typescript-eslint/consistent-type-definitions`). Use `interface` only when you need declaration merging (rare, typically for augmenting third-party modules).
 - Always declare function parameter and return types
 - Avoid `any` - use `unknown` or proper typing
 - Zod for runtime validation (env, forms, API responses)

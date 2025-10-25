@@ -5,9 +5,9 @@ import { usePathname } from 'next/navigation';
 import type { ReactNode, JSX } from 'react';
 import { PAGE_ANIMATION } from '../../constants/config/animation-config';
 
-interface PageWrapperProps {
+type PageWrapperProps = {
   children: ReactNode;
-}
+};
 
 export function PageWrapper({ children }: PageWrapperProps): JSX.Element {
   const pathname = usePathname();

@@ -8,12 +8,12 @@ import {
 } from '@/constants/shared';
 import { EXTERNAL_URLS, ALL_PLATFORMS } from '../../constants/urls';
 
-interface StructuredDataProps {
+type StructuredDataProps = {
   readonly pageType?: 'website' | 'person' | 'article';
   readonly title?: string;
   readonly description?: string;
   readonly url?: string;
-}
+};
 
 /**
  * Structured Data (JSON-LD) component for enhanced SEO
