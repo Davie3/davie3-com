@@ -10,6 +10,6 @@ export const PAGE_LAST_MODIFIED = {
   HOME: '2025-09-01',
   ABOUT: '2025-09-01',
   PORTFOLIO: '2025-09-01',
-  PRIVACY: '2025-09-13',
+  PRIVACY: '2025-10-25',
   CONTACT: '2025-09-01',
 } as const;
