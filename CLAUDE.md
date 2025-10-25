@@ -126,13 +126,26 @@ If Zen or Sequential Thinking MCPs are unavailable:
 
 Next.js 16 personal website using TypeScript, React 19, Tailwind CSS 4, and Framer Motion. Deployed on Vercel with Cloudflare CDN and security features.
 
+### Runtime Requirements
+
+- **Node.js**: 22.x
+- **npm**: >=10.0.0
+
+These are enforced in package.json via engines field.
+
+### Dependency Management
+
+- **Exact Versions**: Key dependencies (Next.js, React, Prettier) are pinned to exact versions in package.json (no ^ or ~ prefixes)
+- **Rationale**: Ensures build reproducibility and prevents unintended breaking changes
+- **Action**: When adding/updating dependencies, use exact versions unless a specific reason requires a version range
+
 ## Common Commands
 
 ### Development
 
 ```bash
 npm run dev                # Start dev server with Turbopack
-npm run build             # Full production build (includes format, lint, type-check)
+npm run build             # Full production build (cleans cache, runs format:check, lint, type-check, then builds)
 npm run start             # Start production server
 ```
 
@@ -161,7 +174,7 @@ npm run fix               # Run format + lint --fix
 - ENABLE_ANALYTICS flag for analytics control
 - All env vars must be validated through env.ts
 
-### Configuration System (src/lib/config/)
+### Configuration System (src/constants/config/)
 
 - `redirect-config.ts` - URL mappings imported by next.config.ts
 - `seo-config.ts` - SEO and metadata configuration
@@ -241,7 +254,7 @@ Component categories:
 - **src/components/layout/**: Header, footer, navigation, sidebars (app-header, app-footer, nav-link, left-sidebar, right-sidebar, client-mobile-nav)
 - **src/components/ui/**: Reusable UI components (animated-background, turnstile-widget, loading-skeleton, page-wrapper, client-layout)
 - **src/components/forms/**: Form components with validation (contact-form)
-- **src/components/analytics/**: Analytics integration (vercel-analytics, cloudflare-analytics)
+- **src/components/analytics/**: Dual analytics setup (Vercel Analytics + Speed Insights, Cloudflare Web Analytics)
 - **src/components/seo/**: Structured data, metadata (structured-data)
 
 ### Styling System
@@ -274,7 +287,7 @@ Component categories:
 - **Always use kebab-case**: component-name.tsx, utility-name.ts
 - Component files: descriptive names (animated-background.tsx, contact-form.tsx)
 - No index.ts barrel exports in components
-- Configuration files end with -config.ts (in src/lib/config/)
+- Configuration files end with -config.ts (in src/constants/config/)
 - Type files end with -types.ts (in src/types/)
 - Utility files end with -utils.ts (in src/lib/utils/)
 - Page files: page.tsx, layout.tsx, loading.tsx, error.tsx, not-found.tsx
@@ -301,11 +314,16 @@ Component categories:
 ### Animation Patterns
 
 - Framer Motion variants defined as constants before component
-- Animation configurations in src/lib/config/animation-config.ts
+- Animation configurations in src/constants/config/animation-config.ts
 - Custom Tailwind animations defined in tailwind.config.ts
 - Prefer declarative animations over imperative
 - AnimatedBackground component uses Web Animations API for star field effect
 - Use staggered animations for list items via `animationDelay` inline styles
+
+### View Transitions
+
+- Uses experimental View Transitions API for smooth page transitions
+- Browser support varies - degrades gracefully in unsupported browsers
 
 ### Deployment Configuration
 
