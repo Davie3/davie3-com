@@ -17,7 +17,10 @@ async function getGitHubRepos(): Promise<GitHubRepo[]> {
   try {
     const response = await fetch(GITHUB_API, {
       // Revalidate data at most once per hour
-      next: { revalidate: GITHUB_CONFIG.revalidateInterval },
+      next: {
+        revalidate: GITHUB_CONFIG.revalidateInterval,
+        tags: ['github-repos'],
+      },
     });
 
     if (!response.ok) {
