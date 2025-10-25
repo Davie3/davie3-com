@@ -1,8 +1,8 @@
-export type NavLink = {
+export interface NavLink {
   name: string;
   href: string;
   openInNewTab?: boolean;
-};
+}
 
 export const NAV_LINKS: NavLink[] = [
   { name: 'Home', href: '/' },

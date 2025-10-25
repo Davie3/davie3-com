@@ -4,13 +4,13 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import type { JSX } from 'react';
 
-type NavLinkProps = {
+interface NavLinkProps {
   href: string;
   children: React.ReactNode;
   target?: string;
   rel?: string;
   className?: string;
-};
+}
 
 export function NavLink({
   href,
@@ -27,7 +27,7 @@ export function NavLink({
       href={href}
       target={target}
       rel={rel}
-      className={`${className} ${
+      className={`${className ?? ''} ${
         isActive
           ? 'text-blue-accent bg-navy-accent/50'
           : 'text-slate-light hover:text-blue-accent hover:bg-navy-accent/30'

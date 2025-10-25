@@ -1,4 +1,4 @@
-export type Star = {
+export interface Star {
   id: number;
   x: number;
   y: number;
@@ -6,7 +6,7 @@ export type Star = {
   opacity: number;
   color: string;
   gradientStop: number;
-};
+}
 
 export const ANIMATION_DURATIONS = {
   FAST: 0.2,

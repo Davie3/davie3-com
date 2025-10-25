@@ -1,12 +1,12 @@
 'use client';
 
 import type { JSX } from 'react';
-import type { SkeletonProps } from '@/types/component-types';
-import { cn } from '@/lib/utils/class-utils';
 import {
   SKELETON_BASE_CLASSES,
   SKELETON_VARIANTS,
 } from '@/constants/ui-components';
+import { cn } from '@/lib/utils/class-utils';
+import type { SkeletonProps } from '@/types/component-types';
 
 export function Skeleton({
   className = '',
@@ -16,9 +16,9 @@ export function Skeleton({
   count = 1,
 }: SkeletonProps): JSX.Element {
   const style = {
-    width: width || (variant === 'circular' ? '40px' : '100%'),
+    width: width ?? (variant === 'circular' ? '40px' : '100%'),
     height:
-      height ||
+      height ??
       (variant === 'circular' ? '40px' : variant === 'card' ? '200px' : '20px'),
   };
 

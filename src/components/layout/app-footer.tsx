@@ -1,17 +1,16 @@
 'use client';
 
 import { useEffect, useState, type JSX } from 'react';
-
-import { SOCIAL_LINKS_DATA } from '../../lib/config/social-config';
 import { FOOTER_CONFIG } from '../../constants/ui-components';
+import { SOCIAL_LINKS_DATA } from '../../lib/config/social-config';
 import { getSocialIcon } from '../../utils/social-icons';
 
 export function AppFooter(): JSX.Element {
   const currentYear = new Date().getFullYear();
   const yearText =
     currentYear !== FOOTER_CONFIG.STARTING_YEAR
-      ? `${FOOTER_CONFIG.STARTING_YEAR} - ${currentYear}`
-      : currentYear;
+      ? `${FOOTER_CONFIG.STARTING_YEAR.toString()} - ${currentYear.toString()}`
+      : currentYear.toString();
 
   const [isVisible, setIsVisible] = useState(false);
 
@@ -19,7 +18,9 @@ export function AppFooter(): JSX.Element {
     const timer = setTimeout(() => {
       setIsVisible(true);
     }, FOOTER_CONFIG.ANIMATION_DELAY);
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(timer);
+    };
   }, []);
 
   return (

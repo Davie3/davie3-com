@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion';
 import type { JSX } from 'react';
-
 import { SOCIAL_LINKS_DATA } from '@/lib/config/social-config';
 import { getSocialIcon } from '@/utils/social-icons';
 

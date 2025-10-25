@@ -1,6 +1,6 @@
 /**
  * Configuration-related type definitions.
  */
-export type GitHubConfig = {
+export interface GitHubConfig {
   readonly revalidateInterval: number;
-};
+}

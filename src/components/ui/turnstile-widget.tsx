@@ -1,8 +1,8 @@
 'use client';
 
-import type { JSX } from 'react';
 import { Turnstile as ReactTurnstile } from '@marsidev/react-turnstile';
 import type { TurnstileProps } from '@marsidev/react-turnstile';
+import type { JSX } from 'react';
 
 /**
  * Cloudflare Turnstile component.
@@ -17,8 +17,8 @@ export function Turnstile({
   return (
     <ReactTurnstile
       siteKey={
-        siteKey ||
-        process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ||
+        siteKey ??
+        process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ??
         '1x00000000000000000000AA'
       }
       {...props}

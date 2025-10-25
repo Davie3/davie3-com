@@ -1,24 +1,21 @@
 'use client';
 
-import { useState, useEffect, type JSX } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useState, useEffect, type JSX } from 'react';
 import { createPortal } from 'react-dom';
-
 import { useLockBody } from '@/hooks/use-lock-body';
 import { NAV_LINKS, type NavLink } from '../../lib/config/navigation-config';
 
 export function ClientMobileNav(): JSX.Element {
   const [isOpen, setIsOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
+  const [mounted] = useState(true);
   const pathname = usePathname();
   useLockBody(isOpen);
 
+  // Close menu when pathname changes - intentional pattern for navigation reset
   useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsOpen(false);
   }, [pathname]);
 
@@ -71,7 +68,7 @@ export function ClientMobileNav(): JSX.Element {
               return (
                 <li
                   key={link.name}
-                  className={`mobile-nav-item animate-delay-${index + 1}`}
+                  className={`mobile-nav-item animate-delay-${(index + 1).toString()}`}
                 >
                   <Link
                     href={link.href}

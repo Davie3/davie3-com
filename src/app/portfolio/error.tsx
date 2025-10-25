@@ -1,12 +1,12 @@
 'use client';
 
-import type { JSX } from 'react';
 import { AlertCircle, RefreshCw } from 'lucide-react';
+import type { JSX } from 'react';
 
-type ErrorProps = {
+interface ErrorProps {
   error: Error & { digest?: string };
   reset: () => void;
-};
+}
 
 /**
  * Error boundary component for the portfolio page.

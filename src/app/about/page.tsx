@@ -1,7 +1,6 @@
-import type { JSX } from 'react';
 import type { Metadata } from 'next';
 import Image from 'next/image';
-
+import type { JSX } from 'react';
 import {
   EXPERIENCES,
   EDUCATION,
@@ -89,7 +88,7 @@ export default function AboutPage(): JSX.Element {
             <div
               key={skill}
               className="card p-4 text-center group cursor-default"
-              style={{ animationDelay: `${index * 50}ms` }}
+              style={{ animationDelay: `${(index * 50).toString()}ms` }}
             >
               <span className="text-sm md:text-base font-medium text-slate-light group-hover:text-blue-accent transition-colors duration-300">
                 {skill}
@@ -111,7 +110,7 @@ export default function AboutPage(): JSX.Element {
         <div className="space-y-6">
           {EXPERIENCES.map((exp, index) => (
             <div
-              key={`${exp.company}-${index}`}
+              key={`${exp.company}-${index.toString()}`}
               className="card p-6 md:p-8 group"
             >
               <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-4">

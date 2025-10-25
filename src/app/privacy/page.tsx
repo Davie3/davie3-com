@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import type { JSX } from 'react';
-
 import { PAGE_LAST_MODIFIED } from '@/constants/site-metadata';
 import { createPacificDate } from '@/lib/utils/date-utils';
 

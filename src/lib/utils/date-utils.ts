@@ -3,7 +3,7 @@
  */
 export const formatEmailTimestamp = (
   date: Date = new Date(),
-  timeZone: string = 'America/Los_Angeles',
+  timeZone = 'America/Los_Angeles',
 ): string => {
   return date.toLocaleString('en-US', {
     timeZone,

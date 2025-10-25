@@ -1,8 +1,7 @@
 import type { JSX } from 'react';
-import { FiGithub, FiInstagram, FiLinkedin, FiTwitch } from 'react-icons/fi';
 import { FaXTwitter } from 'react-icons/fa6';
+import { FiGithub, FiInstagram, FiLinkedin, FiTwitch } from 'react-icons/fi';
 import { SiBluesky } from 'react-icons/si';
-
 import type { SocialLinkData } from '@/types/social-types';
 
 /**
@@ -10,7 +9,7 @@ import type { SocialLinkData } from '@/types/social-types';
  */
 export const getSocialIcon = (
   iconName: SocialLinkData['iconName'],
-  size: number = 20,
+  size = 20,
 ): JSX.Element => {
   const iconProps = { size };
   switch (iconName) {

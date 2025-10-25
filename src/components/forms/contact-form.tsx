@@ -1,15 +1,14 @@
 'use client';
 
-import type { JSX } from 'react';
-import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import type { JSX } from 'react';
 import { useState } from 'react';
-
-import { CONTACT_FORM_SCHEMA } from '@/types/form-types';
-import { FORM_MESSAGES } from '@/constants/ui-components';
-import { INTERNAL_ROUTES } from '../../constants/urls';
-import type { ContactFormValues } from '@/types/form-types';
+import { useForm } from 'react-hook-form';
 import { Turnstile } from '@/components/ui/turnstile-widget';
+import { FORM_MESSAGES } from '@/constants/ui-components';
+import { CONTACT_FORM_SCHEMA } from '@/types/form-types';
+import type { ContactFormValues } from '@/types/form-types';
+import { INTERNAL_ROUTES } from '../../constants/urls';
 
 /**
  * Client-side contact form component with validation and submission handling.
@@ -108,7 +107,12 @@ export default function ContactForm(): JSX.Element {
 
   return (
     <div className="bg-navy-accent/60 backdrop-blur-xl border border-slate-dark/20 rounded-3xl p-8 md:p-12">
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+      <form
+        onSubmit={(e) => {
+          void handleSubmit(onSubmit)(e);
+        }}
+        className="space-y-6"
+      >
         <div>
           <label htmlFor="name" className="form-label">
             Name

@@ -1,16 +1,16 @@
 /**
  * Personal information and experience type definitions.
  */
-export type Experience = {
+export interface Experience {
   readonly role: string;
   readonly company: string;
   readonly period: string;
   readonly description: string;
-};
+}
 
-export type Education = {
+export interface Education {
   readonly degree: string;
   readonly institution: string;
   readonly period: string;
   readonly emoji: string;
-};
+}

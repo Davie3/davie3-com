@@ -8,12 +8,12 @@ import {
 import { SEO_DATA } from '@/lib/config/seo-config';
 import { EXTERNAL_URLS, ALL_PLATFORMS } from '../../constants/urls';
 
-type StructuredDataProps = {
+interface StructuredDataProps {
   readonly pageType?: 'website' | 'person' | 'article';
   readonly title?: string;
   readonly description?: string;
   readonly url?: string;
-};
+}
 
 /**
  * Structured Data (JSON-LD) component for enhanced SEO
@@ -28,8 +28,8 @@ export function StructuredData({
     '@context': 'https://schema.org',
     '@type': pageType === 'person' ? 'Person' : 'WebSite',
     name:
-      title || `${PERSONAL_INFO.FULL_NAME} - ${PROFESSIONAL_TITLES.CURRENT}`,
-    description: description || PAGE_DESCRIPTIONS.SEO_DESCRIPTION,
+      title ?? `${PERSONAL_INFO.FULL_NAME} - ${PROFESSIONAL_TITLES.CURRENT}`,
+    description: description ?? PAGE_DESCRIPTIONS.SEO_DESCRIPTION,
     url,
     author: {
       '@type': 'Person',

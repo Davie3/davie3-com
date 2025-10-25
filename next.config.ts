@@ -31,6 +31,7 @@ const cspHeader = `
 `;
 
 const nextConfig: NextConfig = {
+  // eslint-disable-next-line @typescript-eslint/require-await
   async headers() {
     return [
       {
@@ -44,6 +45,7 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  // eslint-disable-next-line @typescript-eslint/require-await
   async redirects() {
     return URL_MAPPINGS.map((mapping) => ({
       source: mapping.source,

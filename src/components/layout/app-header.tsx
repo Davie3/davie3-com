@@ -1,8 +1,7 @@
-import type { JSX } from 'react';
-import { Suspense } from 'react';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
-
+import type { JSX } from 'react';
+import { Suspense } from 'react';
 import { NAV_LINKS, type NavLink } from '../../lib/config/navigation-config';
 import { NavLink as ClientNavLink } from './nav-link';
 
@@ -40,7 +39,7 @@ export function AppHeader(): JSX.Element {
             {NAV_LINKS.map((link: NavLink, index) => (
               <li
                 key={link.name}
-                className={`nav-item animate-delay-${index + 1}`}
+                className={`nav-item animate-delay-${(index + 1).toString()}`}
               >
                 <ClientNavLink
                   href={link.href}
