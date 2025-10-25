@@ -5,7 +5,7 @@ import { TIMEZONE } from '@/constants/date-constants';
  */
 export const formatEmailTimestamp = (
   date: Date = new Date(),
-  timeZone = 'America/Los_Angeles',
+  timeZone = TIMEZONE.PACIFIC_NAME,
 ): string => {
   return date.toLocaleString('en-US', {
     timeZone,

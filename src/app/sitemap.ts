@@ -4,7 +4,7 @@ import { EXTERNAL_URLS } from '../constants/urls';
 import { createPacificDate } from '../lib/utils/date-utils';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = EXTERNAL_URLS.MAIN;
+  const baseUrl = EXTERNAL_URLS.MAIN || 'https://davie3.com';
 
   return [
     {
