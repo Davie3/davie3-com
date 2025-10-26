@@ -10,19 +10,15 @@ import {
   renderContactFormTemplate,
   generateContactFormText,
 } from '@/lib/utils/email-template';
+import { CONTACT_FORM_SCHEMA } from '@/types/form-types';
 
 sgMail.setApiKey(env.SENDGRID_API_KEY);
 
 const TURNSTILE_VERIFY_ENDPOINT =
   'https://challenges.cloudflare.com/turnstile/v0/siteverify';
 
-const ContactFormSchema = z.object({
-  name: z.string().min(1),
-  email: z.email(),
-  confirmEmail: z.email(),
-  subject: z.string().min(1),
-  message: z.string().min(1),
-  token: z.string().min(1),
+const ContactFormSchema = CONTACT_FORM_SCHEMA.extend({
+  token: z.string().min(1, 'Turnstile token is required.'),
 });
 
 const TurnstileResponseSchema = z.object({

@@ -2,6 +2,7 @@ import { GitFork, Star, ArrowRight } from 'lucide-react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import type { JSX } from 'react';
+import { z } from 'zod';
 import { GITHUB_CONFIG } from '@/constants/config/github-config';
 import { PAGE_METADATA } from '@/constants/config/site-metadata';
 import { PAGE_DESCRIPTIONS } from '@/constants/shared';
@@ -32,9 +33,9 @@ async function getGitHubRepos(): Promise<GitHubRepo[]> {
     }
 
     const data: unknown = await response.json();
-    const validationResult = GITHUB_REPO_SCHEMA.safeParse(
-      (data as { items?: unknown }).items,
-    );
+    const responseSchema = z.object({ items: z.unknown() });
+    const parsedResponse = responseSchema.parse(data);
+    const validationResult = GITHUB_REPO_SCHEMA.safeParse(parsedResponse.items);
 
     if (!validationResult.success) {
       // Log validation errors only in development
