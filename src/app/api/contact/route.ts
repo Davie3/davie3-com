@@ -58,10 +58,9 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
     if (!validationResult.success) {
       return NextResponse.json(
-        { errors: validationResult.error.flatten().fieldErrors },
+        { error: 'Missing required fields.' },
         { status: 400 },
       );
-    }
     }
 
     const { name, email, subject, message, token } = validationResult.data;
