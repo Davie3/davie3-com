@@ -1,11 +1,11 @@
 import Script from 'next/script';
 import type { JSX } from 'react';
+import { SEO_DATA } from '@/constants/config/seo-config';
 import {
   PERSONAL_INFO,
   PAGE_DESCRIPTIONS,
   PROFESSIONAL_TITLES,
 } from '@/constants/shared';
-import { SEO_DATA } from '@/lib/config/seo-config';
 import { EXTERNAL_URLS, ALL_PLATFORMS } from '../../constants/urls';
 
 type StructuredDataProps = {
@@ -28,8 +28,8 @@ export function StructuredData({
     '@context': 'https://schema.org',
     '@type': pageType === 'person' ? 'Person' : 'WebSite',
     name:
-      title || `${PERSONAL_INFO.FULL_NAME} - ${PROFESSIONAL_TITLES.CURRENT}`,
-    description: description || PAGE_DESCRIPTIONS.SEO_DESCRIPTION,
+      title ?? `${PERSONAL_INFO.FULL_NAME} - ${PROFESSIONAL_TITLES.CURRENT}`,
+    description: description ?? PAGE_DESCRIPTIONS.SEO_DESCRIPTION,
     url,
     author: {
       '@type': 'Person',

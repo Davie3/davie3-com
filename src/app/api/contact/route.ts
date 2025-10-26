@@ -1,19 +1,29 @@
+import sgMail from '@sendgrid/mail';
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
-import sgMail from '@sendgrid/mail';
 import sanitizeHtml from 'sanitize-html';
 import xss from 'xss';
+import { z } from 'zod';
 import { env } from '@/env';
 import { formatEmailTimestamp } from '@/lib/utils/date-utils';
 import {
   renderContactFormTemplate,
   generateContactFormText,
 } from '@/lib/utils/email-template';
+import { CONTACT_FORM_SCHEMA } from '@/types/form-types';
 
 sgMail.setApiKey(env.SENDGRID_API_KEY);
 
 const TURNSTILE_VERIFY_ENDPOINT =
   'https://challenges.cloudflare.com/turnstile/v0/siteverify';
+
+const ContactFormSchema = CONTACT_FORM_SCHEMA.safeExtend({
+  token: z.string().min(1, 'Turnstile token is required.'),
+});
+
+const TurnstileResponseSchema = z.object({
+  success: z.boolean(),
+});
 
 /**
  * Sanitizes user input to prevent XSS attacks and HTML injection
@@ -43,15 +53,17 @@ function sanitizeInput(input: string): string {
 
 export async function POST(request: NextRequest): Promise<NextResponse> {
   try {
-    const { name, email, confirmEmail, subject, message, token } =
-      await request.json();
+    const body: unknown = await request.json();
+    const validationResult = ContactFormSchema.safeParse(body);
 
-    if (!name || !email || !confirmEmail || !subject || !message || !token) {
+    if (!validationResult.success) {
       return NextResponse.json(
         { error: 'Missing required fields.' },
         { status: 400 },
       );
     }
+
+    const { name, email, subject, message, token } = validationResult.data;
 
     const turnstileResponse = await fetch(TURNSTILE_VERIFY_ENDPOINT, {
       method: 'POST',
@@ -64,7 +76,8 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       }),
     });
 
-    const turnstileData = await turnstileResponse.json();
+    const turnstileBody: unknown = await turnstileResponse.json();
+    const turnstileData = TurnstileResponseSchema.parse(turnstileBody);
 
     if (!turnstileData.success) {
       return NextResponse.json(

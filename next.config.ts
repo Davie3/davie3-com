@@ -1,5 +1,5 @@
 import type { NextConfig } from 'next';
-import { URL_MAPPINGS } from './src/lib/config/redirect-config';
+import { URL_MAPPINGS } from './src/constants/config/redirect-config';
 
 const cspHeader = `
     default-src 'self';
@@ -44,6 +44,7 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+
   async redirects() {
     return URL_MAPPINGS.map((mapping) => ({
       source: mapping.source,

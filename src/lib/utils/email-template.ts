@@ -1,6 +1,5 @@
 import { readFileSync } from 'fs';
 import { join } from 'path';
-
 import type { ContactFormTemplateData } from '@/types/email-types';
 
 /**

@@ -2,7 +2,7 @@
 
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import type { JSX } from 'react';
 
 /**
@@ -10,11 +10,8 @@ import type { JSX } from 'react';
  * Environment gating handled at parent level (layout.tsx)
  */
 export function VercelAnalytics(): JSX.Element {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  // Initialize as mounted on client - analytics only render client-side anyway
+  const [mounted] = useState(true);
 
   if (!mounted) {
     return <></>;

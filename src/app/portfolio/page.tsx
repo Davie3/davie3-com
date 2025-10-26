@@ -1,12 +1,12 @@
-import type { JSX } from 'react';
+import { GitFork, Star, ArrowRight } from 'lucide-react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { GitFork, Star, ArrowRight } from 'lucide-react';
-
-import { GITHUB_REPO_SCHEMA } from '@/types/api-types';
+import type { JSX } from 'react';
+import { z } from 'zod';
+import { GITHUB_CONFIG } from '@/constants/config/github-config';
+import { PAGE_METADATA } from '@/constants/config/site-metadata';
 import { PAGE_DESCRIPTIONS } from '@/constants/shared';
-import { GITHUB_CONFIG } from '@/lib/config/github-config';
-import { PAGE_METADATA } from '@/lib/config/site-metadata';
+import { GITHUB_REPO_SCHEMA } from '@/types/api-types';
 import type { GitHubRepo } from '@/types/api-types';
 
 export const metadata: Metadata = PAGE_METADATA.PORTFOLIO;
@@ -18,7 +18,10 @@ async function getGitHubRepos(): Promise<GitHubRepo[]> {
   try {
     const response = await fetch(GITHUB_API, {
       // Revalidate data at most once per hour
-      next: { revalidate: GITHUB_CONFIG.revalidateInterval },
+      next: {
+        revalidate: GITHUB_CONFIG.revalidateInterval,
+        tags: ['github-repos'],
+      },
     });
 
     if (!response.ok) {
@@ -29,8 +32,10 @@ async function getGitHubRepos(): Promise<GitHubRepo[]> {
       return [];
     }
 
-    const data = await response.json();
-    const validationResult = GITHUB_REPO_SCHEMA.safeParse(data.items);
+    const data: unknown = await response.json();
+    const responseSchema = z.object({ items: z.unknown() });
+    const parsedResponse = responseSchema.parse(data);
+    const validationResult = GITHUB_REPO_SCHEMA.safeParse(parsedResponse.items);
 
     if (!validationResult.success) {
       // Log validation errors only in development
@@ -105,7 +110,7 @@ export default async function PortfolioPage(): Promise<JSX.Element> {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group card p-6 flex flex-col justify-between h-full"
-                style={{ animationDelay: `${index * 100}ms` }}
+                style={{ animationDelay: `${(index * 100).toString()}ms` }}
               >
                 <div className="flex-1">
                   <div className="flex items-start justify-between mb-3">
@@ -116,7 +121,7 @@ export default async function PortfolioPage(): Promise<JSX.Element> {
                   </div>
 
                   <p className="text-slate-dark leading-relaxed mb-4">
-                    {project.description || 'No description available'}
+                    {project.description ?? 'No description available'}
                   </p>
                 </div>
 

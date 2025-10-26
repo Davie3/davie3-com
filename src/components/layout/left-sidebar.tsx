@@ -2,8 +2,7 @@
 
 import { motion } from 'framer-motion';
 import type { JSX } from 'react';
-
-import { SOCIAL_LINKS_DATA } from '@/lib/config/social-config';
+import { SOCIAL_LINKS_DATA } from '@/constants/config/social-config';
 import { getSocialIcon } from '@/utils/social-icons';
 
 export function LeftSidebar(): JSX.Element {

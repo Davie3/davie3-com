@@ -1,9 +1,11 @@
+import { TIMEZONE } from '@/constants/date-constants';
+
 /**
  * Formats a timestamp for email notifications with timezone support.
  */
 export const formatEmailTimestamp = (
   date: Date = new Date(),
-  timeZone: string = 'America/Los_Angeles',
+  timeZone = TIMEZONE.PACIFIC_NAME,
 ): string => {
   return date.toLocaleString('en-US', {
     timeZone,
@@ -11,14 +13,6 @@ export const formatEmailTimestamp = (
     timeStyle: 'short',
   });
 };
-
-/**
- * Timezone configuration
- */
-export const TIMEZONE = {
-  PACIFIC_OFFSET: '-08:00',
-  PACIFIC_NAME: 'America/Los_Angeles',
-} as const;
 
 /**
  * Helper function to create Pacific timezone Date objects

@@ -1,7 +1,6 @@
 import type { MetadataRoute } from 'next';
-
-import { EXTERNAL_URLS } from '../constants/urls';
 import { PAGE_LAST_MODIFIED } from '../constants/site-metadata';
+import { EXTERNAL_URLS } from '../constants/urls';
 import { createPacificDate } from '../lib/utils/date-utils';
 
 export default function sitemap(): MetadataRoute.Sitemap {

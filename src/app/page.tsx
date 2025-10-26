@@ -1,8 +1,7 @@
-import type { JSX } from 'react';
 import { ArrowRight } from 'lucide-react';
-import Link from 'next/link';
 import Image from 'next/image';
-
+import Link from 'next/link';
+import type { JSX } from 'react';
 import {
   PERSONAL_INFO,
   PROFESSIONAL_TITLES,

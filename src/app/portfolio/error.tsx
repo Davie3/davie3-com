@@ -1,7 +1,7 @@
 'use client';
 
-import type { JSX } from 'react';
 import { AlertCircle, RefreshCw } from 'lucide-react';
+import type { JSX } from 'react';
 
 type ErrorProps = {
   error: Error & { digest?: string };

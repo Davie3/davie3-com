@@ -17,8 +17,7 @@ export const isProduction =
  * Check if analytics should be enabled
  * Always enabled in production, optionally enabled in non-prod via ENABLE_ANALYTICS
  */
-export const shouldEnableAnalytics =
-  isProduction || env.ENABLE_ANALYTICS === true;
+export const shouldEnableAnalytics = isProduction || env.ENABLE_ANALYTICS;
 
 /**
  * Check if the application is running in development environment

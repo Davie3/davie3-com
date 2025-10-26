@@ -1,12 +1,11 @@
 import type { Metadata } from 'next';
 import type { JSX } from 'react';
-
 import { CloudFlareAnalytics } from '@/components/analytics/cloudflare-analytics';
 import { VercelAnalytics } from '@/components/analytics/vercel-analytics';
 import { AppFooter } from '@/components/layout/app-footer';
 import { StructuredData } from '@/components/seo/structured-data';
 import { ClientLayout } from '@/components/ui/client-layout';
-import { SITE_METADATA } from '@/lib/config/site-metadata';
+import { SITE_METADATA } from '@/constants/config/site-metadata';
 import { fontVariables } from '@/lib/fonts';
 import { shouldEnableAnalytics } from '@/lib/utils/environment';
 import './globals.css';

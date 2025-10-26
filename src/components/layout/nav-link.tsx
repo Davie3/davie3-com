@@ -27,7 +27,7 @@ export function NavLink({
       href={href}
       target={target}
       rel={rel}
-      className={`${className} ${
+      className={`${className ?? ''} ${
         isActive
           ? 'text-blue-accent bg-navy-accent/50'
           : 'text-slate-light hover:text-blue-accent hover:bg-navy-accent/30'

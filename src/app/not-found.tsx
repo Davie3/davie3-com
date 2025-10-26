@@ -1,8 +1,8 @@
 'use client';
 
-import type { JSX } from 'react';
-import Link from 'next/link';
 import { Home, ArrowLeft } from 'lucide-react';
+import Link from 'next/link';
+import type { JSX } from 'react';
 
 /**
  * Custom 404 error page component.
@@ -43,7 +43,9 @@ export default function NotFound(): JSX.Element {
             <span>Go Home</span>
           </Link>
           <button
-            onClick={() => window.history.back()}
+            onClick={() => {
+              window.history.back();
+            }}
             className="group inline-flex items-center gap-2 px-6 py-3 glass rounded-xl font-semibold text-slate-light transition-all duration-300 hover:scale-105"
           >
             <ArrowLeft className="w-5 h-5 transition-transform group-hover:-translate-x-1" />

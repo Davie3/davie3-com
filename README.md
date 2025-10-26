@@ -6,7 +6,7 @@ Visit [davie3.com](https://davie3.com)
 
 ## Tech Stack
 
-- **Framework:** Next.js 15 with App Router
+- **Framework:** Next.js 16 with App Router
 - **Language:** TypeScript
 - **Styling:** Tailwind CSS
 - **CDN/Security:** Cloudflare

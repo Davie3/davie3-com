@@ -1,5 +1,4 @@
 import type { MetadataRoute } from 'next';
-
 import { EXTERNAL_URLS } from '../constants/urls';
 
 export default function robots(): MetadataRoute.Robots {

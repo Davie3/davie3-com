@@ -1,11 +1,11 @@
 import type { Metadata } from 'next';
+import { COMBINED_KEYWORDS } from '@/constants/config/seo-config';
 import {
   PERSONAL_INFO,
   PAGE_DESCRIPTIONS,
   PROFESSIONAL_TITLES,
 } from '@/constants/shared';
 import { EXTERNAL_URLS } from '@/constants/urls';
-import { COMBINED_KEYWORDS } from '@/lib/config/seo-config';
 
 /**
  * Site metadata for SEO (titles, descriptions, OpenGraph, Twitter, etc.).
