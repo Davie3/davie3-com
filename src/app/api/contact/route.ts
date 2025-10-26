@@ -17,7 +17,7 @@ sgMail.setApiKey(env.SENDGRID_API_KEY);
 const TURNSTILE_VERIFY_ENDPOINT =
   'https://challenges.cloudflare.com/turnstile/v0/siteverify';
 
-const ContactFormSchema = CONTACT_FORM_SCHEMA.extend({
+const ContactFormSchema = CONTACT_FORM_SCHEMA.safeExtend({
   token: z.string().min(1, 'Turnstile token is required.'),
 });
 
