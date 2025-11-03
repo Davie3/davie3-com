@@ -4,6 +4,17 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import type { JSX } from 'react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { Button } from '@/components/ui/button';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
 import { Turnstile } from '@/components/ui/turnstile-widget';
 import { FORM_MESSAGES } from '@/constants/ui-components';
 import { CONTACT_FORM_SCHEMA } from '@/types/form-types';
@@ -21,13 +32,15 @@ export default function ContactForm(): JSX.Element {
   const [token, setToken] = useState<string>('');
   const [captchaError, setCaptchaError] = useState<string | null>(null);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm<ContactFormValues>({
+  const form = useForm<ContactFormValues>({
     resolver: zodResolver(CONTACT_FORM_SCHEMA),
+    defaultValues: {
+      name: '',
+      email: '',
+      confirmEmail: '',
+      subject: '',
+      message: '',
+    },
   });
 
   const onSubmit = async (data: ContactFormValues) => {
@@ -53,7 +66,7 @@ export default function ContactForm(): JSX.Element {
       }
 
       setFormStatus(FORM_MESSAGES.SUCCESS);
-      reset();
+      form.reset();
       setToken('');
       setCaptchaError(null);
     } catch {
@@ -65,7 +78,7 @@ export default function ContactForm(): JSX.Element {
 
   if (formStatus === FORM_MESSAGES.SUCCESS) {
     return (
-      <div className="bg-navy-accent/60 backdrop-blur-xl border border-slate-dark/20 rounded-3xl p-8 md:p-12">
+      <div className="glass rounded-3xl p-8 md:p-12">
         <div className="text-center space-y-6">
           <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto">
             <svg
@@ -82,148 +95,156 @@ export default function ContactForm(): JSX.Element {
               />
             </svg>
           </div>
-          <h3 className="text-2xl font-bold text-slate-light">
+          <h3 className="text-2xl font-bold text-foreground">
             Message Sent Successfully!
           </h3>
-          <p className="text-slate-dark text-lg">
+          <p className="text-muted-foreground text-lg">
             Thank you for reaching out. I&apos;ll get back to you as soon as
             possible.
           </p>
-          <button
+          <Button
             onClick={() => {
               setFormStatus(null);
-              reset();
+              form.reset();
               setToken('');
               setCaptchaError(null);
             }}
-            className="px-6 py-3 bg-blue-accent/20 hover:bg-blue-accent/30 rounded-xl text-blue-accent border border-blue-accent/30 hover:border-blue-accent/50 transition-all duration-200"
+            variant="outline"
+            className="px-6 py-3"
           >
             Send Another Message
-          </button>
+          </Button>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="bg-navy-accent/60 backdrop-blur-xl border border-slate-dark/20 rounded-3xl p-8 md:p-12">
-      <form
-        onSubmit={(e) => {
-          void handleSubmit(onSubmit)(e);
-        }}
-        className="space-y-6"
-      >
-        <div>
-          <label htmlFor="name" className="form-label">
-            Name
-          </label>
-          <input
-            id="name"
-            type="text"
-            {...register('name')}
-            className="form-input"
-            placeholder="Your full name"
-          />
-          {errors.name && <p className="form-error">{errors.name.message}</p>}
-        </div>
-
-        <div>
-          <label htmlFor="email" className="form-label">
-            Email
-          </label>
-          <input
-            id="email"
-            type="email"
-            {...register('email')}
-            className="form-input"
-            placeholder="your.email@example.com"
-          />
-          {errors.email && <p className="form-error">{errors.email.message}</p>}
-        </div>
-
-        <div>
-          <label htmlFor="confirmEmail" className="form-label">
-            Confirm Email
-          </label>
-          <input
-            id="confirmEmail"
-            type="email"
-            {...register('confirmEmail')}
-            className="form-input"
-            placeholder="Confirm your email address"
-          />
-          {errors.confirmEmail && (
-            <p className="form-error">{errors.confirmEmail.message}</p>
-          )}
-        </div>
-
-        <div>
-          <label htmlFor="subject" className="form-label">
-            Subject
-          </label>
-          <input
-            id="subject"
-            type="text"
-            {...register('subject')}
-            className="form-input"
-            placeholder="What's this about?"
-          />
-          {errors.subject && (
-            <p className="form-error">{errors.subject.message}</p>
-          )}
-        </div>
-
-        <div>
-          <label htmlFor="message" className="form-label">
-            Message
-          </label>
-          <textarea
-            id="message"
-            rows={5}
-            {...register('message')}
-            className="form-input resize-none"
-            placeholder="Tell me about your project or inquiry..."
-          />
-          {errors.message && (
-            <p className="form-error">{errors.message.message}</p>
-          )}
-        </div>
-
-        <div className="flex justify-center">
-          <Turnstile
-            onSuccess={(token) => {
-              setToken(token);
-              setCaptchaError(null);
-            }}
-          />
-        </div>
-        {captchaError && (
-          <div className="p-3 bg-red-500/10 border border-red-500/30 rounded-xl">
-            <p className="text-center text-red-400 text-sm font-medium">
-              {captchaError}
-            </p>
-          </div>
-        )}
-
-        <button
-          type="submit"
-          disabled={isSubmitting}
-          className="w-full px-8 py-4 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 rounded-xl font-bold text-white shadow-lg hover:shadow-xl hover:shadow-emerald-500/30 transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:shadow-lg border-2 border-emerald-400/50 hover:border-emerald-300/60 relative overflow-hidden"
+    <div className="glass rounded-3xl p-8 md:p-12">
+      <Form {...form}>
+        <form
+          onSubmit={(e) => {
+            void form.handleSubmit(onSubmit)(e);
+          }}
+          className="space-y-6"
         >
-          <span className="relative z-10">
-            {isSubmitting ? 'Sending...' : 'Send Message'}
-          </span>
-          <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-200" />
-        </button>
+          <FormField
+            control={form.control}
+            name="name"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Name</FormLabel>
+                <FormControl>
+                  <Input placeholder="Your full name" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-        {formStatus === FORM_MESSAGES.ERROR && (
-          <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
-            <p className="text-center text-red-400 font-medium">
-              Something went wrong. Please try again later.
-            </p>
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Email</FormLabel>
+                <FormControl>
+                  <Input
+                    type="email"
+                    placeholder="your.email@example.com"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="confirmEmail"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Confirm Email</FormLabel>
+                <FormControl>
+                  <Input
+                    type="email"
+                    placeholder="Confirm your email address"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="subject"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Subject</FormLabel>
+                <FormControl>
+                  <Input placeholder="What's this about?" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="message"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Message</FormLabel>
+                <FormControl>
+                  <Textarea
+                    placeholder="Tell me about your project or inquiry..."
+                    className="resize-none"
+                    rows={5}
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <div className="flex justify-center">
+            <Turnstile
+              onSuccess={(token) => {
+                setToken(token);
+                setCaptchaError(null);
+              }}
+            />
           </div>
-        )}
-      </form>
+          {captchaError && (
+            <div className="p-3 bg-destructive/10 border border-destructive/30 rounded-xl">
+              <p className="text-center text-destructive text-sm font-medium">
+                {captchaError}
+              </p>
+            </div>
+          )}
+
+          <Button
+            type="submit"
+            disabled={isSubmitting}
+            className="w-full"
+            size="lg"
+          >
+            {isSubmitting ? 'Sending...' : 'Send Message'}
+          </Button>
+
+          {formStatus === FORM_MESSAGES.ERROR && (
+            <div className="p-4 bg-destructive/10 border border-destructive/30 rounded-xl">
+              <p className="text-center text-destructive font-medium">
+                Something went wrong. Please try again later.
+              </p>
+            </div>
+          )}
+        </form>
+      </Form>
     </div>
   );
 }
