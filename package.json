@@ -52,7 +52,7 @@
     "@types/react": "19.2.2",
     "@types/react-dom": "19.2.2",
     "@types/sanitize-html": "^2.16.0",
-    "eslint": "^9.39.0",
+    "eslint": "^9.39.1",
     "eslint-config-next": "16.0.1",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import": "^2.32.0",
@@ -64,7 +64,7 @@
     "prettier": "3.6.2",
     "tailwindcss": "^4.1.13",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.46.2"
+    "typescript-eslint": "^8.46.3"
   },
   "overrides": {
     "@types/react": "19.2.2",
