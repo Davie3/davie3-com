@@ -17,7 +17,7 @@ jobs:
       github.event.review.user.login == 'davie3'
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Check if review label exists
         id: check-label
