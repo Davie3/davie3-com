@@ -99,7 +99,8 @@ jobs:
             console.log('📊 Metadata:', JSON.stringify(metadata, null, 2));
 
             // Security updates: auto-merge immediately (any version)
-            if (metadata.alertState && metadata.alertState !== '') {
+            if ((metadata.alertState && metadata.alertState !== '') ||
+                metadata.dependencyGroup === 'security-updates') {
               console.log('✅ Security update detected - eligible for auto-merge');
               core.setOutput('should-merge', 'true');
               core.setOutput('merge-reason', 'security');
@@ -316,6 +317,8 @@ jobs:
               reason = 'This is a **major version update** that may contain breaking changes.';
             } else if (mergeReason === 'initial-release') {
               reason = 'This is an **initial release** (`.0` version) that may contain untested changes.';
+            } else if (mergeReason === 'unknown') {
+              reason = 'The update type could not be determined automatically (metadata fetch may have failed). Manual review is required.';
             } else {
               reason = 'This update requires manual review.';
             }
