@@ -135,9 +135,43 @@ These are enforced in package.json via engines field.
 
 ### Dependency Management
 
-- **Exact Versions**: Key dependencies (Next.js, React, Prettier) are pinned to exact versions in package.json (no ^ or ~ prefixes)
-- **Rationale**: Ensures build reproducibility and prevents unintended breaking changes
-- **Action**: When adding/updating dependencies, use exact versions unless a specific reason requires a version range
+**CI/CD-First Strategy**: Vercel CI/CD pipeline is the primary quality and safety gate for dependency updates.
+
+**Version Strategy:**
+
+- **Next.js Ecosystem (Exact Pinning)**: `next` and `eslint-config-next` use exact versions due to potential breaking changes in minor releases
+- **All Other Dependencies (Caret Ranges)**: Use `^x.y.z` to allow automatic patch and minor updates
+  - React/React-DOM: `^19.2.1` for rapid security patches
+  - Prettier: `^3.7.4` for formatting updates
+  - Type definitions: `^x.y.z` (no runtime impact)
+  - Libraries: `^x.y.z` (default)
+
+**Rationale:**
+
+- **Security Speed**: Dependabot demonstrated 2+ day delay on critical CVE; caret ranges enable immediate patch updates via `npm install`
+- **Reproducibility**: `package-lock.json` (always committed) ensures identical versions across environments
+- **Stability**: Next.js pinning prevents unintended framework changes requiring migration effort
+- **CI/CD Safety Net**: Build pipeline catches regressions (format, lint, type-check, build)
+
+**Security Monitoring:**
+
+- npm audit before commits
+- Manual monitoring of security advisories for React, Next.js
+- Subscribe to framework security mailing lists
+- Review CVE databases periodically
+
+**Lock File Discipline:**
+
+- `package-lock.json` must always be committed
+- Run `npm install` to update lock file when pulling changes
+- Caret ranges control WHEN versions update, not reproducibility
+
+**Action**: When adding/updating dependencies:
+
+- Use exact versions only for Next.js ecosystem (`next`, `eslint-config-next`)
+- Use caret ranges (`^x.y.z`) for all other packages
+- Always commit updated `package-lock.json`
+- Rely on CI/CD to validate compatibility
 
 ## Common Commands
 
