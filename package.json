@@ -30,7 +30,7 @@
     "sanitize-html": "^2.17.0",
     "tailwind-merge": "^3.4.0",
     "xss": "^1.0.15",
-    "zod": "^4.2.0"
+    "zod": "^4.2.1"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
@@ -64,7 +64,7 @@
     "prettier": "^3.7.4",
     "tailwindcss": "^4.1.13",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.49.0"
+    "typescript-eslint": "^8.50.0"
   },
   "overrides": {
     "@types/react": "^19.2.2",
