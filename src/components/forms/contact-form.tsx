@@ -65,11 +65,11 @@ export default function ContactForm(): JSX.Element {
 
   if (formStatus === FORM_MESSAGES.SUCCESS) {
     return (
-      <div className="bg-navy-accent/60 backdrop-blur-xl border border-slate-dark/20 rounded-3xl p-8 md:p-12">
+      <div className="bg-navy-accent/60 border-2 border-electric-cyan/30 p-8 md:p-12">
         <div className="text-center space-y-6">
-          <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto">
+          <div className="w-20 h-20 bg-electric-cyan/10 border-2 border-electric-cyan flex items-center justify-center mx-auto">
             <svg
-              className="w-8 h-8 text-green-400"
+              className="w-10 h-10 text-electric-cyan"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -77,15 +77,15 @@ export default function ContactForm(): JSX.Element {
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                strokeWidth={2}
+                strokeWidth={3}
                 d="M5 13l4 4L19 7"
               />
             </svg>
           </div>
-          <h3 className="text-2xl font-bold text-slate-light">
+          <h3 className="text-3xl font-display text-cream">
             Message Sent Successfully!
           </h3>
-          <p className="text-slate-dark text-lg">
+          <p className="text-silver text-lg">
             Thank you for reaching out. I&apos;ll get back to you as soon as
             possible.
           </p>
@@ -96,7 +96,7 @@ export default function ContactForm(): JSX.Element {
               setToken('');
               setCaptchaError(null);
             }}
-            className="px-6 py-3 bg-blue-accent/20 hover:bg-blue-accent/30 rounded-xl text-blue-accent border border-blue-accent/30 hover:border-blue-accent/50 transition-all duration-200"
+            className="px-6 py-3 bg-electric-cyan text-navy font-semibold hover:bg-safety-orange transition-all duration-300"
           >
             Send Another Message
           </button>
@@ -106,7 +106,7 @@ export default function ContactForm(): JSX.Element {
   }
 
   return (
-    <div className="bg-navy-accent/60 backdrop-blur-xl border border-slate-dark/20 rounded-3xl p-8 md:p-12">
+    <div className="bg-navy-accent/40 border-2 border-electric-cyan/20 p-8 md:p-12">
       <form
         onSubmit={(e) => {
           void handleSubmit(onSubmit)(e);
@@ -198,8 +198,8 @@ export default function ContactForm(): JSX.Element {
           />
         </div>
         {captchaError && (
-          <div className="p-3 bg-red-500/10 border border-red-500/30 rounded-xl">
-            <p className="text-center text-red-400 text-sm font-medium">
+          <div className="p-4 bg-safety-orange/10 border-2 border-safety-orange/50">
+            <p className="text-center text-safety-orange text-sm font-semibold">
               {captchaError}
             </p>
           </div>
@@ -208,17 +208,14 @@ export default function ContactForm(): JSX.Element {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full px-8 py-4 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 rounded-xl font-bold text-white shadow-lg hover:shadow-xl hover:shadow-emerald-500/30 transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:shadow-lg border-2 border-emerald-400/50 hover:border-emerald-300/60 relative overflow-hidden"
+          className="w-full px-8 py-4 bg-electric-cyan text-navy font-bold text-lg hover:bg-safety-orange transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-50 border-2 border-electric-cyan hover:border-safety-orange hover:scale-[1.02] active:scale-95"
         >
-          <span className="relative z-10">
-            {isSubmitting ? 'Sending...' : 'Send Message'}
-          </span>
-          <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-200" />
+          {isSubmitting ? 'Sending...' : 'Send Message'}
         </button>
 
         {formStatus === FORM_MESSAGES.ERROR && (
-          <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
-            <p className="text-center text-red-400 font-medium">
+          <div className="p-4 bg-safety-orange/10 border-2 border-safety-orange/50">
+            <p className="text-center text-safety-orange font-semibold">
               Something went wrong. Please try again later.
             </p>
           </div>

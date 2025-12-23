@@ -91,9 +91,9 @@ export default async function PortfolioPage(): Promise<JSX.Element> {
         </div>
       </section>
 
-      {/* Projects Section - Bento Grid */}
+      {/* Projects Section - Enhanced Bento Grid */}
       <section>
-        <div className="mb-8 border-l-4 border-safety-orange pl-8">
+        <div className="mb-12 border-l-4 border-safety-orange pl-8">
           <span className="font-accent text-sm tracking-wider uppercase text-silver">
             Featured
           </span>
@@ -103,11 +103,24 @@ export default async function PortfolioPage(): Promise<JSX.Element> {
         </div>
 
         {projects.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 auto-rows-fr">
+          <div className="grid grid-cols-1 md:grid-cols-6 gap-4 auto-rows-[minmax(280px,auto)]">
             {projects.map((project, index) => {
-              // Create varying card sizes for bento-box effect
-              const isLarge = index % 7 === 0 || index % 7 === 3;
-              const colSpan = isLarge ? 'md:col-span-2' : 'md:col-span-1';
+              // Create more interesting bento-box patterns
+              // Pattern: First item spans 4 cols, then 2+2+2, then 3+3, repeat
+              let colSpan = 'md:col-span-2';
+              let rowSpan = '';
+
+              if (index === 0) {
+                colSpan = 'md:col-span-4';
+                rowSpan = 'md:row-span-2';
+              } else if ((index - 1) % 8 === 0) {
+                colSpan = 'md:col-span-3';
+              } else if ((index - 1) % 8 === 1) {
+                colSpan = 'md:col-span-3';
+              } else if ((index - 1) % 8 === 4) {
+                colSpan = 'md:col-span-4';
+                rowSpan = 'md:row-span-2';
+              }
 
               return (
                 <Link
@@ -115,56 +128,74 @@ export default async function PortfolioPage(): Promise<JSX.Element> {
                   href={project.html_url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`group relative p-6 md:p-8 bg-navy-accent/40 border border-electric-cyan/20 hover:border-electric-cyan transition-all duration-300 ${colSpan}`}
+                  className={`group relative p-6 md:p-8 bg-navy-accent/40 border-2 border-electric-cyan/20 hover:border-electric-cyan transition-all duration-300 overflow-hidden ${colSpan} ${rowSpan}`}
                   style={{ animationDelay: `${(index * 100).toString()}ms` }}
                 >
-                  {/* Accent corner */}
-                  <div className="absolute top-0 right-0 w-16 h-16 bg-safety-orange/10 transform translate-x-4 -translate-y-4 group-hover:translate-x-2 group-hover:-translate-y-2 transition-transform duration-300" />
+                  {/* Diagonal stripe accent - varies by position */}
+                  <div
+                    className={`absolute top-0 right-0 w-24 h-24 transition-transform duration-300 ${
+                      index % 3 === 0
+                        ? 'bg-safety-orange/5'
+                        : index % 3 === 1
+                          ? 'bg-electric-cyan/5'
+                          : 'bg-cream/5'
+                    }`}
+                    style={{ transform: 'translate(50%, -50%) rotate(45deg)' }}
+                  />
 
-                  <div className="relative space-y-4">
-                    <div>
-                      <h3 className="text-2xl md:text-3xl font-display text-cream group-hover:text-electric-cyan transition-colors duration-300 leading-tight">
+                  <div className="relative h-full flex flex-col">
+                    <div className="flex-1">
+                      <h3 className="text-2xl md:text-3xl font-display text-cream group-hover:text-electric-cyan transition-colors duration-300 leading-tight mb-3">
                         {project.name}
                       </h3>
-                      <p className="text-silver leading-relaxed mt-3">
+                      <p className="text-silver leading-relaxed">
                         {project.description ?? 'No description available'}
                       </p>
                     </div>
 
-                    <div className="flex items-center justify-between pt-4 border-t border-electric-cyan/10">
-                      <div className="flex items-center gap-3">
+                    <div className="mt-6 pt-4 border-t border-electric-cyan/10">
+                      <div className="flex items-center justify-between">
                         {project.language && (
-                          <span className="px-3 py-1 bg-navy-accent/50 border border-electric-cyan/20 text-cream text-xs font-medium">
+                          <span className="px-3 py-1.5 bg-safety-orange/10 border border-safety-orange/30 text-safety-orange text-xs font-bold tracking-wide uppercase">
                             {project.language}
                           </span>
                         )}
-                      </div>
 
-                      <div className="flex items-center gap-4 text-sm text-silver">
-                        <div className="flex items-center gap-1">
-                          <Star size={14} />
-                          <span>{project.stargazers_count}</span>
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <GitFork size={14} />
-                          <span>{project.forks_count}</span>
+                        <div className="flex items-center gap-4 text-sm text-silver ml-auto">
+                          <div className="flex items-center gap-1.5">
+                            <Star size={16} className="text-electric-cyan" />
+                            <span className="font-medium">
+                              {project.stargazers_count}
+                            </span>
+                          </div>
+                          <div className="flex items-center gap-1.5">
+                            <GitFork size={16} className="text-safety-orange" />
+                            <span className="font-medium">
+                              {project.forks_count}
+                            </span>
+                          </div>
                         </div>
                       </div>
                     </div>
+                  </div>
+
+                  {/* Hover state border glow */}
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                    <div className="absolute inset-0 border-2 border-electric-cyan/50" />
                   </div>
                 </Link>
               );
             })}
           </div>
         ) : (
-          <div className="p-12 text-center border border-electric-cyan/20 bg-navy-accent/20">
-            <div className="w-16 h-16 bg-safety-orange/20 border-2 border-safety-orange flex items-center justify-center mx-auto mb-4">
-              <span className="text-2xl">🔧</span>
+          <div className="p-12 text-center border-2 border-electric-cyan/20 bg-navy-accent/20">
+            <div className="w-20 h-20 bg-safety-orange/20 border-4 border-safety-orange flex items-center justify-center mx-auto mb-4">
+              <span className="text-3xl">🔧</span>
             </div>
-            <h3 className="text-xl font-display text-cream mb-2">
+            <h3 className="text-2xl font-display text-cream mb-2">
               Projects Loading
             </h3>
-            <p className="text-silver">
+            <p className="text-silver text-lg">
               Fetching the latest projects from GitHub...
             </p>
           </div>
