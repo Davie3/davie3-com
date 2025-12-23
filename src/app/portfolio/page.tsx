@@ -113,8 +113,8 @@ export default async function PortfolioPage(): Promise<JSX.Element> {
               <div className="space-y-8">
                 {projects.map((project, index) => (
                   <div key={project.name} className="relative">
-                    {/* Timeline node - hidden on mobile */}
-                    <div className="absolute left-0 top-8 w-4 h-4 -translate-x-[7px] bg-safety-orange rounded-full border-4 border-navy hidden md:block" />
+                    {/* Timeline bracket connector - hidden on mobile */}
+                    <div className="absolute left-0 top-8 w-10 h-6 border-l-2 border-b-2 border-safety-orange hidden md:block" />
 
                     {/* Project card */}
                     <Link
