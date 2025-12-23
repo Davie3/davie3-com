@@ -29,7 +29,7 @@ export const PROFESSIONAL_TITLES = {
 export const PAGE_DESCRIPTIONS = {
   // Core messaging (used for both page content and SEO)
   HOME_DESCRIPTION:
-    "I love building systems that just work, no matter the scale or pressure. When I'm not experimenting with new technologies in my homelab, I'm finding creative ways to turn tricky problems into experiences that feel effortless for users. I also enjoy exploring how AI can streamline development workflows.",
+    "I architect cloud-native systems at Twitch using TypeScript, Node.js, and AWS. From fixing printers to building systems that scale, my journey has been all about turning complex problems into elegant solutions. These days I'm pioneering generative AI features and automating everything I can get my hands on.",
 
   SEO_DESCRIPTION:
     'System Development Engineer at Twitch building cloud-native solutions. I love creating systems that work at scale and exploring AI in development.',
