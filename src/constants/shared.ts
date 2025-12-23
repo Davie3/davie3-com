@@ -102,4 +102,6 @@ export const UI_MESSAGES = {
     'An unexpected error occurred. Please try refreshing the page.',
   ERROR_BUTTON_REFRESH: 'Refresh Page',
   ERROR_BUTTON_HOME: 'Go Home',
+
+  FOOTER_AI_CREDIT: 'Created with an AI assistant',
 } as const;

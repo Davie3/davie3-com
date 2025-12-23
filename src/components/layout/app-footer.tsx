@@ -2,6 +2,7 @@
 
 import { useEffect, useState, type JSX } from 'react';
 import { SOCIAL_LINKS_DATA } from '../../constants/config/social-config';
+import { UI_MESSAGES } from '../../constants/shared';
 import { FOOTER_CONFIG } from '../../constants/ui-components';
 import { getSocialIcon } from '../../utils/social-icons';
 
@@ -79,7 +80,7 @@ export function AppFooter(): JSX.Element {
             {/* Right - Copyright & Links */}
             <div className="flex flex-col items-start md:items-end gap-3">
               <div className="flex items-center gap-2 text-sm text-silver">
-                <span>Built with AI</span>
+                <span>{UI_MESSAGES.FOOTER_AI_CREDIT}</span>
                 <span className="text-safety-orange">🤖</span>
               </div>
               <div className="flex items-center gap-4 text-sm text-silver">
