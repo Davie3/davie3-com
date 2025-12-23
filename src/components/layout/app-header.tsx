@@ -22,7 +22,7 @@ const ClientMobileNav = dynamic(
  */
 export function AppHeader(): JSX.Element {
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 glass app-header-animation">
+    <header className="fixed top-0 left-0 right-0 z-50 glass app-header-animation border-b border-electric-cyan/10">
       <nav
         className="container mx-auto flex items-center justify-between p-4"
         aria-label="Main navigation"
@@ -32,8 +32,8 @@ export function AppHeader(): JSX.Element {
           className="group flex items-center gap-2"
           aria-label="DG - Go to homepage"
         >
-          <div className="w-10 h-10 bg-gradient-to-r from-blue-accent to-purple-accent rounded-xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
-            <span className="text-navy font-bold text-lg">DG</span>
+          <div className="w-10 h-10 bg-electric-cyan border-2 border-electric-cyan flex items-center justify-center transition-all duration-300 group-hover:bg-safety-orange group-hover:border-safety-orange">
+            <span className="text-navy font-bold text-lg font-accent">DG</span>
           </div>
         </Link>
 
@@ -48,7 +48,7 @@ export function AppHeader(): JSX.Element {
                   href={link.href}
                   target={link.openInNewTab ? '_blank' : undefined}
                   rel={link.openInNewTab ? 'noopener noreferrer' : undefined}
-                  className="relative px-4 py-2 rounded-lg font-medium transition-all duration-300 text-slate-light hover:text-blue-accent hover:bg-navy-accent/30"
+                  className="relative px-4 py-2 font-medium transition-all duration-300 text-cream hover:text-electric-cyan"
                 >
                   {link.name}
                 </ClientNavLink>

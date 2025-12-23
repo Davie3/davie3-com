@@ -58,6 +58,7 @@ async function getGitHubRepos(): Promise<GitHubRepo[]> {
 
 /**
  * Renders the portfolio page, showcasing public software projects.
+ * Design: Bento-box grid with varying card sizes
  *
  * @returns The rendered portfolio page.
  */
@@ -65,110 +66,117 @@ export default async function PortfolioPage(): Promise<JSX.Element> {
   const projects = await getGitHubRepos();
 
   return (
-    <main className="container mx-auto max-w-6xl px-4 py-24">
-      {/* Hero Section */}
+    <main className="container mx-auto max-w-7xl px-4 py-24">
+      {/* Hero Section - Editorial */}
       <section className="relative mb-16">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-accent/5 via-purple-accent/5 to-cyan-accent/5 rounded-3xl" />
-        <div className="relative glass rounded-3xl p-8 md:p-12">
-          <div className="flex items-center gap-4 mb-6">
-            <div className="w-12 h-12 bg-gradient-to-r from-purple-accent to-cyan-accent rounded-full flex items-center justify-center">
-              <span className="text-navy font-bold text-xl">💼</span>
+        <div className="space-y-6">
+          <div>
+            <div className="flex items-center gap-4 mb-3">
+              <div className="h-px w-12 bg-safety-orange" />
+              <span className="font-accent text-sm tracking-wider uppercase text-silver">
+                Portfolio
+              </span>
             </div>
-            <div>
-              <h1 className="text-4xl md:text-5xl font-bold gradient-text">
-                My Portfolio
-              </h1>
-              <p className="text-slate-dark mt-1">
-                {PAGE_DESCRIPTIONS.PORTFOLIO_HERO_SUBTITLE}
-              </p>
-            </div>
+            <h1 className="font-display text-6xl md:text-7xl lg:text-8xl leading-tight text-cream mb-3">
+              My Work
+            </h1>
+            <p className="text-xl text-electric-cyan font-semibold mb-4">
+              {PAGE_DESCRIPTIONS.PORTFOLIO_HERO_SUBTITLE}
+            </p>
           </div>
 
-          <p className="text-lg md:text-xl leading-relaxed text-slate-light">
+          <p className="text-lg md:text-xl leading-relaxed text-silver max-w-3xl">
             {PAGE_DESCRIPTIONS.PORTFOLIO_PAGE_INTRO}
           </p>
         </div>
       </section>
 
-      {/* Projects Section */}
+      {/* Projects Section - Bento Grid */}
       <section>
-        <div className="mb-8">
-          <h2 className="text-3xl md:text-4xl font-bold gradient-text mb-2">
-            Featured Projects
+        <div className="mb-8 border-l-4 border-safety-orange pl-8">
+          <span className="font-accent text-sm tracking-wider uppercase text-silver">
+            Featured
+          </span>
+          <h2 className="font-display text-4xl md:text-5xl text-cream mt-2">
+            Open Source Projects
           </h2>
-          <p className="text-slate-dark">
-            Open source contributions and personal projects
-          </p>
         </div>
 
         {projects.length > 0 ? (
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {projects.map((project, index) => (
-              <Link
-                key={project.name}
-                href={project.html_url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group card p-6 flex flex-col justify-between h-full"
-                style={{ animationDelay: `${(index * 100).toString()}ms` }}
-              >
-                <div className="flex-1">
-                  <div className="flex items-start justify-between mb-3">
-                    <h3 className="text-xl font-bold text-slate-light group-hover:text-blue-accent transition-colors duration-300">
-                      {project.name}
-                    </h3>
-                    <div className="w-3 h-3 bg-gradient-to-r from-blue-accent to-purple-accent rounded-full opacity-60 group-hover:opacity-100 transition-opacity duration-300" />
-                  </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 auto-rows-fr">
+            {projects.map((project, index) => {
+              // Create varying card sizes for bento-box effect
+              const isLarge = index % 7 === 0 || index % 7 === 3;
+              const colSpan = isLarge ? 'md:col-span-2' : 'md:col-span-1';
 
-                  <p className="text-slate-dark leading-relaxed mb-4">
-                    {project.description ?? 'No description available'}
-                  </p>
-                </div>
+              return (
+                <Link
+                  key={project.name}
+                  href={project.html_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`group relative p-6 md:p-8 bg-navy-accent/40 border border-electric-cyan/20 hover:border-electric-cyan transition-all duration-300 ${colSpan}`}
+                  style={{ animationDelay: `${(index * 100).toString()}ms` }}
+                >
+                  {/* Accent corner */}
+                  <div className="absolute top-0 right-0 w-16 h-16 bg-safety-orange/10 transform translate-x-4 -translate-y-4 group-hover:translate-x-2 group-hover:-translate-y-2 transition-transform duration-300" />
 
-                <div className="flex items-center justify-between pt-4 border-t border-navy-accent/30">
-                  <div className="flex items-center gap-3">
-                    {project.language && (
-                      <span className="px-3 py-1 bg-navy-accent rounded-full text-xs font-medium text-cyan-accent">
-                        {project.language}
-                      </span>
-                    )}
-                  </div>
-
-                  <div className="flex items-center gap-4 text-sm text-slate-dark">
-                    <div className="flex items-center gap-1 group-hover:text-blue-accent transition-colors duration-300">
-                      <Star size={14} />
-                      <span>{project.stargazers_count}</span>
+                  <div className="relative space-y-4">
+                    <div>
+                      <h3 className="text-2xl md:text-3xl font-display text-cream group-hover:text-electric-cyan transition-colors duration-300 leading-tight">
+                        {project.name}
+                      </h3>
+                      <p className="text-silver leading-relaxed mt-3">
+                        {project.description ?? 'No description available'}
+                      </p>
                     </div>
-                    <div className="flex items-center gap-1 group-hover:text-purple-accent transition-colors duration-300">
-                      <GitFork size={14} />
-                      <span>{project.forks_count}</span>
+
+                    <div className="flex items-center justify-between pt-4 border-t border-electric-cyan/10">
+                      <div className="flex items-center gap-3">
+                        {project.language && (
+                          <span className="px-3 py-1 bg-navy-accent/50 border border-electric-cyan/20 text-cream text-xs font-medium">
+                            {project.language}
+                          </span>
+                        )}
+                      </div>
+
+                      <div className="flex items-center gap-4 text-sm text-silver">
+                        <div className="flex items-center gap-1">
+                          <Star size={14} />
+                          <span>{project.stargazers_count}</span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <GitFork size={14} />
+                          <span>{project.forks_count}</span>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </Link>
-            ))}
+                </Link>
+              );
+            })}
           </div>
         ) : (
-          <div className="card p-8 text-center">
-            <div className="w-16 h-16 bg-gradient-to-r from-blue-accent/20 to-purple-accent/20 rounded-full flex items-center justify-center mx-auto mb-4">
+          <div className="p-12 text-center border border-electric-cyan/20 bg-navy-accent/20">
+            <div className="w-16 h-16 bg-safety-orange/20 border-2 border-safety-orange flex items-center justify-center mx-auto mb-4">
               <span className="text-2xl">🔧</span>
             </div>
-            <h3 className="text-xl font-bold text-slate-light mb-2">
+            <h3 className="text-xl font-display text-cream mb-2">
               Projects Loading
             </h3>
-            <p className="text-slate-dark">
+            <p className="text-silver">
               Fetching the latest projects from GitHub...
             </p>
           </div>
         )}
 
         {/* View More Link */}
-        <div className="mt-12 text-center">
+        <div className="mt-12">
           <Link
             href="https://github.com/davie3"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 px-8 py-4 glass rounded-xl font-semibold text-slate-light transition-all duration-300 hover:scale-105 hover:bg-navy-accent/50 group"
+            className="group inline-flex items-center gap-3 px-8 py-4 bg-electric-cyan text-navy font-semibold text-lg transition-all duration-300 hover:bg-safety-orange hover:scale-105 active:scale-95"
           >
             <span>View All Projects on GitHub</span>
             <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />

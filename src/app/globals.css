@@ -26,43 +26,51 @@
   }
 }
 
-/* Define the enhanced color palette using CSS variables */
+/* Define the color palette using CSS variables */
+/* Theme: "Midnight Industrial" - Dark blue anchored with unexpected accents */
 :root {
-  /* Enhanced Dark Theme Colors */
-  --color-navy: #0a0e1a; /* Deeper navy for better contrast */
-  --color-navy-light: #1a1f2e; /* Refined lighter navy */
-  --color-navy-accent: #2a2f3e; /* Mid-tone navy for cards */
-  --color-slate-light: #e2e8f0; /* Brighter slate for better readability */
-  --color-slate-dark: #94a3b8; /* Softer slate for secondary text */
-  --color-blue-accent: #60a5fa; /* More vibrant blue accent */
-  --color-purple-accent: #a855f7; /* Purple accent for variety */
-  --color-cyan-accent: #06b6d4; /* Cyan accent for highlights */
-  --color-background: var(--color-navy);
-  --color-foreground: var(--color-slate-light);
-  --color-foreground-dark: var(--color-slate-dark);
-  --color-accent: var(--color-blue-accent);
+  /* Base Colors */
+  --color-navy: #0a1628; /* Deep navy base - richer, darker */
+  --color-navy-light: #152238; /* Lighter navy variation */
+  --color-navy-accent: #1f2d44; /* Mid-tone navy for cards */
 
-  /* Gradient definitions */
+  /* Accent Colors */
+  --color-electric-cyan: #00d4ff; /* Sharp electric blue - primary accent */
+  --color-safety-orange: #ff6b35; /* Unexpected energy accent */
+  --color-cream: #f5f1e8; /* Warm cream for text */
+
+  /* Grays */
+  --color-slate: #475569; /* Mid gray */
+  --color-silver: #cbd5e1; /* Light gray */
+
+  /* Semantic Mappings */
+  --color-background: var(--color-navy);
+  --color-foreground: var(--color-cream);
+  --color-foreground-dark: var(--color-silver);
+  --color-accent: var(--color-electric-cyan);
+  --color-accent-warm: var(--color-safety-orange);
+
+  /* Gradient definitions - minimal use, strategic placement */
   --gradient-primary: linear-gradient(
     135deg,
-    var(--color-blue-accent),
-    var(--color-purple-accent)
+    var(--color-electric-cyan),
+    var(--color-navy-accent)
   );
-  --gradient-secondary: linear-gradient(
+  --gradient-accent: linear-gradient(
     135deg,
-    var(--color-cyan-accent),
-    var(--color-blue-accent)
+    var(--color-safety-orange),
+    var(--color-electric-cyan)
   );
   --gradient-background: linear-gradient(
     180deg,
     var(--color-navy) 0%,
-    #0f172a 100%
+    #060d17 100%
   );
 }
 
 /* Enhanced focus styles for better accessibility */
 *:focus-visible {
-  outline: 2px solid var(--color-blue-accent);
+  outline: 2px solid var(--color-accent);
   outline-offset: 2px;
   border-radius: 0.375rem;
 }
@@ -70,20 +78,20 @@
 button:focus-visible,
 a:focus-visible,
 [role='button']:focus-visible {
-  outline: 2px solid var(--color-blue-accent);
+  outline: 2px solid var(--color-accent);
   outline-offset: 2px;
   border-radius: 0.375rem;
   /* High contrast box shadow for dark backgrounds */
   box-shadow:
-    0 0 0 4px rgba(96, 165, 250, 0.2),
-    0 0 8px rgba(96, 165, 250, 0.3);
+    0 0 0 4px rgba(0, 212, 255, 0.2),
+    0 0 8px rgba(0, 212, 255, 0.3);
 }
 
 /* Ensure focus indicators are visible for all interactive elements */
 input:focus-visible,
 textarea:focus-visible,
 select:focus-visible {
-  outline: 2px solid var(--color-blue-accent);
+  outline: 2px solid var(--color-accent);
   outline-offset: 2px;
   border-radius: 0.375rem;
 }
@@ -102,6 +110,21 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  position: relative;
+}
+
+/* Grain texture overlay for industrial aesthetic */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.5' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: overlay;
 }
 
 /* Enhanced link styles */
@@ -112,16 +135,16 @@ a {
 }
 
 a:hover {
-  color: var(--color-purple-accent);
-  text-shadow: 0 0 8px rgba(96, 165, 250, 0.3);
+  color: var(--color-accent-warm);
+  text-shadow: 0 0 8px rgba(0, 212, 255, 0.3);
 }
 
-/* Glass morphism effect */
+/* Glass morphism effect - Updated for Midnight Industrial */
 .glass {
-  background: rgba(26, 31, 46, 0.8);
+  background: rgba(21, 34, 56, 0.7);
   backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(0, 212, 255, 0.15);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
 }
 
 /* Optimized glass effect for mobile devices */
@@ -147,11 +170,11 @@ a:hover {
   box-decoration-break: clone;
 }
 
-/* Enhanced card styles */
+/* Enhanced card styles - Midnight Industrial */
 .card {
-  background: rgba(26, 31, 46, 0.6);
+  background: rgba(31, 45, 68, 0.5);
   backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(0, 212, 255, 0.1);
   border-radius: 16px;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   /* Fix text cutoff issues */
@@ -161,7 +184,8 @@ a:hover {
 
 .card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 20px 40px rgba(96, 165, 250, 0.15);
+  border-color: rgba(0, 212, 255, 0.3);
+  box-shadow: 0 20px 40px rgba(0, 212, 255, 0.2);
 }
 
 /* Optimized card effects for mobile devices */
@@ -234,28 +258,28 @@ select {
 .form-input {
   width: 100%;
   padding: 0.75rem 1rem;
-  background-color: rgba(42, 47, 62, 0.5);
-  border: 1px solid rgba(148, 163, 184, 0.3);
+  background-color: rgba(31, 45, 68, 0.5);
+  border: 1px solid rgba(0, 212, 255, 0.2);
   border-radius: 0.75rem;
-  color: var(--color-slate-light);
+  color: var(--color-cream);
   transition: all 0.2s ease;
 }
 
 .form-input::placeholder {
-  color: var(--color-slate-dark);
+  color: var(--color-silver);
 }
 
 .form-input:focus {
   outline: none;
-  border-color: var(--color-blue-accent);
-  box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.2);
+  border-color: var(--color-electric-cyan);
+  box-shadow: 0 0 0 2px rgba(0, 212, 255, 0.2);
 }
 
 .form-label {
   display: block;
   font-size: 0.875rem;
   font-weight: 500;
-  color: var(--color-slate-light);
+  color: var(--color-cream);
   margin-bottom: 0.5rem;
 }
 
@@ -267,11 +291,7 @@ select {
 
 /* Button variants */
 .btn-primary {
-  background: linear-gradient(
-    135deg,
-    var(--color-blue-accent),
-    var(--color-purple-accent)
-  );
+  background: var(--color-electric-cyan);
   color: var(--color-navy);
   font-weight: 600;
   padding: 1rem 2rem;
@@ -284,8 +304,9 @@ select {
 }
 
 .btn-primary:hover {
+  background: var(--color-safety-orange);
   transform: scale(1.05) translateY(-2px);
-  box-shadow: 0 20px 40px rgba(96, 165, 250, 0.4);
+  box-shadow: 0 20px 40px rgba(0, 212, 255, 0.4);
 }
 
 .btn-primary:active {
@@ -337,10 +358,10 @@ select {
 /* High contrast mode support */
 @media (prefers-contrast: high) {
   :root {
-    --color-slate-light: #ffffff;
-    --color-slate-dark: #cccccc;
-    --color-blue-accent: #4da3ff;
-    --color-purple-accent: #b366ff;
+    --color-cream: #ffffff;
+    --color-silver: #e5e5e5;
+    --color-electric-cyan: #00f0ff;
+    --color-safety-orange: #ff8c5a;
   }
 
   .glass {
@@ -351,7 +372,7 @@ select {
   button:focus-visible,
   a:focus-visible,
   [role='button']:focus-visible {
-    outline: 3px solid #4da3ff !important;
+    outline: 3px solid #00f0ff !important;
     outline-offset: 2px !important;
   }
 }
@@ -464,7 +485,7 @@ select {
   transform: translateX(-50%);
   width: 0.25rem;
   height: 0.25rem;
-  background-color: var(--color-blue-accent);
+  background-color: var(--color-electric-cyan);
   border-radius: 50%;
 }
 
@@ -515,12 +536,12 @@ select {
 }
 
 .mobile-menu-close:hover {
-  color: var(--color-blue-accent);
+  color: var(--color-electric-cyan);
 }
 
 .mobile-menu-close:focus {
   outline: none;
-  box-shadow: 0 0 0 2px var(--color-blue-accent);
+  box-shadow: 0 0 0 2px var(--color-electric-cyan);
 }
 
 .mobile-menu-overlay.open {
