@@ -91,7 +91,7 @@ export default async function PortfolioPage(): Promise<JSX.Element> {
         </div>
       </section>
 
-      {/* Projects Section - Enhanced Bento Grid */}
+      {/* Projects Section - Vertical Timeline */}
       <section>
         <div className="mb-12 border-l-4 border-safety-orange pl-8">
           <span className="font-accent text-sm tracking-wider uppercase text-silver">
@@ -103,65 +103,50 @@ export default async function PortfolioPage(): Promise<JSX.Element> {
         </div>
 
         {projects.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-6 gap-4 auto-rows-[minmax(280px,auto)]">
-            {projects.map((project, index) => {
-              // Create more interesting bento-box patterns
-              // Pattern: First item spans 4 cols, then 2+2+2, then 3+3, repeat
-              let colSpan = 'md:col-span-2';
-              let rowSpan = '';
+          <div className="max-w-4xl mx-auto">
+            {/* Timeline container */}
+            <div className="relative">
+              {/* Vertical timeline line */}
+              <div className="absolute left-0 top-0 bottom-0 w-1 bg-safety-orange hidden md:block" />
 
-              if (index === 0) {
-                colSpan = 'md:col-span-4';
-                rowSpan = 'md:row-span-2';
-              } else if ((index - 1) % 8 === 0) {
-                colSpan = 'md:col-span-3';
-              } else if ((index - 1) % 8 === 1) {
-                colSpan = 'md:col-span-3';
-              } else if ((index - 1) % 8 === 4) {
-                colSpan = 'md:col-span-4';
-                rowSpan = 'md:row-span-2';
-              }
+              {/* Projects */}
+              <div className="space-y-8">
+                {projects.map((project, index) => (
+                  <div key={project.name} className="relative">
+                    {/* Timeline node - hidden on mobile */}
+                    <div className="absolute left-0 top-8 w-4 h-4 -translate-x-[7px] bg-safety-orange rounded-full border-4 border-navy hidden md:block" />
 
-              return (
-                <Link
-                  key={project.name}
-                  href={project.html_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`group relative p-6 md:p-8 bg-navy-accent/40 border-2 border-electric-cyan/20 hover:border-electric-cyan transition-all duration-300 overflow-hidden ${colSpan} ${rowSpan}`}
-                  style={{ animationDelay: `${(index * 100).toString()}ms` }}
-                >
-                  {/* Diagonal stripe accent - varies by position */}
-                  <div
-                    className={`absolute top-0 right-0 w-24 h-24 transition-transform duration-300 ${
-                      index % 3 === 0
-                        ? 'bg-safety-orange/5'
-                        : index % 3 === 1
-                          ? 'bg-electric-cyan/5'
-                          : 'bg-cream/5'
-                    }`}
-                    style={{ transform: 'translate(50%, -50%) rotate(45deg)' }}
-                  />
+                    {/* Project card */}
+                    <Link
+                      href={project.html_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group block md:ml-12 bg-navy-accent/40 border-2 border-electric-cyan/20 hover:border-electric-cyan transition-all duration-300 p-6 md:p-8"
+                      style={{
+                        animationDelay: `${(index * 100).toString()}ms`,
+                      }}
+                    >
+                      {/* Project header */}
+                      <div className="mb-4">
+                        <h3 className="text-2xl md:text-3xl font-display text-cream group-hover:text-electric-cyan transition-colors duration-300 leading-tight mb-3">
+                          {project.name}
+                        </h3>
+                        <p className="text-silver leading-relaxed text-base md:text-lg">
+                          {project.description ??
+                            PORTFOLIO_PAGE.PROJECT_NO_DESCRIPTION}
+                        </p>
+                      </div>
 
-                  <div className="relative h-full flex flex-col">
-                    <div className="flex-1">
-                      <h3 className="text-2xl md:text-3xl font-display text-cream group-hover:text-electric-cyan transition-colors duration-300 leading-tight mb-3">
-                        {project.name}
-                      </h3>
-                      <p className="text-silver leading-relaxed">
-                        {project.description ??
-                          PORTFOLIO_PAGE.PROJECT_NO_DESCRIPTION}
-                      </p>
-                    </div>
-
-                    <div className="mt-6 pt-4 border-t border-electric-cyan/10">
-                      <div className="flex items-center justify-between">
+                      {/* Project footer - stats and language */}
+                      <div className="flex flex-wrap items-center gap-4 pt-4 border-t border-electric-cyan/10">
+                        {/* Language badge */}
                         {project.language && (
                           <span className="px-3 py-1.5 bg-safety-orange/10 border border-safety-orange/30 text-safety-orange text-xs font-bold tracking-wide uppercase">
                             {project.language}
                           </span>
                         )}
 
+                        {/* Stats */}
                         <div className="flex items-center gap-4 text-sm text-silver ml-auto">
                           <div className="flex items-center gap-1.5">
                             <Star size={16} className="text-electric-cyan" />
@@ -177,19 +162,19 @@ export default async function PortfolioPage(): Promise<JSX.Element> {
                           </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
 
-                  {/* Hover state border glow */}
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                    <div className="absolute inset-0 border-2 border-electric-cyan/50" />
+                      {/* Hover state border glow */}
+                      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                        <div className="absolute inset-0 border-2 border-electric-cyan/50" />
+                      </div>
+                    </Link>
                   </div>
-                </Link>
-              );
-            })}
+                ))}
+              </div>
+            </div>
           </div>
         ) : (
-          <div className="p-12 text-center border-2 border-electric-cyan/20 bg-navy-accent/20">
+          <div className="max-w-4xl mx-auto p-12 text-center border-2 border-electric-cyan/20 bg-navy-accent/20">
             <div className="w-20 h-20 bg-safety-orange/20 border-4 border-safety-orange flex items-center justify-center mx-auto mb-4">
               <span className="text-3xl">🔧</span>
             </div>
@@ -203,7 +188,7 @@ export default async function PortfolioPage(): Promise<JSX.Element> {
         )}
 
         {/* View More Link */}
-        <div className="mt-12">
+        <div className="mt-12 max-w-4xl mx-auto">
           <Link
             href="https://github.com/davie3"
             target="_blank"
