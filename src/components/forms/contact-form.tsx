@@ -5,6 +5,7 @@ import type { JSX } from 'react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Turnstile } from '@/components/ui/turnstile-widget';
+import { CONTACT_FORM } from '@/constants/shared';
 import { FORM_MESSAGES } from '@/constants/ui-components';
 import { CONTACT_FORM_SCHEMA } from '@/types/form-types';
 import type { ContactFormValues } from '@/types/form-types';
@@ -32,7 +33,7 @@ export default function ContactForm(): JSX.Element {
 
   const onSubmit = async (data: ContactFormValues) => {
     if (!token) {
-      setCaptchaError('Please complete the CAPTCHA verification.');
+      setCaptchaError(CONTACT_FORM.CAPTCHA_ERROR);
       return;
     }
     setIsSubmitting(true);
@@ -83,12 +84,9 @@ export default function ContactForm(): JSX.Element {
             </svg>
           </div>
           <h3 className="text-3xl font-display text-cream">
-            Message Sent Successfully!
+            {CONTACT_FORM.SUCCESS_HEADING}
           </h3>
-          <p className="text-silver text-lg">
-            Thank you for reaching out. I&apos;ll get back to you as soon as
-            possible.
-          </p>
+          <p className="text-silver text-lg">{CONTACT_FORM.SUCCESS_MESSAGE}</p>
           <button
             onClick={() => {
               setFormStatus(null);
@@ -98,7 +96,7 @@ export default function ContactForm(): JSX.Element {
             }}
             className="px-6 py-3 bg-electric-cyan text-navy font-semibold hover:bg-safety-orange transition-all duration-300"
           >
-            Send Another Message
+            {CONTACT_FORM.SUCCESS_BUTTON}
           </button>
         </div>
       </div>
@@ -115,42 +113,42 @@ export default function ContactForm(): JSX.Element {
       >
         <div>
           <label htmlFor="name" className="form-label">
-            Name
+            {CONTACT_FORM.LABEL_NAME}
           </label>
           <input
             id="name"
             type="text"
             {...register('name')}
             className="form-input"
-            placeholder="Your full name"
+            placeholder={CONTACT_FORM.PLACEHOLDER_NAME}
           />
           {errors.name && <p className="form-error">{errors.name.message}</p>}
         </div>
 
         <div>
           <label htmlFor="email" className="form-label">
-            Email
+            {CONTACT_FORM.LABEL_EMAIL}
           </label>
           <input
             id="email"
             type="email"
             {...register('email')}
             className="form-input"
-            placeholder="your.email@example.com"
+            placeholder={CONTACT_FORM.PLACEHOLDER_EMAIL}
           />
           {errors.email && <p className="form-error">{errors.email.message}</p>}
         </div>
 
         <div>
           <label htmlFor="confirmEmail" className="form-label">
-            Confirm Email
+            {CONTACT_FORM.LABEL_CONFIRM_EMAIL}
           </label>
           <input
             id="confirmEmail"
             type="email"
             {...register('confirmEmail')}
             className="form-input"
-            placeholder="Confirm your email address"
+            placeholder={CONTACT_FORM.PLACEHOLDER_CONFIRM_EMAIL}
           />
           {errors.confirmEmail && (
             <p className="form-error">{errors.confirmEmail.message}</p>
@@ -159,14 +157,14 @@ export default function ContactForm(): JSX.Element {
 
         <div>
           <label htmlFor="subject" className="form-label">
-            Subject
+            {CONTACT_FORM.LABEL_SUBJECT}
           </label>
           <input
             id="subject"
             type="text"
             {...register('subject')}
             className="form-input"
-            placeholder="What's this about?"
+            placeholder={CONTACT_FORM.PLACEHOLDER_SUBJECT}
           />
           {errors.subject && (
             <p className="form-error">{errors.subject.message}</p>
@@ -175,14 +173,14 @@ export default function ContactForm(): JSX.Element {
 
         <div>
           <label htmlFor="message" className="form-label">
-            Message
+            {CONTACT_FORM.LABEL_MESSAGE}
           </label>
           <textarea
             id="message"
             rows={5}
             {...register('message')}
             className="form-input resize-none"
-            placeholder="Tell me about your project or inquiry..."
+            placeholder={CONTACT_FORM.PLACEHOLDER_MESSAGE}
           />
           {errors.message && (
             <p className="form-error">{errors.message.message}</p>
@@ -210,13 +208,13 @@ export default function ContactForm(): JSX.Element {
           disabled={isSubmitting}
           className="w-full px-8 py-4 bg-electric-cyan text-navy font-bold text-lg hover:bg-safety-orange transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-50 border-2 border-electric-cyan hover:border-safety-orange hover:scale-[1.02] active:scale-95"
         >
-          {isSubmitting ? 'Sending...' : 'Send Message'}
+          {isSubmitting ? FORM_MESSAGES.SUBMITTING : FORM_MESSAGES.SUBMIT}
         </button>
 
         {formStatus === FORM_MESSAGES.ERROR && (
           <div className="p-4 bg-safety-orange/10 border-2 border-safety-orange/50">
             <p className="text-center text-safety-orange font-semibold">
-              Something went wrong. Please try again later.
+              {CONTACT_FORM.ERROR_MESSAGE}
             </p>
           </div>
         )}

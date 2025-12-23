@@ -5,7 +5,7 @@ import type { JSX } from 'react';
 import { z } from 'zod';
 import { GITHUB_CONFIG } from '@/constants/config/github-config';
 import { PAGE_METADATA } from '@/constants/config/site-metadata';
-import { PAGE_DESCRIPTIONS } from '@/constants/shared';
+import { PAGE_DESCRIPTIONS, PORTFOLIO_PAGE } from '@/constants/shared';
 import { GITHUB_REPO_SCHEMA } from '@/types/api-types';
 import type { GitHubRepo } from '@/types/api-types';
 
@@ -74,11 +74,11 @@ export default async function PortfolioPage(): Promise<JSX.Element> {
             <div className="flex items-center gap-4 mb-3">
               <div className="h-px w-12 bg-safety-orange" />
               <span className="font-accent text-sm tracking-wider uppercase text-silver">
-                Portfolio
+                {PORTFOLIO_PAGE.SECTION_LABEL}
               </span>
             </div>
             <h1 className="font-display text-6xl md:text-7xl lg:text-8xl leading-tight text-cream mb-3">
-              My Work
+              {PORTFOLIO_PAGE.HEADING}
             </h1>
             <p className="text-xl text-electric-cyan font-semibold mb-4">
               {PAGE_DESCRIPTIONS.PORTFOLIO_HERO_SUBTITLE}
@@ -95,10 +95,10 @@ export default async function PortfolioPage(): Promise<JSX.Element> {
       <section>
         <div className="mb-12 border-l-4 border-safety-orange pl-8">
           <span className="font-accent text-sm tracking-wider uppercase text-silver">
-            Featured
+            {PORTFOLIO_PAGE.FEATURED_LABEL}
           </span>
           <h2 className="font-display text-4xl md:text-5xl text-cream mt-2">
-            Open Source Projects
+            {PORTFOLIO_PAGE.FEATURED_HEADING}
           </h2>
         </div>
 
@@ -149,7 +149,8 @@ export default async function PortfolioPage(): Promise<JSX.Element> {
                         {project.name}
                       </h3>
                       <p className="text-silver leading-relaxed">
-                        {project.description ?? 'No description available'}
+                        {project.description ??
+                          PORTFOLIO_PAGE.PROJECT_NO_DESCRIPTION}
                       </p>
                     </div>
 
@@ -193,10 +194,10 @@ export default async function PortfolioPage(): Promise<JSX.Element> {
               <span className="text-3xl">🔧</span>
             </div>
             <h3 className="text-2xl font-display text-cream mb-2">
-              Projects Loading
+              {PORTFOLIO_PAGE.EMPTY_STATE_HEADING}
             </h3>
             <p className="text-silver text-lg">
-              Fetching the latest projects from GitHub...
+              {PORTFOLIO_PAGE.EMPTY_STATE_MESSAGE}
             </p>
           </div>
         )}
@@ -209,7 +210,7 @@ export default async function PortfolioPage(): Promise<JSX.Element> {
             rel="noopener noreferrer"
             className="group inline-flex items-center gap-3 px-8 py-4 bg-electric-cyan text-navy font-semibold text-lg transition-all duration-300 hover:bg-safety-orange hover:scale-105 active:scale-95"
           >
-            <span>View All Projects on GitHub</span>
+            <span>{PORTFOLIO_PAGE.VIEW_ALL_BUTTON}</span>
             <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
           </Link>
         </div>

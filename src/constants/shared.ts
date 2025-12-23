@@ -105,3 +105,54 @@ export const UI_MESSAGES = {
 
   FOOTER_AI_CREDIT: 'Created with an AI assistant',
 } as const;
+
+/**
+ * Contact page content
+ */
+export const CONTACT_PAGE = {
+  SECTION_LABEL: 'Contact',
+  HEADING: 'Get In Touch',
+  FORM_SECTION_LABEL: 'Message',
+  FORM_HEADING: 'Send a Message',
+} as const;
+
+/**
+ * Contact form content
+ */
+export const CONTACT_FORM = {
+  // Field labels
+  LABEL_NAME: 'Name',
+  LABEL_EMAIL: 'Email',
+  LABEL_CONFIRM_EMAIL: 'Confirm Email',
+  LABEL_SUBJECT: 'Subject',
+  LABEL_MESSAGE: 'Message',
+
+  // Placeholders
+  PLACEHOLDER_NAME: 'Your full name',
+  PLACEHOLDER_EMAIL: 'your.email@example.com',
+  PLACEHOLDER_CONFIRM_EMAIL: 'Confirm your email address',
+  PLACEHOLDER_SUBJECT: "What's this about?",
+  PLACEHOLDER_MESSAGE: 'Tell me about your project or inquiry...',
+
+  // Messages
+  CAPTCHA_ERROR: 'Please complete the CAPTCHA verification.',
+  SUCCESS_HEADING: 'Message Sent Successfully!',
+  SUCCESS_MESSAGE:
+    "Thank you for reaching out. I'll get back to you as soon as possible.",
+  SUCCESS_BUTTON: 'Send Another Message',
+  ERROR_MESSAGE: 'Something went wrong. Please try again later.',
+} as const;
+
+/**
+ * Portfolio page content
+ */
+export const PORTFOLIO_PAGE = {
+  SECTION_LABEL: 'Portfolio',
+  HEADING: 'My Work',
+  FEATURED_LABEL: 'Featured',
+  FEATURED_HEADING: 'Open Source Projects',
+  PROJECT_NO_DESCRIPTION: 'No description available',
+  EMPTY_STATE_HEADING: 'Projects Loading',
+  EMPTY_STATE_MESSAGE: 'Fetching the latest projects from GitHub...',
+  VIEW_ALL_BUTTON: 'View All Projects on GitHub',
+} as const;
