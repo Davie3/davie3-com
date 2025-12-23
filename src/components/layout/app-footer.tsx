@@ -26,7 +26,7 @@ export function AppFooter(): JSX.Element {
 
   return (
     <footer
-      className={`w-full py-16 mt-40 transition-all duration-700 ease-in-out ${
+      className={`w-full py-16 mt-56 lg:mt-24 transition-all duration-700 ease-in-out ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
       }`}
     >
