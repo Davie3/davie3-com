@@ -1,4 +1,4 @@
-import { GitFork, Star, ArrowRight } from 'lucide-react';
+import { GitFork, Star, ExternalLink } from 'lucide-react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import type { JSX } from 'react';
@@ -171,7 +171,7 @@ export default async function PortfolioPage(): Promise<JSX.Element> {
         )}
 
         {/* View More Link */}
-        <div className="mt-12 ">
+        <div className="mt-12 flex justify-center">
           <Link
             href="https://github.com/davie3"
             target="_blank"
@@ -179,7 +179,7 @@ export default async function PortfolioPage(): Promise<JSX.Element> {
             className="group inline-flex items-center gap-3 px-8 py-4 bg-electric-cyan text-navy font-semibold text-lg transition-all duration-300 hover:bg-safety-orange hover:scale-105 active:scale-95"
           >
             <span>{PORTFOLIO_PAGE.VIEW_ALL_BUTTON}</span>
-            <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
+            <ExternalLink className="w-5 h-5 transition-transform duration-300 group-hover:scale-110" />
           </Link>
         </div>
       </section>
