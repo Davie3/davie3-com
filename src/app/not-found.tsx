@@ -13,7 +13,7 @@ export default function NotFound(): JSX.Element {
   return (
     <main
       id="main-content"
-      className="min-h-screen flex items-center justify-center p-4"
+      className="flex-1 flex items-center justify-center p-4"
     >
       <div className="text-center max-w-2xl">
         {/* 404 Animation */}

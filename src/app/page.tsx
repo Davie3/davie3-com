@@ -17,11 +17,7 @@ import { EXTERNAL_URLS, INTERNAL_ROUTES } from '../constants/urls';
  */
 export default function Home(): JSX.Element {
   return (
-    <main
-      id="main-content"
-      className="min-h-screen relative overflow-hidden p-4 md:p-8"
-      style={{ minHeight: 'calc(100vh - 4rem)' }}
-    >
+    <main id="main-content" className="relative overflow-hidden p-4 md:p-8">
       {/* Subtle background gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-electric-cyan/5 via-transparent to-navy-accent pointer-events-none" />
 
