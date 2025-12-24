@@ -60,7 +60,7 @@ export default function Home(): JSX.Element {
 
               <Link
                 href={INTERNAL_ROUTES.PORTFOLIO}
-                className="group relative px-8 py-4 border-2 border-electric-cyan text-electric-cyan font-semibold text-lg transition-all duration-300 hover:bg-electric-cyan hover:text-navy hover:scale-105 active:scale-95"
+                className="group relative px-8 py-4 bg-electric-cyan text-navy font-semibold text-lg transition-all duration-300 hover:bg-safety-orange hover:scale-105 active:scale-95"
               >
                 <span className="flex items-center gap-2">
                   View Work
@@ -72,7 +72,7 @@ export default function Home(): JSX.Element {
                 href={EXTERNAL_URLS.GITHUB_PROFILE}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex items-center gap-3 px-6 py-4 text-silver font-semibold transition-all duration-300 hover:text-electric-cyan"
+                className="group flex items-center gap-3 px-6 py-4 text-silver font-semibold text-lg transition-all duration-300 hover:text-electric-cyan"
               >
                 <span>GitHub</span>
                 <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
