@@ -120,7 +120,7 @@ export default async function PortfolioPage(): Promise<JSX.Element> {
                   <h3 className="text-lg md:text-xl font-display text-cream group-hover:text-electric-cyan transition-colors duration-300 leading-tight mb-2">
                     {project.name}
                   </h3>
-                  <p className="text-silver leading-snug text-sm">
+                  <p className="text-silver leading-snug text-md">
                     {project.description ??
                       PORTFOLIO_PAGE.PROJECT_NO_DESCRIPTION}
                   </p>
