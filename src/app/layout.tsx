@@ -89,8 +89,8 @@ export default function RootLayout({
         </a>
         <div className="flex-1 flex flex-col">
           <ClientLayout>{children}</ClientLayout>
+          <AppFooter />
         </div>
-        <AppFooter />
         {/* Analytics components - controlled by ENABLE_ANALYTICS env var */}
         {shouldEnableAnalytics && (
           <>

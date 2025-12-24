@@ -15,7 +15,7 @@ export function PageWrapper({ children }: PageWrapperProps): JSX.Element {
   return (
     <motion.main
       key={pathname}
-      className="container mx-auto px-6 md:px-12 lg:px-24"
+      className="container mx-auto px-6 md:px-12 lg:px-24 pb-2"
       initial={{ opacity: 0, y: PAGE_ANIMATION.Y_OFFSET }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -PAGE_ANIMATION.Y_OFFSET }}

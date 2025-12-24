@@ -6,7 +6,7 @@ import type { JSX } from 'react';
 export function RightSidebar(): JSX.Element {
   return (
     <motion.aside
-      className="hidden md:flex flex-col items-center fixed bottom-0 right-10 w-10"
+      className="hidden md:flex flex-col items-center fixed bottom-0 right-10 w-10 z-40"
       initial={{ opacity: 0, x: 20 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.5, delay: 1.5 }}
