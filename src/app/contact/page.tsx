@@ -15,7 +15,7 @@ export const metadata: Metadata = PAGE_METADATA.CONTACT;
  */
 export default function ContactPage(): JSX.Element {
   return (
-    <main className="container mx-auto max-w-4xl px-4 py-24">
+    <main className="container mx-auto max-w-4xl px-4 py-16">
       {/* Hero Section - Editorial */}
       <section className="relative mb-16">
         <div className="space-y-6">

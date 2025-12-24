@@ -21,7 +21,7 @@ export const metadata: Metadata = PAGE_METADATA.ABOUT;
  */
 export default function AboutPage(): JSX.Element {
   return (
-    <main className="container mx-auto max-w-6xl px-4 py-24">
+    <main className="container mx-auto max-w-6xl px-4 py-16">
       {/* Hero Section - Editorial style */}
       <section className="relative mb-24">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">

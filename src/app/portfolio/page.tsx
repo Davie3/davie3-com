@@ -66,7 +66,7 @@ export default async function PortfolioPage(): Promise<JSX.Element> {
   const projects = await getGitHubRepos();
 
   return (
-    <main className="container mx-auto max-w-7xl px-4 py-24">
+    <main className="container mx-auto max-w-7xl px-4 py-16">
       {/* Hero Section - Editorial */}
       <section className="relative mb-16">
         <div className="space-y-6">

@@ -17,7 +17,7 @@ type ErrorProps = {
  */
 export default function Error({ error, reset }: ErrorProps): JSX.Element {
   return (
-    <main className="container mx-auto max-w-4xl px-4 py-24">
+    <main className="container mx-auto max-w-4xl px-4 py-16">
       <section id="portfolio-error" className="text-center">
         <div className="flex justify-center mb-4">
           <AlertCircle className="h-16 w-16 text-destructive" />
