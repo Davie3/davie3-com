@@ -1,0 +1,94 @@
+'use client';
+
+import { forwardRef } from 'react';
+import { cn } from '@/lib/utils/class-utils';
+import type { ReactNode } from 'react';
+import type { CardVariant } from '@/types/ui-types';
+
+type CardProps = {
+  variant?: CardVariant;
+  className?: string;
+  children: ReactNode;
+} & React.HTMLAttributes<HTMLDivElement>;
+
+export const Card = forwardRef<HTMLDivElement, CardProps>(
+  ({ variant = 'default', className, children, ...props }, ref) => {
+    return (
+      <div
+        ref={ref}
+        className={cn(
+          // Base styles
+          'rounded-xl transition-all duration-300',
+
+          // Variant styles
+          variant === 'default' &&
+            cn(
+              'bg-navy-accent/40 border-2 border-electric-cyan/20',
+              'hover:border-electric-cyan/30',
+            ),
+          variant === 'glass' &&
+            cn(
+              'bg-navy-accent/30 backdrop-blur-md border-2 border-electric-cyan/20',
+              'shadow-lg shadow-electric-cyan/5',
+              'hover:border-electric-cyan/30 hover:shadow-electric-cyan/10',
+            ),
+          variant === 'elevated' &&
+            cn(
+              'bg-navy-accent/50 border-2 border-electric-cyan/30',
+              'shadow-2xl shadow-electric-cyan/10',
+              'hover:shadow-electric-cyan/20',
+            ),
+
+          className,
+        )}
+        {...props}
+      >
+        {children}
+      </div>
+    );
+  },
+);
+
+Card.displayName = 'Card';
+
+// Card sub-components
+type CardSubComponentProps = {
+  className?: string;
+  children: ReactNode;
+} & React.HTMLAttributes<HTMLDivElement>;
+
+export const CardHeader = forwardRef<HTMLDivElement, CardSubComponentProps>(
+  ({ className, children, ...props }, ref) => {
+    return (
+      <div ref={ref} className={cn('p-6 pb-4', className)} {...props}>
+        {children}
+      </div>
+    );
+  },
+);
+
+CardHeader.displayName = 'CardHeader';
+
+export const CardContent = forwardRef<HTMLDivElement, CardSubComponentProps>(
+  ({ className, children, ...props }, ref) => {
+    return (
+      <div ref={ref} className={cn('p-6', className)} {...props}>
+        {children}
+      </div>
+    );
+  },
+);
+
+CardContent.displayName = 'CardContent';
+
+export const CardFooter = forwardRef<HTMLDivElement, CardSubComponentProps>(
+  ({ className, children, ...props }, ref) => {
+    return (
+      <div ref={ref} className={cn('p-6 pt-4', className)} {...props}>
+        {children}
+      </div>
+    );
+  },
+);
+
+CardFooter.displayName = 'CardFooter';

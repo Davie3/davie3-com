@@ -1,15 +1,43 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { User, Mail, MessageSquare, CheckCircle2 } from 'lucide-react';
+import { motion } from 'framer-motion';
 import type { JSX } from 'react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+
 import { Turnstile } from '@/components/ui/turnstile-widget';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Button } from '@/components/ui/button';
+import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
+import { Card, CardContent } from '@/components/ui/card';
+import { FormField } from '@/components/ui/form-field';
+
 import { CONTACT_FORM } from '@/constants/shared';
 import { FORM_MESSAGES } from '@/constants/ui-components';
 import { CONTACT_FORM_SCHEMA } from '@/types/form-types';
 import type { ContactFormValues } from '@/types/form-types';
-import { INTERNAL_ROUTES } from '../../constants/urls';
+import { INTERNAL_ROUTES } from '@/constants/urls';
+
+// Framer Motion variants
+const formVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.4,
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const fieldVariants = {
+  hidden: { opacity: 0, x: -20 },
+  visible: { opacity: 1, x: 0 },
+};
 
 /**
  * Client-side contact form component with validation and submission handling.
@@ -27,9 +55,12 @@ export default function ContactForm(): JSX.Element {
     handleSubmit,
     formState: { errors },
     reset,
+    watch,
   } = useForm<ContactFormValues>({
     resolver: zodResolver(CONTACT_FORM_SCHEMA),
   });
+
+  const messageValue = watch('message', '');
 
   const onSubmit = async (data: ContactFormValues) => {
     if (!token) {
@@ -64,161 +95,201 @@ export default function ContactForm(): JSX.Element {
     }
   };
 
+  const resetForm = () => {
+    setFormStatus(null);
+    reset();
+    setToken('');
+    setCaptchaError(null);
+  };
+
+  // Success state
   if (formStatus === FORM_MESSAGES.SUCCESS) {
     return (
-      <div className="bg-navy-accent/60 border-2 border-electric-cyan/30 p-8 md:p-12">
-        <div className="text-center space-y-6">
-          <div className="w-20 h-20 bg-electric-cyan/10 border-2 border-electric-cyan flex items-center justify-center mx-auto">
-            <svg
-              className="w-10 h-10 text-electric-cyan"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={3}
-                d="M5 13l4 4L19 7"
-              />
-            </svg>
-          </div>
-          <h3 className="text-3xl font-display text-cream">
-            {CONTACT_FORM.SUCCESS_HEADING}
-          </h3>
-          <p className="text-silver text-lg">{CONTACT_FORM.SUCCESS_MESSAGE}</p>
-          <button
-            onClick={() => {
-              setFormStatus(null);
-              reset();
-              setToken('');
-              setCaptchaError(null);
-            }}
-            className="px-6 py-3 bg-electric-cyan text-navy font-semibold hover:bg-safety-orange transition-all duration-300"
-          >
-            {CONTACT_FORM.SUCCESS_BUTTON}
-          </button>
-        </div>
-      </div>
+      <motion.div
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ type: 'spring', duration: 0.6, bounce: 0.3 }}
+      >
+        <Card variant="elevated" className="max-w-3xl mx-auto">
+          <CardContent className="py-12 text-center space-y-6">
+            <div className="w-20 h-20 bg-electric-cyan/10 border-2 border-electric-cyan flex items-center justify-center mx-auto rounded-lg">
+              <CheckCircle2 className="w-10 h-10 text-electric-cyan" />
+            </div>
+            <Alert variant="success" className="border-0 bg-transparent">
+              <AlertTitle className="text-3xl font-display text-cream mb-3">
+                {CONTACT_FORM.SUCCESS_HEADING}
+              </AlertTitle>
+              <AlertDescription className="text-lg text-silver">
+                {CONTACT_FORM.SUCCESS_MESSAGE}
+              </AlertDescription>
+            </Alert>
+            <Button onClick={resetForm} variant="outline" size="lg">
+              {CONTACT_FORM.SUCCESS_BUTTON}
+            </Button>
+          </CardContent>
+        </Card>
+      </motion.div>
     );
   }
 
+  // Form state
   return (
-    <div className="bg-navy-accent/40 border-2 border-electric-cyan/20 p-8 md:p-12">
-      <form
-        onSubmit={(e) => {
-          void handleSubmit(onSubmit)(e);
-        }}
-        className="space-y-6"
-      >
-        <div>
-          <label htmlFor="name" className="form-label">
-            {CONTACT_FORM.LABEL_NAME}
-          </label>
-          <input
-            id="name"
-            type="text"
-            {...register('name')}
-            className="form-input"
-            placeholder={CONTACT_FORM.PLACEHOLDER_NAME}
-          />
-          {errors.name && <p className="form-error">{errors.name.message}</p>}
-        </div>
-
-        <div>
-          <label htmlFor="email" className="form-label">
-            {CONTACT_FORM.LABEL_EMAIL}
-          </label>
-          <input
-            id="email"
-            type="email"
-            {...register('email')}
-            className="form-input"
-            placeholder={CONTACT_FORM.PLACEHOLDER_EMAIL}
-          />
-          {errors.email && <p className="form-error">{errors.email.message}</p>}
-        </div>
-
-        <div>
-          <label htmlFor="confirmEmail" className="form-label">
-            {CONTACT_FORM.LABEL_CONFIRM_EMAIL}
-          </label>
-          <input
-            id="confirmEmail"
-            type="email"
-            {...register('confirmEmail')}
-            className="form-input"
-            placeholder={CONTACT_FORM.PLACEHOLDER_CONFIRM_EMAIL}
-          />
-          {errors.confirmEmail && (
-            <p className="form-error">{errors.confirmEmail.message}</p>
-          )}
-        </div>
-
-        <div>
-          <label htmlFor="subject" className="form-label">
-            {CONTACT_FORM.LABEL_SUBJECT}
-          </label>
-          <input
-            id="subject"
-            type="text"
-            {...register('subject')}
-            className="form-input"
-            placeholder={CONTACT_FORM.PLACEHOLDER_SUBJECT}
-          />
-          {errors.subject && (
-            <p className="form-error">{errors.subject.message}</p>
-          )}
-        </div>
-
-        <div>
-          <label htmlFor="message" className="form-label">
-            {CONTACT_FORM.LABEL_MESSAGE}
-          </label>
-          <textarea
-            id="message"
-            rows={5}
-            {...register('message')}
-            className="form-input resize-none"
-            placeholder={CONTACT_FORM.PLACEHOLDER_MESSAGE}
-          />
-          {errors.message && (
-            <p className="form-error">{errors.message.message}</p>
-          )}
-        </div>
-
-        <div className="flex justify-center">
-          <Turnstile
-            onSuccess={(token) => {
-              setToken(token);
-              setCaptchaError(null);
-            }}
-          />
-        </div>
-        {captchaError && (
-          <div className="p-4 bg-safety-orange/10 border-2 border-safety-orange/50">
-            <p className="text-center text-safety-orange text-sm font-semibold">
-              {captchaError}
-            </p>
-          </div>
-        )}
-
-        <button
-          type="submit"
-          disabled={isSubmitting}
-          className="w-full px-8 py-4 bg-electric-cyan text-navy font-bold text-lg hover:bg-safety-orange transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-50 border-2 border-electric-cyan hover:border-safety-orange hover:scale-[1.02] active:scale-95"
+    <Card variant="glass" className="max-w-3xl mx-auto">
+      <CardContent>
+        <motion.form
+          onSubmit={(e) => {
+            void handleSubmit(onSubmit)(e);
+          }}
+          className="space-y-6"
+          variants={formVariants}
+          initial="hidden"
+          animate="visible"
         >
-          {isSubmitting ? FORM_MESSAGES.SUBMITTING : FORM_MESSAGES.SUBMIT}
-        </button>
+          <motion.div variants={fieldVariants}>
+            <FormField
+              label={CONTACT_FORM.LABEL_NAME}
+              name="name"
+              error={errors.name?.message}
+              required
+            >
+              <Input
+                id="name"
+                type="text"
+                {...register('name')}
+                variant={errors.name ? 'error' : 'default'}
+                placeholder={CONTACT_FORM.PLACEHOLDER_NAME}
+                icon={<User className="w-5 h-5" />}
+                iconPosition="left"
+              />
+            </FormField>
+          </motion.div>
 
-        {formStatus === FORM_MESSAGES.ERROR && (
-          <div className="p-4 bg-safety-orange/10 border-2 border-safety-orange/50">
-            <p className="text-center text-safety-orange font-semibold">
-              {CONTACT_FORM.ERROR_MESSAGE}
-            </p>
-          </div>
-        )}
-      </form>
-    </div>
+          <motion.div variants={fieldVariants}>
+            <FormField
+              label={CONTACT_FORM.LABEL_EMAIL}
+              name="email"
+              error={errors.email?.message}
+              required
+            >
+              <Input
+                id="email"
+                type="email"
+                {...register('email')}
+                variant={errors.email ? 'error' : 'default'}
+                placeholder={CONTACT_FORM.PLACEHOLDER_EMAIL}
+                icon={<Mail className="w-5 h-5" />}
+                iconPosition="left"
+              />
+            </FormField>
+          </motion.div>
+
+          <motion.div variants={fieldVariants}>
+            <FormField
+              label={CONTACT_FORM.LABEL_CONFIRM_EMAIL}
+              name="confirmEmail"
+              error={errors.confirmEmail?.message}
+              required
+            >
+              <Input
+                id="confirmEmail"
+                type="email"
+                {...register('confirmEmail')}
+                variant={errors.confirmEmail ? 'error' : 'default'}
+                placeholder={CONTACT_FORM.PLACEHOLDER_CONFIRM_EMAIL}
+                icon={<Mail className="w-5 h-5" />}
+                iconPosition="left"
+              />
+            </FormField>
+          </motion.div>
+
+          <motion.div variants={fieldVariants}>
+            <FormField
+              label={CONTACT_FORM.LABEL_SUBJECT}
+              name="subject"
+              error={errors.subject?.message}
+              required
+            >
+              <Input
+                id="subject"
+                type="text"
+                {...register('subject')}
+                variant={errors.subject ? 'error' : 'default'}
+                placeholder={CONTACT_FORM.PLACEHOLDER_SUBJECT}
+                icon={<MessageSquare className="w-5 h-5" />}
+                iconPosition="left"
+              />
+            </FormField>
+          </motion.div>
+
+          <motion.div variants={fieldVariants}>
+            <FormField
+              label={CONTACT_FORM.LABEL_MESSAGE}
+              name="message"
+              error={errors.message?.message}
+              required
+            >
+              <Textarea
+                id="message"
+                {...register('message')}
+                variant={errors.message ? 'error' : 'default'}
+                placeholder={CONTACT_FORM.PLACEHOLDER_MESSAGE}
+                rows={6}
+                maxLength={2000}
+                showCharCount
+                value={messageValue}
+              />
+            </FormField>
+          </motion.div>
+
+          <motion.div
+            variants={fieldVariants}
+            className="flex justify-center pt-2"
+          >
+            <Turnstile
+              onSuccess={(newToken) => {
+                setToken(newToken);
+                setCaptchaError(null);
+              }}
+            />
+          </motion.div>
+
+          {captchaError && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+            >
+              <Alert
+                variant="error"
+                dismissible
+                onDismiss={() => setCaptchaError(null)}
+              >
+                {captchaError}
+              </Alert>
+            </motion.div>
+          )}
+
+          <motion.div variants={fieldVariants}>
+            <Button
+              type="submit"
+              variant="primary"
+              size="lg"
+              loading={isSubmitting}
+              className="w-full"
+            >
+              {isSubmitting ? FORM_MESSAGES.SUBMITTING : FORM_MESSAGES.SUBMIT}
+            </Button>
+          </motion.div>
+
+          {formStatus === FORM_MESSAGES.ERROR && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+            >
+              <Alert variant="error">{CONTACT_FORM.ERROR_MESSAGE}</Alert>
+            </motion.div>
+          )}
+        </motion.form>
+      </CardContent>
+    </Card>
   );
 }
