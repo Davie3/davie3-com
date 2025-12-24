@@ -11,7 +11,7 @@ import { Turnstile } from '@/components/ui/turnstile-widget';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
-import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
+import { Alert } from '@/components/ui/alert';
 import { Card, CardContent } from '@/components/ui/card';
 import { FormField } from '@/components/ui/form-field';
 
@@ -115,14 +115,14 @@ export default function ContactForm(): JSX.Element {
             <div className="w-20 h-20 bg-electric-cyan/10 border-2 border-electric-cyan flex items-center justify-center mx-auto rounded-lg">
               <CheckCircle2 className="w-10 h-10 text-electric-cyan" />
             </div>
-            <Alert variant="success" className="border-0 bg-transparent">
-              <AlertTitle className="text-3xl font-display text-cream mb-3">
+            <div className="space-y-3">
+              <h3 className="text-3xl font-display text-cream">
                 {CONTACT_FORM.SUCCESS_HEADING}
-              </AlertTitle>
-              <AlertDescription className="text-lg text-silver">
+              </h3>
+              <p className="text-lg text-silver">
                 {CONTACT_FORM.SUCCESS_MESSAGE}
-              </AlertDescription>
-            </Alert>
+              </p>
+            </div>
             <Button onClick={resetForm} variant="outline" size="lg">
               {CONTACT_FORM.SUCCESS_BUTTON}
             </Button>
