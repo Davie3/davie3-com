@@ -32,8 +32,10 @@ export function AppHeader(): JSX.Element {
           className="group flex items-center gap-2"
           aria-label="DG - Go to homepage"
         >
-          <div className="w-10 h-10 bg-electric-cyan border-2 border-electric-cyan flex items-center justify-center transition-all duration-300 group-hover:bg-safety-orange group-hover:border-safety-orange">
-            <span className="text-navy font-bold text-lg font-accent">DG</span>
+          <div className="w-10 h-10 flex items-center justify-center transition-all duration-300">
+            <span className="text-electric-cyan font-bold text-lg font-accent group-hover:text-safety-orange">
+              DG
+            </span>
           </div>
         </Link>
 
