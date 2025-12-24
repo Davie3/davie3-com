@@ -173,7 +173,7 @@ export default function AboutPage(): JSX.Element {
           {EDUCATION.map((edu) => (
             <div key={edu.institution} className="space-y-3">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-safety-orange/20 border-2 border-safety-orange flex items-center justify-center flex-shrink-0">
+                <div className="w-12 h-12 bg-safety-orange/20 flex items-center justify-center flex-shrink-0">
                   <span className="text-2xl">{edu.emoji}</span>
                 </div>
                 <div>
