@@ -103,78 +103,61 @@ export default async function PortfolioPage(): Promise<JSX.Element> {
         </div>
 
         {projects.length > 0 ? (
-          <div className="max-w-4xl mx-auto">
-            {/* Timeline container */}
-            <div className="relative">
-              {/* Vertical timeline line */}
-              <div className="absolute left-0 top-0 bottom-0 w-1 bg-safety-orange hidden md:block" />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {projects.map((project, index) => (
+              <Link
+                key={project.name}
+                href={project.html_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative block rounded-lg bg-navy-accent/40 border-2 border-electric-cyan/20 hover:border-electric-cyan shadow-sm hover:shadow-md transition-all duration-300 p-4"
+                style={{
+                  animationDelay: `${(index * 100).toString()}ms`,
+                }}
+              >
+                {/* Project header */}
+                <div className="mb-2">
+                  <h3 className="text-lg md:text-xl font-display text-cream group-hover:text-electric-cyan transition-colors duration-300 leading-tight mb-2">
+                    {project.name}
+                  </h3>
+                  <p className="text-silver leading-snug text-sm">
+                    {project.description ??
+                      PORTFOLIO_PAGE.PROJECT_NO_DESCRIPTION}
+                  </p>
+                </div>
 
-              {/* Projects */}
-              <div className="space-y-8">
-                {projects.map((project, index) => (
-                  <div key={project.name} className="relative">
-                    {/* Timeline bracket connector - hidden on mobile */}
-                    <div className="absolute left-0 top-8 w-10 h-6 border-l-2 border-b-2 border-safety-orange hidden md:block" />
-
-                    {/* Project card */}
-                    <Link
-                      href={project.html_url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group block md:ml-10 bg-navy-accent/40 border-2 border-electric-cyan/20 hover:border-electric-cyan transition-all duration-300 p-6 md:p-8"
-                      style={{
-                        animationDelay: `${(index * 100).toString()}ms`,
-                      }}
-                    >
-                      {/* Project header */}
-                      <div className="mb-4">
-                        <h3 className="text-2xl md:text-3xl font-display text-cream group-hover:text-electric-cyan transition-colors duration-300 leading-tight mb-3">
-                          {project.name}
-                        </h3>
-                        <p className="text-silver leading-relaxed text-base md:text-lg">
-                          {project.description ??
-                            PORTFOLIO_PAGE.PROJECT_NO_DESCRIPTION}
-                        </p>
-                      </div>
-
-                      {/* Project footer - stats and language */}
-                      <div className="flex flex-wrap items-center gap-4 pt-4 border-t border-electric-cyan/10">
-                        {/* Language badge */}
-                        {project.language && (
-                          <span className="px-3 py-1.5 bg-safety-orange/10 border border-safety-orange/30 text-safety-orange text-xs font-bold tracking-wide uppercase">
-                            {project.language}
-                          </span>
-                        )}
-
-                        {/* Stats */}
-                        <div className="flex items-center gap-4 text-sm text-silver ml-auto">
-                          <div className="flex items-center gap-1.5">
-                            <Star size={16} className="text-electric-cyan" />
-                            <span className="font-medium">
-                              {project.stargazers_count}
-                            </span>
-                          </div>
-                          <div className="flex items-center gap-1.5">
-                            <GitFork size={16} className="text-safety-orange" />
-                            <span className="font-medium">
-                              {project.forks_count}
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Hover state border glow */}
-                      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                        <div className="absolute inset-0 border-2 border-electric-cyan/50" />
-                      </div>
-                    </Link>
+                {/* Language badge */}
+                {project.language && (
+                  <div className="mb-3">
+                    <span className="inline-block px-2 py-0.5 bg-safety-orange/10 border border-safety-orange/30 text-safety-orange text-xs font-bold tracking-wide uppercase rounded-full">
+                      {project.language}
+                    </span>
                   </div>
-                ))}
-              </div>
-            </div>
+                )}
+
+                {/* Project footer - stats */}
+                <div className="flex items-center gap-3 pt-3 border-t border-electric-cyan/10 text-xs text-silver">
+                  <div className="flex items-center gap-1">
+                    <Star size={14} className="text-electric-cyan" />
+                    <span className="font-medium">
+                      {project.stargazers_count}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <GitFork size={14} className="text-safety-orange" />
+                    <span className="font-medium">{project.forks_count}</span>
+                  </div>
+                </div>
+
+                {/* Hover state border glow */}
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-lg">
+                  <div className="absolute inset-0 border-2 border-electric-cyan/50 rounded-lg" />
+                </div>
+              </Link>
+            ))}
           </div>
         ) : (
-          <div className="max-w-4xl mx-auto p-12 text-center border-2 border-electric-cyan/20 bg-navy-accent/20">
+          <div className=" p-12 text-center border-2 border-electric-cyan/20 bg-navy-accent/20">
             <div className="w-20 h-20 bg-safety-orange/20 border-4 border-safety-orange flex items-center justify-center mx-auto mb-4">
               <span className="text-3xl">🔧</span>
             </div>
@@ -188,7 +171,7 @@ export default async function PortfolioPage(): Promise<JSX.Element> {
         )}
 
         {/* View More Link */}
-        <div className="mt-12 max-w-4xl mx-auto">
+        <div className="mt-12 ">
           <Link
             href="https://github.com/davie3"
             target="_blank"
