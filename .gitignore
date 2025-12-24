@@ -45,4 +45,4 @@ next-env.d.ts
 
 # misc
 brainstorm/
-claude_desktop_config.json
+.claude/*
