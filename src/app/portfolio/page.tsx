@@ -121,7 +121,7 @@ export default async function PortfolioPage(): Promise<JSX.Element> {
                       href={project.html_url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group block md:ml-12 bg-navy-accent/40 border-2 border-electric-cyan/20 hover:border-electric-cyan transition-all duration-300 p-6 md:p-8"
+                      className="group block md:ml-10 bg-navy-accent/40 border-2 border-electric-cyan/20 hover:border-electric-cyan transition-all duration-300 p-6 md:p-8"
                       style={{
                         animationDelay: `${(index * 100).toString()}ms`,
                       }}
