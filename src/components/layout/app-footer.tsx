@@ -26,7 +26,7 @@ export function AppFooter(): JSX.Element {
 
   return (
     <footer
-      className={`w-full py-16 mt-24 transition-all duration-700 ease-in-out ${
+      className={`w-full py-16 mt-16 transition-all duration-700 ease-in-out ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
       }`}
     >
@@ -53,7 +53,7 @@ export function AppFooter(): JSX.Element {
         </div>
 
         {/* Footer Content - Industrial Design */}
-        <div className="border-t-4 border-safety-orange pt-20 lg:pt-8">
+        <div className="border-t-4 border-safety-orange pt-12 lg:pt-8">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-8">
             {/* Left - Branding */}
             <div className="flex items-center gap-4">
