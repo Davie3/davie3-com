@@ -1,4 +1,4 @@
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, ExternalLink } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import type { JSX } from 'react';
@@ -75,7 +75,7 @@ export default function Home(): JSX.Element {
                 className="group flex items-center gap-3 px-6 py-4 text-silver font-semibold text-lg transition-all duration-300 hover:text-electric-cyan"
               >
                 <span>GitHub</span>
-                <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
+                <ExternalLink className="w-5 h-5 transition-transform duration-300 group-hover:scale-110" />
               </a>
             </div>
           </div>
