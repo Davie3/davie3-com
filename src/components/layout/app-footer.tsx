@@ -53,7 +53,7 @@ export function AppFooter(): JSX.Element {
         </div>
 
         {/* Footer Content - Industrial Design */}
-        <div className="border-t-4 border-safety-orange pt-10 lg:pt-8">
+        <div className="border-t-0 lg:border-t-4 border-safety-orange pt-10 lg:pt-8">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-8">
             {/* Left - Branding */}
             <div className="flex items-center gap-4">
