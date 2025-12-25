@@ -17,6 +17,7 @@ import { FormField } from '@/components/ui/form-field';
 
 import { CONTACT_FORM } from '@/constants/shared';
 import { FORM_MESSAGES } from '@/constants/ui-components';
+import { ANIMATION_DURATIONS } from '@/constants/config/animation-config';
 import { CONTACT_FORM_SCHEMA } from '@/types/form-types';
 import type { ContactFormValues } from '@/types/form-types';
 import { INTERNAL_ROUTES } from '@/constants/urls';
@@ -58,7 +59,7 @@ export default function ContactForm(): JSX.Element {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.4,
+        duration: ANIMATION_DURATIONS.MEDIUM,
         staggerChildren: shouldReduceMotion ? 0 : 0.1,
       },
     },
@@ -127,7 +128,11 @@ export default function ContactForm(): JSX.Element {
       <motion.div
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
-        transition={{ type: 'spring', duration: 0.6, bounce: 0.3 }}
+        transition={{
+          type: 'spring',
+          duration: ANIMATION_DURATIONS.SPRING,
+          bounce: 0.3,
+        }}
       >
         <Card variant="elevated" className="max-w-3xl mx-auto">
           <CardContent className="py-12 text-center space-y-6">

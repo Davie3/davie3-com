@@ -3,7 +3,10 @@ import type { LayerType } from '@/types/config-types';
 export const ANIMATION_DURATIONS = {
   FAST: 0.2,
   NORMAL: 0.3,
+  MEDIUM: 0.4,
   SLOW: 0.5,
+  SPRING: 0.6,
+  SLOWER: 0.7,
 } as const;
 
 export const CANVAS_CONFIG = {
