@@ -20,10 +20,13 @@ const clientEnvSchema = z.object({
 // Validate and apply defaults
 const parsedEnv = clientEnvSchema.parse(process.env);
 
+const isDevelopment = process.env.NODE_ENV === 'development';
+
 export const env = {
   ...parsedEnv,
   NEXT_PUBLIC_TURNSTILE_SITE_KEY:
-    parsedEnv.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? '1x00000000000000000000AA', // Test key for local dev
+    parsedEnv.NEXT_PUBLIC_TURNSTILE_SITE_KEY ??
+    (isDevelopment ? '1x00000000000000000000AA' : ''), // Test key only for local dev
 };
 
 // Lazy validation for server env (call this in API routes)
