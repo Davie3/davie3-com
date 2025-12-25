@@ -9,12 +9,8 @@ import {
   ShootingStarPool,
   updateStarTwinkle,
 } from '@/lib/utils/particle-system';
-import {
-  drawStar,
-  drawNebula,
-  drawShootingStar,
-  isInViewport,
-} from '@/lib/utils/canvas-utils';
+import { drawShootingStar, isInViewport } from '@/lib/utils/canvas-utils';
+import { SpriteRenderer } from '@/lib/utils/sprite-renderer';
 
 export function AnimatedBackground(): JSX.Element {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -22,10 +18,12 @@ export function AnimatedBackground(): JSX.Element {
   const lastFrameTimeRef = useRef<number>(0);
   const scrollYRef = useRef<number>(0);
 
-  // Initialize particles once on mount
+  // Initialize particles and sprite renderer once on mount
   const [particles] = useState(() => {
     const width = typeof window !== 'undefined' ? window.innerWidth : 1920;
     const height = typeof window !== 'undefined' ? window.innerHeight : 1080;
+
+    const nebulae = generateNebulae(10, width, height);
 
     return {
       stars: {
@@ -48,10 +46,13 @@ export function AnimatedBackground(): JSX.Element {
           height,
         ),
       },
-      nebulae: generateNebulae(10, width, height),
+      nebulae,
       shootingStarPool: new ShootingStarPool(5),
     };
   });
+
+  // Initialize sprite renderer (will be created on client-side only)
+  const spriteRendererRef = useRef<SpriteRenderer | null>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -59,6 +60,16 @@ export function AnimatedBackground(): JSX.Element {
 
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
+
+    // Initialize sprite renderer on client-side only (avoid SSR issues)
+    if (!spriteRendererRef.current) {
+      const renderer = new SpriteRenderer();
+      renderer.preRenderStars();
+      renderer.preRenderNebulae(particles.nebulae);
+      spriteRendererRef.current = renderer;
+    }
+
+    const spriteRenderer = spriteRendererRef.current;
 
     // Resize handler
     const resizeCanvas = (): void => {
@@ -90,7 +101,7 @@ export function AnimatedBackground(): JSX.Element {
 
       const scrollY = scrollYRef.current;
 
-      // 1. Render nebulae (background layer)
+      // 1. Render nebulae (background layer) using pre-rendered sprites
       const bgScrollOffset = scrollY * CANVAS_CONFIG.layers.background.speed;
       particles.nebulae.forEach((nebula) => {
         if (
@@ -101,11 +112,11 @@ export function AnimatedBackground(): JSX.Element {
             CANVAS_CONFIG.viewportBuffer,
           )
         ) {
-          drawNebula(ctx, nebula, bgScrollOffset);
+          spriteRenderer.drawNebula(ctx, nebula, bgScrollOffset);
         }
       });
 
-      // 2. Render stars by layer
+      // 2. Render stars by layer using pre-rendered sprites
       const layers = [
         {
           stars: particles.stars.background,
@@ -135,7 +146,12 @@ export function AnimatedBackground(): JSX.Element {
             const currentOpacity = prefersReducedMotion
               ? star.baseOpacity
               : updateStarTwinkle(star, deltaTime);
-            drawStar(ctx, star, currentOpacity, layerScrollOffset);
+            spriteRenderer.drawStar(
+              ctx,
+              star,
+              currentOpacity,
+              layerScrollOffset,
+            );
           }
         });
       });
