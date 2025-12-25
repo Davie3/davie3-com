@@ -7,6 +7,7 @@ import type { JSX } from 'react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
+import { CONTACT_FORM_CONSTRAINTS } from '@/constants/config/form-config';
 import { Turnstile } from '@/components/ui/turnstile-widget';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -258,7 +259,7 @@ export default function ContactForm(): JSX.Element {
                 variant={errors.message ? 'error' : 'default'}
                 placeholder={CONTACT_FORM.PLACEHOLDER_MESSAGE}
                 rows={6}
-                maxLength={2000}
+                maxLength={CONTACT_FORM_CONSTRAINTS.MESSAGE.MAX_LENGTH}
                 showCharCount
                 value={messageValue}
               />

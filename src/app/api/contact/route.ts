@@ -4,6 +4,7 @@ import { NextResponse } from 'next/server';
 import sanitizeHtml from 'sanitize-html';
 import xss from 'xss';
 import { z } from 'zod';
+import { CLOUDFLARE_API } from '@/constants/config/external-api-config';
 import { env } from '@/env';
 import { formatEmailTimestamp } from '@/lib/utils/date-utils';
 import {
@@ -13,9 +14,6 @@ import {
 import { CONTACT_FORM_SCHEMA } from '@/types/form-types';
 
 sgMail.setApiKey(env.SENDGRID_API_KEY);
-
-const TURNSTILE_VERIFY_ENDPOINT =
-  'https://challenges.cloudflare.com/turnstile/v0/siteverify';
 
 const ContactFormSchema = CONTACT_FORM_SCHEMA.safeExtend({
   token: z.string().min(1, 'Turnstile token is required.'),
@@ -65,16 +63,19 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
     const { name, email, subject, message, token } = validationResult.data;
 
-    const turnstileResponse = await fetch(TURNSTILE_VERIFY_ENDPOINT, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
+    const turnstileResponse = await fetch(
+      CLOUDFLARE_API.TURNSTILE_VERIFY_ENDPOINT,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          secret: env.TURNSTILE_SECRET_KEY,
+          response: token,
+        }),
       },
-      body: JSON.stringify({
-        secret: env.TURNSTILE_SECRET_KEY,
-        response: token,
-      }),
-    });
+    );
 
     const turnstileBody: unknown = await turnstileResponse.json();
     const turnstileData = TurnstileResponseSchema.parse(turnstileBody);

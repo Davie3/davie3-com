@@ -5,6 +5,7 @@ import type { JSX } from 'react';
 import { z } from 'zod';
 import { Card } from '@/components/ui/card';
 import { SectionHeader } from '@/components/ui/section-header';
+import { PAGE_STAGGER_DELAYS } from '@/constants/config/animation-config';
 import { GITHUB_CONFIG } from '@/constants/config/github-config';
 import { PAGE_METADATA } from '@/constants/config/site-metadata';
 import { PAGE_DESCRIPTIONS, PORTFOLIO_PAGE } from '@/constants/shared';
@@ -111,7 +112,7 @@ export default async function PortfolioPage(): Promise<JSX.Element> {
                 rel="noopener noreferrer"
                 className="group block"
                 style={{
-                  animationDelay: `${(index * 100).toString()}ms`,
+                  animationDelay: `${(index * PAGE_STAGGER_DELAYS.PORTFOLIO_REPOS).toString()}ms`,
                 }}
               >
                 <Card className="h-full p-4 hover:shadow-md hover:border-electric-cyan">

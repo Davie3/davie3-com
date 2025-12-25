@@ -1,15 +1,12 @@
 import type { Metadata } from 'next';
 import type { JSX } from 'react';
+import { PAGE_METADATA } from '@/constants/config/seo-config';
 import { PAGE_LAST_MODIFIED } from '@/constants/site-metadata';
 import { createPacificDate } from '@/lib/utils/date-utils';
 import { PrivacySection } from '@/components/ui/privacy-section';
 import { Card, CardContent } from '@/components/ui/card';
 
-export const metadata: Metadata = {
-  title: 'Privacy Policy | David Griffin',
-  description:
-    'Privacy policy for davie3.com - Learn how I collect, use, and protect your personal information.',
-};
+export const metadata: Metadata = PAGE_METADATA.PRIVACY;
 
 export default function PrivacyPage(): JSX.Element {
   return (

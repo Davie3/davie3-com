@@ -55,3 +55,11 @@ export const PAGE_ANIMATION = {
   DURATION: ANIMATION_DURATIONS.NORMAL,
   Y_OFFSET: 10,
 } as const;
+
+/**
+ * Page-specific animation stagger delays (in milliseconds)
+ */
+export const PAGE_STAGGER_DELAYS = {
+  ABOUT_SKILLS: 50,
+  PORTFOLIO_REPOS: 100,
+} as const;

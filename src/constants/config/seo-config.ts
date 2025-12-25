@@ -92,3 +92,11 @@ export const SEO_DATA = {
     ...TECHNOLOGIES.GENERAL,
   ],
 } as const;
+
+export const PAGE_METADATA = {
+  PRIVACY: {
+    title: 'Privacy Policy | David Griffin',
+    description:
+      'Privacy policy for davie3.com - Learn how I collect, use, and protect your personal information.',
+  },
+} as const;

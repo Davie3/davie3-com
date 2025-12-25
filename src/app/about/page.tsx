@@ -7,6 +7,7 @@ import {
   ABOUT_CONTENT,
   SKILLS,
 } from '@/constants/about-page';
+import { PAGE_STAGGER_DELAYS } from '@/constants/config/animation-config';
 import { SectionHeader } from '@/components/ui/section-header';
 import { BorderedSection } from '@/components/ui/bordered-section';
 import { PAGE_METADATA } from '@/constants/config/site-metadata';
@@ -93,7 +94,9 @@ export default function AboutPage(): JSX.Element {
             <span
               key={skill}
               className="px-4 py-2 bg-navy-accent/50 border border-electric-cyan/20 text-cream hover:border-electric-cyan hover:text-electric-cyan transition-all duration-300 text-sm md:text-base font-medium"
-              style={{ animationDelay: `${(index * 50).toString()}ms` }}
+              style={{
+                animationDelay: `${(index * PAGE_STAGGER_DELAYS.ABOUT_SKILLS).toString()}ms`,
+              }}
             >
               {skill}
             </span>
