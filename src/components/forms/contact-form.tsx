@@ -29,7 +29,7 @@ const formVariants = {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.4,
+      duration: ANIMATION_DURATIONS.MEDIUM,
       staggerChildren: 0.1,
     },
   },

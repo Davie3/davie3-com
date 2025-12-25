@@ -54,6 +54,13 @@
   --z-overlay: 100;
   --z-modal: 200;
   --z-grain: 300; /* Grain texture overlay - top layer, non-interactive */
+
+  /* Animation Durations - Aligned with animation-config.ts */
+  --animation-duration-fast: 0.2s; /* FAST */
+  --animation-duration-normal: 0.3s; /* NORMAL */
+  --animation-duration-medium: 0.4s; /* MEDIUM */
+  --animation-duration-slow: 0.5s; /* SLOW */
+  --animation-duration-slower: 0.7s; /* SLOWER */
 }
 
 /* Enhanced focus styles for better accessibility */
@@ -385,12 +392,12 @@ select {
 
 /* Header Animation - Now using Tailwind animation */
 .app-header-animation {
-  animation: slideInFromTop 0.5s ease-out;
+  animation: slideInFromTop var(--animation-duration-slow) ease-out;
 }
 
 /* Navigation item animation - Keep as component-specific */
 .nav-item {
-  animation: fadeInUp 0.3s ease-out both;
+  animation: fadeInUp var(--animation-duration-normal) ease-out both;
 }
 
 /* Active nav link indicator - Complex pseudo-element, keep as CSS */
