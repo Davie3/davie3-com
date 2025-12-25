@@ -51,7 +51,7 @@ export function updateStarTwinkle(star: CanvasStar, deltaTime: number): number {
 /**
  * Update shooting star position and opacity.
  */
-export function updateShootingStar(
+function updateShootingStar(
   shootingStar: ShootingStar,
   deltaTime: number,
 ): void {
