@@ -510,10 +510,11 @@ select {
 }
 
 .mobile-menu-backdrop {
-  position: absolute;
+  position: fixed;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(4px);
+  z-index: var(--z-overlay);
 }
 
 .mobile-menu-panel {
