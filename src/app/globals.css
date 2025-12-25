@@ -40,7 +40,6 @@
   --color-cream: #f5f1e8; /* Warm cream for text */
 
   /* Grays */
-  --color-slate: #475569; /* Mid gray */
   --color-silver: #cbd5e1; /* Light gray */
 
   /* Semantic Mappings */
@@ -51,29 +50,10 @@
   --color-accent-warm: var(--color-safety-orange);
 
   /* Z-index Scale - Systematic layering hierarchy */
-  --z-base: 0;
-  --z-content: 10;
   --z-header: 50;
   --z-overlay: 100;
   --z-modal: 200;
   --z-grain: 300; /* Grain texture overlay - top layer, non-interactive */
-
-  /* Gradient definitions - minimal use, strategic placement */
-  --gradient-primary: linear-gradient(
-    135deg,
-    var(--color-electric-cyan),
-    var(--color-navy-accent)
-  );
-  --gradient-accent: linear-gradient(
-    135deg,
-    var(--color-safety-orange),
-    var(--color-electric-cyan)
-  );
-  --gradient-background: linear-gradient(
-    180deg,
-    var(--color-navy) 0%,
-    #060d17 100%
-  );
 }
 
 /* Enhanced focus styles for better accessibility */
@@ -285,75 +265,6 @@ select {
   writing-mode: vertical-rl;
 }
 
-/* Form input styles */
-.form-input {
-  width: 100%;
-  padding: 0.75rem 1rem;
-  background-color: rgba(31, 45, 68, 0.5);
-  border: 1px solid rgba(0, 212, 255, 0.2);
-  border-radius: 0.75rem;
-  color: var(--color-cream);
-  transition: all 0.2s ease;
-}
-
-.form-input::placeholder {
-  color: var(--color-silver);
-}
-
-.form-input:focus {
-  outline: none;
-  border-color: var(--color-electric-cyan);
-  box-shadow: 0 0 0 2px rgba(0, 212, 255, 0.2);
-}
-
-.form-label {
-  display: block;
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: var(--color-cream);
-  margin-bottom: 0.5rem;
-}
-
-.form-error {
-  margin-top: 0.5rem;
-  font-size: 0.875rem;
-  color: #f87171;
-}
-
-/* Button variants */
-.btn-primary {
-  background: var(--color-electric-cyan);
-  color: var(--color-navy);
-  font-weight: 600;
-  padding: 1rem 2rem;
-  border-radius: 0.75rem;
-  border: none;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.btn-primary:hover {
-  background: var(--color-safety-orange);
-  transform: scale(1.05) translateY(-2px);
-  box-shadow: 0 20px 40px rgba(0, 212, 255, 0.4);
-}
-
-.btn-primary:active {
-  transform: scale(0.95);
-}
-
-.btn-primary:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.btn-primary:disabled:hover {
-  transform: none;
-  box-shadow: none;
-}
-
 /* Reduce motion for users who prefer it */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -427,31 +338,6 @@ select {
 }
 
 /* Glow effect for buttons */
-.glow-on-hover {
-  position: relative;
-  overflow: hidden;
-}
-
-.glow-on-hover::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.1),
-    transparent
-  );
-  transition: left 0.5s;
-}
-
-.glow-on-hover:hover::before {
-  left: 100%;
-}
-
 /* Header Animations - CSS replacements for Framer Motion */
 @keyframes slideInFromTop {
   from {
@@ -599,17 +485,6 @@ select {
 }
 
 /* Custom animations for UI components */
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateY(-8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 /* Common utility classes for consistent transitions */
 @layer utilities {
   .transition-standard {
