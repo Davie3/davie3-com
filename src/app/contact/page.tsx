@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import type { JSX } from 'react';
 import ContactForm from '@/components/forms/contact-form';
+import { SectionHeader } from '@/components/ui/section-header';
 import { PAGE_METADATA } from '@/constants/config/site-metadata';
 import { CONTACT_PAGE, PAGE_DESCRIPTIONS } from '@/constants/shared';
 
@@ -18,15 +19,12 @@ export default function ContactPage(): JSX.Element {
       {/* Enhanced Hero Section */}
       <section className="mb-16">
         <div className="max-w-3xl">
-          <div className="flex items-center gap-4 mb-4">
-            <div className="h-px w-16 bg-gradient-to-r from-safety-orange to-electric-cyan" />
-            <span className="font-accent text-sm tracking-widest uppercase text-silver">
-              {CONTACT_PAGE.SECTION_LABEL}
-            </span>
-          </div>
-          <h1 className="font-display text-7xl md:text-8xl lg:text-9xl leading-none text-cream mb-6">
-            {CONTACT_PAGE.HEADING}
-          </h1>
+          <SectionHeader
+            label={CONTACT_PAGE.SECTION_LABEL}
+            heading={CONTACT_PAGE.HEADING}
+            headingLevel="h1"
+            className="mb-6"
+          />
           <p className="text-2xl text-electric-cyan font-semibold mb-6">
             {PAGE_DESCRIPTIONS.CONTACT_HERO_SUBTITLE}
           </p>

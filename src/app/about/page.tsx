@@ -7,6 +7,7 @@ import {
   ABOUT_CONTENT,
   SKILLS,
 } from '@/constants/about-page';
+import { SectionHeader } from '@/components/ui/section-header';
 import { PAGE_METADATA } from '@/constants/config/site-metadata';
 import { SOCIAL_LINKS_DATA } from '@/constants/config/social-config';
 import { getSocialIcon } from '@/utils/social-icons';
@@ -43,15 +44,12 @@ export default function AboutPage(): JSX.Element {
           {/* Right - Title and intro */}
           <div className="md:col-span-2 space-y-6">
             <div>
-              <div className="flex items-center gap-3 mb-3">
-                <div className="h-px w-12 bg-safety-orange" />
-                <span className="font-accent text-sm tracking-wider uppercase text-silver">
-                  About
-                </span>
-              </div>
-              <h1 className="font-display text-6xl md:text-7xl lg:text-8xl leading-tight text-cream mb-2">
-                David Griffin
-              </h1>
+              <SectionHeader
+                label="About"
+                heading="David Griffin"
+                headingLevel="h1"
+                className="mb-2"
+              />
               <p className="text-xl text-electric-cyan font-semibold">
                 {ABOUT_CONTENT.HERO_SUBTITLE}
               </p>

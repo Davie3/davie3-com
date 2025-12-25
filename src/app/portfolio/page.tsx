@@ -4,6 +4,7 @@ import Link from 'next/link';
 import type { JSX } from 'react';
 import { z } from 'zod';
 import { Card } from '@/components/ui/card';
+import { SectionHeader } from '@/components/ui/section-header';
 import { GITHUB_CONFIG } from '@/constants/config/github-config';
 import { PAGE_METADATA } from '@/constants/config/site-metadata';
 import { PAGE_DESCRIPTIONS, PORTFOLIO_PAGE } from '@/constants/shared';
@@ -72,15 +73,12 @@ export default async function PortfolioPage(): Promise<JSX.Element> {
       <section className="relative mb-16">
         <div className="space-y-6">
           <div>
-            <div className="flex items-center gap-4 mb-3">
-              <div className="h-px w-12 bg-safety-orange" />
-              <span className="font-accent text-sm tracking-wider uppercase text-silver">
-                {PORTFOLIO_PAGE.SECTION_LABEL}
-              </span>
-            </div>
-            <h1 className="font-display text-6xl md:text-7xl lg:text-8xl leading-tight text-cream mb-3">
-              {PORTFOLIO_PAGE.HEADING}
-            </h1>
+            <SectionHeader
+              label={PORTFOLIO_PAGE.SECTION_LABEL}
+              heading={PORTFOLIO_PAGE.HEADING}
+              headingLevel="h1"
+              className="mb-3"
+            />
             <p className="text-xl text-electric-cyan font-semibold mb-4">
               {PAGE_DESCRIPTIONS.PORTFOLIO_HERO_SUBTITLE}
             </p>
