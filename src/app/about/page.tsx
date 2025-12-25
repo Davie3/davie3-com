@@ -126,9 +126,9 @@ export default function AboutPage(): JSX.Element {
         </div>
 
         <div className="space-y-12">
-          {EXPERIENCES.map((exp, index) => (
+          {EXPERIENCES.map((exp) => (
             <div
-              key={`${exp.company}-${index.toString()}`}
+              key={`${exp.company}-${exp.role}-${exp.period}`}
               className="relative pl-8 border-l-2 border-electric-cyan/30"
             >
               {/* Timeline dot */}
