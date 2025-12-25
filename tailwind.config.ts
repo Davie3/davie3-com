@@ -20,7 +20,6 @@ const config: Config = {
         'electric-cyan': 'var(--color-electric-cyan)',
         'safety-orange': 'var(--color-safety-orange)',
         cream: 'var(--color-cream)',
-        slate: 'var(--color-slate)',
         silver: 'var(--color-silver)',
         // Legacy color mappings for backward compatibility
         'slate-light': 'var(--color-cream)',
@@ -44,11 +43,6 @@ const config: Config = {
         sans: ['var(--font-sans)'],
         display: ['var(--font-display)'],
         accent: ['var(--font-accent)'],
-      },
-      backgroundImage: {
-        'gradient-primary': 'var(--gradient-primary)',
-        'gradient-accent': 'var(--gradient-accent)',
-        'gradient-background': 'var(--gradient-background)',
       },
       animation: {
         'fade-in-up': 'fadeInUp 0.3s ease-out both',

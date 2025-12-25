@@ -136,15 +136,6 @@ body::before {
   mix-blend-mode: overlay;
 }
 
-/* Alternative if performance issues detected:
-body {
-  background-image:
-    url("data:image/svg+xml,..."),
-    var(--gradient-background);
-  background-attachment: scroll;
-}
-*/
-
 /* Enhanced link styles */
 a {
   color: var(--color-accent);
@@ -171,21 +162,6 @@ a:hover {
     backdrop-filter: blur(6px);
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
   }
-}
-
-/* Gradient text effect */
-.gradient-text {
-  background: var(--gradient-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  /* Fix text cutoff for descenders */
-  line-height: 1.2;
-  padding-bottom: 0.1em;
-  display: inline-block;
-  /* Ensure proper rendering */
-  -webkit-box-decoration-break: clone;
-  box-decoration-break: clone;
 }
 
 /* Enhanced card styles - Midnight Industrial */
@@ -231,12 +207,6 @@ a:hover {
   overflow: visible;
 }
 
-/* Ensure proper spacing for text with descenders */
-.text-container {
-  padding-bottom: 0.25rem;
-  overflow: visible;
-}
-
 /* Smooth transitions for interactive elements */
 button,
 a,
@@ -244,28 +214,6 @@ input,
 textarea,
 select {
   transition: all 0.2s ease;
-}
-
-/* Navigation animation delay utilities - Keep these as they're component-specific */
-.animate-delay-1 {
-  animation-delay: 0.1s;
-}
-
-.animate-delay-2 {
-  animation-delay: 0.2s;
-}
-
-.animate-delay-3 {
-  animation-delay: 0.3s;
-}
-
-.animate-delay-4 {
-  animation-delay: 0.4s;
-}
-
-/* Layout utilities - Now available as Tailwind utilities */
-.min-h-screen-minus-header {
-  min-height: calc(100vh - 4rem);
 }
 
 .writing-mode-vertical {
@@ -350,7 +298,6 @@ select {
   }
 }
 
-/* Glow effect for buttons */
 /* Header Animations - CSS replacements for Framer Motion */
 @keyframes slideInFromTop {
   from {
