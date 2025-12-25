@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 import type { ReactNode, JSX } from 'react';
 import { PAGE_ANIMATION } from '../../constants/config/animation-config';
@@ -11,14 +11,21 @@ type PageWrapperProps = {
 
 export function PageWrapper({ children }: PageWrapperProps): JSX.Element {
   const pathname = usePathname();
+  const shouldReduceMotion = useReducedMotion();
 
   return (
     <motion.main
       key={pathname}
       className="container mx-auto px-6 md:px-12 lg:px-24 pb-2"
-      initial={{ opacity: 0, y: PAGE_ANIMATION.Y_OFFSET }}
+      initial={{
+        opacity: 0,
+        y: shouldReduceMotion ? 0 : PAGE_ANIMATION.Y_OFFSET,
+      }}
       animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -PAGE_ANIMATION.Y_OFFSET }}
+      exit={{
+        opacity: 0,
+        y: shouldReduceMotion ? 0 : -PAGE_ANIMATION.Y_OFFSET,
+      }}
       transition={{
         duration: PAGE_ANIMATION.DURATION,
         ease: 'easeInOut',

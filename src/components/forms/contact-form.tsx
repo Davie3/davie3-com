@@ -2,7 +2,7 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { User, Mail, MessageSquare, CheckCircle2 } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import type { JSX } from 'react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -49,6 +49,25 @@ export default function ContactForm(): JSX.Element {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [token, setToken] = useState<string>('');
   const [captchaError, setCaptchaError] = useState<string | null>(null);
+  const shouldReduceMotion = useReducedMotion();
+
+  // Conditional variants based on motion preference
+  const formVariantsResponsive = {
+    hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.4,
+        staggerChildren: shouldReduceMotion ? 0 : 0.1,
+      },
+    },
+  };
+
+  const fieldVariantsResponsive = {
+    hidden: { opacity: 0, x: shouldReduceMotion ? 0 : -20 },
+    visible: { opacity: 1, x: 0 },
+  };
 
   const {
     register,
@@ -141,11 +160,11 @@ export default function ContactForm(): JSX.Element {
             void handleSubmit(onSubmit)(e);
           }}
           className="space-y-6"
-          variants={formVariants}
+          variants={formVariantsResponsive}
           initial="hidden"
           animate="visible"
         >
-          <motion.div variants={fieldVariants}>
+          <motion.div variants={fieldVariantsResponsive}>
             <FormField
               label={CONTACT_FORM.LABEL_NAME}
               name="name"
@@ -164,7 +183,7 @@ export default function ContactForm(): JSX.Element {
             </FormField>
           </motion.div>
 
-          <motion.div variants={fieldVariants}>
+          <motion.div variants={fieldVariantsResponsive}>
             <FormField
               label={CONTACT_FORM.LABEL_EMAIL}
               name="email"
@@ -183,7 +202,7 @@ export default function ContactForm(): JSX.Element {
             </FormField>
           </motion.div>
 
-          <motion.div variants={fieldVariants}>
+          <motion.div variants={fieldVariantsResponsive}>
             <FormField
               label={CONTACT_FORM.LABEL_CONFIRM_EMAIL}
               name="confirmEmail"
@@ -202,7 +221,7 @@ export default function ContactForm(): JSX.Element {
             </FormField>
           </motion.div>
 
-          <motion.div variants={fieldVariants}>
+          <motion.div variants={fieldVariantsResponsive}>
             <FormField
               label={CONTACT_FORM.LABEL_SUBJECT}
               name="subject"
@@ -221,7 +240,7 @@ export default function ContactForm(): JSX.Element {
             </FormField>
           </motion.div>
 
-          <motion.div variants={fieldVariants}>
+          <motion.div variants={fieldVariantsResponsive}>
             <FormField
               label={CONTACT_FORM.LABEL_MESSAGE}
               name="message"
@@ -242,7 +261,7 @@ export default function ContactForm(): JSX.Element {
           </motion.div>
 
           <motion.div
-            variants={fieldVariants}
+            variants={fieldVariantsResponsive}
             className="flex justify-center pt-2"
           >
             <Turnstile
@@ -268,7 +287,7 @@ export default function ContactForm(): JSX.Element {
             </motion.div>
           )}
 
-          <motion.div variants={fieldVariants}>
+          <motion.div variants={fieldVariantsResponsive}>
             <Button
               type="submit"
               variant="primary"

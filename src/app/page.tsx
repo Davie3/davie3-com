@@ -36,7 +36,7 @@ export default function Home(): JSX.Element {
             {/* Role with accent font */}
             <div className="flex items-center gap-4">
               <div className="h-px w-12 bg-safety-orange" />
-              <h2 className="font-accent text-2xl md:text-3xl lg:text-4xl tracking-wider uppercase text-silver">
+              <h2 className="font-accent text-3xl md:text-4xl lg:text-5xl tracking-wider uppercase text-silver">
                 {PROFESSIONAL_TITLES.CURRENT}
               </h2>
             </div>

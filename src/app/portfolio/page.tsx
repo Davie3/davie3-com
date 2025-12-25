@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import type { JSX } from 'react';
 import { z } from 'zod';
+import { Card } from '@/components/ui/card';
 import { GITHUB_CONFIG } from '@/constants/config/github-config';
 import { PAGE_METADATA } from '@/constants/config/site-metadata';
 import { PAGE_DESCRIPTIONS, PORTFOLIO_PAGE } from '@/constants/shared';
@@ -110,49 +111,46 @@ export default async function PortfolioPage(): Promise<JSX.Element> {
                 href={project.html_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative block rounded-lg bg-navy-accent/40 border-2 border-electric-cyan/20 hover:border-electric-cyan shadow-sm hover:shadow-md transition-all duration-300 p-4"
+                className="group block"
                 style={{
                   animationDelay: `${(index * 100).toString()}ms`,
                 }}
               >
-                {/* Project header */}
-                <div className="mb-2">
-                  <h3 className="text-lg md:text-xl font-display text-cream group-hover:text-electric-cyan transition-colors duration-300 leading-tight mb-2">
-                    {project.name}
-                  </h3>
-                  <p className="text-silver leading-snug text-md">
-                    {project.description ??
-                      PORTFOLIO_PAGE.PROJECT_NO_DESCRIPTION}
-                  </p>
-                </div>
-
-                {/* Language badge */}
-                {project.language && (
-                  <div className="mb-3">
-                    <span className="inline-block px-2 py-0.5 bg-safety-orange/10 border border-safety-orange/30 text-safety-orange text-xs font-bold tracking-wide uppercase rounded-full">
-                      {project.language}
-                    </span>
+                <Card className="h-full p-4 hover:shadow-md hover:border-electric-cyan">
+                  {/* Project header */}
+                  <div className="mb-2">
+                    <h3 className="text-lg md:text-xl font-display text-cream group-hover:text-electric-cyan transition-colors duration-300 leading-tight mb-2">
+                      {project.name}
+                    </h3>
+                    <p className="text-silver leading-snug text-md">
+                      {project.description ??
+                        PORTFOLIO_PAGE.PROJECT_NO_DESCRIPTION}
+                    </p>
                   </div>
-                )}
 
-                {/* Project footer - stats */}
-                <div className="flex items-center gap-3 pt-3 border-t border-electric-cyan/10 text-xs text-silver">
-                  <div className="flex items-center gap-1">
-                    <Star size={14} className="text-electric-cyan" />
-                    <span className="font-medium">
-                      {project.stargazers_count}
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <GitFork size={14} className="text-safety-orange" />
-                    <span className="font-medium">{project.forks_count}</span>
-                  </div>
-                </div>
+                  {/* Language badge */}
+                  {project.language && (
+                    <div className="mb-3">
+                      <span className="inline-block px-2 py-0.5 bg-safety-orange/10 border border-safety-orange/30 text-safety-orange text-xs font-bold tracking-wide uppercase rounded-full">
+                        {project.language}
+                      </span>
+                    </div>
+                  )}
 
-                {/* Hover state border glow */}
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-lg">
-                  <div className="absolute inset-0 border-2 border-electric-cyan/50 rounded-lg" />
-                </div>
+                  {/* Project footer - stats */}
+                  <div className="flex items-center gap-3 pt-3 border-t border-electric-cyan/10 text-xs text-silver">
+                    <div className="flex items-center gap-1">
+                      <Star size={14} className="text-electric-cyan" />
+                      <span className="font-medium">
+                        {project.stargazers_count}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <GitFork size={14} className="text-safety-orange" />
+                      <span className="font-medium">{project.forks_count}</span>
+                    </div>
+                  </div>
+                </Card>
               </Link>
             ))}
           </div>

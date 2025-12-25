@@ -18,10 +18,10 @@ export default function NotFound(): JSX.Element {
       <div className="text-center max-w-2xl">
         {/* 404 Animation */}
         <div className="relative mb-8">
-          <div className="text-[150px] md:text-[200px] font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-accent via-purple-accent to-cyan-accent animate-pulse">
+          <div className="text-[150px] md:text-[200px] font-bold text-transparent bg-clip-text bg-gradient-to-r from-electric-cyan to-safety-orange animate-pulse">
             404
           </div>
-          <div className="absolute inset-0 blur-3xl bg-gradient-to-r from-blue-accent/20 via-purple-accent/20 to-cyan-accent/20" />
+          <div className="absolute inset-0 blur-3xl bg-gradient-to-r from-electric-cyan/20 to-safety-orange/20" />
         </div>
 
         {/* Error Message */}
@@ -37,7 +37,7 @@ export default function NotFound(): JSX.Element {
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link
             href="/"
-            className="group inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-accent to-purple-accent rounded-xl font-semibold text-navy transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-blue-accent/25"
+            className="group inline-flex items-center gap-2 px-6 py-3 bg-electric-cyan rounded-xl font-semibold text-navy transition-all duration-300 hover:bg-safety-orange hover:scale-105 hover:shadow-lg hover:shadow-electric-cyan/25"
           >
             <Home className="w-5 h-5" />
             <span>Go Home</span>
@@ -61,19 +61,19 @@ export default function NotFound(): JSX.Element {
           <div className="flex flex-wrap gap-4 justify-center">
             <Link
               href="/about"
-              className="text-blue-accent hover:text-cyan-accent transition-colors"
+              className="text-electric-cyan hover:text-safety-orange transition-colors"
             >
               About
             </Link>
             <Link
               href="/portfolio"
-              className="text-blue-accent hover:text-cyan-accent transition-colors"
+              className="text-electric-cyan hover:text-safety-orange transition-colors"
             >
               Portfolio
             </Link>
             <Link
               href="/contact"
-              className="text-blue-accent hover:text-cyan-accent transition-colors"
+              className="text-electric-cyan hover:text-safety-orange transition-colors"
             >
               Contact
             </Link>
