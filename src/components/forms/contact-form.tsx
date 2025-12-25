@@ -286,6 +286,7 @@ export default function ContactForm(): JSX.Element {
             <motion.div
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
+              role="alert"
             >
               <Alert
                 variant="error"
@@ -313,6 +314,7 @@ export default function ContactForm(): JSX.Element {
             <motion.div
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
+              role="alert"
             >
               <Alert variant="error">{CONTACT_FORM.ERROR_MESSAGE}</Alert>
             </motion.div>

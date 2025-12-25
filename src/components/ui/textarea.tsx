@@ -71,13 +71,24 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
             className,
           )}
           aria-invalid={variant === 'error'}
-          aria-describedby={error ? `${props.id}-error` : undefined}
+          aria-describedby={
+            error
+              ? `${props.id}-error`
+              : showCounter
+                ? `${props.id}-char-count`
+                : undefined
+          }
           {...props}
         />
 
         {/* Character counter */}
         {showCounter && (
-          <div className="absolute bottom-2 right-3 text-xs text-silver/60 font-mono">
+          <div
+            id={`${props.id}-char-count`}
+            className="absolute bottom-2 right-3 text-xs text-silver/60 font-mono"
+            aria-live="polite"
+            aria-atomic="true"
+          >
             {charCount}/{maxLength}
           </div>
         )}
