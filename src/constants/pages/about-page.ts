@@ -41,28 +41,28 @@ export const EXPERIENCES = [
     company: 'Twitch',
     period: 'Aug 2025 - Present',
     description:
-      "These days I'm architecting cloud-native systems with TypeScript and Node.js, while diving deep into AWS CloudFormation and Terraform. I regularly use AI tools and models to enhance my development workflow. I'm also pioneering some really cool generative AI features that are changing how people interact with our internal platforms.",
+      "These days I'm architecting cloud-native systems with TypeScript and Node.js, diving deep into AWS CloudFormation and Terraform. I'm pioneering generative AI features that are transforming how people interact with our internal platforms, and I regularly leverage AI tools to enhance my development workflow. I also manage high-level identity systems in Okta to deliver seamless and secure experiences for Twitch employees.",
   },
   {
     role: 'System Admin Engineer II',
     company: 'Twitch',
     period: 'Jul 2023 - Aug 2025',
     description:
-      'I spent these years automating everything I could get my hands on with Terraform, Python, and TypeScript. Became the go-to person for Okta identity management and built systems that could scale without breaking a sweat.',
+      'I spent these years automating everything I could get my hands on with Terraform, Python, and TypeScript. I became the go-to person for Okta identity management and built systems that could scale.',
   },
   {
     role: 'IT Support Engineer II',
     company: 'Twitch',
     period: 'Apr 2021 - Jul 2023',
     description:
-      'Got promoted to handle the tough technical escalations nobody else wanted to touch. Started my automation journey here and discovered I love teaching others. This is where I really got comfortable with Okta and learned how to write docs people actually want to read.',
+      'I got promoted to handle the tough technical escalations. I started my automation journey here and discovered I love teaching others. This is where I really got comfortable with Okta and learned how to write docs people actually want to read. I also overhauled the IT onboarding process for new employees, streamlining the experience and improving workflows with our HR partners.',
   },
   {
     role: 'IT Support Engineer I',
     company: 'Twitch',
     period: 'May 2018 - Apr 2021',
     description:
-      'My first role at Twitch! Started with the classics - troubleshooting, ticket management, and making friends with the coffee machine. This is where I built my foundation in enterprise systems and figured out how things really work behind the scenes.',
+      'My first role at Twitch! Troubleshooting, ticket management, imaging, turning computers on and off. This is where I built my foundation in enterprise systems and figured out how things really work behind the scenes.',
   },
 ] as const;
 

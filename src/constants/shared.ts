@@ -29,7 +29,7 @@ export const PROFESSIONAL_TITLES = {
 export const PAGE_DESCRIPTIONS = {
   // Core messaging (used for both page content and SEO)
   HOME_DESCRIPTION:
-    "I architect cloud-native systems at Twitch using TypeScript, Node.js, AWS, and more. From fixing printers to building systems that scale, my journey has been all about turning complex problems into elegant solutions. These days I'm pioneering generative AI features and automating everything I can get my hands on.",
+    "I architect cloud-native systems at Twitch using TypeScript, Node.js, AWS, and more. From turning computers on and off to building systems that scale, my journey has been all about turning complex problems into elegant solutions. These days I'm pioneering generative AI features and automating everything I can get my hands on.",
 
   SEO_DESCRIPTION:
     'System Development Engineer at Twitch building cloud-native solutions. I love creating systems that work at scale and exploring AI in development.',
@@ -43,7 +43,7 @@ export const PAGE_DESCRIPTIONS = {
   // Page content descriptions (also used for SEO for consistency)
   ABOUT_HERO_SUBTITLE: 'My journey in technology',
   ABOUT_PAGE_INTRO:
-    "Curious how I went from fixing printers to building cloud systems at Twitch? My journey's been all about learning, growing, and finding creative ways to solve tech problems.",
+    "Curious how I went from turning computers on and off to building cloud systems at Twitch? My journey's been all about learning, growing, and finding creative ways to solve tech problems.",
   ABOUT_SKILLS_SUBTITLE: 'Technologies I work with and love',
   ABOUT_EXPERIENCE_SUBTITLE: 'My professional journey',
   ABOUT_EDUCATION_SUBTITLE: 'Academic foundation',
