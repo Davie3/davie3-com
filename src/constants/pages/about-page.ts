@@ -48,14 +48,14 @@ export const EXPERIENCES = [
     company: 'Twitch',
     period: 'Jul 2023 - Aug 2025',
     description:
-      'I spent these years automating everything I could get my hands on with Terraform, Python, and TypeScript. I became the go-to person for Okta identity management and built systems that could scale.',
+      'I spent these years automating everything I could get my hands on with Terraform, Python, and Okta Workflows. I became the go-to person for Okta identity management, focusing on SSO integrations and building automated workflows for user provisioning and lifecycle management that significantly reduced manual work across the team.',
   },
   {
     role: 'IT Support Engineer II',
     company: 'Twitch',
     period: 'Apr 2021 - Jul 2023',
     description:
-      'I got promoted to handle the tough technical escalations. I started my automation journey here and discovered I love teaching others. This is where I really got comfortable with Okta and learned how to write docs people actually want to read. I also overhauled the IT onboarding process for new employees, streamlining the experience and improving workflows with our HR partners.',
+      'I got promoted to handle the tough technical escalations. I overhauled the IT onboarding process for new employees, streamlining the experience and improving workflows with our HR partners. I joined the project to migrate our applications from the old IDP to Okta—this is where I really got comfortable with Okta. I started my automation journey here, discovered I love teaching others, and learned how to write docs people actually want to read.',
   },
   {
     role: 'IT Support Engineer I',
