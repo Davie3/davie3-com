@@ -8,6 +8,7 @@ import {
   SKILLS,
 } from '@/constants/about-page';
 import { SectionHeader } from '@/components/ui/section-header';
+import { BorderedSection } from '@/components/ui/bordered-section';
 import { PAGE_METADATA } from '@/constants/config/site-metadata';
 import { SOCIAL_LINKS_DATA } from '@/constants/config/social-config';
 import { getSocialIcon } from '@/utils/social-icons';
@@ -79,21 +80,13 @@ export default function AboutPage(): JSX.Element {
       </section>
 
       {/* Skills Section - Tag cloud style */}
-      <section
-        id="skills"
-        className="mb-24 border-l-4 border-safety-orange pl-8"
+      <BorderedSection
+        label="Skills"
+        heading="Technologies"
+        headingLevel="h2"
+        className="mb-24"
       >
-        <div className="mb-8">
-          <div className="flex items-center gap-3 mb-3">
-            <span className="font-accent text-sm tracking-wider uppercase text-silver">
-              Skills
-            </span>
-          </div>
-          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl leading-tight text-cream mb-2">
-            Technologies
-          </h2>
-          <p className="text-silver">{ABOUT_CONTENT.SKILLS_SUBTITLE}</p>
-        </div>
+        <p className="text-silver mb-8">{ABOUT_CONTENT.SKILLS_SUBTITLE}</p>
 
         <div className="flex flex-wrap gap-3">
           {SKILLS.map((skill, index) => (
@@ -106,7 +99,7 @@ export default function AboutPage(): JSX.Element {
             </span>
           ))}
         </div>
-      </section>
+      </BorderedSection>
 
       {/* Experience Section - Timeline style */}
       <section id="experience" className="mb-24">
@@ -154,18 +147,12 @@ export default function AboutPage(): JSX.Element {
       </section>
 
       {/* Education Section */}
-      <section id="education" className="border-l-4 border-safety-orange pl-8">
-        <div className="mb-8">
-          <div className="flex items-center gap-3 mb-3">
-            <span className="font-accent text-sm tracking-wider uppercase text-silver">
-              Education
-            </span>
-          </div>
-          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl leading-tight text-cream mb-2">
-            Academic Background
-          </h2>
-          <p className="text-silver">{ABOUT_CONTENT.EDUCATION_SUBTITLE}</p>
-        </div>
+      <BorderedSection
+        label="Education"
+        heading="Academic Background"
+        headingLevel="h2"
+      >
+        <p className="text-silver mb-8">{ABOUT_CONTENT.EDUCATION_SUBTITLE}</p>
 
         <div className="space-y-8">
           {EDUCATION.map((edu) => (
@@ -191,7 +178,7 @@ export default function AboutPage(): JSX.Element {
             </div>
           ))}
         </div>
-      </section>
+      </BorderedSection>
     </main>
   );
 }
