@@ -38,7 +38,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         disabled={isDisabled}
         className={cn(
           // Base styles
-          'relative inline-flex items-center justify-center gap-2.5',
+          'relative inline-flex flex-center gap-2.5',
           'font-bold tracking-wide uppercase text-sm',
           'rounded-lg border-2 transition-all duration-200',
           'overflow-hidden',
@@ -92,7 +92,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       >
         {/* Loading spinner */}
         {loading && (
-          <div className="absolute inset-0 flex items-center justify-center bg-inherit">
+          <div className="absolute inset-0 flex-center bg-inherit">
             <svg
               className="animate-spin h-5 w-5"
               xmlns="http://www.w3.org/2000/svg"

@@ -136,7 +136,7 @@ export default function ContactForm(): JSX.Element {
       >
         <Card variant="elevated" className="max-w-3xl mx-auto">
           <CardContent className="py-12 text-center space-y-6">
-            <div className="w-20 h-20 bg-electric-cyan/10 border-2 border-electric-cyan flex items-center justify-center mx-auto rounded-lg">
+            <div className="w-20 h-20 bg-electric-cyan/10 border-2 border-electric-cyan flex-center mx-auto rounded-lg">
               <CheckCircle2 className="w-10 h-10 text-electric-cyan" />
             </div>
             <div className="space-y-3">

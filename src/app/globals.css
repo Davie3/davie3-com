@@ -494,4 +494,12 @@ select {
   .transition-colors-standard {
     @apply transition-colors duration-300;
   }
+
+  .transition-fast {
+    @apply transition-all duration-200;
+  }
+
+  .flex-center {
+    @apply flex items-center justify-center;
+  }
 }
