@@ -32,7 +32,10 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       <div className="relative w-full group">
         {/* Icon */}
         {hasIcon && iconPosition === 'left' && (
-          <div className="absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none z-10">
+          <div
+            className="absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none z-10"
+            aria-hidden="true"
+          >
             <div
               className={cn(
                 'transition-colors duration-200',
@@ -94,7 +97,10 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
 
         {/* Right Icon */}
         {hasIcon && iconPosition === 'right' && (
-          <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none z-10">
+          <div
+            className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none z-10"
+            aria-hidden="true"
+          >
             <div
               className={cn(
                 'transition-colors duration-200',
