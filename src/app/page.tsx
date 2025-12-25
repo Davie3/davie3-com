@@ -47,7 +47,7 @@ export default function Home(): JSX.Element {
             </p>
 
             {/* CTA Buttons - Industrial style */}
-            <div className="flex flex-col sm:flex-row gap-4 pt-4">
+            <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 pt-4">
               <Link
                 href={INTERNAL_ROUTES.ABOUT}
                 className="group relative px-8 py-4 bg-electric-cyan text-navy font-semibold text-lg transition-all duration-300 hover:bg-safety-orange hover:scale-105 active:scale-95"
