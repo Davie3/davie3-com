@@ -1,7 +1,9 @@
-/**
- * External API configuration
- * Endpoints for third-party services
- */
+export const EXTERNAL_API = {
+  GITHUB: {
+    USER_REPOS_ENDPOINT:
+      'https://api.github.com/search/repositories?q=user:davie3+fork:false',
+  },
+} as const;
 
 export const CLOUDFLARE_API = {
   TURNSTILE_VERIFY_ENDPOINT:

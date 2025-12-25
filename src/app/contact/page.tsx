@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import type { JSX } from 'react';
+import { BorderedSection } from '@/components/ui/bordered-section';
 import ContactForm from '@/components/forms/contact-form';
 import { SectionHeader } from '@/components/ui/section-header';
 import { PAGE_METADATA } from '@/constants/config/site-metadata';
@@ -35,21 +36,17 @@ export default function ContactPage(): JSX.Element {
       </section>
 
       {/* Contact Form Section */}
-      <section>
-        <div className="mb-8 border-l-4 border-safety-orange pl-6">
-          <span className="font-accent text-sm tracking-wider uppercase text-silver">
-            {CONTACT_PAGE.FORM_SECTION_LABEL}
-          </span>
-          <h2 className="font-display text-3xl md:text-4xl text-cream mt-2 mb-3">
-            {CONTACT_PAGE.FORM_HEADING}
-          </h2>
-          <p className="text-silver leading-relaxed">
-            {CONTACT_CONTENT.FORM_HELP}
-          </p>
-        </div>
-
+      <BorderedSection
+        label={CONTACT_PAGE.FORM_SECTION_LABEL}
+        heading={CONTACT_PAGE.FORM_HEADING}
+        headingLevel="h2"
+        className="mb-8"
+      >
+        <p className="text-silver leading-relaxed mb-8">
+          {CONTACT_CONTENT.FORM_HELP}
+        </p>
         <ContactForm />
-      </section>
+      </BorderedSection>
     </main>
   );
 }

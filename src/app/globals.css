@@ -1,6 +1,15 @@
 @import 'tailwindcss';
 
 /* Screen reader only utility */
+/* Component utilities */
+.section-label {
+  font-family: var(--font-accent);
+  font-size: 0.875rem; /* text-sm */
+  letter-spacing: 0.05em; /* tracking-wider */
+  text-transform: uppercase;
+  color: var(--color-silver);
+}
+
 @layer utilities {
   .sr-only {
     position: absolute;

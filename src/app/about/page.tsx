@@ -109,11 +109,9 @@ export default function AboutPage(): JSX.Element {
         <div className="mb-12">
           <div className="flex items-center gap-3 mb-3">
             <div className="h-px w-12 bg-safety-orange" />
-            <span className="font-accent text-sm tracking-wider uppercase text-silver">
-              Experience
-            </span>
+            <span className="section-label">Experience</span>
           </div>
-          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl leading-tight text-cream mb-2">
+          <h2 className="font-display text-3xl md:text-4xl leading-tight text-cream mb-2">
             Work History
           </h2>
           <p className="text-silver">{ABOUT_CONTENT.EXPERIENCE_SUBTITLE}</p>
@@ -123,10 +121,10 @@ export default function AboutPage(): JSX.Element {
           {EXPERIENCES.map((exp) => (
             <div
               key={`${exp.company}-${exp.role}-${exp.period}`}
-              className="relative pl-8 border-l-2 border-electric-cyan/30"
+              className="relative pl-8 border-l-4 border-electric-cyan/30"
             >
               {/* Timeline dot */}
-              <div className="absolute -left-[9px] top-0 w-4 h-4 bg-safety-orange rounded-full border-4 border-navy" />
+              <div className="absolute -left-[10px] top-0 w-4 h-4 bg-safety-orange rounded-full border-4 border-navy" />
 
               <div className="space-y-3">
                 <div>

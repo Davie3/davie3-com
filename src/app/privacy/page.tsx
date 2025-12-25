@@ -15,9 +15,7 @@ export default function PrivacyPage(): JSX.Element {
       <header className="mb-24">
         <div className="flex items-center gap-3 mb-3">
           <div className="h-px w-12 bg-safety-orange" />
-          <span className="font-accent text-sm tracking-wider uppercase text-silver">
-            Privacy
-          </span>
+          <span className="section-label">Privacy</span>
         </div>
         <h1 className="font-display text-7xl md:text-8xl lg:text-9xl leading-tight text-cream mb-6">
           Privacy Policy

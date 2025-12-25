@@ -3,9 +3,11 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import type { JSX } from 'react';
 import { z } from 'zod';
+import { BorderedSection } from '@/components/ui/bordered-section';
 import { Card } from '@/components/ui/card';
 import { SectionHeader } from '@/components/ui/section-header';
 import { PAGE_STAGGER_DELAYS } from '@/constants/config/animation-config';
+import { EXTERNAL_API } from '@/constants/config/external-api-config';
 import { GITHUB_CONFIG } from '@/constants/config/github-config';
 import { PAGE_METADATA } from '@/constants/config/site-metadata';
 import {
@@ -17,8 +19,7 @@ import type { GitHubRepo } from '@/types/api-types';
 
 export const metadata: Metadata = PAGE_METADATA.PORTFOLIO;
 
-const GITHUB_API =
-  'https://api.github.com/search/repositories?q=user:davie3+fork:false';
+const GITHUB_API = EXTERNAL_API.GITHUB.USER_REPOS_ENDPOINT;
 
 async function getGitHubRepos(): Promise<GitHubRepo[]> {
   try {
@@ -95,16 +96,12 @@ export default async function PortfolioPage(): Promise<JSX.Element> {
       </section>
 
       {/* Projects Section - Vertical Timeline */}
-      <section>
-        <div className="mb-12 border-l-4 border-safety-orange pl-8">
-          <span className="font-accent text-sm tracking-wider uppercase text-silver">
-            {PORTFOLIO_PAGE.FEATURED_LABEL}
-          </span>
-          <h2 className="font-display text-4xl md:text-5xl text-cream mt-2">
-            {PORTFOLIO_PAGE.FEATURED_HEADING}
-          </h2>
-        </div>
-
+      <BorderedSection
+        label={PORTFOLIO_PAGE.FEATURED_LABEL}
+        heading={PORTFOLIO_PAGE.FEATURED_HEADING}
+        headingLevel="h2"
+        className="mb-12"
+      >
         {projects.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {projects.map((project, index) => (
@@ -182,7 +179,7 @@ export default async function PortfolioPage(): Promise<JSX.Element> {
             <ExternalLink className="w-5 h-5 transition-transform duration-300 group-hover:scale-110" />
           </Link>
         </div>
-      </section>
+      </BorderedSection>
     </main>
   );
 }
