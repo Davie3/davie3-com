@@ -5,7 +5,6 @@ import type { JSX } from 'react';
 import { CANVAS_CONFIG } from '@/constants/config/animation-config';
 import {
   generateStarsByLayer,
-  generateNebulae,
   ShootingStarPool,
   updateStarTwinkle,
 } from '@/lib/utils/particle-system';
@@ -22,8 +21,6 @@ export function AnimatedBackground(): JSX.Element {
   const [particles] = useState(() => {
     const width = typeof window !== 'undefined' ? window.innerWidth : 1920;
     const height = typeof window !== 'undefined' ? window.innerHeight : 1080;
-
-    const nebulae = generateNebulae(10, width, height);
 
     return {
       stars: {
@@ -46,7 +43,6 @@ export function AnimatedBackground(): JSX.Element {
           height,
         ),
       },
-      nebulae,
       shootingStarPool: new ShootingStarPool(5),
     };
   });
@@ -65,7 +61,6 @@ export function AnimatedBackground(): JSX.Element {
     if (!spriteRendererRef.current) {
       const renderer = new SpriteRenderer();
       renderer.preRenderStars();
-      renderer.preRenderNebulae(particles.nebulae);
       spriteRendererRef.current = renderer;
     }
 
@@ -101,22 +96,7 @@ export function AnimatedBackground(): JSX.Element {
 
       const scrollY = scrollYRef.current;
 
-      // 1. Render nebulae (background layer) using pre-rendered sprites
-      const bgScrollOffset = scrollY * CANVAS_CONFIG.layers.background.speed;
-      particles.nebulae.forEach((nebula) => {
-        if (
-          isInViewport(
-            nebula.y,
-            bgScrollOffset,
-            canvas.height,
-            CANVAS_CONFIG.viewportBuffer,
-          )
-        ) {
-          spriteRenderer.drawNebula(ctx, nebula, bgScrollOffset);
-        }
-      });
-
-      // 2. Render stars by layer using pre-rendered sprites
+      // 1. Render stars by layer using pre-rendered sprites
       const layers = [
         {
           stars: particles.stars.background,
@@ -156,7 +136,7 @@ export function AnimatedBackground(): JSX.Element {
         });
       });
 
-      // 3. Update and render shooting stars
+      // 2. Update and render shooting stars
       if (!prefersReducedMotion) {
         particles.shootingStarPool.update(
           deltaTime,
