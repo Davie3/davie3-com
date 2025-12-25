@@ -5,7 +5,7 @@ import sanitizeHtml from 'sanitize-html';
 import xss from 'xss';
 import { z } from 'zod';
 import { CLOUDFLARE_API } from '@/constants/config/external-api-config';
-import { env } from '@/env';
+import { getServerEnv } from '@/env';
 import { formatEmailTimestamp } from '@/lib/utils/date-utils';
 import {
   renderContactFormTemplate,
@@ -15,7 +15,8 @@ import { API_ERROR_MESSAGES } from '@/constants/config/api-error-messages';
 import { EMAIL_CONFIG } from '@/constants/config/email-config';
 import { CONTACT_FORM_CONSTRAINTS } from '@/constants/config/form-config';
 
-sgMail.setApiKey(env.SENDGRID_API_KEY);
+const serverEnv = getServerEnv();
+sgMail.setApiKey(serverEnv.SENDGRID_API_KEY);
 
 // Build schema without refine to allow extension
 const ContactFormSchema = z
@@ -121,7 +122,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          secret: env.TURNSTILE_SECRET_KEY,
+          secret: serverEnv.TURNSTILE_SECRET_KEY,
           response: token,
         }),
       },
@@ -153,8 +154,8 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     };
 
     const msg = {
-      to: env.SENDGRID_TO_EMAIL,
-      from: env.SENDGRID_FROM_EMAIL,
+      to: serverEnv.SENDGRID_TO_EMAIL,
+      from: serverEnv.SENDGRID_FROM_EMAIL,
       replyTo: sanitizedEmail,
       subject: EMAIL_CONFIG.CONTACT_FORM.SUBJECT_TEMPLATE(
         sanitizedSubject,
