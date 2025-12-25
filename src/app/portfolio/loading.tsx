@@ -8,7 +8,7 @@ import { ProjectCardSkeleton } from '@/components/ui/loading-skeleton';
  */
 export default function Loading(): JSX.Element {
   return (
-    <main className="container mx-auto max-w-6xl px-4 py-24">
+    <main className="container mx-auto max-w-6xl px-4 py-16">
       {/* Hero Section Skeleton */}
       <section className="relative mb-16">
         <div className="absolute inset-0 bg-gradient-to-r from-blue-accent/5 via-purple-accent/5 to-cyan-accent/5 rounded-3xl" />

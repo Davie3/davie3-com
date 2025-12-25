@@ -4,22 +4,70 @@ import { NextResponse } from 'next/server';
 import sanitizeHtml from 'sanitize-html';
 import xss from 'xss';
 import { z } from 'zod';
+import { CLOUDFLARE_API } from '@/constants/config/external-api-config';
 import { env } from '@/env';
 import { formatEmailTimestamp } from '@/lib/utils/date-utils';
 import {
   renderContactFormTemplate,
   generateContactFormText,
 } from '@/lib/utils/email-template';
-import { CONTACT_FORM_SCHEMA } from '@/types/form-types';
+import { API_ERROR_MESSAGES } from '@/constants/config/api-error-messages';
+import { EMAIL_CONFIG } from '@/constants/config/email-config';
+import { CONTACT_FORM_CONSTRAINTS } from '@/constants/config/form-config';
 
 sgMail.setApiKey(env.SENDGRID_API_KEY);
 
-const TURNSTILE_VERIFY_ENDPOINT =
-  'https://challenges.cloudflare.com/turnstile/v0/siteverify';
-
-const ContactFormSchema = CONTACT_FORM_SCHEMA.safeExtend({
-  token: z.string().min(1, 'Turnstile token is required.'),
-});
+// Build schema without refine to allow extension
+const ContactFormSchema = z
+  .object({
+    name: z
+      .string()
+      .min(
+        CONTACT_FORM_CONSTRAINTS.NAME.MIN_LENGTH,
+        'Name must be at least 2 characters.',
+      )
+      .max(
+        CONTACT_FORM_CONSTRAINTS.NAME.MAX_LENGTH,
+        'Name must be less than 100 characters.',
+      ),
+    email: z
+      .email('Please enter a valid email address.')
+      .max(
+        CONTACT_FORM_CONSTRAINTS.EMAIL.MAX_LENGTH,
+        'Email address is too long.',
+      ),
+    confirmEmail: z
+      .email('Please enter a valid email address.')
+      .max(
+        CONTACT_FORM_CONSTRAINTS.EMAIL.MAX_LENGTH,
+        'Email address is too long.',
+      ),
+    subject: z
+      .string()
+      .min(
+        CONTACT_FORM_CONSTRAINTS.SUBJECT.MIN_LENGTH,
+        'Subject must be at least 3 characters.',
+      )
+      .max(
+        CONTACT_FORM_CONSTRAINTS.SUBJECT.MAX_LENGTH,
+        'Subject must be less than 200 characters.',
+      ),
+    message: z
+      .string()
+      .min(
+        CONTACT_FORM_CONSTRAINTS.MESSAGE.MIN_LENGTH,
+        'Message must be at least 10 characters.',
+      )
+      .max(
+        CONTACT_FORM_CONSTRAINTS.MESSAGE.MAX_LENGTH,
+        'Message must be less than 2000 characters.',
+      ),
+    token: z.string().min(1, 'Turnstile token is required.'),
+  })
+  .refine((data) => data.email === data.confirmEmail, {
+    message: 'Email addresses must match.',
+    path: ['confirmEmail'],
+  });
 
 const TurnstileResponseSchema = z.object({
   success: z.boolean(),
@@ -58,30 +106,33 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
     if (!validationResult.success) {
       return NextResponse.json(
-        { error: 'Missing required fields.' },
+        { error: API_ERROR_MESSAGES.CONTACT_FORM.MISSING_FIELDS },
         { status: 400 },
       );
     }
 
     const { name, email, subject, message, token } = validationResult.data;
 
-    const turnstileResponse = await fetch(TURNSTILE_VERIFY_ENDPOINT, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
+    const turnstileResponse = await fetch(
+      CLOUDFLARE_API.TURNSTILE_VERIFY_ENDPOINT,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          secret: env.TURNSTILE_SECRET_KEY,
+          response: token,
+        }),
       },
-      body: JSON.stringify({
-        secret: env.TURNSTILE_SECRET_KEY,
-        response: token,
-      }),
-    });
+    );
 
     const turnstileBody: unknown = await turnstileResponse.json();
     const turnstileData = TurnstileResponseSchema.parse(turnstileBody);
 
     if (!turnstileData.success) {
       return NextResponse.json(
-        { error: 'Invalid CAPTCHA. Please try again.' },
+        { error: API_ERROR_MESSAGES.CONTACT_FORM.INVALID_CAPTCHA },
         { status: 400 },
       );
     }
@@ -105,7 +156,10 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       to: env.SENDGRID_TO_EMAIL,
       from: env.SENDGRID_FROM_EMAIL,
       replyTo: sanitizedEmail,
-      subject: `💬 Contact: ${sanitizedSubject} - from ${sanitizedName}`,
+      subject: EMAIL_CONFIG.CONTACT_FORM.SUBJECT_TEMPLATE(
+        sanitizedSubject,
+        sanitizedName,
+      ),
       text: generateContactFormText(templateData),
       html: renderContactFormTemplate(templateData),
     };
@@ -116,7 +170,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
   } catch (error) {
     console.error('Error in contact API:', error);
     return NextResponse.json(
-      { error: 'Failed to send message.' },
+      { error: API_ERROR_MESSAGES.CONTACT_FORM.SEND_FAILED },
       { status: 500 },
     );
   }

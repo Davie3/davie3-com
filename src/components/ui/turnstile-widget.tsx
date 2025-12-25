@@ -4,6 +4,8 @@ import { Turnstile as ReactTurnstile } from '@marsidev/react-turnstile';
 import type { TurnstileProps } from '@marsidev/react-turnstile';
 import type { JSX } from 'react';
 
+import { env } from '@/env';
+
 /**
  * Cloudflare Turnstile component.
  *
@@ -18,7 +20,7 @@ export function Turnstile({
     <ReactTurnstile
       siteKey={
         siteKey ??
-        process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ??
+        env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ??
         '1x00000000000000000000AA'
       }
       {...props}

@@ -1,4 +1,5 @@
 import type { MetadataRoute } from 'next';
+import { SITEMAP_CONFIG } from '../constants/config/seo-automation-config';
 import { PAGE_LAST_MODIFIED } from '../constants/site-metadata';
 import { EXTERNAL_URLS } from '../constants/urls';
 import { createPacificDate } from '../lib/utils/date-utils';
@@ -10,32 +11,32 @@ export default function sitemap(): MetadataRoute.Sitemap {
     {
       url: baseUrl,
       lastModified: createPacificDate(PAGE_LAST_MODIFIED.HOME),
-      changeFrequency: 'monthly',
-      priority: 1,
+      changeFrequency: SITEMAP_CONFIG.HOME.changeFrequency,
+      priority: SITEMAP_CONFIG.HOME.priority,
     },
     {
       url: `${baseUrl}/about`,
       lastModified: createPacificDate(PAGE_LAST_MODIFIED.ABOUT),
-      changeFrequency: 'monthly',
-      priority: 0.8,
+      changeFrequency: SITEMAP_CONFIG.ABOUT.changeFrequency,
+      priority: SITEMAP_CONFIG.ABOUT.priority,
     },
     {
       url: `${baseUrl}/portfolio`,
       lastModified: createPacificDate(PAGE_LAST_MODIFIED.PORTFOLIO),
-      changeFrequency: 'weekly',
-      priority: 0.7,
+      changeFrequency: SITEMAP_CONFIG.PORTFOLIO.changeFrequency,
+      priority: SITEMAP_CONFIG.PORTFOLIO.priority,
     },
     {
       url: `${baseUrl}/privacy`,
       lastModified: createPacificDate(PAGE_LAST_MODIFIED.PRIVACY),
-      changeFrequency: 'yearly',
-      priority: 0.3,
+      changeFrequency: SITEMAP_CONFIG.PRIVACY.changeFrequency,
+      priority: SITEMAP_CONFIG.PRIVACY.priority,
     },
     {
       url: `${baseUrl}/contact`,
       lastModified: createPacificDate(PAGE_LAST_MODIFIED.CONTACT),
-      changeFrequency: 'monthly',
-      priority: 0.7,
+      changeFrequency: SITEMAP_CONFIG.CONTACT.changeFrequency,
+      priority: SITEMAP_CONFIG.CONTACT.priority,
     },
   ];
 }

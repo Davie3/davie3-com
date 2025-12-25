@@ -28,18 +28,10 @@ export function ClientMobileNav(): JSX.Element {
 
   const mobileMenu = (
     <div className={`mobile-menu-overlay ${isOpen ? 'open' : ''}`}>
-      <div
+      <button
         className="mobile-menu-backdrop"
         onClick={toggleMenu}
-        role="button"
-        tabIndex={0}
         aria-label="Close navigation menu"
-        onKeyDown={(e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            toggleMenu();
-          }
-        }}
       />
       <div
         id="mobile-menu"
@@ -59,6 +51,7 @@ export function ClientMobileNav(): JSX.Element {
             fill="none"
             stroke="currentColor"
             strokeWidth="2"
+            aria-hidden="true"
           >
             <line x1="18" y1="6" x2="6" y2="18"></line>
             <line x1="6" y1="6" x2="18" y2="18"></line>
@@ -77,7 +70,7 @@ export function ClientMobileNav(): JSX.Element {
                     href={link.href}
                     target={link.openInNewTab ? '_blank' : undefined}
                     rel={link.openInNewTab ? 'noopener noreferrer' : undefined}
-                    className={`text-2xl transition-colors duration-300 ${
+                    className={`text-2xl transition-colors-standard ${
                       isActive
                         ? 'text-blue-accent'
                         : 'text-slate-light hover:text-blue-accent'
@@ -105,13 +98,13 @@ export function ClientMobileNav(): JSX.Element {
       >
         <div className="flex flex-col gap-1.5">
           <span
-            className={`block w-6 h-0.5 bg-white transition-all duration-300 ${isOpen ? 'rotate-45 translate-y-1.5' : ''}`}
+            className={`block w-6 h-0.5 bg-white transition-standard ${isOpen ? 'rotate-45 translate-y-1.5' : ''}`}
           ></span>
           <span
-            className={`block w-6 h-0.5 bg-white transition-all duration-300 ${isOpen ? 'opacity-0' : ''}`}
+            className={`block w-6 h-0.5 bg-white transition-standard ${isOpen ? 'opacity-0' : ''}`}
           ></span>
           <span
-            className={`block w-6 h-0.5 bg-white transition-all duration-300 ${isOpen ? '-rotate-45 -translate-y-1.5' : ''}`}
+            className={`block w-6 h-0.5 bg-white transition-standard ${isOpen ? '-rotate-45 -translate-y-1.5' : ''}`}
           ></span>
         </div>
       </button>

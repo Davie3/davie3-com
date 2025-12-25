@@ -3,12 +3,12 @@
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 > 🧭 **Core principle:**
-> Claude is the planner — Zen is the thinker.
+> Claude is the planner — Pal is the thinker.
 
 Claude’s role is to:
 
 1. Outline and refine plans.
-2. Hand off “thinking” or execution steps to Zen via MCP.
+2. Hand off “thinking” or execution steps to Pal via MCP.
 3. Maintain short, efficient memory using Sequential Thinking.
 
 ---
@@ -18,7 +18,7 @@ Claude’s role is to:
 | Server                           | Package                                            | Purpose                                                                       |
 | -------------------------------- | -------------------------------------------------- | ----------------------------------------------------------------------------- |
 | **`server-sequential-thinking`** | `@modelcontextprotocol/server-sequential-thinking` | Keeps stepwise memory compact and outside Claude’s token window.              |
-| **`server-zen`**                 | `@beehiveinnovations/zen-mcp-server`               | Executes deep reasoning, code reviews, or heavy analysis delegated by Claude. |
+| **`server-pal`**                 | `@beehiveinnovations/pal-mcp-server`               | Executes deep reasoning, code reviews, or heavy analysis delegated by Claude. |
 
 ---
 
@@ -27,7 +27,7 @@ Claude’s role is to:
 ```
 npm install \
   @modelcontextprotocol/server-sequential-thinking \
-  @beehiveinnovations/zen-mcp-server
+  @beehiveinnovations/pal-mcp-server
 ```
 
 Claude should **verify** both servers are registered before continuing.
@@ -42,16 +42,16 @@ If not, return an MCP setup message with instructions.
 - **Claude (Planner):**
   - Breaks tasks into clear, executable steps.
   - Keeps context lightweight.
-  - Calls Zen for any step requiring long reasoning, code search, or analysis.
+  - Calls Pal for any step requiring long reasoning, code search, or analysis.
 
-- **Zen (Thinker):**
+- **Pal (Thinker):**
   - Performs the reasoning behind Claude’s plan.
   - Can run tools, evaluate code, or conduct deep multi-step thought.
   - Returns concise, actionable results for Claude to integrate.
 
 Claude should always:
 
-> Plan → Send to Zen → Review → Integrate results.
+> Plan → Send to Pal → Review → Integrate results.
 
 ---
 
@@ -71,8 +71,8 @@ This keeps token usage minimal and reasoning traceable.
 | Task Type                                 | Who Handles It      | Notes                             |
 | ----------------------------------------- | ------------------- | --------------------------------- |
 | High-level planning, summaries            | Claude              | Short reasoning, minimal context. |
-| Deep analysis, code evaluation, debugging | Zen                 | Automatically offload to Zen.     |
-| Multi-step reasoning chains               | Zen                 | Zen executes, Claude reviews.     |
+| Deep analysis, code evaluation, debugging | Pal                 | Automatically offload to Pal.     |
+| Multi-step reasoning chains               | Pal                 | Pal executes, Claude reviews.     |
 | Context recall / step continuity          | Sequential Thinking | Keeps context compact.            |
 
 ---
@@ -84,11 +84,11 @@ User: Optimize this function.
 
 Claude: (plan)
 1. Analyze performance issues.
-2. Ask Zen to benchmark alternatives.
-3. Integrate Zen’s findings and rewrite function.
+2. Ask Pal to benchmark alternatives.
+3. Integrate Pal’s findings and rewrite function.
 
-Claude → Zen: “Think deeply about this function’s complexity.”
-Zen → Claude: Returns optimized solution.
+Claude → Pal: “Think deeply about this function’s complexity.”
+Pal → Claude: Returns optimized solution.
 Claude: Integrates and summarizes final output.
 ```
 
@@ -97,7 +97,7 @@ Claude: Integrates and summarizes final output.
 ### 5. Behavior Summary
 
 ✅ Claude focuses on **short, strategic prompts**.
-✅ Zen handles **thinking-heavy** or **context-expensive** operations.
+✅ Pal handles **thinking-heavy** or **context-expensive** operations.
 ✅ Sequential Thinking ensures **long-running memory efficiency**.
 ✅ Never duplicate large context or file contents unless necessary.
 
@@ -105,7 +105,7 @@ Claude: Integrates and summarizes final output.
 
 ### 6. Fallback
 
-If Zen or Sequential Thinking MCPs are unavailable:
+If Pal or Sequential Thinking MCPs are unavailable:
 
 - Run only minimal reasoning locally.
 - Notify the user that deeper “thinking” delegation requires the missing MCP.

@@ -11,7 +11,7 @@ import {
 /**
  * Technology keywords for SEO (flattened for search optimization)
  */
-export const TECHNOLOGY_KEYWORDS = [
+const TECHNOLOGY_KEYWORDS = [
   ...TECHNOLOGIES.CLOUD,
   ...TECHNOLOGIES.INFRASTRUCTURE,
   ...TECHNOLOGIES.IDENTITY,
@@ -24,7 +24,7 @@ export const TECHNOLOGY_KEYWORDS = [
 /**
  * SEO keywords organized by category
  */
-export const SEO_KEYWORDS = {
+const SEO_KEYWORDS = {
   PROFESSIONAL: [
     PERSONAL_INFO.FULL_NAME,
     PROFESSIONAL_TITLES.CURRENT,
@@ -91,4 +91,12 @@ export const SEO_DATA = {
     ...TECHNOLOGIES.CONTENT,
     ...TECHNOLOGIES.GENERAL,
   ],
+} as const;
+
+export const PAGE_METADATA = {
+  PRIVACY: {
+    title: 'Privacy Policy | David Griffin',
+    description:
+      'Privacy policy for davie3.com - Learn how I collect, use, and protect your personal information.',
+  },
 } as const;

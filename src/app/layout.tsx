@@ -18,7 +18,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>): JSX.Element {
   return (
-    <html lang="en">
+    <html lang="en" className="h-full">
       <head>
         <StructuredData pageType="website" />
         {/* Preconnect hints for analytics domains */}
@@ -78,7 +78,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${fontVariables} antialiased pt-16 bg-black text-white`}
+        className={`${fontVariables} antialiased pt-16 bg-black text-white flex flex-col min-h-screen`}
       >
         {/* Skip to main content link for keyboard navigation */}
         <a
@@ -87,8 +87,10 @@ export default function RootLayout({
         >
           Skip to main content
         </a>
-        <ClientLayout>{children}</ClientLayout>
-        <AppFooter />
+        <div className="flex-1 flex flex-col">
+          <ClientLayout>{children}</ClientLayout>
+          <AppFooter />
+        </div>
         {/* Analytics components - controlled by ENABLE_ANALYTICS env var */}
         {shouldEnableAnalytics && (
           <>

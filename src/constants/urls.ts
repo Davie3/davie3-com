@@ -6,7 +6,7 @@
 /**
  * Site-specific URLs
  */
-export const SITE_URLS = {
+const SITE_URLS = {
   MAIN: 'https://davie3.com',
   OG_IMAGE: 'https://davie3.com/images/profile.png',
 } as const;
@@ -14,7 +14,7 @@ export const SITE_URLS = {
 /**
  * Content creation platform URLs
  */
-export const CONTENT_URLS = {
+const CONTENT_URLS = {
   YOUTUBE_MAIN: 'https://www.youtube.com/Davie3TV',
   YOUTUBE_TECH: 'https://www.youtube.com/Davie3Tech',
   YOUTUBE_GAMES: 'https://www.youtube.com/Davie3Games',
@@ -25,7 +25,7 @@ export const CONTENT_URLS = {
 /**
  * Social media platform URLs
  */
-export const SOCIAL_URLS = {
+const SOCIAL_URLS = {
   BLUESKY: 'https://bsky.app/profile/itsdavie3.bsky.social',
   FACEBOOK: 'https://www.facebook.com/Davie3.Griffin',
   GITHUB_PROFILE: 'https://github.com/davie3',
@@ -59,7 +59,7 @@ export const INTERNAL_ROUTES = {
 /**
  * URL collections for different contexts
  */
-export const URL_COLLECTIONS = {
+const URL_COLLECTIONS = {
   SOCIAL: Object.values(SOCIAL_URLS),
   CONTENT: Object.values(CONTENT_URLS),
   PROFESSIONAL: [

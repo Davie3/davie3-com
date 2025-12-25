@@ -1,14 +1,45 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { User, Mail, MessageSquare, CheckCircle2 } from 'lucide-react';
+import { motion, useReducedMotion } from 'framer-motion';
 import type { JSX } from 'react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+
+import { CONTACT_FORM_CONSTRAINTS } from '@/constants/config/form-config';
 import { Turnstile } from '@/components/ui/turnstile-widget';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Button } from '@/components/ui/button';
+import { Alert } from '@/components/ui/alert';
+import { Card, CardContent } from '@/components/ui/card';
+import { FormField } from '@/components/ui/form-field';
+
+import { CONTACT_FORM } from '@/constants/pages/contact-page';
 import { FORM_MESSAGES } from '@/constants/ui-components';
+import { ANIMATION_DURATIONS } from '@/constants/config/animation-config';
 import { CONTACT_FORM_SCHEMA } from '@/types/form-types';
 import type { ContactFormValues } from '@/types/form-types';
-import { INTERNAL_ROUTES } from '../../constants/urls';
+import { INTERNAL_ROUTES } from '@/constants/urls';
+
+// Framer Motion variants
+const formVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: ANIMATION_DURATIONS.MEDIUM,
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const fieldVariants = {
+  hidden: { opacity: 0, x: -20 },
+  visible: { opacity: 1, x: 0 },
+};
 
 /**
  * Client-side contact form component with validation and submission handling.
@@ -20,19 +51,41 @@ export default function ContactForm(): JSX.Element {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [token, setToken] = useState<string>('');
   const [captchaError, setCaptchaError] = useState<string | null>(null);
+  const shouldReduceMotion = useReducedMotion();
+
+  // Conditional variants based on motion preference
+  const formVariantsResponsive = {
+    hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: ANIMATION_DURATIONS.MEDIUM,
+        staggerChildren: shouldReduceMotion ? 0 : 0.1,
+      },
+    },
+  };
+
+  const fieldVariantsResponsive = {
+    hidden: { opacity: 0, x: shouldReduceMotion ? 0 : -20 },
+    visible: { opacity: 1, x: 0 },
+  };
 
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
+    watch,
   } = useForm<ContactFormValues>({
     resolver: zodResolver(CONTACT_FORM_SCHEMA),
   });
 
+  const messageValue = watch('message', '');
+
   const onSubmit = async (data: ContactFormValues) => {
     if (!token) {
-      setCaptchaError('Please complete the CAPTCHA verification.');
+      setCaptchaError(CONTACT_FORM.CAPTCHA_ERROR);
       return;
     }
     setIsSubmitting(true);
@@ -63,167 +116,212 @@ export default function ContactForm(): JSX.Element {
     }
   };
 
+  const resetForm = () => {
+    setFormStatus(null);
+    reset();
+    setToken('');
+    setCaptchaError(null);
+  };
+
+  // Success state
   if (formStatus === FORM_MESSAGES.SUCCESS) {
     return (
-      <div className="bg-navy-accent/60 backdrop-blur-xl border border-slate-dark/20 rounded-3xl p-8 md:p-12">
-        <div className="text-center space-y-6">
-          <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto">
-            <svg
-              className="w-8 h-8 text-green-400"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M5 13l4 4L19 7"
-              />
-            </svg>
-          </div>
-          <h3 className="text-2xl font-bold text-slate-light">
-            Message Sent Successfully!
-          </h3>
-          <p className="text-slate-dark text-lg">
-            Thank you for reaching out. I&apos;ll get back to you as soon as
-            possible.
-          </p>
-          <button
-            onClick={() => {
-              setFormStatus(null);
-              reset();
-              setToken('');
-              setCaptchaError(null);
-            }}
-            className="px-6 py-3 bg-blue-accent/20 hover:bg-blue-accent/30 rounded-xl text-blue-accent border border-blue-accent/30 hover:border-blue-accent/50 transition-all duration-200"
-          >
-            Send Another Message
-          </button>
-        </div>
-      </div>
+      <motion.div
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{
+          type: 'spring',
+          duration: ANIMATION_DURATIONS.SPRING,
+          bounce: 0.3,
+        }}
+      >
+        <Card variant="elevated" className="max-w-3xl mx-auto">
+          <CardContent className="py-12 text-center space-y-6">
+            <div className="w-20 h-20 bg-electric-cyan/10 border-2 border-electric-cyan flex-center mx-auto rounded-lg">
+              <CheckCircle2 className="w-10 h-10 text-electric-cyan" />
+            </div>
+            <div className="space-y-3">
+              <h3 className="text-3xl font-display text-cream">
+                {CONTACT_FORM.SUCCESS_HEADING}
+              </h3>
+              <p className="text-lg text-silver">
+                {CONTACT_FORM.SUCCESS_MESSAGE}
+              </p>
+            </div>
+            <Button onClick={resetForm} variant="outline" size="lg">
+              {CONTACT_FORM.SUCCESS_BUTTON}
+            </Button>
+          </CardContent>
+        </Card>
+      </motion.div>
     );
   }
 
+  // Form state
   return (
-    <div className="bg-navy-accent/60 backdrop-blur-xl border border-slate-dark/20 rounded-3xl p-8 md:p-12">
-      <form
-        onSubmit={(e) => {
-          void handleSubmit(onSubmit)(e);
-        }}
-        className="space-y-6"
-      >
-        <div>
-          <label htmlFor="name" className="form-label">
-            Name
-          </label>
-          <input
-            id="name"
-            type="text"
-            {...register('name')}
-            className="form-input"
-            placeholder="Your full name"
-          />
-          {errors.name && <p className="form-error">{errors.name.message}</p>}
-        </div>
-
-        <div>
-          <label htmlFor="email" className="form-label">
-            Email
-          </label>
-          <input
-            id="email"
-            type="email"
-            {...register('email')}
-            className="form-input"
-            placeholder="your.email@example.com"
-          />
-          {errors.email && <p className="form-error">{errors.email.message}</p>}
-        </div>
-
-        <div>
-          <label htmlFor="confirmEmail" className="form-label">
-            Confirm Email
-          </label>
-          <input
-            id="confirmEmail"
-            type="email"
-            {...register('confirmEmail')}
-            className="form-input"
-            placeholder="Confirm your email address"
-          />
-          {errors.confirmEmail && (
-            <p className="form-error">{errors.confirmEmail.message}</p>
-          )}
-        </div>
-
-        <div>
-          <label htmlFor="subject" className="form-label">
-            Subject
-          </label>
-          <input
-            id="subject"
-            type="text"
-            {...register('subject')}
-            className="form-input"
-            placeholder="What's this about?"
-          />
-          {errors.subject && (
-            <p className="form-error">{errors.subject.message}</p>
-          )}
-        </div>
-
-        <div>
-          <label htmlFor="message" className="form-label">
-            Message
-          </label>
-          <textarea
-            id="message"
-            rows={5}
-            {...register('message')}
-            className="form-input resize-none"
-            placeholder="Tell me about your project or inquiry..."
-          />
-          {errors.message && (
-            <p className="form-error">{errors.message.message}</p>
-          )}
-        </div>
-
-        <div className="flex justify-center">
-          <Turnstile
-            onSuccess={(token) => {
-              setToken(token);
-              setCaptchaError(null);
-            }}
-          />
-        </div>
-        {captchaError && (
-          <div className="p-3 bg-red-500/10 border border-red-500/30 rounded-xl">
-            <p className="text-center text-red-400 text-sm font-medium">
-              {captchaError}
-            </p>
-          </div>
-        )}
-
-        <button
-          type="submit"
-          disabled={isSubmitting}
-          className="w-full px-8 py-4 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 rounded-xl font-bold text-white shadow-lg hover:shadow-xl hover:shadow-emerald-500/30 transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:shadow-lg border-2 border-emerald-400/50 hover:border-emerald-300/60 relative overflow-hidden"
+    <Card variant="glass" className="max-w-3xl mx-auto">
+      <CardContent>
+        <motion.form
+          onSubmit={(e) => {
+            void handleSubmit(onSubmit)(e);
+          }}
+          className="space-y-6"
+          variants={formVariantsResponsive}
+          initial="hidden"
+          animate="visible"
         >
-          <span className="relative z-10">
-            {isSubmitting ? 'Sending...' : 'Send Message'}
-          </span>
-          <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-200" />
-        </button>
+          <motion.div variants={fieldVariantsResponsive}>
+            <FormField
+              label={CONTACT_FORM.LABEL_NAME}
+              name="name"
+              error={errors.name?.message}
+              required
+            >
+              <Input
+                id="name"
+                type="text"
+                {...register('name')}
+                variant={errors.name ? 'error' : 'default'}
+                placeholder={CONTACT_FORM.PLACEHOLDER_NAME}
+                icon={<User className="w-5 h-5" />}
+                iconPosition="left"
+              />
+            </FormField>
+          </motion.div>
 
-        {formStatus === FORM_MESSAGES.ERROR && (
-          <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
-            <p className="text-center text-red-400 font-medium">
-              Something went wrong. Please try again later.
-            </p>
-          </div>
-        )}
-      </form>
-    </div>
+          <motion.div variants={fieldVariantsResponsive}>
+            <FormField
+              label={CONTACT_FORM.LABEL_EMAIL}
+              name="email"
+              error={errors.email?.message}
+              required
+            >
+              <Input
+                id="email"
+                type="email"
+                {...register('email')}
+                variant={errors.email ? 'error' : 'default'}
+                placeholder={CONTACT_FORM.PLACEHOLDER_EMAIL}
+                icon={<Mail className="w-5 h-5" />}
+                iconPosition="left"
+              />
+            </FormField>
+          </motion.div>
+
+          <motion.div variants={fieldVariantsResponsive}>
+            <FormField
+              label={CONTACT_FORM.LABEL_CONFIRM_EMAIL}
+              name="confirmEmail"
+              error={errors.confirmEmail?.message}
+              required
+            >
+              <Input
+                id="confirmEmail"
+                type="email"
+                {...register('confirmEmail')}
+                variant={errors.confirmEmail ? 'error' : 'default'}
+                placeholder={CONTACT_FORM.PLACEHOLDER_CONFIRM_EMAIL}
+                icon={<Mail className="w-5 h-5" />}
+                iconPosition="left"
+              />
+            </FormField>
+          </motion.div>
+
+          <motion.div variants={fieldVariantsResponsive}>
+            <FormField
+              label={CONTACT_FORM.LABEL_SUBJECT}
+              name="subject"
+              error={errors.subject?.message}
+              required
+            >
+              <Input
+                id="subject"
+                type="text"
+                {...register('subject')}
+                variant={errors.subject ? 'error' : 'default'}
+                placeholder={CONTACT_FORM.PLACEHOLDER_SUBJECT}
+                icon={<MessageSquare className="w-5 h-5" />}
+                iconPosition="left"
+              />
+            </FormField>
+          </motion.div>
+
+          <motion.div variants={fieldVariantsResponsive}>
+            <FormField
+              label={CONTACT_FORM.LABEL_MESSAGE}
+              name="message"
+              error={errors.message?.message}
+              required
+            >
+              <Textarea
+                id="message"
+                {...register('message')}
+                variant={errors.message ? 'error' : 'default'}
+                placeholder={CONTACT_FORM.PLACEHOLDER_MESSAGE}
+                rows={6}
+                maxLength={CONTACT_FORM_CONSTRAINTS.MESSAGE.MAX_LENGTH}
+                showCharCount
+                value={messageValue}
+              />
+            </FormField>
+          </motion.div>
+
+          <motion.div variants={fieldVariantsResponsive}>
+            <FormField
+              label={CONTACT_FORM.LABEL_CAPTCHA}
+              name="turnstile-captcha"
+              error={captchaError ?? undefined}
+            >
+              <div className="flex justify-center pt-2">
+                <Turnstile
+                  onSuccess={(newToken) => {
+                    setToken(newToken);
+                    setCaptchaError(null);
+                  }}
+                />
+              </div>
+            </FormField>
+          </motion.div>
+
+          {captchaError && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              role="alert"
+            >
+              <Alert
+                variant="error"
+                dismissible
+                onDismiss={() => setCaptchaError(null)}
+              >
+                {captchaError}
+              </Alert>
+            </motion.div>
+          )}
+
+          <motion.div variants={fieldVariantsResponsive}>
+            <Button
+              type="submit"
+              variant="primary"
+              size="lg"
+              loading={isSubmitting}
+              className="w-full"
+            >
+              {isSubmitting ? FORM_MESSAGES.SUBMITTING : FORM_MESSAGES.SUBMIT}
+            </Button>
+          </motion.div>
+
+          {formStatus === FORM_MESSAGES.ERROR && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              role="alert"
+            >
+              <Alert variant="error">{CONTACT_FORM.ERROR_MESSAGE}</Alert>
+            </motion.div>
+          )}
+        </motion.form>
+      </CardContent>
+    </Card>
   );
 }

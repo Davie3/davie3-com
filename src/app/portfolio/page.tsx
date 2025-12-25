@@ -1,18 +1,25 @@
-import { GitFork, Star, ArrowRight } from 'lucide-react';
+import { GitFork, Star, ExternalLink } from 'lucide-react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import type { JSX } from 'react';
 import { z } from 'zod';
+import { BorderedSection } from '@/components/ui/bordered-section';
+import { Card } from '@/components/ui/card';
+import { SectionHeader } from '@/components/ui/section-header';
+import { PAGE_STAGGER_DELAYS } from '@/constants/config/animation-config';
+import { EXTERNAL_API } from '@/constants/config/external-api-config';
 import { GITHUB_CONFIG } from '@/constants/config/github-config';
 import { PAGE_METADATA } from '@/constants/config/site-metadata';
-import { PAGE_DESCRIPTIONS } from '@/constants/shared';
+import {
+  PORTFOLIO_PAGE,
+  PORTFOLIO_CONTENT,
+} from '@/constants/pages/portfolio-page';
 import { GITHUB_REPO_SCHEMA } from '@/types/api-types';
 import type { GitHubRepo } from '@/types/api-types';
 
 export const metadata: Metadata = PAGE_METADATA.PORTFOLIO;
 
-const GITHUB_API =
-  'https://api.github.com/search/repositories?q=user:davie3+fork:false';
+const GITHUB_API = EXTERNAL_API.GITHUB.USER_REPOS_ENDPOINT;
 
 async function getGitHubRepos(): Promise<GitHubRepo[]> {
   try {
@@ -58,6 +65,7 @@ async function getGitHubRepos(): Promise<GitHubRepo[]> {
 
 /**
  * Renders the portfolio page, showcasing public software projects.
+ * Design: Bento-box grid with varying card sizes
  *
  * @returns The rendered portfolio page.
  */
@@ -65,116 +73,113 @@ export default async function PortfolioPage(): Promise<JSX.Element> {
   const projects = await getGitHubRepos();
 
   return (
-    <main className="container mx-auto max-w-6xl px-4 py-24">
-      {/* Hero Section */}
+    <main className="container mx-auto max-w-7xl px-4 py-16">
+      {/* Hero Section - Editorial */}
       <section className="relative mb-16">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-accent/5 via-purple-accent/5 to-cyan-accent/5 rounded-3xl" />
-        <div className="relative glass rounded-3xl p-8 md:p-12">
-          <div className="flex items-center gap-4 mb-6">
-            <div className="w-12 h-12 bg-gradient-to-r from-purple-accent to-cyan-accent rounded-full flex items-center justify-center">
-              <span className="text-navy font-bold text-xl">💼</span>
-            </div>
-            <div>
-              <h1 className="text-4xl md:text-5xl font-bold gradient-text">
-                My Portfolio
-              </h1>
-              <p className="text-slate-dark mt-1">
-                {PAGE_DESCRIPTIONS.PORTFOLIO_HERO_SUBTITLE}
-              </p>
-            </div>
+        <div className="space-y-6">
+          <div>
+            <SectionHeader
+              label={PORTFOLIO_PAGE.SECTION_LABEL}
+              heading={PORTFOLIO_PAGE.HEADING}
+              headingLevel="h1"
+              className="mb-3"
+            />
+            <p className="text-xl text-electric-cyan font-semibold mb-4">
+              {PORTFOLIO_CONTENT.HERO_SUBTITLE}
+            </p>
           </div>
 
-          <p className="text-lg md:text-xl leading-relaxed text-slate-light">
-            {PAGE_DESCRIPTIONS.PORTFOLIO_PAGE_INTRO}
+          <p className="text-lg md:text-xl leading-relaxed text-silver max-w-3xl">
+            {PORTFOLIO_CONTENT.PAGE_INTRO}
           </p>
         </div>
       </section>
 
-      {/* Projects Section */}
-      <section>
-        <div className="mb-8">
-          <h2 className="text-3xl md:text-4xl font-bold gradient-text mb-2">
-            Featured Projects
-          </h2>
-          <p className="text-slate-dark">
-            Open source contributions and personal projects
-          </p>
-        </div>
-
+      {/* Projects Section - Vertical Timeline */}
+      <BorderedSection
+        label={PORTFOLIO_PAGE.FEATURED_LABEL}
+        heading={PORTFOLIO_PAGE.FEATURED_HEADING}
+        headingLevel="h2"
+        className="mb-12"
+      >
         {projects.length > 0 ? (
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {projects.map((project, index) => (
               <Link
                 key={project.name}
                 href={project.html_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group card p-6 flex flex-col justify-between h-full"
-                style={{ animationDelay: `${(index * 100).toString()}ms` }}
+                className="group block"
+                style={{
+                  animationDelay: `${(index * PAGE_STAGGER_DELAYS.PORTFOLIO_REPOS).toString()}ms`,
+                }}
               >
-                <div className="flex-1">
-                  <div className="flex items-start justify-between mb-3">
-                    <h3 className="text-xl font-bold text-slate-light group-hover:text-blue-accent transition-colors duration-300">
+                <Card className="h-full p-4 hover:shadow-md hover:border-electric-cyan">
+                  {/* Project header */}
+                  <div className="mb-2">
+                    <h3 className="text-lg md:text-xl font-display text-cream group-hover:text-electric-cyan transition-colors duration-300 leading-tight mb-2">
                       {project.name}
                     </h3>
-                    <div className="w-3 h-3 bg-gradient-to-r from-blue-accent to-purple-accent rounded-full opacity-60 group-hover:opacity-100 transition-opacity duration-300" />
+                    <p className="text-silver leading-snug text-md">
+                      {project.description ??
+                        PORTFOLIO_PAGE.PROJECT_NO_DESCRIPTION}
+                    </p>
                   </div>
 
-                  <p className="text-slate-dark leading-relaxed mb-4">
-                    {project.description ?? 'No description available'}
-                  </p>
-                </div>
-
-                <div className="flex items-center justify-between pt-4 border-t border-navy-accent/30">
-                  <div className="flex items-center gap-3">
-                    {project.language && (
-                      <span className="px-3 py-1 bg-navy-accent rounded-full text-xs font-medium text-cyan-accent">
+                  {/* Language badge */}
+                  {project.language && (
+                    <div className="mb-3">
+                      <span className="inline-block px-2 py-0.5 bg-safety-orange/10 border border-safety-orange/30 text-safety-orange text-xs font-bold tracking-wide uppercase rounded-full">
                         {project.language}
                       </span>
-                    )}
-                  </div>
+                    </div>
+                  )}
 
-                  <div className="flex items-center gap-4 text-sm text-slate-dark">
-                    <div className="flex items-center gap-1 group-hover:text-blue-accent transition-colors duration-300">
-                      <Star size={14} />
-                      <span>{project.stargazers_count}</span>
+                  {/* Project footer - stats */}
+                  <div className="flex items-center gap-3 pt-3 border-t border-electric-cyan/10 text-xs text-silver">
+                    <div className="flex items-center gap-1">
+                      <Star size={14} className="text-electric-cyan" />
+                      <span className="font-medium">
+                        {project.stargazers_count}
+                      </span>
                     </div>
-                    <div className="flex items-center gap-1 group-hover:text-purple-accent transition-colors duration-300">
-                      <GitFork size={14} />
-                      <span>{project.forks_count}</span>
+                    <div className="flex items-center gap-1">
+                      <GitFork size={14} className="text-safety-orange" />
+                      <span className="font-medium">{project.forks_count}</span>
                     </div>
                   </div>
-                </div>
+                </Card>
               </Link>
             ))}
           </div>
         ) : (
-          <div className="card p-8 text-center">
-            <div className="w-16 h-16 bg-gradient-to-r from-blue-accent/20 to-purple-accent/20 rounded-full flex items-center justify-center mx-auto mb-4">
-              <span className="text-2xl">🔧</span>
+          <div className=" p-12 text-center border-2 border-electric-cyan/20 bg-navy-accent/20">
+            <div className="w-20 h-20 bg-safety-orange/20 border-4 border-safety-orange flex items-center justify-center mx-auto mb-4">
+              <span className="text-3xl">🔧</span>
             </div>
-            <h3 className="text-xl font-bold text-slate-light mb-2">
-              Projects Loading
+            <h3 className="text-2xl font-display text-cream mb-2">
+              {PORTFOLIO_PAGE.EMPTY_STATE_HEADING}
             </h3>
-            <p className="text-slate-dark">
-              Fetching the latest projects from GitHub...
+            <p className="text-silver text-lg">
+              {PORTFOLIO_PAGE.EMPTY_STATE_MESSAGE}
             </p>
           </div>
         )}
 
         {/* View More Link */}
-        <div className="mt-12 text-center">
+        <div className="mt-12 flex justify-center">
           <Link
             href="https://github.com/davie3"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 px-8 py-4 glass rounded-xl font-semibold text-slate-light transition-all duration-300 hover:scale-105 hover:bg-navy-accent/50 group"
+            className="group inline-flex items-center gap-3 px-8 py-4 bg-electric-cyan text-navy font-semibold text-lg transition-all duration-300 hover:bg-safety-orange hover:scale-105 active:scale-95"
           >
-            <span>View All Projects on GitHub</span>
-            <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
+            <span>{PORTFOLIO_PAGE.VIEW_ALL_BUTTON}</span>
+            <ExternalLink className="w-5 h-5 transition-transform duration-300 group-hover:scale-110" />
           </Link>
         </div>
-      </section>
+      </BorderedSection>
     </main>
   );
 }

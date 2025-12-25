@@ -1,35 +1,12 @@
 /**
  * Environment detection utilities
- * Provides consistent environment checking across the application
  */
 
 import { env } from '@/env';
 
 /**
- * Check if the application is running in production environment
- * Returns true for both Vercel production and standard NODE_ENV production
+ * Check if analytics should be enabled based on environment variable.
+ * Defaults to enabled in production unless explicitly disabled.
  */
-export const isProduction =
-  process.env.VERCEL_ENV === 'production' ||
-  process.env.NODE_ENV === 'production';
-
-/**
- * Check if analytics should be enabled
- * Always enabled in production, optionally enabled in non-prod via ENABLE_ANALYTICS
- */
-export const shouldEnableAnalytics = isProduction || env.ENABLE_ANALYTICS;
-
-/**
- * Check if the application is running in development environment
- * Returns true for both Vercel development and standard NODE_ENV development
- */
-export const isDevelopment =
-  process.env.VERCEL_ENV === 'development' ||
-  process.env.NODE_ENV === 'development';
-
-/**
- * Check if the application is running in preview/staging environment
- * Returns true for Vercel preview deployments or when not in production/development
- */
-export const isPreview =
-  process.env.VERCEL_ENV === 'preview' || (!isProduction && !isDevelopment);
+export const shouldEnableAnalytics =
+  process.env.NODE_ENV === 'production' || env.ENABLE_ANALYTICS;

@@ -2,14 +2,31 @@
  * Configuration-related type definitions.
  */
 
-export type Star = {
+export type LayerType = 'background' | 'middle' | 'foreground';
+
+export type CanvasStar = {
   readonly id: number;
   readonly x: number;
   readonly y: number;
   readonly size: number;
-  readonly opacity: number;
+  readonly baseOpacity: number;
   readonly color: string;
-  readonly gradientStop: number;
+  readonly layer: LayerType;
+  readonly twinklePhase: number;
+  readonly twinkleSpeed: number;
+};
+
+export type ShootingStar = {
+  id: number;
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+  length: number;
+  opacity: number;
+  lifetime: number;
+  maxLifetime: number;
+  active: boolean;
 };
 
 export type NavLink = {
@@ -20,4 +37,14 @@ export type NavLink = {
 
 export type GitHubConfig = {
   readonly revalidateInterval: number;
+};
+
+export type SitemapPageConfig = {
+  readonly changeFrequency: 'yearly' | 'monthly' | 'weekly' | 'daily';
+  readonly priority: number;
+};
+
+export type NavigationLinkConfig = {
+  readonly href: string;
+  readonly label: string;
 };

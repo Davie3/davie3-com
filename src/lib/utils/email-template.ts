@@ -1,5 +1,6 @@
 import { readFileSync } from 'fs';
 import { join } from 'path';
+import { EMAIL_CONFIG } from '@/constants/config/email-config';
 import type { ContactFormTemplateData } from '@/types/email-types';
 
 /**
@@ -31,20 +32,22 @@ export const renderContactFormTemplate = (
 export const generateContactFormText = (
   data: ContactFormTemplateData,
 ): string => {
+  const { TEXT_TEMPLATE } = EMAIL_CONFIG.CONTACT_FORM;
+
   return `
-CONTACT FORM SUBMISSION
-═══════════════════════
+${TEXT_TEMPLATE.HEADER}
+${TEXT_TEMPLATE.DIVIDER}
 
-👤 Name: ${data.name}
-📧 Email: ${data.email}
-📝 Subject: ${data.subject}
-🕒 Received: ${data.timestamp}
+${TEXT_TEMPLATE.LABELS.NAME} ${data.name}
+${TEXT_TEMPLATE.LABELS.EMAIL} ${data.email}
+${TEXT_TEMPLATE.LABELS.SUBJECT} ${data.subject}
+${TEXT_TEMPLATE.LABELS.RECEIVED} ${data.timestamp}
 
-MESSAGE:
-────────
+${TEXT_TEMPLATE.LABELS.MESSAGE}
+${TEXT_TEMPLATE.MESSAGE_DIVIDER}
 ${data.message}
 
-═══════════════════════
-Reply directly to this email to respond to ${data.name}.
+${TEXT_TEMPLATE.DIVIDER}
+${TEXT_TEMPLATE.FOOTER_TEMPLATE(data.name)}
   `.trim();
 };
