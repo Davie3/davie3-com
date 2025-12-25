@@ -4,7 +4,7 @@
  */
 
 import type { Education } from '@/types/personal-types';
-import { PAGE_DESCRIPTIONS, TECHNOLOGIES } from './shared';
+import { PAGE_DESCRIPTIONS, TECHNOLOGIES } from '../shared';
 
 /**
  * About page content

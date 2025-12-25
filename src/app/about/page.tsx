@@ -6,7 +6,7 @@ import {
   EDUCATION,
   ABOUT_CONTENT,
   SKILLS,
-} from '@/constants/about-page';
+} from '@/constants/pages/about-page';
 import { PAGE_STAGGER_DELAYS } from '@/constants/config/animation-config';
 import { SectionHeader } from '@/components/ui/section-header';
 import { BorderedSection } from '@/components/ui/bordered-section';

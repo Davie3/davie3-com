@@ -3,7 +3,7 @@ import type { JSX } from 'react';
 import ContactForm from '@/components/forms/contact-form';
 import { SectionHeader } from '@/components/ui/section-header';
 import { PAGE_METADATA } from '@/constants/config/site-metadata';
-import { CONTACT_PAGE, PAGE_DESCRIPTIONS } from '@/constants/shared';
+import { CONTACT_PAGE, CONTACT_CONTENT } from '@/constants/pages/contact-page';
 
 export const metadata: Metadata = PAGE_METADATA.CONTACT;
 
@@ -26,10 +26,10 @@ export default function ContactPage(): JSX.Element {
             className="mb-6"
           />
           <p className="text-2xl text-electric-cyan font-semibold mb-6">
-            {PAGE_DESCRIPTIONS.CONTACT_HERO_SUBTITLE}
+            {CONTACT_CONTENT.HERO_SUBTITLE}
           </p>
           <p className="text-xl leading-relaxed text-silver">
-            {PAGE_DESCRIPTIONS.CONTACT_PAGE_INTRO}
+            {CONTACT_CONTENT.PAGE_INTRO}
           </p>
         </div>
       </section>
@@ -44,7 +44,7 @@ export default function ContactPage(): JSX.Element {
             {CONTACT_PAGE.FORM_HEADING}
           </h2>
           <p className="text-silver leading-relaxed">
-            {PAGE_DESCRIPTIONS.CONTACT_FORM_HELP}
+            {CONTACT_CONTENT.FORM_HELP}
           </p>
         </div>
 

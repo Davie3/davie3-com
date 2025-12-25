@@ -16,7 +16,7 @@ import { Alert } from '@/components/ui/alert';
 import { Card, CardContent } from '@/components/ui/card';
 import { FormField } from '@/components/ui/form-field';
 
-import { CONTACT_FORM } from '@/constants/shared';
+import { CONTACT_FORM } from '@/constants/pages/contact-page';
 import { FORM_MESSAGES } from '@/constants/ui-components';
 import { ANIMATION_DURATIONS } from '@/constants/config/animation-config';
 import { CONTACT_FORM_SCHEMA } from '@/types/form-types';

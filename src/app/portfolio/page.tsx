@@ -8,7 +8,10 @@ import { SectionHeader } from '@/components/ui/section-header';
 import { PAGE_STAGGER_DELAYS } from '@/constants/config/animation-config';
 import { GITHUB_CONFIG } from '@/constants/config/github-config';
 import { PAGE_METADATA } from '@/constants/config/site-metadata';
-import { PAGE_DESCRIPTIONS, PORTFOLIO_PAGE } from '@/constants/shared';
+import {
+  PORTFOLIO_PAGE,
+  PORTFOLIO_CONTENT,
+} from '@/constants/pages/portfolio-page';
 import { GITHUB_REPO_SCHEMA } from '@/types/api-types';
 import type { GitHubRepo } from '@/types/api-types';
 
@@ -81,12 +84,12 @@ export default async function PortfolioPage(): Promise<JSX.Element> {
               className="mb-3"
             />
             <p className="text-xl text-electric-cyan font-semibold mb-4">
-              {PAGE_DESCRIPTIONS.PORTFOLIO_HERO_SUBTITLE}
+              {PORTFOLIO_CONTENT.HERO_SUBTITLE}
             </p>
           </div>
 
           <p className="text-lg md:text-xl leading-relaxed text-silver max-w-3xl">
-            {PAGE_DESCRIPTIONS.PORTFOLIO_PAGE_INTRO}
+            {PORTFOLIO_CONTENT.PAGE_INTRO}
           </p>
         </div>
       </section>

@@ -1,3 +1,5 @@
+import { CONTACT_CONTENT } from '@/constants/pages/contact-page';
+import { PORTFOLIO_CONTENT } from '@/constants/pages/portfolio-page';
 import type { Metadata } from 'next';
 import { COMBINED_KEYWORDS } from '@/constants/config/seo-config';
 import {
@@ -111,12 +113,12 @@ export const PAGE_METADATA = {
   },
   CONTACT: {
     title: `Contact | ${PERSONAL_INFO.FULL_NAME} - Get In Touch`,
-    description: PAGE_DESCRIPTIONS.CONTACT_PAGE_INTRO,
+    description: CONTACT_CONTENT.PAGE_INTRO,
     keywords: [...COMBINED_KEYWORDS.CONTACT],
   },
   PORTFOLIO: {
     title: `Portfolio | ${PERSONAL_INFO.FULL_NAME} - Software Projects & GitHub`,
-    description: PAGE_DESCRIPTIONS.PORTFOLIO_PAGE_INTRO,
+    description: PORTFOLIO_CONTENT.PAGE_INTRO,
     keywords: [...COMBINED_KEYWORDS.PORTFOLIO],
   },
 };
