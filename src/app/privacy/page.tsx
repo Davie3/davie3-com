@@ -230,7 +230,7 @@ export default function PrivacyPage(): JSX.Element {
                         href="https://vercel.com/legal/privacy-policy"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-electric-cyan hover:text-cream transition-colors underline"
+                        className="text-electric-cyan hover:text-safety-orange transition-colors underline"
                       >
                         Vercel Privacy Policy
                       </a>
@@ -251,7 +251,7 @@ export default function PrivacyPage(): JSX.Element {
                         href="https://www.cloudflare.com/privacypolicy/"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-electric-cyan hover:text-cream transition-colors underline"
+                        className="text-electric-cyan hover:text-safety-orange transition-colors underline"
                       >
                         Cloudflare Privacy Policy
                       </a>
@@ -272,7 +272,7 @@ export default function PrivacyPage(): JSX.Element {
                         href="https://www.cloudflare.com/privacypolicy/"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-electric-cyan hover:text-cream transition-colors underline"
+                        className="text-electric-cyan hover:text-safety-orange transition-colors underline"
                       >
                         Cloudflare Privacy Policy
                       </a>
@@ -293,7 +293,7 @@ export default function PrivacyPage(): JSX.Element {
                         href="https://www.twilio.com/legal/privacy"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-electric-cyan hover:text-cream transition-colors underline"
+                        className="text-electric-cyan hover:text-safety-orange transition-colors underline"
                       >
                         Twilio Privacy Policy
                       </a>
@@ -314,7 +314,7 @@ export default function PrivacyPage(): JSX.Element {
                         href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-electric-cyan hover:text-cream transition-colors underline"
+                        className="text-electric-cyan hover:text-safety-orange transition-colors underline"
                       >
                         GitHub Privacy Policy
                       </a>
@@ -349,7 +349,7 @@ export default function PrivacyPage(): JSX.Element {
                         href="https://vercel.com/legal/privacy-policy"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-electric-cyan hover:text-cream transition-colors underline"
+                        className="text-electric-cyan hover:text-safety-orange transition-colors underline"
                       >
                         Vercel
                       </a>
@@ -358,7 +358,7 @@ export default function PrivacyPage(): JSX.Element {
                         href="https://www.cloudflare.com/privacypolicy/"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-electric-cyan hover:text-cream transition-colors underline"
+                        className="text-electric-cyan hover:text-safety-orange transition-colors underline"
                       >
                         Cloudflare
                       </a>
@@ -572,7 +572,7 @@ export default function PrivacyPage(): JSX.Element {
           exercise your rights, please contact me through my{' '}
           <a
             href="/contact"
-            className="text-electric-cyan hover:text-cream transition-colors underline"
+            className="text-electric-cyan hover:text-safety-orange transition-colors underline"
           >
             contact form
           </a>{' '}
