@@ -18,11 +18,7 @@ export function Turnstile({
 }: Omit<TurnstileProps, 'siteKey'> & { siteKey?: string }): JSX.Element {
   return (
     <ReactTurnstile
-      siteKey={
-        siteKey ??
-        env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ??
-        '1x00000000000000000000AA'
-      }
+      siteKey={siteKey ?? env.NEXT_PUBLIC_TURNSTILE_SITE_KEY}
       {...props}
     />
   );

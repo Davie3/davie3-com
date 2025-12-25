@@ -10,17 +10,21 @@ const serverEnvSchema = z.object({
 
 // Client-side environment variables (validated on import)
 const clientEnvSchema = z.object({
-  NEXT_PUBLIC_TURNSTILE_SITE_KEY: z
-    .string()
-    .min(1, 'NEXT_PUBLIC_TURNSTILE_SITE_KEY is required.'),
+  NEXT_PUBLIC_TURNSTILE_SITE_KEY: z.string().optional(),
   ENABLE_ANALYTICS: z
     .string()
     .optional()
     .transform((val) => val === 'true'),
 });
 
-// Validate client env on import
-export const env = clientEnvSchema.parse(process.env);
+// Validate and apply defaults
+const parsedEnv = clientEnvSchema.parse(process.env);
+
+export const env = {
+  ...parsedEnv,
+  NEXT_PUBLIC_TURNSTILE_SITE_KEY:
+    parsedEnv.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? '1x00000000000000000000AA', // Test key for local dev
+};
 
 // Lazy validation for server env (call this in API routes)
 export const getServerEnv = () => serverEnvSchema.parse(process.env);
