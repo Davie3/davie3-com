@@ -586,3 +586,18 @@ select {
     transform: translateY(0);
   }
 }
+
+/* Common utility classes for consistent transitions */
+@layer utilities {
+  .transition-standard {
+    @apply transition-all duration-300;
+  }
+
+  .transition-colors-standard {
+    @apply transition-colors duration-300;
+  }
+
+  .hover-accent {
+    @apply hover:text-electric-cyan hover:border-electric-cyan;
+  }
+}
