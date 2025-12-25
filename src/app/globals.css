@@ -290,6 +290,12 @@ select {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
   }
 
+  /* Disable mobile menu animations for reduced motion */
+  .mobile-menu-overlay,
+  .mobile-menu-panel {
+    transition: none !important;
+  }
+
   /* Disable parallax and transform animations */
   .glow-on-hover::before {
     animation: none !important;

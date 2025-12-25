@@ -15,6 +15,7 @@ export function PageWrapper({ children }: PageWrapperProps): JSX.Element {
 
   return (
     <motion.main
+      id="main-content"
       key={pathname}
       className="container mx-auto px-6 md:px-12 lg:px-24 pb-2"
       initial={{
