@@ -122,6 +122,20 @@ body {
 }
 
 /* Grain texture overlay for industrial aesthetic */
+/**
+ * Grain texture overlay for "Midnight Industrial" aesthetic
+ *
+ * Performance Note:
+ * - position: fixed + mix-blend-mode may cause recomposition on scroll/animation
+ * - Low opacity (0.03) minimizes performance impact
+ * - Alternative if performance issues arise: Use background-image on body (scrolls with content)
+ * - Monitor: Lighthouse scroll performance & compositor layer analysis
+ *
+ * Current approach chosen for:
+ * - Fixed texture maintains visual consistency during parallax scrolling
+ * - Subtle grain enhances industrial aesthetic without heaviness
+ * - Compatible with animated starfield background
+ */
 body::before {
   content: '';
   position: fixed;
@@ -134,6 +148,15 @@ body::before {
   z-index: var(--z-grain);
   mix-blend-mode: overlay;
 }
+
+/* Alternative if performance issues detected:
+body {
+  background-image:
+    url("data:image/svg+xml,..."),
+    var(--gradient-background);
+  background-attachment: scroll;
+}
+*/
 
 /* Enhanced link styles */
 a {
