@@ -596,8 +596,4 @@ select {
   .transition-colors-standard {
     @apply transition-colors duration-300;
   }
-
-  .hover-accent {
-    @apply hover:text-electric-cyan hover:border-electric-cyan;
-  }
 }
