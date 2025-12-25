@@ -1,88 +1,175 @@
 'use client';
 
-import { motion, type Variants } from 'framer-motion';
-import { useState, type JSX } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import type { JSX } from 'react';
+import { CANVAS_CONFIG } from '@/constants/config/animation-config';
 import {
-  STAR_CONFIG,
-  ANIMATION_DURATIONS,
-  type Star,
-} from '../../constants/config/animation-config';
-
-const containerVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: STAR_CONFIG.STAGGER_DELAY,
-    },
-  },
-};
-
-const starVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      duration: ANIMATION_DURATIONS.SLOW,
-    },
-  },
-};
-
-const generateStars = (): Star[] => {
-  return Array.from({ length: STAR_CONFIG.COUNT }, (_, i) => ({
-    id: i,
-    x: Math.random() * 100,
-    y: Math.random() * 100,
-    size:
-      Math.random() *
-        (STAR_CONFIG.SIZE_RANGE.MAX - STAR_CONFIG.SIZE_RANGE.MIN) +
-      STAR_CONFIG.SIZE_RANGE.MIN,
-    opacity:
-      Math.random() *
-        (STAR_CONFIG.OPACITY_RANGE.MAX - STAR_CONFIG.OPACITY_RANGE.MIN) +
-      STAR_CONFIG.OPACITY_RANGE.MIN,
-    color:
-      STAR_CONFIG.COLORS[Math.floor(Math.random() * STAR_CONFIG.COLORS.length)],
-    gradientStop:
-      Math.random() *
-        (STAR_CONFIG.GRADIENT_RANGE.MAX - STAR_CONFIG.GRADIENT_RANGE.MIN) +
-      STAR_CONFIG.GRADIENT_RANGE.MIN,
-  }));
-};
+  generateStarsByLayer,
+  generateNebulae,
+  ShootingStarPool,
+  updateStarTwinkle,
+} from '@/lib/utils/particle-system';
+import {
+  drawStar,
+  drawNebula,
+  drawShootingStar,
+  isInViewport,
+} from '@/lib/utils/canvas-utils';
 
 export function AnimatedBackground(): JSX.Element {
-  const [stars] = useState<Star[]>(generateStars);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const animationFrameRef = useRef<number>(0);
+  const lastFrameTimeRef = useRef<number>(0);
+  const scrollYRef = useRef<number>(0);
+
+  // Initialize particles once on mount
+  const [particles] = useState(() => {
+    const width = typeof window !== 'undefined' ? window.innerWidth : 1920;
+    const height = typeof window !== 'undefined' ? window.innerHeight : 1080;
+
+    return {
+      stars: {
+        background: generateStarsByLayer(
+          CANVAS_CONFIG.layers.background.particleCount,
+          'background',
+          width,
+          height,
+        ),
+        middle: generateStarsByLayer(
+          CANVAS_CONFIG.layers.middle.particleCount,
+          'middle',
+          width,
+          height,
+        ),
+        foreground: generateStarsByLayer(
+          CANVAS_CONFIG.layers.foreground.particleCount,
+          'foreground',
+          width,
+          height,
+        ),
+      },
+      nebulae: generateNebulae(10, width, height),
+      shootingStarPool: new ShootingStarPool(5),
+    };
+  });
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    // Resize handler
+    const resizeCanvas = (): void => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    // Scroll handler (passive for performance)
+    const handleScroll = (): void => {
+      scrollYRef.current = window.scrollY;
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    // Check for reduced motion
+    const prefersReducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)',
+    ).matches;
+
+    // Animation loop
+    const animate = (timestamp: number): void => {
+      const deltaTime = timestamp - lastFrameTimeRef.current;
+      lastFrameTimeRef.current = timestamp;
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      const scrollY = scrollYRef.current;
+
+      // 1. Render nebulae (background layer)
+      const bgScrollOffset = scrollY * CANVAS_CONFIG.layers.background.speed;
+      particles.nebulae.forEach((nebula) => {
+        if (
+          isInViewport(
+            nebula.y,
+            bgScrollOffset,
+            canvas.height,
+            CANVAS_CONFIG.viewportBuffer,
+          )
+        ) {
+          drawNebula(ctx, nebula, bgScrollOffset);
+        }
+      });
+
+      // 2. Render stars by layer
+      const layers = [
+        {
+          stars: particles.stars.background,
+          speed: CANVAS_CONFIG.layers.background.speed,
+        },
+        {
+          stars: particles.stars.middle,
+          speed: CANVAS_CONFIG.layers.middle.speed,
+        },
+        {
+          stars: particles.stars.foreground,
+          speed: CANVAS_CONFIG.layers.foreground.speed,
+        },
+      ];
+
+      layers.forEach(({ stars, speed }) => {
+        const layerScrollOffset = scrollY * speed;
+        stars.forEach((star) => {
+          if (
+            isInViewport(
+              star.y,
+              layerScrollOffset,
+              canvas.height,
+              CANVAS_CONFIG.viewportBuffer,
+            )
+          ) {
+            const currentOpacity = prefersReducedMotion
+              ? star.baseOpacity
+              : updateStarTwinkle(star, deltaTime);
+            drawStar(ctx, star, currentOpacity, layerScrollOffset);
+          }
+        });
+      });
+
+      // 3. Update and render shooting stars
+      if (!prefersReducedMotion) {
+        particles.shootingStarPool.update(
+          deltaTime,
+          canvas.width,
+          canvas.height,
+        );
+        particles.shootingStarPool.getActiveStars().forEach((shootingStar) => {
+          drawShootingStar(ctx, shootingStar);
+        });
+      }
+
+      animationFrameRef.current = requestAnimationFrame(animate);
+    };
+
+    animationFrameRef.current = requestAnimationFrame(animate);
+
+    return () => {
+      cancelAnimationFrame(animationFrameRef.current);
+      window.removeEventListener('resize', resizeCanvas);
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [particles]);
 
   return (
-    <motion.div
+    <canvas
+      ref={canvasRef}
       className="fixed top-0 left-0 w-full h-full -z-10"
-      variants={containerVariants}
-      initial="hidden"
-      animate="visible"
       aria-hidden="true"
       role="presentation"
-    >
-      {stars.map((star) => (
-        <motion.div
-          key={star.id}
-          variants={starVariants}
-          className="absolute rounded-full"
-          animate={{ opacity: [0, star.opacity, 0] }}
-          transition={{
-            duration: star.size / 2,
-            repeat: Infinity,
-            repeatType: 'reverse',
-            delay: star.id * 0.1,
-          }}
-          style={{
-            left: `${star.x.toString()}%`,
-            top: `${star.y.toString()}%`,
-            width: `${star.size.toString()}px`,
-            height: `${star.size.toString()}px`,
-            background: `radial-gradient(circle, ${star.color} 0%, transparent ${star.gradientStop.toString()}%)`,
-          }}
-        />
-      ))}
-    </motion.div>
+    />
   );
 }
