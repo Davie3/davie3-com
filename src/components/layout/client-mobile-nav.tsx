@@ -28,18 +28,10 @@ export function ClientMobileNav(): JSX.Element {
 
   const mobileMenu = (
     <div className={`mobile-menu-overlay ${isOpen ? 'open' : ''}`}>
-      <div
+      <button
         className="mobile-menu-backdrop"
         onClick={toggleMenu}
-        role="button"
-        tabIndex={0}
         aria-label="Close navigation menu"
-        onKeyDown={(e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            toggleMenu();
-          }
-        }}
       />
       <div
         id="mobile-menu"

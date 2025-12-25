@@ -265,16 +265,21 @@ export default function ContactForm(): JSX.Element {
             </FormField>
           </motion.div>
 
-          <motion.div
-            variants={fieldVariantsResponsive}
-            className="flex justify-center pt-2"
-          >
-            <Turnstile
-              onSuccess={(newToken) => {
-                setToken(newToken);
-                setCaptchaError(null);
-              }}
-            />
+          <motion.div variants={fieldVariantsResponsive}>
+            <FormField
+              label={CONTACT_FORM.LABEL_CAPTCHA}
+              name="turnstile-captcha"
+              error={captchaError ?? undefined}
+            >
+              <div className="flex justify-center pt-2">
+                <Turnstile
+                  onSuccess={(newToken) => {
+                    setToken(newToken);
+                    setCaptchaError(null);
+                  }}
+                />
+              </div>
+            </FormField>
           </motion.div>
 
           {captchaError && (

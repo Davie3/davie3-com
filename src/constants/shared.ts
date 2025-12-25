@@ -126,6 +126,7 @@ export const CONTACT_FORM = {
   LABEL_CONFIRM_EMAIL: 'Confirm Email',
   LABEL_SUBJECT: 'Subject',
   LABEL_MESSAGE: 'Message',
+  LABEL_CAPTCHA: 'Please verify you are not a robot',
 
   // Placeholders
   PLACEHOLDER_NAME: 'Your full name',
