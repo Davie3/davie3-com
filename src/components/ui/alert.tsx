@@ -115,17 +115,3 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
 );
 
 Alert.displayName = 'Alert';
-
-// Sub-components for semantic structure
-type AlertTitleProps = {
-  className?: string;
-  children: ReactNode;
-};
-
-export const AlertTitle = ({ className, children }: AlertTitleProps) => (
-  <h5 className={cn('font-bold mb-1 text-base', className)}>{children}</h5>
-);
-
-export const AlertDescription = ({ className, children }: AlertTitleProps) => (
-  <div className={cn('text-sm opacity-90', className)}>{children}</div>
-);

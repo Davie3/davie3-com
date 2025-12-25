@@ -53,14 +53,3 @@ export const URL_MAPPINGS: readonly UrlMapping[] = [
   { source: '/links', destination: '/', permanent: true },
   { source: '/home', destination: '/', permanent: true },
 ] as const;
-
-/**
- * Helper functions for URL mappings
- */
-export const getSourcePaths = (): string[] => {
-  return URL_MAPPINGS.map((mapping) => mapping.source);
-};
-
-export const findMappingBySource = (source: string): UrlMapping | undefined => {
-  return URL_MAPPINGS.find((mapping) => mapping.source === source);
-};

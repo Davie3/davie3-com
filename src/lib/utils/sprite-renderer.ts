@@ -1,8 +1,5 @@
-import type { CanvasStar, NebulaCloud } from '@/types/config-types';
-import {
-  STAR_CONFIG,
-  NEBULA_CONFIG,
-} from '@/constants/config/animation-config';
+import type { CanvasStar } from '@/types/config-types';
+import { STAR_CONFIG } from '@/constants/config/animation-config';
 
 /**
  * Sprite cache entry containing pre-rendered canvas element.
@@ -19,7 +16,6 @@ type SpriteCache = {
  */
 export class SpriteRenderer {
   private starSprites: Map<string, SpriteCache> = new Map();
-  private nebulaSprites: Map<number, SpriteCache> = new Map();
 
   /**
    * Pre-render all unique star variations during initialization.
@@ -45,17 +41,6 @@ export class SpriteRenderer {
             this.starSprites.set(key, this.createStarSprite(size, color));
           }
         });
-      }
-    });
-  }
-
-  /**
-   * Pre-render all nebula sprites during initialization.
-   */
-  preRenderNebulae(nebulae: NebulaCloud[]): void {
-    nebulae.forEach((nebula) => {
-      if (!this.nebulaSprites.has(nebula.id)) {
-        this.nebulaSprites.set(nebula.id, this.createNebulaSprite(nebula));
       }
     });
   }
@@ -100,49 +85,6 @@ export class SpriteRenderer {
   }
 
   /**
-   * Create a pre-rendered nebula sprite with multi-stop radial gradient.
-   */
-  private createNebulaSprite(nebula: NebulaCloud): SpriteCache {
-    const padding = 4;
-    const canvasSize = Math.ceil(nebula.radius * 2) + padding * 2;
-
-    const canvas = document.createElement('canvas');
-    canvas.width = canvasSize;
-    canvas.height = canvasSize;
-
-    const ctx = canvas.getContext('2d');
-    if (!ctx) throw new Error('Failed to get 2D context for nebula sprite');
-
-    const centerX = canvasSize / 2;
-    const centerY = canvasSize / 2;
-
-    // Draw multi-stop radial gradient (once, stored forever)
-    const gradient = ctx.createRadialGradient(
-      centerX,
-      centerY,
-      0,
-      centerX,
-      centerY,
-      nebula.radius,
-    );
-
-    nebula.gradientStops.forEach((stop) => {
-      const alpha = stop.alpha;
-      const rgba = this.hexToRGBA(nebula.color, alpha);
-      gradient.addColorStop(stop.offset, rgba);
-    });
-
-    ctx.fillStyle = gradient;
-    ctx.fillRect(0, 0, canvasSize, canvasSize);
-
-    return {
-      canvas,
-      width: canvasSize,
-      height: canvasSize,
-    };
-  }
-
-  /**
    * Draw a star using pre-rendered sprite (10-20x faster than gradients).
    */
   drawStar(
@@ -159,26 +101,6 @@ export class SpriteRenderer {
 
     ctx.save();
     ctx.globalAlpha = currentOpacity;
-    ctx.drawImage(sprite.canvas, x, y);
-    ctx.restore();
-  }
-
-  /**
-   * Draw a nebula using pre-rendered sprite.
-   */
-  drawNebula(
-    ctx: CanvasRenderingContext2D,
-    nebula: NebulaCloud,
-    scrollOffset: number,
-  ): void {
-    const sprite = this.nebulaSprites.get(nebula.id);
-    if (!sprite) return;
-
-    const x = Math.floor(nebula.x - sprite.width / 2);
-    const y = Math.floor(nebula.y - scrollOffset - sprite.height / 2);
-
-    ctx.save();
-    ctx.globalAlpha = nebula.baseOpacity;
     ctx.drawImage(sprite.canvas, x, y);
     ctx.restore();
   }
@@ -228,20 +150,9 @@ export class SpriteRenderer {
   }
 
   /**
-   * Convert hex color to RGBA string.
-   */
-  private hexToRGBA(hex: string, alpha: number): string {
-    const r = parseInt(hex.slice(1, 3), 16);
-    const g = parseInt(hex.slice(3, 5), 16);
-    const b = parseInt(hex.slice(5, 7), 16);
-    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
-  }
-
-  /**
    * Clear all sprite caches (useful for cleanup).
    */
   clear(): void {
     this.starSprites.clear();
-    this.nebulaSprites.clear();
   }
 }

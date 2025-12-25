@@ -1,12 +1,6 @@
-import type {
-  CanvasStar,
-  NebulaCloud,
-  ShootingStar,
-  LayerType,
-} from '@/types/config-types';
+import type { CanvasStar, ShootingStar, LayerType } from '@/types/config-types';
 import {
   STAR_CONFIG,
-  NEBULA_CONFIG,
   SHOOTING_STAR_CONFIG,
 } from '@/constants/config/animation-config';
 
@@ -40,37 +34,6 @@ export function generateStarsByLayer(
           STAR_CONFIG.TWINKLE_SPEED_RANGE.MIN) +
       STAR_CONFIG.TWINKLE_SPEED_RANGE.MIN,
   }));
-}
-
-/**
- * Generate nebula clouds with gradient configurations.
- */
-export function generateNebulae(
-  count: number,
-  width: number,
-  height: number,
-): NebulaCloud[] {
-  return Array.from({ length: count }, (_, i) => {
-    const useAccent = Math.random() < NEBULA_CONFIG.ACCENT_PROBABILITY;
-
-    return {
-      id: i,
-      x: Math.random() * width,
-      y: Math.random() * height * 2,
-      radius:
-        Math.random() *
-          (NEBULA_CONFIG.RADIUS_RANGE.MAX - NEBULA_CONFIG.RADIUS_RANGE.MIN) +
-        NEBULA_CONFIG.RADIUS_RANGE.MIN,
-      baseOpacity:
-        Math.random() *
-          (NEBULA_CONFIG.OPACITY_RANGE.MAX - NEBULA_CONFIG.OPACITY_RANGE.MIN) +
-        NEBULA_CONFIG.OPACITY_RANGE.MIN,
-      color: useAccent
-        ? NEBULA_CONFIG.COLORS.ACCENT
-        : NEBULA_CONFIG.COLORS.PRIMARY,
-      gradientStops: NEBULA_CONFIG.GRADIENT_STOPS,
-    };
-  });
 }
 
 /**

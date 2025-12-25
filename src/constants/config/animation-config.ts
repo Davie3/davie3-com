@@ -1,6 +1,4 @@
-import type { Star, CanvasConfig, LayerType } from '@/types/config-types';
-
-export type { Star, CanvasConfig, LayerType };
+import type { LayerType } from '@/types/config-types';
 
 export const ANIMATION_DURATIONS = {
   FAST: 0.2,
@@ -8,7 +6,7 @@ export const ANIMATION_DURATIONS = {
   SLOW: 0.5,
 } as const;
 
-export const CANVAS_CONFIG: CanvasConfig = {
+export const CANVAS_CONFIG = {
   targetFps: 60,
   viewportBuffer: 100,
   layers: {
@@ -38,23 +36,6 @@ export const STAR_CONFIG = {
     middle: { MIN: 1.0, MAX: 2.5 },
     foreground: { MIN: 1.5, MAX: 3.0 },
   },
-} as const;
-
-export const NEBULA_CONFIG = {
-  COUNT: 10,
-  RADIUS_RANGE: { MIN: 80, MAX: 200 },
-  OPACITY_RANGE: { MIN: 0.05, MAX: 0.15 },
-  COLORS: {
-    PRIMARY: '#00d4ff',
-    ACCENT: '#ff6b35',
-  },
-  ACCENT_PROBABILITY: 0.1,
-  GRADIENT_STOPS: [
-    { offset: 0, alpha: 1.0 },
-    { offset: 0.4, alpha: 0.6 },
-    { offset: 0.7, alpha: 0.3 },
-    { offset: 1.0, alpha: 0 },
-  ] as const,
 } as const;
 
 export const SHOOTING_STAR_CONFIG = {

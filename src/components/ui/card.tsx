@@ -57,18 +57,6 @@ type CardSubComponentProps = {
   children: ReactNode;
 } & React.HTMLAttributes<HTMLDivElement>;
 
-export const CardHeader = forwardRef<HTMLDivElement, CardSubComponentProps>(
-  ({ className, children, ...props }, ref) => {
-    return (
-      <div ref={ref} className={cn('p-6 pb-4', className)} {...props}>
-        {children}
-      </div>
-    );
-  },
-);
-
-CardHeader.displayName = 'CardHeader';
-
 export const CardContent = forwardRef<HTMLDivElement, CardSubComponentProps>(
   ({ className, children, ...props }, ref) => {
     return (
@@ -80,15 +68,3 @@ export const CardContent = forwardRef<HTMLDivElement, CardSubComponentProps>(
 );
 
 CardContent.displayName = 'CardContent';
-
-export const CardFooter = forwardRef<HTMLDivElement, CardSubComponentProps>(
-  ({ className, children, ...props }, ref) => {
-    return (
-      <div ref={ref} className={cn('p-6 pt-4', className)} {...props}>
-        {children}
-      </div>
-    );
-  },
-);
-
-CardFooter.displayName = 'CardFooter';
