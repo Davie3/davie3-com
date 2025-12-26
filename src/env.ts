@@ -14,11 +14,16 @@ const serverEnvSchema = z.object({
 
 // Client-side environment variables (validated on import)
 const clientEnvSchema = z.object({
-  NEXT_PUBLIC_TURNSTILE_SITE_KEY: z.string().optional(),
+  NEXT_PUBLIC_TURNSTILE_SITE_KEY: z.string().min(1).optional(),
   NEXT_PUBLIC_ENABLE_ANALYTICS: z
     .string()
     .optional()
-    .default(process.env.NODE_ENV === 'production' ? 'true' : 'false')
+    .default(
+      process.env.VERCEL_ENV === 'production' ||
+        process.env.VERCEL_ENV === 'preview'
+        ? 'true'
+        : 'false',
+    )
     .transform((val) => val === 'true'),
 });
 
@@ -28,13 +33,15 @@ const parsedEnv = clientEnvSchema.parse(process.env);
 // Use VERCEL_ENV to distinguish environments (not NODE_ENV which is always 'production' on Vercel)
 // VERCEL_ENV values: 'production' | 'preview' | 'development' | undefined (local dev)
 // See: https://vercel.com/docs/environment-variables/system-environment-variables
-const isVercelProduction = process.env.VERCEL_ENV === 'production';
+const isVercelDeployed =
+  process.env.VERCEL_ENV === 'production' ||
+  process.env.VERCEL_ENV === 'preview';
 
 export const env = {
   ...parsedEnv,
   NEXT_PUBLIC_TURNSTILE_SITE_KEY:
     parsedEnv.NEXT_PUBLIC_TURNSTILE_SITE_KEY ??
-    (isVercelProduction ? '' : TURNSTILE_TEST_KEY), // Test key for dev/preview, empty for production
+    (isVercelDeployed ? '' : TURNSTILE_TEST_KEY), // Test key for local dev only
 };
 
 // Lazy validation for server env (call this in API routes)
