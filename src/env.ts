@@ -33,10 +33,18 @@ console.log(
   typeof window,
 );
 console.log(
-  '🔍 ENV DEBUG - process.env keys:',
-  Object.keys(process.env).filter((k) => k.startsWith('NEXT_PUBLIC')),
+  '🔍 ENV DEBUG - NEXT_PUBLIC_TURNSTILE_SITE_KEY value:',
+  process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY?.substring(0, 15) || 'undefined',
+);
+console.log(
+  '🔍 ENV DEBUG - NEXT_PUBLIC_TURNSTILE_SITE_KEY type:',
+  typeof process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY,
 );
 const parsedEnv = clientEnvSchema.parse(process.env);
+console.log(
+  '🔍 ENV DEBUG - After Zod parse:',
+  parsedEnv.NEXT_PUBLIC_TURNSTILE_SITE_KEY?.substring(0, 15) || 'undefined',
+);
 
 export const env = {
   ...parsedEnv,
