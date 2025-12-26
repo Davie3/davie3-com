@@ -14,7 +14,7 @@ const serverEnvSchema = z.object({
 
 // Client-side environment variables (validated on import)
 const clientEnvSchema = z.object({
-  NEXT_PUBLIC_TURNSTILE_SITE_KEY: z.string().min(1).optional(),
+  NEXT_PUBLIC_TURNSTILE_SITE_KEY: z.string().optional(),
   NEXT_PUBLIC_ENABLE_ANALYTICS: z
     .string()
     .optional()
@@ -46,20 +46,10 @@ console.log(
     : 'undefined',
 );
 
-// Use VERCEL_ENV to distinguish environments (not NODE_ENV which is always 'production' on Vercel)
-// VERCEL_ENV values: 'production' | 'preview' | 'development' | undefined (local dev)
-// See: https://vercel.com/docs/environment-variables/system-environment-variables
-const isVercelDeployed =
-  process.env.VERCEL_ENV === 'production' ||
-  process.env.VERCEL_ENV === 'preview';
-
-console.log('🔍 ENV DEBUG - isVercelDeployed:', isVercelDeployed);
-
 export const env = {
   ...parsedEnv,
   NEXT_PUBLIC_TURNSTILE_SITE_KEY:
-    parsedEnv.NEXT_PUBLIC_TURNSTILE_SITE_KEY ??
-    (isVercelDeployed ? '' : TURNSTILE_TEST_KEY), // Test key for local dev only
+    parsedEnv.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? TURNSTILE_TEST_KEY,
 };
 
 console.log(
