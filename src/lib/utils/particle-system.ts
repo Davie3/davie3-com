@@ -1,8 +1,8 @@
-import type { CanvasStar, ShootingStar, LayerType } from '@/types/config-types';
 import {
   STAR_CONFIG,
   SHOOTING_STAR_CONFIG,
 } from '@/constants/config/animation-config';
+import type { CanvasStar, ShootingStar, LayerType } from '@/types/config-types';
 
 /**
  * Generate stars for a specific layer with layer-specific properties.
@@ -78,8 +78,8 @@ function updateShootingStar(
  */
 export class ShootingStarPool {
   private pool: ShootingStar[] = [];
-  private lastSpawnTime: number = 0;
-  private nextSpawnDelay: number = 0;
+  private lastSpawnTime = 0;
+  private nextSpawnDelay = 0;
 
   constructor(poolSize: number) {
     this.pool = Array.from({ length: poolSize }, (_, i) => ({
@@ -107,7 +107,7 @@ export class ShootingStarPool {
     );
   }
 
-  private spawnShootingStar(width: number, height: number): void {
+  private spawnShootingStar(width: number, _height: number): void {
     // Find inactive star in pool
     const star = this.pool.find((s) => !s.active);
     if (!star) return; // Pool exhausted

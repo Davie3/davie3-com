@@ -1,7 +1,5 @@
 import { GitFork, Star, ExternalLink } from 'lucide-react';
-import type { Metadata } from 'next';
 import Link from 'next/link';
-import type { JSX } from 'react';
 import { z } from 'zod';
 import { BorderedSection } from '@/components/ui/bordered-section';
 import { Card } from '@/components/ui/card';
@@ -16,6 +14,8 @@ import {
 } from '@/constants/pages/portfolio-page';
 import { GITHUB_REPO_SCHEMA } from '@/types/api-types';
 import type { GitHubRepo } from '@/types/api-types';
+import type { Metadata } from 'next';
+import type { JSX } from 'react';
 
 export const metadata: Metadata = PAGE_METADATA.PORTFOLIO;
 

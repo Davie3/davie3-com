@@ -1,9 +1,9 @@
-import type { MetadataRoute } from 'next';
 import { ROBOTS_CONFIG } from '../constants/config/seo-automation-config';
 import { EXTERNAL_URLS } from '../constants/urls';
+import type { MetadataRoute } from 'next';
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = EXTERNAL_URLS.MAIN || 'https://davie3.com';
+  const baseUrl = EXTERNAL_URLS.MAIN;
 
   return {
     rules: {

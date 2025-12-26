@@ -2,8 +2,8 @@
 
 import { forwardRef } from 'react';
 import { cn } from '@/lib/utils/class-utils';
-import type { ReactNode } from 'react';
 import type { InputVariant, IconPosition } from '@/types/ui-types';
+import type { ReactNode } from 'react';
 
 type InputProps = {
   variant?: InputVariant;
@@ -91,7 +91,9 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             className,
           )}
           aria-invalid={variant === 'error'}
-          aria-describedby={error ? `${props.id}-error` : undefined}
+          aria-describedby={
+            error ? (props.id ? `${props.id}-error` : undefined) : undefined
+          }
           {...props}
         />
 

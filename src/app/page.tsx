@@ -1,13 +1,9 @@
 import { ArrowRight, ExternalLink } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import type { JSX } from 'react';
-import {
-  PERSONAL_INFO,
-  PROFESSIONAL_TITLES,
-  PAGE_DESCRIPTIONS,
-} from '@/constants/shared';
+import { PROFESSIONAL_TITLES, PAGE_DESCRIPTIONS } from '@/constants/shared';
 import { EXTERNAL_URLS, INTERNAL_ROUTES } from '../constants/urls';
+import type { JSX } from 'react';
 
 /**
  * Renders the home page of the personal website.

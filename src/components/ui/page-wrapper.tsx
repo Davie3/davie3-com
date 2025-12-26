@@ -2,8 +2,8 @@
 
 import { motion, useReducedMotion } from 'framer-motion';
 import { usePathname } from 'next/navigation';
-import type { ReactNode, JSX } from 'react';
 import { PAGE_ANIMATION } from '../../constants/config/animation-config';
+import type { ReactNode, JSX } from 'react';
 
 type PageWrapperProps = {
   children: ReactNode;

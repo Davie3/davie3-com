@@ -1,18 +1,18 @@
-import type { Metadata } from 'next';
 import Image from 'next/image';
-import type { JSX } from 'react';
+import { BorderedSection } from '@/components/ui/bordered-section';
+import { SectionHeader } from '@/components/ui/section-header';
+import { PAGE_STAGGER_DELAYS } from '@/constants/config/animation-config';
+import { PAGE_METADATA } from '@/constants/config/site-metadata';
+import { SOCIAL_LINKS_DATA } from '@/constants/config/social-config';
 import {
   EXPERIENCES,
   EDUCATION,
   ABOUT_CONTENT,
   SKILLS,
 } from '@/constants/pages/about-page';
-import { PAGE_STAGGER_DELAYS } from '@/constants/config/animation-config';
-import { SectionHeader } from '@/components/ui/section-header';
-import { BorderedSection } from '@/components/ui/bordered-section';
-import { PAGE_METADATA } from '@/constants/config/site-metadata';
-import { SOCIAL_LINKS_DATA } from '@/constants/config/social-config';
 import { getSocialIcon } from '@/utils/social-icons';
+import type { Metadata } from 'next';
+import type { JSX } from 'react';
 
 export const metadata: Metadata = PAGE_METADATA.ABOUT;
 

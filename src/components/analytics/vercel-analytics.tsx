@@ -31,7 +31,7 @@ export function VercelAnalytics(): JSX.Element {
     // Suppress network resource errors (ERR_BLOCKED_BY_CLIENT)
     const handleResourceError = (event: Event) => {
       const target = event.target as HTMLScriptElement;
-      if (target?.src?.includes('/_vercel/')) {
+      if (target.src.includes('/_vercel/')) {
         event.preventDefault();
         event.stopPropagation();
         return true;

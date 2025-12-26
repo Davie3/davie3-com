@@ -1,5 +1,5 @@
-import type { JSX } from 'react';
 import { cn } from '@/lib/utils/class-utils';
+import type { JSX } from 'react';
 
 type SectionHeaderProps = {
   label: string;

@@ -2,8 +2,8 @@
 
 import { forwardRef } from 'react';
 import { cn } from '@/lib/utils/class-utils';
-import type { ReactNode } from 'react';
 import type { ButtonVariant, ButtonSize } from '@/types/ui-types';
+import type { ReactNode } from 'react';
 
 type ButtonProps = {
   variant?: ButtonVariant;
@@ -30,7 +30,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     },
     ref,
   ) => {
-    const isDisabled = disabled || loading;
+    const isDisabled = disabled ?? loading;
 
     return (
       <button

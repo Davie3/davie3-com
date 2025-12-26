@@ -2,10 +2,9 @@
 
 import { useDetectAdBlock } from 'adblock-detect-react';
 import { useEffect, useState } from 'react';
-import type { JSX } from 'react';
-
 import { CloudFlareAnalytics } from '@/components/analytics/cloudflare-analytics';
 import { VercelAnalytics } from '@/components/analytics/vercel-analytics';
+import type { JSX } from 'react';
 
 /**
  * Analytics provider with proactive ad blocker detection.

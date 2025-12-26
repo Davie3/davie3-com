@@ -1,5 +1,3 @@
-import type { LayerType } from '@/types/config-types';
-
 export const ANIMATION_DURATIONS = {
   FAST: 0.2,
   NORMAL: 0.3,

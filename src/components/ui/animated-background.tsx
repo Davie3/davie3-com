@@ -1,15 +1,15 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import type { JSX } from 'react';
 import { CANVAS_CONFIG } from '@/constants/config/animation-config';
+import { drawShootingStar, isInViewport } from '@/lib/utils/canvas-utils';
 import {
   generateStarsByLayer,
   ShootingStarPool,
   updateStarTwinkle,
 } from '@/lib/utils/particle-system';
-import { drawShootingStar, isInViewport } from '@/lib/utils/canvas-utils';
 import { SpriteRenderer } from '@/lib/utils/sprite-renderer';
+import type { JSX } from 'react';
 
 export function AnimatedBackground(): JSX.Element {
   const canvasRef = useRef<HTMLCanvasElement>(null);

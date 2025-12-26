@@ -2,8 +2,8 @@
 
 import { forwardRef } from 'react';
 import { cn } from '@/lib/utils/class-utils';
-import type { ReactNode } from 'react';
 import type { CardVariant } from '@/types/ui-types';
+import type { ReactNode } from 'react';
 
 type CardProps = {
   variant?: CardVariant;

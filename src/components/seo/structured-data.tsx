@@ -1,5 +1,4 @@
 import Script from 'next/script';
-import type { JSX } from 'react';
 import { SEO_DATA } from '@/constants/config/seo-config';
 import {
   PERSONAL_INFO,
@@ -7,6 +6,7 @@ import {
   PROFESSIONAL_TITLES,
 } from '@/constants/shared';
 import { EXTERNAL_URLS, ALL_PLATFORMS } from '../../constants/urls';
+import type { JSX } from 'react';
 
 type StructuredDataProps = {
   readonly pageType?: 'website' | 'person' | 'article';

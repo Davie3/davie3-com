@@ -1,10 +1,10 @@
-import type { Metadata } from 'next';
-import type { JSX } from 'react';
-import { BorderedSection } from '@/components/ui/bordered-section';
 import ContactForm from '@/components/forms/contact-form';
+import { BorderedSection } from '@/components/ui/bordered-section';
 import { SectionHeader } from '@/components/ui/section-header';
 import { PAGE_METADATA } from '@/constants/config/site-metadata';
 import { CONTACT_PAGE, CONTACT_CONTENT } from '@/constants/pages/contact-page';
+import type { Metadata } from 'next';
+import type { JSX } from 'react';
 
 export const metadata: Metadata = PAGE_METADATA.CONTACT;
 
