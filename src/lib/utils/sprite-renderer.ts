@@ -116,7 +116,7 @@ export class SpriteRenderer {
       const sizeConfig = STAR_CONFIG.SIZE_BY_LAYER[layer];
       const colors = STAR_CONFIG.COLORS_BY_LAYER[layer];
 
-      if (colors.includes(color as never)) {
+      if ((colors as readonly string[]).includes(color)) {
         // Find closest size in this layer
         const sizeSteps = 5;
         const minSize = sizeConfig.MIN;
