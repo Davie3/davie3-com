@@ -24,13 +24,16 @@ const clientEnvSchema = z.object({
 // Validate and apply defaults
 const parsedEnv = clientEnvSchema.parse(process.env);
 
-const isDevelopment = process.env.NODE_ENV === 'development';
+// Use VERCEL_ENV to distinguish environments (not NODE_ENV which is always 'production' on Vercel)
+// VERCEL_ENV values: 'production' | 'preview' | 'development' | undefined (local dev)
+// See: https://vercel.com/docs/environment-variables/system-environment-variables
+const isVercelProduction = process.env.VERCEL_ENV === 'production';
 
 export const env = {
   ...parsedEnv,
   NEXT_PUBLIC_TURNSTILE_SITE_KEY:
     parsedEnv.NEXT_PUBLIC_TURNSTILE_SITE_KEY ??
-    (isDevelopment ? TURNSTILE_TEST_KEY : ''), // Test key only for local dev
+    (isVercelProduction ? '' : TURNSTILE_TEST_KEY), // Test key for dev/preview, empty for production
 };
 
 // Lazy validation for server env (call this in API routes)
