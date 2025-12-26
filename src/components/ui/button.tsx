@@ -30,7 +30,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     },
     ref,
   ) => {
-    const isDisabled = disabled ?? loading;
+    // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing -- intentional: disabled OR loading (boolean logic)
+    const isDisabled = disabled || loading;
 
     return (
       <button

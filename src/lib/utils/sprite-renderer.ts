@@ -121,7 +121,7 @@ export class SpriteRenderer {
         const sizeSteps = 5;
         const minSize = sizeConfig.MIN;
         const maxSize = sizeConfig.MAX;
-        let closestSize = minSize;
+        let closestSize: number = minSize;
         let minDiff = Math.abs(size - closestSize);
 
         for (let i = 0; i < sizeSteps; i++) {
@@ -130,7 +130,7 @@ export class SpriteRenderer {
           const diff = Math.abs(size - testSize);
           if (diff < minDiff) {
             minDiff = diff;
-            closestSize = testSize as typeof minSize;
+            closestSize = testSize;
           }
         }
 
