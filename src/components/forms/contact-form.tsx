@@ -148,7 +148,12 @@ export default function ContactForm(): JSX.Element {
                 {CONTACT_FORM.SUCCESS_MESSAGE}
               </p>
             </div>
-            <Button onClick={resetForm} variant="outline" size="lg">
+            <Button
+              onClick={resetForm}
+              variant="outline"
+              size="lg"
+              className="mx-auto"
+            >
               {CONTACT_FORM.SUCCESS_BUTTON}
             </Button>
           </CardContent>

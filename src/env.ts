@@ -1,40 +1,74 @@
 import { z } from 'zod';
 
-// Cloudflare Turnstile test key for local development
-// See: https://developers.cloudflare.com/turnstile/troubleshooting/testing/
-const TURNSTILE_TEST_KEY = '1x00000000000000000000AA';
-
-// Server-side environment variables (only validated in API routes)
-const serverEnvSchema = z.object({
-  TURNSTILE_SECRET_KEY: z.string().min(1, 'TURNSTILE_SECRET_KEY is required.'),
-  SENDGRID_API_KEY: z.string().min(1, 'SENDGRID_API_KEY is required.'),
-  SENDGRID_TO_EMAIL: z.email('Invalid SENDGRID_TO_EMAIL address.'),
-  SENDGRID_FROM_EMAIL: z.email('Invalid SENDGRID_FROM_EMAIL address.'),
+/**
+ * Server-side environment variables schema
+ * These are private and only accessible on the server (API routes, server components)
+ */
+const serverSchema = z.object({
+  TURNSTILE_SECRET_KEY: z.string().min(1, 'TURNSTILE_SECRET_KEY is required'),
+  SENDGRID_API_KEY: z.string().min(1, 'SENDGRID_API_KEY is required'),
+  SENDGRID_TO_EMAIL: z.email('Invalid SENDGRID_TO_EMAIL address'),
+  SENDGRID_FROM_EMAIL: z.email('Invalid SENDGRID_FROM_EMAIL address'),
 });
 
-// Client-side environment variables (validated on import)
-const clientEnvSchema = z.object({
-  NEXT_PUBLIC_TURNSTILE_SITE_KEY: z.string().optional(),
-  ENABLE_ANALYTICS: z
+/**
+ * Client-side environment variables schema (NEXT_PUBLIC_*)
+ * These are public and exposed to the browser
+ */
+const clientSchema = z.object({
+  NEXT_PUBLIC_TURNSTILE_SITE_KEY: z
     .string()
-    .optional()
-    .transform((val) => val === 'true'),
+    .min(1, 'NEXT_PUBLIC_TURNSTILE_SITE_KEY is required for production'),
+  NEXT_PUBLIC_ENABLE_ANALYTICS: z.string().optional(),
+  NEXT_PUBLIC_VERCEL_ENV: z
+    .enum(['production', 'preview', 'development'])
+    .optional(),
 });
 
-// Validate and apply defaults
-const parsedEnv = clientEnvSchema.parse(process.env);
+/**
+ * Infer client environment variable types from schema
+ * Reflects validated shape where required fields are guaranteed to exist
+ */
+type ClientParsedEnv = z.infer<typeof clientSchema>;
 
-// Use VERCEL_ENV to distinguish environments (not NODE_ENV which is always 'production' on Vercel)
-// VERCEL_ENV values: 'production' | 'preview' | 'development' | undefined (local dev)
-// See: https://vercel.com/docs/environment-variables/system-environment-variables
-const isVercelProduction = process.env.VERCEL_ENV === 'production';
+/**
+ * Validate client environment variables at build time
+ * Only runs server-side (during build), not in browser where process.env is empty
+ * If validation fails, the build will crash, preventing broken deployments
+ */
+if (typeof window === 'undefined') {
+  clientSchema.parse(process.env);
+}
 
+/**
+ * Type-asserted process.env for cleaner access to validated environment variables
+ * The validation above guarantees these values match the ClientParsedEnv type
+ */
+const validatedProcessEnv = process.env as unknown as ClientParsedEnv;
+
+/**
+ * Public environment variables for client-side use
+ * Next.js inlines these values at build time by detecting direct process.env access
+ */
 export const env = {
-  ...parsedEnv,
   NEXT_PUBLIC_TURNSTILE_SITE_KEY:
-    parsedEnv.NEXT_PUBLIC_TURNSTILE_SITE_KEY ??
-    (isVercelProduction ? '' : TURNSTILE_TEST_KEY), // Test key for dev/preview, empty for production
-};
+    validatedProcessEnv.NEXT_PUBLIC_TURNSTILE_SITE_KEY,
 
-// Lazy validation for server env (call this in API routes)
-export const getServerEnv = () => serverEnvSchema.parse(process.env);
+  NEXT_PUBLIC_ENABLE_ANALYTICS:
+    validatedProcessEnv.NEXT_PUBLIC_ENABLE_ANALYTICS === 'true' ||
+    (validatedProcessEnv.NEXT_PUBLIC_ENABLE_ANALYTICS === undefined &&
+      (validatedProcessEnv.NEXT_PUBLIC_VERCEL_ENV === 'production' ||
+        validatedProcessEnv.NEXT_PUBLIC_VERCEL_ENV === 'preview')),
+} as const;
+
+/**
+ * Server-side environment variables getter
+ * Call this in API routes or server components to access private env vars
+ * @throws {ZodError} if environment variables are invalid
+ */
+export function getServerEnv() {
+  if (typeof window !== 'undefined') {
+    throw new Error('getServerEnv should only be called on the server');
+  }
+  return serverSchema.parse(process.env);
+}

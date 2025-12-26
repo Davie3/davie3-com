@@ -6,7 +6,14 @@ import { env } from '@/env';
 
 /**
  * Check if analytics should be enabled based on environment variable.
- * Defaults to enabled in production unless explicitly disabled.
+ *
+ * Two-layer analytics control:
+ * 1. shouldEnableAnalytics === true (env var - this layer)
+ * 2. No ad blocker detected (AnalyticsProvider - runtime check)
+ *
+ * Both must be true for analytics to load.
+ *
+ * Defaults to enabled in production, disabled in development.
+ * Can be overridden via NEXT_PUBLIC_ENABLE_ANALYTICS env var.
  */
-export const shouldEnableAnalytics =
-  process.env.NODE_ENV === 'production' || env.ENABLE_ANALYTICS;
+export const shouldEnableAnalytics = env.NEXT_PUBLIC_ENABLE_ANALYTICS;

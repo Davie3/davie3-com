@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import type { JSX } from 'react';
-import { CloudFlareAnalytics } from '@/components/analytics/cloudflare-analytics';
-import { VercelAnalytics } from '@/components/analytics/vercel-analytics';
+import { AnalyticsProvider } from '@/components/analytics/analytics-provider';
 import { AppFooter } from '@/components/layout/app-footer';
 import { StructuredData } from '@/components/seo/structured-data';
 import { ClientLayout } from '@/components/ui/client-layout';
@@ -37,12 +36,6 @@ export default function RootLayout({
             <link
               rel="preconnect"
               href="https://vitals.vercel-analytics.com"
-              crossOrigin="anonymous"
-            />
-            {/* Speed Insights script preload for mobile */}
-            <link
-              rel="modulepreload"
-              href="/_vercel/speed-insights/script.js"
               crossOrigin="anonymous"
             />
           </>
@@ -91,13 +84,8 @@ export default function RootLayout({
           <ClientLayout>{children}</ClientLayout>
           <AppFooter />
         </div>
-        {/* Analytics components - controlled by ENABLE_ANALYTICS env var */}
-        {shouldEnableAnalytics && (
-          <>
-            <CloudFlareAnalytics />
-            <VercelAnalytics />
-          </>
-        )}
+        {/* Analytics provider - controlled by ENABLE_ANALYTICS env var */}
+        {shouldEnableAnalytics && <AnalyticsProvider />}
       </body>
     </html>
   );

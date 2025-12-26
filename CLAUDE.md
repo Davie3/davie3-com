@@ -204,8 +204,11 @@ npm run fix               # Run format + lint --fix
 
 - Central validation using Zod schema
 - Server-side: TURNSTILE*SECRET_KEY, SENDGRID*\* keys
-- Client-side: NEXT_PUBLIC_TURNSTILE_SITE_KEY
-- ENABLE_ANALYTICS flag for analytics control
+- Client-side: NEXT_PUBLIC_TURNSTILE_SITE_KEY, NEXT_PUBLIC_ENABLE_ANALYTICS
+- **NEXT_PUBLIC_ENABLE_ANALYTICS**: Controls Vercel Analytics, Speed Insights, and Cloudflare Web Analytics
+  - Default: `true` in production, `false` in development
+  - Set to `false` in production to disable analytics completely
+  - Requires rebuild to take effect (build-time variable)
 - All env vars must be validated through env.ts
 
 ### Configuration System (src/constants/config/)
@@ -229,6 +232,10 @@ npm run fix               # Run format + lint --fix
   - Validation: Server-side in contact API route
 - **Security Headers**: Configured in vercel.json
   - X-Content-Type-Options, X-Frame-Options, HSTS, etc.
+- **Analytics Error Handling**: Graceful degradation when blocked
+  - Cloudflare: Script `onError` handler suppresses blocking errors
+  - Vercel: Packages handle blocking with built-in error handling
+  - No console errors when blocked by browser extensions
 
 ### Contact Form Flow
 
