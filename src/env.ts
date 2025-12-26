@@ -28,38 +28,21 @@ const clientEnvSchema = z.object({
 });
 
 // Validate and apply defaults
+console.log(
+  '🔍 ENV DEBUG - When is this running? typeof window:',
+  typeof window,
+);
+console.log(
+  '🔍 ENV DEBUG - process.env keys:',
+  Object.keys(process.env).filter((k) => k.startsWith('NEXT_PUBLIC')),
+);
 const parsedEnv = clientEnvSchema.parse(process.env);
-
-// Diagnostic logging to debug Turnstile test mode issue
-console.log('🔍 ENV DEBUG - VERCEL_ENV:', process.env.VERCEL_ENV);
-console.log('🔍 ENV DEBUG - NODE_ENV:', process.env.NODE_ENV);
-console.log(
-  '🔍 ENV DEBUG - Raw NEXT_PUBLIC_TURNSTILE_SITE_KEY from process.env:',
-  process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY
-    ? `${process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY.substring(0, 10)}...`
-    : 'undefined',
-);
-console.log(
-  '🔍 ENV DEBUG - parsedEnv.NEXT_PUBLIC_TURNSTILE_SITE_KEY:',
-  parsedEnv.NEXT_PUBLIC_TURNSTILE_SITE_KEY
-    ? `${parsedEnv.NEXT_PUBLIC_TURNSTILE_SITE_KEY.substring(0, 10)}...`
-    : 'undefined',
-);
 
 export const env = {
   ...parsedEnv,
   NEXT_PUBLIC_TURNSTILE_SITE_KEY:
     parsedEnv.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? TURNSTILE_TEST_KEY,
 };
-
-console.log(
-  '🔍 ENV DEBUG - Final env.NEXT_PUBLIC_TURNSTILE_SITE_KEY:',
-  env.NEXT_PUBLIC_TURNSTILE_SITE_KEY === TURNSTILE_TEST_KEY
-    ? 'TEST KEY'
-    : env.NEXT_PUBLIC_TURNSTILE_SITE_KEY
-      ? `${env.NEXT_PUBLIC_TURNSTILE_SITE_KEY.substring(0, 10)}...`
-      : 'empty/undefined',
-);
 
 // Lazy validation for server env (call this in API routes)
 export const getServerEnv = () => serverEnvSchema.parse(process.env);
