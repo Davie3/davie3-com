@@ -1,4 +1,4 @@
-import type { UrlMapping } from '../../types/url-types';
+import type { UrlMapping } from '@/types/url-types';
 
 /**
  * URL mappings for redirects from old Squarespace site and common user expectations

@@ -1,8 +1,10 @@
 import { ArrowRight, ExternalLink } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+
 import { PROFESSIONAL_TITLES, PAGE_DESCRIPTIONS } from '@/constants/shared';
-import { EXTERNAL_URLS, INTERNAL_ROUTES } from '../constants/urls';
+import { EXTERNAL_URLS, INTERNAL_ROUTES } from '@/constants/urls';
+
 import type { JSX } from 'react';
 
 /**

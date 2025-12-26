@@ -7,6 +7,7 @@ import {
   PROFESSIONAL_TITLES,
 } from '@/constants/shared';
 import { EXTERNAL_URLS } from '@/constants/urls';
+
 import type { Metadata } from 'next';
 
 /**

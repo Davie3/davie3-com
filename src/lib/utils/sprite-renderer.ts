@@ -1,4 +1,5 @@
 import { STAR_CONFIG } from '@/constants/config/animation-config';
+
 import type { CanvasStar } from '@/types/config-types';
 
 /**

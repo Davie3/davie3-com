@@ -1,4 +1,5 @@
 import { ProjectCardSkeleton } from '@/components/ui/loading-skeleton';
+
 import type { JSX } from 'react';
 
 /**

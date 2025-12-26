@@ -1,7 +1,8 @@
-import { SITEMAP_CONFIG } from '../constants/config/seo-automation-config';
-import { PAGE_LAST_MODIFIED } from '../constants/site-metadata';
-import { EXTERNAL_URLS } from '../constants/urls';
-import { createPacificDate } from '../lib/utils/date-utils';
+import { SITEMAP_CONFIG } from '@/constants/config/seo-automation-config';
+import { PAGE_LAST_MODIFIED } from '@/constants/site-metadata';
+import { EXTERNAL_URLS } from '@/constants/urls';
+import { createPacificDate } from '@/lib/utils/date-utils';
+
 import type { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {

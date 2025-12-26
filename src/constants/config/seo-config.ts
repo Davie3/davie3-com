@@ -2,7 +2,7 @@ import {
   PERSONAL_INFO,
   PROFESSIONAL_TITLES,
   TECHNOLOGIES,
-} from '../../constants/shared';
+} from '@/constants/shared';
 
 /**
  * SEO and Search Optimization Configuration

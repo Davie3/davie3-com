@@ -1,4 +1,5 @@
 import { cn } from '@/lib/utils/class-utils';
+
 import type { JSX, ReactNode } from 'react';
 
 type BorderedSectionProps = {

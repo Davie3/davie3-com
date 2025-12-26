@@ -2,7 +2,9 @@
 
 import { Home, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
+
 import { NOT_FOUND_PAGE } from '@/constants/config/error-pages-config';
+
 import type { JSX } from 'react';
 
 /**

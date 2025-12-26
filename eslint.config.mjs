@@ -81,16 +81,13 @@ export default tseslint.config(
         'error',
         {
           groups: [
-            'builtin',
-            'external',
+            ['builtin', 'external'],
             'internal',
-            'parent',
-            'sibling',
-            'index',
+            ['parent', 'sibling', 'index'],
             'object',
             'type',
           ],
-          'newlines-between': 'never',
+          'newlines-between': 'always',
           alphabetize: {
             order: 'asc',
             caseInsensitive: true,

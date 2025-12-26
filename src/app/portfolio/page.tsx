@@ -1,6 +1,7 @@
 import { GitFork, Star, ExternalLink } from 'lucide-react';
 import Link from 'next/link';
 import { z } from 'zod';
+
 import { BorderedSection } from '@/components/ui/bordered-section';
 import { Card } from '@/components/ui/card';
 import { SectionHeader } from '@/components/ui/section-header';
@@ -13,6 +14,7 @@ import {
   PORTFOLIO_CONTENT,
 } from '@/constants/pages/portfolio-page';
 import { GITHUB_REPO_SCHEMA } from '@/types/api-types';
+
 import type { GitHubRepo } from '@/types/api-types';
 import type { Metadata } from 'next';
 import type { JSX } from 'react';

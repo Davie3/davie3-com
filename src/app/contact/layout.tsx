@@ -1,4 +1,5 @@
 import { PAGE_METADATA } from '@/constants/config/site-metadata';
+
 import type { Metadata } from 'next';
 import type { JSX } from 'react';
 

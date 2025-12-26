@@ -1,4 +1,5 @@
 import Image from 'next/image';
+
 import { BorderedSection } from '@/components/ui/bordered-section';
 import { SectionHeader } from '@/components/ui/section-header';
 import { PAGE_STAGGER_DELAYS } from '@/constants/config/animation-config';
@@ -11,6 +12,7 @@ import {
   SKILLS,
 } from '@/constants/pages/about-page';
 import { getSocialIcon } from '@/utils/social-icons';
+
 import type { Metadata } from 'next';
 import type { JSX } from 'react';
 

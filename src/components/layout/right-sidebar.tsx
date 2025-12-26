@@ -1,7 +1,9 @@
 'use client';
 
 import { motion, useReducedMotion } from 'framer-motion';
+
 import { ANIMATION_DURATIONS } from '@/constants/config/animation-config';
+
 import type { JSX } from 'react';
 
 export function RightSidebar(): JSX.Element {

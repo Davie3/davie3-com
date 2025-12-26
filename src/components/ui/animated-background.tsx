@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+
 import { CANVAS_CONFIG } from '@/constants/config/animation-config';
 import { drawShootingStar, isInViewport } from '@/lib/utils/canvas-utils';
 import {
@@ -9,6 +10,7 @@ import {
   updateStarTwinkle,
 } from '@/lib/utils/particle-system';
 import { SpriteRenderer } from '@/lib/utils/sprite-renderer';
+
 import type { JSX } from 'react';
 
 export function AnimatedBackground(): JSX.Element {

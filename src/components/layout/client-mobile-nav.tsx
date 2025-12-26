@@ -4,11 +4,9 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState, useEffect, type JSX } from 'react';
 import { createPortal } from 'react-dom';
+
+import { NAV_LINKS, type NavLink } from '@/constants/config/navigation-config';
 import { useLockBody } from '@/hooks/use-lock-body';
-import {
-  NAV_LINKS,
-  type NavLink,
-} from '../../constants/config/navigation-config';
 
 export function ClientMobileNav(): JSX.Element {
   const [isOpen, setIsOpen] = useState(false);

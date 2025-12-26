@@ -5,6 +5,7 @@ import {
   SKELETON_VARIANTS,
 } from '@/constants/ui-components';
 import { cn } from '@/lib/utils/class-utils';
+
 import type { SkeletonProps } from '@/types/component-types';
 import type { JSX } from 'react';
 

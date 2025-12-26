@@ -1,6 +1,7 @@
 import { FaXTwitter } from 'react-icons/fa6';
 import { FiGithub, FiInstagram, FiLinkedin, FiTwitch } from 'react-icons/fi';
 import { SiBluesky } from 'react-icons/si';
+
 import type { SocialLinkData } from '@/types/social-types';
 import type { JSX } from 'react';
 

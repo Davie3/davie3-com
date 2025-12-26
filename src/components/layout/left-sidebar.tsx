@@ -1,9 +1,11 @@
 'use client';
 
 import { motion, useReducedMotion } from 'framer-motion';
+
 import { ANIMATION_DURATIONS } from '@/constants/config/animation-config';
 import { SOCIAL_LINKS_DATA } from '@/constants/config/social-config';
 import { getSocialIcon } from '@/utils/social-icons';
+
 import type { JSX } from 'react';
 
 export function LeftSidebar(): JSX.Element {

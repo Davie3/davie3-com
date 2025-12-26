@@ -1,11 +1,13 @@
 import Script from 'next/script';
+
 import { SEO_DATA } from '@/constants/config/seo-config';
 import {
   PERSONAL_INFO,
   PAGE_DESCRIPTIONS,
   PROFESSIONAL_TITLES,
 } from '@/constants/shared';
-import { EXTERNAL_URLS, ALL_PLATFORMS } from '../../constants/urls';
+import { EXTERNAL_URLS, ALL_PLATFORMS } from '@/constants/urls';
+
 import type { JSX } from 'react';
 
 type StructuredDataProps = {

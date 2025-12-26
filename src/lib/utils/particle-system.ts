@@ -2,6 +2,7 @@ import {
   STAR_CONFIG,
   SHOOTING_STAR_CONFIG,
 } from '@/constants/config/animation-config';
+
 import type { CanvasStar, ShootingStar, LayerType } from '@/types/config-types';
 
 /**
