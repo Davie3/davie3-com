@@ -15,9 +15,6 @@ import { API_ERROR_MESSAGES } from '@/constants/config/api-error-messages';
 import { EMAIL_CONFIG } from '@/constants/config/email-config';
 import { CONTACT_FORM_CONSTRAINTS } from '@/constants/config/form-config';
 
-const serverEnv = getServerEnv();
-sgMail.setApiKey(serverEnv.SENDGRID_API_KEY);
-
 // Build schema without refine to allow extension
 const ContactFormSchema = z
   .object({
@@ -102,6 +99,10 @@ function sanitizeInput(input: string): string {
 
 export async function POST(request: NextRequest): Promise<NextResponse> {
   try {
+    // Validate server environment variables
+    const serverEnv = getServerEnv();
+    sgMail.setApiKey(serverEnv.SENDGRID_API_KEY);
+
     const body: unknown = await request.json();
     const validationResult = ContactFormSchema.safeParse(body);
 
