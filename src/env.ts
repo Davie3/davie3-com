@@ -1,5 +1,9 @@
 import { z } from 'zod';
 
+// Cloudflare Turnstile test key for local development
+// See: https://developers.cloudflare.com/turnstile/troubleshooting/testing/
+const TURNSTILE_TEST_KEY = '1x00000000000000000000AA';
+
 // Server-side environment variables (only validated in API routes)
 const serverEnvSchema = z.object({
   TURNSTILE_SECRET_KEY: z.string().min(1, 'TURNSTILE_SECRET_KEY is required.'),
@@ -26,7 +30,7 @@ export const env = {
   ...parsedEnv,
   NEXT_PUBLIC_TURNSTILE_SITE_KEY:
     parsedEnv.NEXT_PUBLIC_TURNSTILE_SITE_KEY ??
-    (isDevelopment ? '1x00000000000000000000AA' : ''), // Test key only for local dev
+    (isDevelopment ? TURNSTILE_TEST_KEY : ''), // Test key only for local dev
 };
 
 // Lazy validation for server env (call this in API routes)
