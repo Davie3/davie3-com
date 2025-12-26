@@ -15,9 +15,10 @@ const serverEnvSchema = z.object({
 // Client-side environment variables (validated on import)
 const clientEnvSchema = z.object({
   NEXT_PUBLIC_TURNSTILE_SITE_KEY: z.string().optional(),
-  ENABLE_ANALYTICS: z
+  NEXT_PUBLIC_ENABLE_ANALYTICS: z
     .string()
     .optional()
+    .default(process.env.NODE_ENV === 'production' ? 'true' : 'false')
     .transform((val) => val === 'true'),
 });
 
