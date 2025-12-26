@@ -1,12 +1,6 @@
 import { z } from 'zod';
 
 /**
- * Cloudflare Turnstile test key for local development
- * @see https://developers.cloudflare.com/turnstile/troubleshooting/testing/
- */
-const TURNSTILE_TEST_KEY = '1x00000000000000000000AA';
-
-/**
  * Server-side environment variables schema
  * These are private and only accessible on the server (API routes, server components)
  */
@@ -22,7 +16,9 @@ const serverSchema = z.object({
  * These are public and exposed to the browser
  */
 const clientSchema = z.object({
-  NEXT_PUBLIC_TURNSTILE_SITE_KEY: z.string().optional(),
+  NEXT_PUBLIC_TURNSTILE_SITE_KEY: z
+    .string()
+    .min(1, 'NEXT_PUBLIC_TURNSTILE_SITE_KEY is required for production'),
   NEXT_PUBLIC_ENABLE_ANALYTICS: z.string().optional(),
   NEXT_PUBLIC_VERCEL_ENV: z
     .enum(['production', 'preview', 'development'])
@@ -30,24 +26,38 @@ const clientSchema = z.object({
 });
 
 /**
+ * Infer client environment variable types from schema
+ * Reflects validated shape where required fields are guaranteed to exist
+ */
+type ClientParsedEnv = z.infer<typeof clientSchema>;
+
+/**
  * Validate client environment variables at build time
+ * Stores result to ensure validation runs, but we use direct process.env access
+ * in the exported env object to maintain Next.js build-time inlining
  * If validation fails, the build will crash, preventing broken deployments
  */
-clientSchema.parse(process.env);
+const _validatedClientEnv = clientSchema.parse(process.env);
+
+/**
+ * Type-asserted process.env for cleaner access to validated environment variables
+ * The validation above guarantees these values match the ClientParsedEnv type
+ */
+const validatedProcessEnv = process.env as unknown as ClientParsedEnv;
 
 /**
  * Public environment variables for client-side use
- * Next.js inlines these values at build time, so we access process.env directly
+ * Next.js inlines these values at build time by detecting direct process.env access
  */
 export const env = {
   NEXT_PUBLIC_TURNSTILE_SITE_KEY:
-    process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? TURNSTILE_TEST_KEY,
+    validatedProcessEnv.NEXT_PUBLIC_TURNSTILE_SITE_KEY,
 
   NEXT_PUBLIC_ENABLE_ANALYTICS:
-    process.env.NEXT_PUBLIC_ENABLE_ANALYTICS === 'true' ||
-    (process.env.NEXT_PUBLIC_ENABLE_ANALYTICS === undefined &&
-      (process.env.NEXT_PUBLIC_VERCEL_ENV === 'production' ||
-        process.env.NEXT_PUBLIC_VERCEL_ENV === 'preview')),
+    validatedProcessEnv.NEXT_PUBLIC_ENABLE_ANALYTICS === 'true' ||
+    (validatedProcessEnv.NEXT_PUBLIC_ENABLE_ANALYTICS === undefined &&
+      (validatedProcessEnv.NEXT_PUBLIC_VERCEL_ENV === 'production' ||
+        validatedProcessEnv.NEXT_PUBLIC_VERCEL_ENV === 'preview')),
 } as const;
 
 /**

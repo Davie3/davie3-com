@@ -1,7 +1,7 @@
 'use client';
 
 import { useDetectAdBlock } from 'adblock-detect-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { JSX } from 'react';
 
 import { CloudFlareAnalytics } from '@/components/analytics/cloudflare-analytics';
@@ -22,10 +22,10 @@ export function AnalyticsProvider(): JSX.Element | null {
   // Track if detection has ever completed (false → true/false transition)
   const [detectionComplete, setDetectionComplete] = useState(adBlockDetected);
 
-  // Update completion flag when detection result changes
-  if (adBlockDetected !== detectionComplete) {
+  // Synchronize detectionComplete with adBlockDetected changes
+  useEffect(() => {
     setDetectionComplete(adBlockDetected);
-  }
+  }, [adBlockDetected]);
 
   // Don't render until detection completes AND no blocker found
   if (!detectionComplete && !adBlockDetected) {
