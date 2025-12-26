@@ -12,46 +12,32 @@ const serverEnvSchema = z.object({
   SENDGRID_FROM_EMAIL: z.email('Invalid SENDGRID_FROM_EMAIL address.'),
 });
 
-// Client-side environment variables (validated on import)
-const clientEnvSchema = z.object({
-  NEXT_PUBLIC_TURNSTILE_SITE_KEY: z.string().optional(),
-  NEXT_PUBLIC_ENABLE_ANALYTICS: z
-    .string()
-    .optional()
-    .default(
-      process.env.VERCEL_ENV === 'production' ||
-        process.env.VERCEL_ENV === 'preview'
-        ? 'true'
-        : 'false',
-    )
-    .transform((val) => val === 'true'),
-});
+// Client-side environment variables
+// NOTE: We access process.env.NEXT_PUBLIC_* directly (not through Zod parsing) because
+// when client components import this file, it re-evaluates in the browser where Zod
+// loses build-time values. Direct access ensures Next.js can inline the literal values.
+//
+// We still validate with Zod at build time to catch missing vars early:
+if (process.env.NODE_ENV !== 'test') {
+  z.object({
+    NEXT_PUBLIC_TURNSTILE_SITE_KEY: z.string().optional(),
+    NEXT_PUBLIC_ENABLE_ANALYTICS: z.string().optional(),
+  }).parse(process.env);
+}
 
-// Validate and apply defaults
-console.log(
-  '🔍 ENV DEBUG - When is this running? typeof window:',
-  typeof window,
-);
-console.log(
-  '🔍 ENV DEBUG - NEXT_PUBLIC_TURNSTILE_SITE_KEY value:',
-  process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY?.substring(0, 15) || 'undefined',
-);
-console.log(
-  '🔍 ENV DEBUG - NEXT_PUBLIC_TURNSTILE_SITE_KEY type:',
-  typeof process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY,
-);
-const parsedEnv = clientEnvSchema.parse(process.env);
-console.log(
-  '🔍 ENV DEBUG - After Zod parse:',
-  parsedEnv.NEXT_PUBLIC_TURNSTILE_SITE_KEY?.substring(0, 15) || 'undefined',
-);
-
+// Export env object using process.env directly for proper Next.js inlining
 export const env = {
-  ...parsedEnv,
-  // Use process.env directly to ensure Next.js inlines the value correctly
-  // parsedEnv gets the build-time value, but when this runs in browser, we need the inlined literal
+  // Turnstile: use real key if set, otherwise use test key for local dev
   NEXT_PUBLIC_TURNSTILE_SITE_KEY:
     process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? TURNSTILE_TEST_KEY,
+
+  // Analytics: enable in Preview and Production, disable in local dev
+  // VERCEL_ENV is server-side only, so we check if we're on Vercel using NEXT_PUBLIC_VERCEL_ENV
+  NEXT_PUBLIC_ENABLE_ANALYTICS:
+    process.env.NEXT_PUBLIC_ENABLE_ANALYTICS === 'true' ||
+    (process.env.NEXT_PUBLIC_ENABLE_ANALYTICS === undefined &&
+      (process.env.NEXT_PUBLIC_VERCEL_ENV === 'production' ||
+        process.env.NEXT_PUBLIC_VERCEL_ENV === 'preview')),
 };
 
 // Lazy validation for server env (call this in API routes)
