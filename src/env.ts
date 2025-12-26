@@ -48,8 +48,10 @@ console.log(
 
 export const env = {
   ...parsedEnv,
+  // Use process.env directly to ensure Next.js inlines the value correctly
+  // parsedEnv gets the build-time value, but when this runs in browser, we need the inlined literal
   NEXT_PUBLIC_TURNSTILE_SITE_KEY:
-    parsedEnv.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? TURNSTILE_TEST_KEY,
+    process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? TURNSTILE_TEST_KEY,
 };
 
 // Lazy validation for server env (call this in API routes)
