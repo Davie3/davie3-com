@@ -21,8 +21,6 @@ import { CONTACT_FORM_SCHEMA } from '@/types/form-types';
 import type { ContactFormValues } from '@/types/form-types';
 import type { JSX } from 'react';
 
-// Framer Motion variants
-
 /**
  * Client-side contact form component with validation and submission handling.
  *
