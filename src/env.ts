@@ -33,11 +33,12 @@ type ClientParsedEnv = z.infer<typeof clientSchema>;
 
 /**
  * Validate client environment variables at build time
- * Stores result to ensure validation runs, but we use direct process.env access
- * in the exported env object to maintain Next.js build-time inlining
+ * Only runs server-side (during build), not in browser where process.env is empty
  * If validation fails, the build will crash, preventing broken deployments
  */
-const _validatedClientEnv = clientSchema.parse(process.env);
+if (typeof window === 'undefined') {
+  clientSchema.parse(process.env);
+}
 
 /**
  * Type-asserted process.env for cleaner access to validated environment variables
