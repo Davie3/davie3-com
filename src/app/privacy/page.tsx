@@ -1,10 +1,11 @@
-import type { Metadata } from 'next';
-import type { JSX } from 'react';
+import { Card, CardContent } from '@/components/ui/card';
+import { PrivacySection } from '@/components/ui/privacy-section';
 import { PAGE_METADATA } from '@/constants/config/seo-config';
 import { PAGE_LAST_MODIFIED } from '@/constants/site-metadata';
 import { createPacificDate } from '@/lib/utils/date-utils';
-import { PrivacySection } from '@/components/ui/privacy-section';
-import { Card, CardContent } from '@/components/ui/card';
+
+import type { Metadata } from 'next';
+import type { JSX } from 'react';
 
 export const metadata: Metadata = PAGE_METADATA.PRIVACY;
 

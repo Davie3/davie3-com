@@ -1,9 +1,11 @@
 'use client';
 
 import { forwardRef } from 'react';
+
 import { cn } from '@/lib/utils/class-utils';
-import type { ReactNode } from 'react';
+
 import type { ButtonVariant, ButtonSize } from '@/types/ui-types';
+import type { ReactNode } from 'react';
 
 type ButtonProps = {
   variant?: ButtonVariant;
@@ -30,6 +32,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     },
     ref,
   ) => {
+    // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing -- intentional: disabled OR loading (boolean logic)
     const isDisabled = disabled || loading;
 
     return (

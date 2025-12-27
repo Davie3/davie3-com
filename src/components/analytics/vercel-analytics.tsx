@@ -3,6 +3,7 @@
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { useEffect } from 'react';
+
 import type { JSX } from 'react';
 
 /**
@@ -30,12 +31,17 @@ export function VercelAnalytics(): JSX.Element {
 
     // Suppress network resource errors (ERR_BLOCKED_BY_CLIENT)
     const handleResourceError = (event: Event) => {
-      const target = event.target as HTMLScriptElement;
-      if (target?.src?.includes('/_vercel/')) {
-        event.preventDefault();
-        event.stopPropagation();
-        return true;
+      const target = event.target;
+
+      // Type guard: validates both null and correct element type
+      if (target instanceof HTMLScriptElement) {
+        if (target.src.includes('/_vercel/')) {
+          event.preventDefault();
+          event.stopPropagation();
+          return true;
+        }
       }
+
       return false;
     };
 

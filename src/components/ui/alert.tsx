@@ -1,6 +1,5 @@
 'use client';
 
-import { forwardRef, useState } from 'react';
 import {
   AlertCircle,
   CheckCircle2,
@@ -8,9 +7,12 @@ import {
   AlertTriangle,
   X,
 } from 'lucide-react';
+import { forwardRef, useState } from 'react';
+
 import { cn } from '@/lib/utils/class-utils';
-import type { ReactNode } from 'react';
+
 import type { AlertVariant } from '@/types/ui-types';
+import type { ReactNode } from 'react';
 
 type AlertProps = {
   variant?: AlertVariant;

@@ -1,6 +1,7 @@
 'use client';
 
 import Script from 'next/script';
+
 import type { JSX } from 'react';
 
 /**

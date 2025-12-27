@@ -1,5 +1,6 @@
-import type { JSX } from 'react';
 import { ProjectCardSkeleton } from '@/components/ui/loading-skeleton';
+
+import type { JSX } from 'react';
 
 /**
  * Loading component for the portfolio page.

@@ -1,5 +1,6 @@
-import type { CanvasStar } from '@/types/config-types';
 import { STAR_CONFIG } from '@/constants/config/animation-config';
+
+import type { CanvasStar } from '@/types/config-types';
 
 /**
  * Sprite cache entry containing pre-rendered canvas element.
@@ -15,7 +16,7 @@ type SpriteCache = {
  * Instead of drawing 2000 radial gradients per frame, we draw pre-rendered images.
  */
 export class SpriteRenderer {
-  private starSprites: Map<string, SpriteCache> = new Map();
+  private starSprites = new Map<string, SpriteCache>();
 
   /**
    * Pre-render all unique star variations during initialization.
@@ -116,12 +117,12 @@ export class SpriteRenderer {
       const sizeConfig = STAR_CONFIG.SIZE_BY_LAYER[layer];
       const colors = STAR_CONFIG.COLORS_BY_LAYER[layer];
 
-      if (colors.includes(color as never)) {
+      if ((colors as readonly string[]).includes(color)) {
         // Find closest size in this layer
         const sizeSteps = 5;
-        const minSize = Number(sizeConfig.MIN);
-        const maxSize = Number(sizeConfig.MAX);
-        let closestSize = minSize;
+        const minSize = sizeConfig.MIN;
+        const maxSize = sizeConfig.MAX;
+        let closestSize: number = minSize;
         let minDiff = Math.abs(size - closestSize);
 
         for (let i = 0; i < sizeSteps; i++) {

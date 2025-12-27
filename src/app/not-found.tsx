@@ -2,8 +2,10 @@
 
 import { Home, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
-import type { JSX } from 'react';
+
 import { NOT_FOUND_PAGE } from '@/constants/config/error-pages-config';
+
+import type { JSX } from 'react';
 
 /**
  * Custom 404 error page component.

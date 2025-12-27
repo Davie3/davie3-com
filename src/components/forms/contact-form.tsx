@@ -1,45 +1,27 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { User, Mail, MessageSquare, CheckCircle2 } from 'lucide-react';
 import { motion, useReducedMotion } from 'framer-motion';
-import type { JSX } from 'react';
+import { User, Mail, MessageSquare, CheckCircle2 } from 'lucide-react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { CONTACT_FORM_CONSTRAINTS } from '@/constants/config/form-config';
-import { Turnstile } from '@/components/ui/turnstile-widget';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { Button } from '@/components/ui/button';
 import { Alert } from '@/components/ui/alert';
+import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { FormField } from '@/components/ui/form-field';
-
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Turnstile } from '@/components/ui/turnstile-widget';
+import { ANIMATION_DURATIONS } from '@/constants/config/animation-config';
+import { CONTACT_FORM_CONSTRAINTS } from '@/constants/config/form-config';
 import { CONTACT_FORM } from '@/constants/pages/contact-page';
 import { FORM_MESSAGES } from '@/constants/ui-components';
-import { ANIMATION_DURATIONS } from '@/constants/config/animation-config';
-import { CONTACT_FORM_SCHEMA } from '@/types/form-types';
-import type { ContactFormValues } from '@/types/form-types';
 import { INTERNAL_ROUTES } from '@/constants/urls';
+import { CONTACT_FORM_SCHEMA } from '@/types/form-types';
 
-// Framer Motion variants
-const formVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: ANIMATION_DURATIONS.MEDIUM,
-      staggerChildren: 0.1,
-    },
-  },
-};
-
-const fieldVariants = {
-  hidden: { opacity: 0, x: -20 },
-  visible: { opacity: 1, x: 0 },
-};
+import type { ContactFormValues } from '@/types/form-types';
+import type { JSX } from 'react';
 
 /**
  * Client-side contact form component with validation and submission handling.
@@ -297,7 +279,9 @@ export default function ContactForm(): JSX.Element {
               <Alert
                 variant="error"
                 dismissible
-                onDismiss={() => setCaptchaError(null)}
+                onDismiss={() => {
+                  setCaptchaError(null);
+                }}
               >
                 {captchaError}
               </Alert>

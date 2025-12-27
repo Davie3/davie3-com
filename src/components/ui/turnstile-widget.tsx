@@ -1,10 +1,11 @@
 'use client';
 
 import { Turnstile as ReactTurnstile } from '@marsidev/react-turnstile';
-import type { TurnstileProps } from '@marsidev/react-turnstile';
-import type { JSX } from 'react';
 
 import { env } from '@/env';
+
+import type { TurnstileProps } from '@marsidev/react-turnstile';
+import type { JSX } from 'react';
 
 /**
  * Cloudflare Turnstile component.

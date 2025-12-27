@@ -1,10 +1,11 @@
 'use client';
 
 import { useEffect, useState, type JSX } from 'react';
-import { SOCIAL_LINKS_DATA } from '../../constants/config/social-config';
-import { UI_MESSAGES } from '../../constants/shared';
-import { FOOTER_CONFIG } from '../../constants/ui-components';
-import { getSocialIcon } from '../../utils/social-icons';
+
+import { SOCIAL_LINKS_DATA } from '@/constants/config/social-config';
+import { UI_MESSAGES } from '@/constants/shared';
+import { FOOTER_CONFIG } from '@/constants/ui-components';
+import { getSocialIcon } from '@/utils/social-icons';
 
 export function AppFooter(): JSX.Element {
   const currentYear = new Date().getFullYear();

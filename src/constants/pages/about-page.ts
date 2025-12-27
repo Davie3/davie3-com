@@ -3,8 +3,9 @@
  * Content, data, and configuration specific to the about page
  */
 
+import { PAGE_DESCRIPTIONS, TECHNOLOGIES } from '@/constants/shared';
+
 import type { Education } from '@/types/personal-types';
-import { PAGE_DESCRIPTIONS, TECHNOLOGIES } from '../shared';
 
 /**
  * About page content

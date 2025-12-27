@@ -1,6 +1,8 @@
 import { readFileSync } from 'fs';
 import { join } from 'path';
+
 import { EMAIL_CONFIG } from '@/constants/config/email-config';
+
 import type { ContactFormTemplateData } from '@/types/email-types';
 
 /**

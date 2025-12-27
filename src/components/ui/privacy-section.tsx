@@ -1,5 +1,6 @@
-import type { ReactNode } from 'react';
 import { cn } from '@/lib/utils/class-utils';
+
+import type { ReactNode } from 'react';
 
 type PrivacySectionProps = {
   readonly title: string;
