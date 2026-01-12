@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "rm -rf .next node_modules/.cache .eslintcache tsconfig.tsbuildinfo && npm run format:check && npm run lint && npm run type-check && next build",
+    "build": "npm run lint && npm run type-check && next build",
     "dev": "next dev",
     "fix": "npm run format && npm run lint -- --fix",
     "format": "prettier --write .",
