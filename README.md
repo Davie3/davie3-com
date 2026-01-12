@@ -23,6 +23,23 @@ Visit [davie3.com](https://davie3.com)
 - Performance focused with native CSS transitions
 - Server-side rendering with progressive enhancement
 
+## Development
+
+**Code Quality:**
+
+- Prettier 3.7+ (Tailwind class sorting, package.json formatting)
+- ESLint 9+ (TypeScript strict mode, import ordering)
+- Husky pre-commit hooks
+
+**Scripts:**
+
+```bash
+npm run fix   # Auto-fix formatting + linting
+npm run build # Full validation + production build
+```
+
+**Note:** Tailwind CSS v4 in use. `eslint-plugin-tailwindcss` (v3.x only) skipped until v4 support.
+
 ## Architecture Highlights
 
 - Type-safe environment variable validation
