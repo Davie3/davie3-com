@@ -288,15 +288,9 @@ Location: `next.config.ts`
 npm run build
 ```
 
-Executes:
+Runs linting, type checking, and production build. See `package.json` for script details.
 
-1. Clean Next.js cache
-2. Format check (Prettier)
-3. Lint (ESLint)
-4. Type check (TypeScript)
-5. Build (Next.js production build)
-
-CI/CD pipeline on Vercel runs this automatically.
+Vercel CI/CD runs this automatically.
 
 ## Contact Form Flow
 
