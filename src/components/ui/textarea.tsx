@@ -32,7 +32,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     const showCounter = showCharCount && maxLength;
 
     return (
-      <div className="relative w-full group">
+      <div className="group relative w-full">
         <textarea
           ref={ref}
           disabled={disabled}
@@ -40,32 +40,32 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           value={value}
           className={cn(
             // Base styles
-            'w-full px-4 py-3.5 rounded-lg font-medium',
+            'w-full rounded-lg px-4 py-3.5 font-medium',
             'bg-navy-accent/50 backdrop-blur-sm',
             'border-2 transition-all duration-200',
             'text-cream placeholder:text-silver/50',
-            'outline-none resize-y min-h-[120px]',
+            'min-h-[120px] resize-y outline-none',
 
             // Variant styles
             variant === 'default' &&
               cn(
                 'border-electric-cyan/20',
-                'focus:border-electric-cyan focus:ring-2 focus:ring-electric-cyan/30',
+                'focus:border-electric-cyan focus:ring-electric-cyan/30 focus:ring-2',
                 'hover:border-electric-cyan/40',
               ),
             variant === 'error' &&
               cn(
                 'border-safety-orange/50',
-                'focus:border-safety-orange focus:ring-2 focus:ring-safety-orange/30',
+                'focus:border-safety-orange focus:ring-safety-orange/30 focus:ring-2',
               ),
             variant === 'success' &&
               cn(
                 'border-electric-cyan/50',
-                'focus:border-electric-cyan focus:ring-2 focus:ring-electric-cyan/30',
+                'focus:border-electric-cyan focus:ring-electric-cyan/30 focus:ring-2',
               ),
 
             // Disabled state
-            disabled && 'opacity-50 cursor-not-allowed bg-navy-accent/30',
+            disabled && 'bg-navy-accent/30 cursor-not-allowed opacity-50',
 
             // Extra padding for char counter
             showCounter && 'pb-8',
@@ -91,7 +91,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         {showCounter && props.id && (
           <div
             id={`${props.id}-char-count`}
-            className="absolute bottom-2 right-3 text-xs text-silver/60 font-mono"
+            className="text-silver/60 absolute right-3 bottom-2 font-mono text-xs"
             aria-live="polite"
             aria-atomic="true"
           >
@@ -102,7 +102,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         {/* Focus glow effect */}
         <div
           className={cn(
-            'absolute inset-0 rounded-lg pointer-events-none transition-opacity duration-200',
+            'pointer-events-none absolute inset-0 rounded-lg transition-opacity duration-200',
             'opacity-0 group-focus-within:opacity-100',
             variant === 'error' ? 'bg-safety-orange/5' : 'bg-electric-cyan/5',
           )}

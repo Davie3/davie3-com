@@ -8,10 +8,7 @@ import type { JSX } from 'react';
 /**
  * Gets the appropriate icon component for a social platform.
  */
-export const getSocialIcon = (
-  iconName: SocialLinkData['iconName'],
-  size = 20,
-): JSX.Element => {
+export const getSocialIcon = (iconName: SocialLinkData['iconName'], size = 20): JSX.Element => {
   const iconProps = { size };
   switch (iconName) {
     case 'github':

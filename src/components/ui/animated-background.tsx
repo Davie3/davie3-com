@@ -85,9 +85,7 @@ export function AnimatedBackground(): JSX.Element {
     window.addEventListener('scroll', handleScroll, { passive: true });
 
     // Check for reduced motion
-    const prefersReducedMotion = window.matchMedia(
-      '(prefers-reduced-motion: reduce)',
-    ).matches;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     // Animation loop
     const animate = (timestamp: number): void => {
@@ -118,33 +116,19 @@ export function AnimatedBackground(): JSX.Element {
         const layerScrollOffset = scrollY * speed;
         stars.forEach((star) => {
           if (
-            isInViewport(
-              star.y,
-              layerScrollOffset,
-              canvas.height,
-              CANVAS_CONFIG.viewportBuffer,
-            )
+            isInViewport(star.y, layerScrollOffset, canvas.height, CANVAS_CONFIG.viewportBuffer)
           ) {
             const currentOpacity = prefersReducedMotion
               ? star.baseOpacity
               : updateStarTwinkle(star, deltaTime);
-            spriteRenderer.drawStar(
-              ctx,
-              star,
-              currentOpacity,
-              layerScrollOffset,
-            );
+            spriteRenderer.drawStar(ctx, star, currentOpacity, layerScrollOffset);
           }
         });
       });
 
       // 2. Update and render shooting stars
       if (!prefersReducedMotion) {
-        particles.shootingStarPool.update(
-          deltaTime,
-          canvas.width,
-          canvas.height,
-        );
+        particles.shootingStarPool.update(deltaTime, canvas.width, canvas.height);
         particles.shootingStarPool.getActiveStars().forEach((shootingStar) => {
           drawShootingStar(ctx, shootingStar);
         });
@@ -165,7 +149,7 @@ export function AnimatedBackground(): JSX.Element {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed top-0 left-0 w-full h-full -z-10"
+      className="fixed top-0 left-0 -z-10 h-full w-full"
       aria-hidden="true"
       role="presentation"
     />

@@ -11,7 +11,7 @@ export function RightSidebar(): JSX.Element {
 
   return (
     <motion.aside
-      className="hidden md:flex flex-col items-center fixed bottom-0 right-10 w-10 z-40"
+      className="fixed right-10 bottom-0 z-40 hidden w-10 flex-col items-center md:flex"
       initial={{ opacity: 0, x: shouldReduceMotion ? 0 : 20 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{
@@ -21,15 +21,12 @@ export function RightSidebar(): JSX.Element {
       aria-label="Developer signature"
     >
       <div
-        className="p-2 text-[color:var(--color-accent)] hover:text-[color:var(--color-purple-accent)] transition-all duration-300 hover:-translate-y-1 text-sm writing-mode-vertical"
+        className="writing-mode-vertical p-2 text-sm text-[color:var(--color-accent)] transition-all duration-300 hover:-translate-y-1 hover:text-[color:var(--color-purple-accent)]"
         aria-hidden="true"
       >
         Davie3 / David Griffin
       </div>
-      <div
-        className="mt-6 w-px h-24 bg-[color:var(--color-slate-dark)]"
-        aria-hidden="true"
-      ></div>
+      <div className="mt-6 h-24 w-px bg-[color:var(--color-slate-dark)]" aria-hidden="true"></div>
     </motion.aside>
   );
 }

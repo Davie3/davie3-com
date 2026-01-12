@@ -117,25 +117,16 @@ export default function ContactForm(): JSX.Element {
           bounce: 0.3,
         }}
       >
-        <Card variant="elevated" className="max-w-3xl mx-auto">
-          <CardContent className="py-12 text-center space-y-6">
-            <div className="w-20 h-20 bg-electric-cyan/10 border-2 border-electric-cyan flex-center mx-auto rounded-lg">
-              <CheckCircle2 className="w-10 h-10 text-electric-cyan" />
+        <Card variant="elevated" className="mx-auto max-w-3xl">
+          <CardContent className="space-y-6 py-12 text-center">
+            <div className="bg-electric-cyan/10 border-electric-cyan flex-center mx-auto h-20 w-20 rounded-lg border-2">
+              <CheckCircle2 className="text-electric-cyan h-10 w-10" />
             </div>
             <div className="space-y-3">
-              <h3 className="text-3xl font-display text-cream">
-                {CONTACT_FORM.SUCCESS_HEADING}
-              </h3>
-              <p className="text-lg text-silver">
-                {CONTACT_FORM.SUCCESS_MESSAGE}
-              </p>
+              <h3 className="font-display text-cream text-3xl">{CONTACT_FORM.SUCCESS_HEADING}</h3>
+              <p className="text-silver text-lg">{CONTACT_FORM.SUCCESS_MESSAGE}</p>
             </div>
-            <Button
-              onClick={resetForm}
-              variant="outline"
-              size="lg"
-              className="mx-auto"
-            >
+            <Button onClick={resetForm} variant="outline" size="lg" className="mx-auto">
               {CONTACT_FORM.SUCCESS_BUTTON}
             </Button>
           </CardContent>
@@ -146,7 +137,7 @@ export default function ContactForm(): JSX.Element {
 
   // Form state
   return (
-    <Card variant="glass" className="max-w-3xl mx-auto">
+    <Card variant="glass" className="mx-auto max-w-3xl">
       <CardContent>
         <motion.form
           onSubmit={(e) => {
@@ -170,7 +161,7 @@ export default function ContactForm(): JSX.Element {
                 {...register('name')}
                 variant={errors.name ? 'error' : 'default'}
                 placeholder={CONTACT_FORM.PLACEHOLDER_NAME}
-                icon={<User className="w-5 h-5" />}
+                icon={<User className="h-5 w-5" />}
                 iconPosition="left"
               />
             </FormField>
@@ -189,7 +180,7 @@ export default function ContactForm(): JSX.Element {
                 {...register('email')}
                 variant={errors.email ? 'error' : 'default'}
                 placeholder={CONTACT_FORM.PLACEHOLDER_EMAIL}
-                icon={<Mail className="w-5 h-5" />}
+                icon={<Mail className="h-5 w-5" />}
                 iconPosition="left"
               />
             </FormField>
@@ -208,7 +199,7 @@ export default function ContactForm(): JSX.Element {
                 {...register('confirmEmail')}
                 variant={errors.confirmEmail ? 'error' : 'default'}
                 placeholder={CONTACT_FORM.PLACEHOLDER_CONFIRM_EMAIL}
-                icon={<Mail className="w-5 h-5" />}
+                icon={<Mail className="h-5 w-5" />}
                 iconPosition="left"
               />
             </FormField>
@@ -227,7 +218,7 @@ export default function ContactForm(): JSX.Element {
                 {...register('subject')}
                 variant={errors.subject ? 'error' : 'default'}
                 placeholder={CONTACT_FORM.PLACEHOLDER_SUBJECT}
-                icon={<MessageSquare className="w-5 h-5" />}
+                icon={<MessageSquare className="h-5 w-5" />}
                 iconPosition="left"
               />
             </FormField>

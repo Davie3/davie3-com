@@ -16,10 +16,7 @@ type LabelProps = {
 } & React.LabelHTMLAttributes<HTMLLabelElement>;
 
 export const Label = forwardRef<HTMLLabelElement, LabelProps>(
-  (
-    { htmlFor, required, helperText, error, className, children, ...props },
-    ref,
-  ) => {
+  ({ htmlFor, required, helperText, error, className, children, ...props }, ref) => {
     return (
       <div className="space-y-1">
         <label
@@ -35,10 +32,7 @@ export const Label = forwardRef<HTMLLabelElement, LabelProps>(
         >
           {children}
           {required && (
-            <span
-              className="text-safety-orange ml-0.5 font-bold"
-              aria-label="required"
-            >
+            <span className="text-safety-orange ml-0.5 font-bold" aria-label="required">
               *
             </span>
           )}

@@ -12,19 +12,19 @@ export default function Loading(): JSX.Element {
     <main className="container mx-auto max-w-6xl px-4 py-16">
       {/* Hero Section Skeleton */}
       <section className="relative mb-16">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-accent/5 via-purple-accent/5 to-cyan-accent/5 rounded-3xl" />
-        <div className="relative glass rounded-3xl p-8 md:p-12 animate-pulse">
-          <div className="flex items-center gap-4 mb-6">
-            <div className="w-12 h-12 bg-gradient-to-r from-purple-accent/20 to-cyan-accent/20 rounded-full" />
+        <div className="from-blue-accent/5 via-purple-accent/5 to-cyan-accent/5 absolute inset-0 rounded-3xl bg-gradient-to-r" />
+        <div className="glass relative animate-pulse rounded-3xl p-8 md:p-12">
+          <div className="mb-6 flex items-center gap-4">
+            <div className="from-purple-accent/20 to-cyan-accent/20 h-12 w-12 rounded-full bg-gradient-to-r" />
             <div>
-              <div className="h-10 bg-navy-accent rounded w-48 mb-2" />
-              <div className="h-4 bg-navy-accent/60 rounded w-64" />
+              <div className="bg-navy-accent mb-2 h-10 w-48 rounded" />
+              <div className="bg-navy-accent/60 h-4 w-64 rounded" />
             </div>
           </div>
           <div className="space-y-2">
-            <div className="h-4 bg-navy-accent/40 rounded w-full" />
-            <div className="h-4 bg-navy-accent/40 rounded w-5/6" />
-            <div className="h-4 bg-navy-accent/40 rounded w-4/6" />
+            <div className="bg-navy-accent/40 h-4 w-full rounded" />
+            <div className="bg-navy-accent/40 h-4 w-5/6 rounded" />
+            <div className="bg-navy-accent/40 h-4 w-4/6 rounded" />
           </div>
         </div>
       </section>
@@ -32,8 +32,8 @@ export default function Loading(): JSX.Element {
       {/* Projects Section Skeleton */}
       <section>
         <div className="mb-8">
-          <div className="h-8 bg-navy-accent rounded w-48 mb-2 animate-pulse" />
-          <div className="h-4 bg-navy-accent/60 rounded w-64 animate-pulse" />
+          <div className="bg-navy-accent mb-2 h-8 w-48 animate-pulse rounded" />
+          <div className="bg-navy-accent/60 h-4 w-64 animate-pulse rounded" />
         </div>
 
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">

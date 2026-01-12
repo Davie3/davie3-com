@@ -23,16 +23,14 @@ export function SectionHeader({
     <div className={cn('space-y-4', className)}>
       {/* Label with optional divider */}
       <div className="flex items-center gap-4">
-        {showDivider && <div className="h-px w-12 bg-safety-orange" />}
-        <span className="font-accent text-sm tracking-wider uppercase text-silver">
-          {label}
-        </span>
+        {showDivider && <div className="bg-safety-orange h-px w-12" />}
+        <span className="font-accent text-silver text-sm tracking-wider uppercase">{label}</span>
       </div>
 
       {/* Heading */}
       <HeadingTag
         className={cn(
-          'font-display leading-tight text-cream',
+          'font-display text-cream leading-tight',
           headingLevel === 'h1' && 'text-7xl md:text-8xl',
           headingLevel === 'h2' && 'text-3xl md:text-4xl',
           headingLevel === 'h3' && 'text-2xl md:text-3xl',

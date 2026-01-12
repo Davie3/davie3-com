@@ -1,8 +1,4 @@
-import {
-  PERSONAL_INFO,
-  PROFESSIONAL_TITLES,
-  TECHNOLOGIES,
-} from '@/constants/shared';
+import { PERSONAL_INFO, PROFESSIONAL_TITLES, TECHNOLOGIES } from '@/constants/shared';
 
 /**
  * SEO and Search Optimization Configuration
@@ -47,11 +43,7 @@ const SEO_KEYWORDS = {
  * Combined keyword arrays for different page types
  */
 export const COMBINED_KEYWORDS = {
-  HOME: [
-    ...SEO_KEYWORDS.PROFESSIONAL,
-    ...SEO_KEYWORDS.TECHNOLOGY,
-    ...SEO_KEYWORDS.BRANDING,
-  ],
+  HOME: [...SEO_KEYWORDS.PROFESSIONAL, ...SEO_KEYWORDS.TECHNOLOGY, ...SEO_KEYWORDS.BRANDING],
   ABOUT: [...SEO_KEYWORDS.PROFESSIONAL, ...SEO_KEYWORDS.TECHNOLOGY],
   CONTACT: [
     ...SEO_KEYWORDS.PROFESSIONAL,

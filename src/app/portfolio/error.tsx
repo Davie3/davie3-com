@@ -20,29 +20,27 @@ export default function Error({ error, reset }: ErrorProps): JSX.Element {
   return (
     <main className="container mx-auto max-w-4xl px-4 py-16">
       <section id="portfolio-error" className="text-center">
-        <div className="flex justify-center mb-4">
-          <AlertCircle className="h-16 w-16 text-destructive" />
+        <div className="mb-4 flex justify-center">
+          <AlertCircle className="text-destructive h-16 w-16" />
         </div>
-        <h1 className="text-4xl font-bold text-primary mb-4">
-          Failed to Load Portfolio
-        </h1>
-        <p className="text-lg text-muted-foreground mb-6">
-          There was an error loading projects from GitHub. This might be due to
-          rate limiting or network issues.
+        <h1 className="text-primary mb-4 text-4xl font-bold">Failed to Load Portfolio</h1>
+        <p className="text-muted-foreground mb-6 text-lg">
+          There was an error loading projects from GitHub. This might be due to rate limiting or
+          network issues.
         </p>
         <button
           onClick={reset}
-          className="inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground hover:bg-primary/90"
+          className="bg-primary text-primary-foreground hover:bg-primary/90 inline-flex items-center gap-2 rounded-md px-4 py-2 text-sm font-semibold"
         >
           <RefreshCw className="h-4 w-4" />
           Try Again
         </button>
         {process.env.NODE_ENV === 'development' && (
           <details className="mt-8 text-left">
-            <summary className="cursor-pointer text-sm text-muted-foreground">
+            <summary className="text-muted-foreground cursor-pointer text-sm">
               Error Details (Development)
             </summary>
-            <pre className="mt-2 text-xs text-destructive bg-muted p-4 rounded overflow-auto">
+            <pre className="text-destructive bg-muted mt-2 overflow-auto rounded p-4 text-xs">
               {error.message}
             </pre>
           </details>

@@ -17,25 +17,17 @@ type InputProps = {
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
   (
-    {
-      variant = 'default',
-      icon,
-      iconPosition = 'left',
-      error,
-      className,
-      disabled,
-      ...props
-    },
+    { variant = 'default', icon, iconPosition = 'left', error, className, disabled, ...props },
     ref,
   ) => {
     const hasIcon = !!icon;
 
     return (
-      <div className="relative w-full group">
+      <div className="group relative w-full">
         {/* Icon */}
         {hasIcon && iconPosition === 'left' && (
           <div
-            className="absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none z-10"
+            className="pointer-events-none absolute top-1/2 left-4 z-10 -translate-y-1/2"
             aria-hidden="true"
           >
             <div
@@ -59,7 +51,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           disabled={disabled}
           className={cn(
             // Base styles
-            'w-full px-4 py-3.5 rounded-lg font-medium',
+            'w-full rounded-lg px-4 py-3.5 font-medium',
             'bg-navy-accent/50 backdrop-blur-sm',
             'border-2 transition-all duration-200',
             'text-cream placeholder:text-silver/50',
@@ -73,36 +65,34 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             variant === 'default' &&
               cn(
                 'border-electric-cyan/20',
-                'focus:border-electric-cyan focus:ring-2 focus:ring-electric-cyan/30',
+                'focus:border-electric-cyan focus:ring-electric-cyan/30 focus:ring-2',
                 'hover:border-electric-cyan/40',
               ),
             variant === 'error' &&
               cn(
                 'border-safety-orange/50',
-                'focus:border-safety-orange focus:ring-2 focus:ring-safety-orange/30',
+                'focus:border-safety-orange focus:ring-safety-orange/30 focus:ring-2',
               ),
             variant === 'success' &&
               cn(
                 'border-electric-cyan/50',
-                'focus:border-electric-cyan focus:ring-2 focus:ring-electric-cyan/30',
+                'focus:border-electric-cyan focus:ring-electric-cyan/30 focus:ring-2',
               ),
 
             // Disabled state
-            disabled && 'opacity-50 cursor-not-allowed bg-navy-accent/30',
+            disabled && 'bg-navy-accent/30 cursor-not-allowed opacity-50',
 
             className,
           )}
           aria-invalid={variant === 'error'}
-          aria-describedby={
-            error ? (props.id ? `${props.id}-error` : undefined) : undefined
-          }
+          aria-describedby={error ? (props.id ? `${props.id}-error` : undefined) : undefined}
           {...props}
         />
 
         {/* Right Icon */}
         {hasIcon && iconPosition === 'right' && (
           <div
-            className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none z-10"
+            className="pointer-events-none absolute top-1/2 right-4 z-10 -translate-y-1/2"
             aria-hidden="true"
           >
             <div
@@ -123,7 +113,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         {/* Focus glow effect */}
         <div
           className={cn(
-            'absolute inset-0 rounded-lg pointer-events-none transition-opacity duration-200',
+            'pointer-events-none absolute inset-0 rounded-lg transition-opacity duration-200',
             'opacity-0 group-focus-within:opacity-100',
             variant === 'error' ? 'bg-safety-orange/5' : 'bg-electric-cyan/5',
           )}

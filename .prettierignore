@@ -1,2 +1,35 @@
 # Vercel configuration - managed separately
 vercel.json
+
+# Dependencies
+node_modules/
+
+# Build outputs
+.next/
+out/
+build/
+dist/
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Coverage
+coverage/
+
+# Cache
+.eslintcache
+tsconfig.tsbuildinfo
+.turbo/
+
+# Git
+.git/
+.husky/_/

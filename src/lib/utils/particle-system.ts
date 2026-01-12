@@ -1,7 +1,4 @@
-import {
-  STAR_CONFIG,
-  SHOOTING_STAR_CONFIG,
-} from '@/constants/config/animation-config';
+import { STAR_CONFIG, SHOOTING_STAR_CONFIG } from '@/constants/config/animation-config';
 
 import type { CanvasStar, ShootingStar, LayerType } from '@/types/config-types';
 
@@ -23,16 +20,13 @@ export function generateStarsByLayer(
     y: Math.random() * height * 2,
     size: Math.random() * (layerConfig.MAX - layerConfig.MIN) + layerConfig.MIN,
     baseOpacity:
-      Math.random() *
-        (STAR_CONFIG.OPACITY_RANGE.MAX - STAR_CONFIG.OPACITY_RANGE.MIN) +
+      Math.random() * (STAR_CONFIG.OPACITY_RANGE.MAX - STAR_CONFIG.OPACITY_RANGE.MIN) +
       STAR_CONFIG.OPACITY_RANGE.MIN,
     color: layerColors[Math.floor(Math.random() * layerColors.length)],
     layer,
     twinklePhase: Math.random() * Math.PI * 2,
     twinkleSpeed:
-      Math.random() *
-        (STAR_CONFIG.TWINKLE_SPEED_RANGE.MAX -
-          STAR_CONFIG.TWINKLE_SPEED_RANGE.MIN) +
+      Math.random() * (STAR_CONFIG.TWINKLE_SPEED_RANGE.MAX - STAR_CONFIG.TWINKLE_SPEED_RANGE.MIN) +
       STAR_CONFIG.TWINKLE_SPEED_RANGE.MIN,
   }));
 }
@@ -52,10 +46,7 @@ export function updateStarTwinkle(star: CanvasStar, deltaTime: number): number {
 /**
  * Update shooting star position and opacity.
  */
-function updateShootingStar(
-  shootingStar: ShootingStar,
-  deltaTime: number,
-): void {
+function updateShootingStar(shootingStar: ShootingStar, deltaTime: number): void {
   shootingStar.lifetime += deltaTime;
 
   // Update position
@@ -63,10 +54,7 @@ function updateShootingStar(
   shootingStar.y += (shootingStar.vy * deltaTime) / 1000;
 
   // Linear opacity fade
-  shootingStar.opacity = Math.max(
-    0,
-    1 - shootingStar.lifetime / shootingStar.maxLifetime,
-  );
+  shootingStar.opacity = Math.max(0, 1 - shootingStar.lifetime / shootingStar.maxLifetime);
 
   // Deactivate when lifetime exceeded
   if (shootingStar.lifetime >= shootingStar.maxLifetime) {
@@ -102,8 +90,7 @@ export class ShootingStarPool {
   private getRandomSpawnDelay(): number {
     return (
       Math.random() *
-        (SHOOTING_STAR_CONFIG.SPAWN_INTERVAL.MAX -
-          SHOOTING_STAR_CONFIG.SPAWN_INTERVAL.MIN) +
+        (SHOOTING_STAR_CONFIG.SPAWN_INTERVAL.MAX - SHOOTING_STAR_CONFIG.SPAWN_INTERVAL.MIN) +
       SHOOTING_STAR_CONFIG.SPAWN_INTERVAL.MIN
     );
   }
@@ -116,15 +103,13 @@ export class ShootingStarPool {
     // Reset and activate
     const angle =
       ((Math.random() *
-        (SHOOTING_STAR_CONFIG.ANGLE_RANGE.MAX -
-          SHOOTING_STAR_CONFIG.ANGLE_RANGE.MIN) +
+        (SHOOTING_STAR_CONFIG.ANGLE_RANGE.MAX - SHOOTING_STAR_CONFIG.ANGLE_RANGE.MIN) +
         SHOOTING_STAR_CONFIG.ANGLE_RANGE.MIN) *
         Math.PI) /
       180;
     const speed =
       Math.random() *
-        (SHOOTING_STAR_CONFIG.SPEED_RANGE.MAX -
-          SHOOTING_STAR_CONFIG.SPEED_RANGE.MIN) +
+        (SHOOTING_STAR_CONFIG.SPEED_RANGE.MAX - SHOOTING_STAR_CONFIG.SPEED_RANGE.MIN) +
       SHOOTING_STAR_CONFIG.SPEED_RANGE.MIN;
 
     star.x = Math.random() * width;
@@ -133,15 +118,13 @@ export class ShootingStarPool {
     star.vy = Math.sin(angle) * speed;
     star.length =
       Math.random() *
-        (SHOOTING_STAR_CONFIG.LENGTH_RANGE.MAX -
-          SHOOTING_STAR_CONFIG.LENGTH_RANGE.MIN) +
+        (SHOOTING_STAR_CONFIG.LENGTH_RANGE.MAX - SHOOTING_STAR_CONFIG.LENGTH_RANGE.MIN) +
       SHOOTING_STAR_CONFIG.LENGTH_RANGE.MIN;
     star.opacity = 1;
     star.lifetime = 0;
     star.maxLifetime =
       Math.random() *
-        (SHOOTING_STAR_CONFIG.LIFETIME_RANGE.MAX -
-          SHOOTING_STAR_CONFIG.LIFETIME_RANGE.MIN) +
+        (SHOOTING_STAR_CONFIG.LIFETIME_RANGE.MAX - SHOOTING_STAR_CONFIG.LIFETIME_RANGE.MIN) +
       SHOOTING_STAR_CONFIG.LIFETIME_RANGE.MIN;
     star.active = true;
   }

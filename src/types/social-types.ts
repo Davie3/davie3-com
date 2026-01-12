@@ -1,13 +1,7 @@
 /**
  * Social media related type definitions.
  */
-type SocialIconName =
-  | 'github'
-  | 'linkedin'
-  | 'twitch'
-  | 'x'
-  | 'instagram'
-  | 'bluesky';
+type SocialIconName = 'github' | 'linkedin' | 'twitch' | 'x' | 'instagram' | 'bluesky';
 
 export type SocialLinkData = {
   readonly name: string;

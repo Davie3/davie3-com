@@ -1,7 +1,6 @@
 export const EMAIL_CONFIG = {
   CONTACT_FORM: {
-    SUBJECT_TEMPLATE: (subject: string, name: string) =>
-      `💬 Contact: ${subject} - from ${name}`,
+    SUBJECT_TEMPLATE: (subject: string, name: string) => `💬 Contact: ${subject} - from ${name}`,
 
     TEXT_TEMPLATE: {
       HEADER: 'CONTACT FORM SUBMISSION',
@@ -14,8 +13,7 @@ export const EMAIL_CONFIG = {
         RECEIVED: '🕒 Received:',
         MESSAGE: 'MESSAGE:',
       },
-      FOOTER_TEMPLATE: (name: string) =>
-        `Reply directly to this email to respond to ${name}.`,
+      FOOTER_TEMPLATE: (name: string) => `Reply directly to this email to respond to ${name}.`,
     },
   },
 } as const;

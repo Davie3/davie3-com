@@ -1,11 +1,7 @@
 import { COMBINED_KEYWORDS } from '@/constants/config/seo-config';
 import { CONTACT_CONTENT } from '@/constants/pages/contact-page';
 import { PORTFOLIO_CONTENT } from '@/constants/pages/portfolio-page';
-import {
-  PERSONAL_INFO,
-  PAGE_DESCRIPTIONS,
-  PROFESSIONAL_TITLES,
-} from '@/constants/shared';
+import { PERSONAL_INFO, PAGE_DESCRIPTIONS, PROFESSIONAL_TITLES } from '@/constants/shared';
 import { EXTERNAL_URLS } from '@/constants/urls';
 
 import type { Metadata } from 'next';

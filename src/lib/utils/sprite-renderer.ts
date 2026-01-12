@@ -32,9 +32,7 @@ export class SpriteRenderer {
       // Create 5 size variations per layer
       const sizeSteps = 5;
       for (let i = 0; i < sizeSteps; i++) {
-        const size =
-          sizeConfig.MIN +
-          (i / (sizeSteps - 1)) * (sizeConfig.MAX - sizeConfig.MIN);
+        const size = sizeConfig.MIN + (i / (sizeSteps - 1)) * (sizeConfig.MAX - sizeConfig.MIN);
 
         colors.forEach((color) => {
           const key = this.getStarSpriteKey(size, color);
@@ -64,14 +62,7 @@ export class SpriteRenderer {
     const centerY = canvasSize / 2;
 
     // Draw radial gradient (once, stored forever)
-    const gradient = ctx.createRadialGradient(
-      centerX,
-      centerY,
-      0,
-      centerX,
-      centerY,
-      size,
-    );
+    const gradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, size);
     gradient.addColorStop(0, color);
     gradient.addColorStop(1, 'transparent');
 
@@ -126,8 +117,7 @@ export class SpriteRenderer {
         let minDiff = Math.abs(size - closestSize);
 
         for (let i = 0; i < sizeSteps; i++) {
-          const testSize =
-            minSize + (i / (sizeSteps - 1)) * (maxSize - minSize);
+          const testSize = minSize + (i / (sizeSteps - 1)) * (maxSize - minSize);
           const diff = Math.abs(size - testSize);
           if (diff < minDiff) {
             minDiff = diff;

@@ -16,10 +16,7 @@ export function isInViewport(
 /**
  * Draw a shooting star with gradient trail.
  */
-export function drawShootingStar(
-  ctx: CanvasRenderingContext2D,
-  shootingStar: ShootingStar,
-): void {
+export function drawShootingStar(ctx: CanvasRenderingContext2D, shootingStar: ShootingStar): void {
   if (!shootingStar.active) return;
 
   const x = Math.floor(shootingStar.x);

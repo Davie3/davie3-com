@@ -17,11 +17,7 @@ export default function ContactLayout({
   return (
     <>
       {/* Turnstile-specific resource hints */}
-      <link
-        rel="preconnect"
-        href="https://challenges.cloudflare.com"
-        crossOrigin="anonymous"
-      />
+      <link rel="preconnect" href="https://challenges.cloudflare.com" crossOrigin="anonymous" />
       <link rel="dns-prefetch" href="https://challenges.cloudflare.com" />
       {children}
     </>

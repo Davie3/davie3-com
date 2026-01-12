@@ -10,10 +10,7 @@ import { CLOUDFLARE_API } from '@/constants/config/external-api-config';
 import { CONTACT_FORM_CONSTRAINTS } from '@/constants/config/form-config';
 import { getServerEnv } from '@/env';
 import { formatEmailTimestamp } from '@/lib/utils/date-utils';
-import {
-  renderContactFormTemplate,
-  generateContactFormText,
-} from '@/lib/utils/email-template';
+import { renderContactFormTemplate, generateContactFormText } from '@/lib/utils/email-template';
 
 import type { NextRequest } from 'next/server';
 
@@ -22,42 +19,24 @@ const ContactFormSchema = z
   .object({
     name: z
       .string()
-      .min(
-        CONTACT_FORM_CONSTRAINTS.NAME.MIN_LENGTH,
-        'Name must be at least 2 characters.',
-      )
-      .max(
-        CONTACT_FORM_CONSTRAINTS.NAME.MAX_LENGTH,
-        'Name must be less than 100 characters.',
-      ),
+      .min(CONTACT_FORM_CONSTRAINTS.NAME.MIN_LENGTH, 'Name must be at least 2 characters.')
+      .max(CONTACT_FORM_CONSTRAINTS.NAME.MAX_LENGTH, 'Name must be less than 100 characters.'),
     email: z
       .email('Please enter a valid email address.')
-      .max(
-        CONTACT_FORM_CONSTRAINTS.EMAIL.MAX_LENGTH,
-        'Email address is too long.',
-      ),
+      .max(CONTACT_FORM_CONSTRAINTS.EMAIL.MAX_LENGTH, 'Email address is too long.'),
     confirmEmail: z
       .email('Please enter a valid email address.')
-      .max(
-        CONTACT_FORM_CONSTRAINTS.EMAIL.MAX_LENGTH,
-        'Email address is too long.',
-      ),
+      .max(CONTACT_FORM_CONSTRAINTS.EMAIL.MAX_LENGTH, 'Email address is too long.'),
     subject: z
       .string()
-      .min(
-        CONTACT_FORM_CONSTRAINTS.SUBJECT.MIN_LENGTH,
-        'Subject must be at least 3 characters.',
-      )
+      .min(CONTACT_FORM_CONSTRAINTS.SUBJECT.MIN_LENGTH, 'Subject must be at least 3 characters.')
       .max(
         CONTACT_FORM_CONSTRAINTS.SUBJECT.MAX_LENGTH,
         'Subject must be less than 200 characters.',
       ),
     message: z
       .string()
-      .min(
-        CONTACT_FORM_CONSTRAINTS.MESSAGE.MIN_LENGTH,
-        'Message must be at least 10 characters.',
-      )
+      .min(CONTACT_FORM_CONSTRAINTS.MESSAGE.MIN_LENGTH, 'Message must be at least 10 characters.')
       .max(
         CONTACT_FORM_CONSTRAINTS.MESSAGE.MAX_LENGTH,
         'Message must be less than 2000 characters.',
@@ -117,19 +96,16 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
     const { name, email, subject, message, token } = validationResult.data;
 
-    const turnstileResponse = await fetch(
-      CLOUDFLARE_API.TURNSTILE_VERIFY_ENDPOINT,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          secret: serverEnv.TURNSTILE_SECRET_KEY,
-          response: token,
-        }),
+    const turnstileResponse = await fetch(CLOUDFLARE_API.TURNSTILE_VERIFY_ENDPOINT, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
       },
-    );
+      body: JSON.stringify({
+        secret: serverEnv.TURNSTILE_SECRET_KEY,
+        response: token,
+      }),
+    });
 
     const turnstileBody: unknown = await turnstileResponse.json();
     const turnstileData = TurnstileResponseSchema.parse(turnstileBody);
@@ -160,10 +136,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       to: serverEnv.SENDGRID_TO_EMAIL,
       from: serverEnv.SENDGRID_FROM_EMAIL,
       replyTo: sanitizedEmail,
-      subject: EMAIL_CONFIG.CONTACT_FORM.SUBJECT_TEMPLATE(
-        sanitizedSubject,
-        sanitizedName,
-      ),
+      subject: EMAIL_CONFIG.CONTACT_FORM.SUBJECT_TEMPLATE(sanitizedSubject, sanitizedName),
       text: generateContactFormText(templateData),
       html: renderContactFormTemplate(templateData),
     };

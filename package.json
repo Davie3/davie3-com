@@ -3,15 +3,28 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "build": "npm run lint && npm run type-check && next build",
     "dev": "next dev",
-    "build": "rm -rf .next node_modules/.cache .eslintcache tsconfig.tsbuildinfo && npm run format:check && npm run lint && npm run type-check && next build",
-    "start": "next start",
-    "lint": "eslint .",
-    "type-check": "tsc --noEmit",
+    "fix": "npm run format && npm run lint -- --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "fix": "npm run format && npm run lint -- --fix",
-    "prepare": "husky"
+    "lint": "eslint .",
+    "prepare": "husky",
+    "start": "next start",
+    "type-check": "tsc --noEmit"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "prettier --write",
+      "eslint --fix"
+    ],
+    "*.{json,css,md}": [
+      "prettier --write"
+    ]
+  },
+  "overrides": {
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
@@ -34,19 +47,6 @@
     "xss": "^1.0.15",
     "zod": "^4.3.5"
   },
-  "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
-      "prettier --write",
-      "eslint --fix"
-    ],
-    "*.{json,css,md}": [
-      "prettier --write"
-    ]
-  },
-  "engines": {
-    "node": "24.x",
-    "npm": ">=10.0.0"
-  },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.18",
     "@types/node": "^25",
@@ -62,12 +62,15 @@
     "husky": "^9.1.7",
     "lint-staged": "^16.2.7",
     "prettier": "^3.7.4",
+    "prettier-plugin-packagejson": "^2.5.20",
+    "prettier-plugin-sh": "^0.18.0",
+    "prettier-plugin-tailwindcss": "^0.7.2",
     "tailwindcss": "^4.1.13",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.52.0"
   },
-  "overrides": {
-    "@types/react": "^19.2.2",
-    "@types/react-dom": "^19.2.2"
+  "engines": {
+    "node": "24.x",
+    "npm": ">=10.0.0"
   }
 }

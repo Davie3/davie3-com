@@ -34,8 +34,7 @@ export const CONTACT_FORM = {
   // Messages
   CAPTCHA_ERROR: 'Please complete the CAPTCHA verification.',
   SUCCESS_HEADING: 'Message Sent Successfully!',
-  SUCCESS_MESSAGE:
-    "Thank you for reaching out. I'll get back to you as soon as possible.",
+  SUCCESS_MESSAGE: "Thank you for reaching out. I'll get back to you as soon as possible.",
   SUCCESS_BUTTON: 'Send Another Message',
   ERROR_MESSAGE: 'Something went wrong. Please try again later.',
 } as const;

@@ -19,7 +19,7 @@ export function PageWrapper({ children }: PageWrapperProps): JSX.Element {
     <motion.main
       id="main-content"
       key={pathname}
-      className="container mx-auto px-6 md:px-12 lg:px-24 pb-2"
+      className="container mx-auto px-6 pb-2 md:px-12 lg:px-24"
       initial={{
         opacity: 0,
         y: shouldReduceMotion ? 0 : PAGE_ANIMATION.Y_OFFSET,

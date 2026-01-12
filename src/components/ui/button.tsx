@@ -41,13 +41,13 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         disabled={isDisabled}
         className={cn(
           // Base styles
-          'relative inline-flex flex-center gap-2.5',
-          'font-bold tracking-wide uppercase text-sm',
+          'flex-center relative inline-flex gap-2.5',
+          'text-sm font-bold tracking-wide uppercase',
           'rounded-lg border-2 transition-all duration-200',
           'overflow-hidden',
 
           // Focus styles
-          'focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-navy',
+          'focus:ring-offset-navy focus:ring-2 focus:ring-offset-2 focus:outline-none',
 
           // Size variants
           size === 'sm' && 'px-4 py-2 text-xs',
@@ -60,7 +60,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
               'bg-electric-cyan text-navy border-electric-cyan',
               'hover:bg-safety-orange hover:border-safety-orange',
               'focus:ring-electric-cyan',
-              'shadow-lg shadow-electric-cyan/20 hover:shadow-safety-orange/20',
+              'shadow-electric-cyan/20 hover:shadow-safety-orange/20 shadow-lg',
               !isDisabled && 'active:scale-95',
             ),
           variant === 'secondary' &&
@@ -72,21 +72,21 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
             ),
           variant === 'outline' &&
             cn(
-              'bg-transparent text-electric-cyan border-electric-cyan',
+              'text-electric-cyan border-electric-cyan bg-transparent',
               'hover:bg-electric-cyan/10 hover:border-electric-cyan',
               'focus:ring-electric-cyan',
               !isDisabled && 'active:scale-95',
             ),
           variant === 'ghost' &&
             cn(
-              'bg-transparent text-cream border-transparent',
+              'text-cream border-transparent bg-transparent',
               'hover:bg-navy-accent/50',
               'focus:ring-electric-cyan/50',
               !isDisabled && 'active:scale-95',
             ),
 
           // Disabled state
-          isDisabled && 'opacity-50 cursor-not-allowed',
+          isDisabled && 'cursor-not-allowed opacity-50',
 
           className,
         )}
@@ -95,9 +95,9 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       >
         {/* Loading spinner */}
         {loading && (
-          <div className="absolute inset-0 flex-center bg-inherit">
+          <div className="flex-center absolute inset-0 bg-inherit">
             <svg
-              className="animate-spin h-5 w-5"
+              className="h-5 w-5 animate-spin"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
@@ -123,24 +123,17 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
         {/* Content */}
         <span
-          className={cn(
-            'inline-flex items-center gap-2',
-            loading && 'invisible',
-          )}
+          className={cn('inline-flex items-center gap-2', loading && 'invisible')}
           aria-hidden={loading}
         >
-          {icon && iconPosition === 'left' && (
-            <span className="inline-flex">{icon}</span>
-          )}
+          {icon && iconPosition === 'left' && <span className="inline-flex">{icon}</span>}
           {children}
-          {icon && iconPosition === 'right' && (
-            <span className="inline-flex">{icon}</span>
-          )}
+          {icon && iconPosition === 'right' && <span className="inline-flex">{icon}</span>}
         </span>
 
         {/* Shimmer effect on hover (only for primary) */}
         {variant === 'primary' && !isDisabled && (
-          <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+          <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-1000 group-hover:translate-x-full" />
         )}
       </button>
     );
