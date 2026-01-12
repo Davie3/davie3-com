@@ -25,19 +25,19 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
           // Variant styles
           variant === 'default' &&
             cn(
-              'bg-navy-accent/40 border-2 border-electric-cyan/20',
+              'bg-navy-accent/40 border-electric-cyan/20 border-2',
               'hover:border-electric-cyan/30',
             ),
           variant === 'glass' &&
             cn(
-              'bg-navy-accent/30 backdrop-blur-md border-2 border-electric-cyan/20',
-              'shadow-lg shadow-electric-cyan/5',
+              'bg-navy-accent/30 border-electric-cyan/20 border-2 backdrop-blur-md',
+              'shadow-electric-cyan/5 shadow-lg',
               'hover:border-electric-cyan/30 hover:shadow-electric-cyan/10',
             ),
           variant === 'elevated' &&
             cn(
-              'bg-navy-accent/50 border-2 border-electric-cyan/30',
-              'shadow-2xl shadow-electric-cyan/10',
+              'bg-navy-accent/50 border-electric-cyan/30 border-2',
+              'shadow-electric-cyan/10 shadow-2xl',
               'hover:shadow-electric-cyan/20',
             ),
 

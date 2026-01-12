@@ -14,47 +14,40 @@ export default function PrivacyPage(): JSX.Element {
     <main className="container mx-auto max-w-6xl px-4 py-16">
       {/* Hero Section - Editorial style */}
       <header className="mb-24">
-        <div className="flex items-center gap-3 mb-3">
-          <div className="h-px w-12 bg-safety-orange" />
+        <div className="mb-3 flex items-center gap-3">
+          <div className="bg-safety-orange h-px w-12" />
           <span className="section-label">Privacy</span>
         </div>
-        <h1 className="font-display text-7xl md:text-8xl lg:text-9xl leading-tight text-cream mb-6">
+        <h1 className="font-display text-cream mb-6 text-7xl leading-tight md:text-8xl lg:text-9xl">
           Privacy Policy
         </h1>
-        <p className="text-lg text-silver">
+        <p className="text-silver text-lg">
           Last updated:{' '}
-          {createPacificDate(PAGE_LAST_MODIFIED.PRIVACY).toLocaleDateString(
-            'en-US',
-            {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
-            },
-          )}
+          {createPacificDate(PAGE_LAST_MODIFIED.PRIVACY).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+          })}
         </p>
       </header>
 
       {/* Introduction */}
       <PrivacySection title="Introduction" hasBorder={false}>
-        <p className="text-silver leading-relaxed mb-4">
-          This Privacy Policy describes how I, David Griffin, collect, use, and
-          protect your information when you visit my website (davie3.com). I am
-          committed to protecting your privacy and being transparent about my
-          data practices.
+        <p className="text-silver mb-4 leading-relaxed">
+          This Privacy Policy describes how I, David Griffin, collect, use, and protect your
+          information when you visit my website (davie3.com). I am committed to protecting your
+          privacy and being transparent about my data practices.
         </p>
       </PrivacySection>
 
       {/* Information I Collect */}
       <PrivacySection title="Information I Collect">
-        <h3 className="text-lg md:text-xl font-semibold mb-3 text-silver">
-          Analytics Data
-        </h3>
-        <p className="text-silver leading-relaxed mb-4">
-          I use privacy-focused analytics tools, including Vercel Analytics and
-          Cloudflare Web Analytics, to understand how visitors interact with my
-          website. These services collect:
+        <h3 className="text-silver mb-3 text-lg font-semibold md:text-xl">Analytics Data</h3>
+        <p className="text-silver mb-4 leading-relaxed">
+          I use privacy-focused analytics tools, including Vercel Analytics and Cloudflare Web
+          Analytics, to understand how visitors interact with my website. These services collect:
         </p>
-        <ul className="list-disc list-inside text-silver space-y-2 mb-6 ml-4">
+        <ul className="text-silver mb-6 ml-4 list-inside list-disc space-y-2">
           <li>Page views and navigation patterns</li>
           <li>Browser type and version</li>
           <li>Operating system information</li>
@@ -63,40 +56,32 @@ export default function PrivacyPage(): JSX.Element {
           <li>Device type (desktop, mobile, tablet)</li>
         </ul>
 
-        <h3 className="text-lg md:text-xl font-semibold mb-3 text-silver">
-          Contact Form Data
-        </h3>
-        <p className="text-silver leading-relaxed mb-4">
-          When you use my contact form, I collect:
-        </p>
-        <ul className="list-disc list-inside text-silver space-y-2 mb-6 ml-4">
+        <h3 className="text-silver mb-3 text-lg font-semibold md:text-xl">Contact Form Data</h3>
+        <p className="text-silver mb-4 leading-relaxed">When you use my contact form, I collect:</p>
+        <ul className="text-silver mb-6 ml-4 list-inside list-disc space-y-2">
           <li>Your name</li>
           <li>Your email address</li>
           <li>Your subject line</li>
           <li>The message content you provide</li>
         </ul>
 
-        <h3 className="text-lg md:text-xl font-semibold mb-3 text-silver">
+        <h3 className="text-silver mb-3 text-lg font-semibold md:text-xl">
           Cloudflare Turnstile (Bot Protection) Data
         </h3>
-        <p className="text-silver leading-relaxed mb-4">
-          My contact form uses Cloudflare Turnstile for bot protection. This
-          service may collect:
+        <p className="text-silver mb-4 leading-relaxed">
+          My contact form uses Cloudflare Turnstile for bot protection. This service may collect:
         </p>
-        <ul className="list-disc list-inside text-silver space-y-2 mb-6 ml-4">
+        <ul className="text-silver mb-6 ml-4 list-inside list-disc space-y-2">
           <li>IP address for verification purposes</li>
           <li>Browser and device information</li>
           <li>Behavioral data to distinguish humans from bots</li>
         </ul>
 
-        <h3 className="text-lg md:text-xl font-semibold mb-3 text-silver">
-          Portfolio Data
-        </h3>
-        <p className="text-silver leading-relaxed mb-4">
-          My portfolio page displays public information from my GitHub
-          repositories, including:
+        <h3 className="text-silver mb-3 text-lg font-semibold md:text-xl">Portfolio Data</h3>
+        <p className="text-silver mb-4 leading-relaxed">
+          My portfolio page displays public information from my GitHub repositories, including:
         </p>
-        <ul className="list-disc list-inside text-silver space-y-2 ml-4">
+        <ul className="text-silver ml-4 list-inside list-disc space-y-2">
           <li>Repository names and descriptions</li>
           <li>Programming languages used</li>
           <li>Star and fork counts</li>
@@ -106,246 +91,208 @@ export default function PrivacyPage(): JSX.Element {
 
       {/* How I Use Your Information */}
       <PrivacySection title="How I Use Your Information">
-        <ul className="list-disc list-inside text-silver space-y-2 ml-4">
+        <ul className="text-silver ml-4 list-inside list-disc space-y-2">
           <li>
-            <strong>Analytics Data:</strong> To understand website usage
-            patterns and improve user experience
+            <strong>Analytics Data:</strong> To understand website usage patterns and improve user
+            experience
           </li>
           <li>
-            <strong>Contact Information:</strong> To respond to your inquiries
-            and communicate with you
+            <strong>Contact Information:</strong> To respond to your inquiries and communicate with
+            you
           </li>
           <li>
-            <strong>Portfolio Data:</strong> To showcase my work and technical
-            projects to visitors
+            <strong>Portfolio Data:</strong> To showcase my work and technical projects to visitors
           </li>
           <li>
-            <strong>Technical Data:</strong> To ensure website functionality and
-            security
+            <strong>Technical Data:</strong> To ensure website functionality and security
           </li>
         </ul>
       </PrivacySection>
 
       {/* Third-Party Services */}
       <PrivacySection title="Third-Party Services">
-        <h3 className="text-lg md:text-xl font-semibold mb-3 text-silver">
-          Cloudflare Analytics
-        </h3>
-        <p className="text-silver leading-relaxed mb-4">
-          I use Cloudflare Web Analytics, which is privacy-focused and does not
-          use cookies or track individual users across websites. Cloudflare
-          processes data in accordance with their privacy policy and GDPR
-          compliance standards.
+        <h3 className="text-silver mb-3 text-lg font-semibold md:text-xl">Cloudflare Analytics</h3>
+        <p className="text-silver mb-4 leading-relaxed">
+          I use Cloudflare Web Analytics, which is privacy-focused and does not use cookies or track
+          individual users across websites. Cloudflare processes data in accordance with their
+          privacy policy and GDPR compliance standards.
         </p>
 
-        <h3 className="text-lg md:text-xl font-semibold mb-3 text-silver">
+        <h3 className="text-silver mb-3 text-lg font-semibold md:text-xl">
           Vercel Analytics & Speed Insights
         </h3>
-        <p className="text-silver leading-relaxed mb-4">
-          I also use Vercel Analytics and Speed Insights for performance
-          monitoring and to understand user engagement. Like Cloudflare
-          Analytics, Vercel&apos;s tools are privacy-friendly, do not use
-          cookies for tracking, and anonymize visitor data. All data is
+        <p className="text-silver mb-4 leading-relaxed">
+          I also use Vercel Analytics and Speed Insights for performance monitoring and to
+          understand user engagement. Like Cloudflare Analytics, Vercel&apos;s tools are
+          privacy-friendly, do not use cookies for tracking, and anonymize visitor data. All data is
           processed in compliance with GDPR.
         </p>
 
-        <h3 className="text-lg md:text-xl font-semibold mb-3 text-silver">
-          Email Processing
-        </h3>
-        <p className="text-silver leading-relaxed mb-4">
-          Contact form submissions are processed through SendGrid, a third-party
-          email service provider. SendGrid processes your contact information to
-          deliver emails and may collect technical data such as IP addresses and
-          email engagement metrics. SendGrid operates under their own privacy
-          policy and maintains GDPR compliance.
+        <h3 className="text-silver mb-3 text-lg font-semibold md:text-xl">Email Processing</h3>
+        <p className="text-silver mb-4 leading-relaxed">
+          Contact form submissions are processed through SendGrid, a third-party email service
+          provider. SendGrid processes your contact information to deliver emails and may collect
+          technical data such as IP addresses and email engagement metrics. SendGrid operates under
+          their own privacy policy and maintains GDPR compliance.
         </p>
 
-        <h3 className="text-lg md:text-xl font-semibold mb-3 text-silver">
-          GitHub API
-        </h3>
-        <p className="text-silver leading-relaxed mb-4">
-          My portfolio page fetches public repository data from GitHub&apos;s
-          API to display my projects. This data is publicly available and does
-          not require authentication. GitHub may log API requests including IP
-          addresses and user agents for their own analytics and rate limiting
-          purposes.
+        <h3 className="text-silver mb-3 text-lg font-semibold md:text-xl">GitHub API</h3>
+        <p className="text-silver mb-4 leading-relaxed">
+          My portfolio page fetches public repository data from GitHub&apos;s API to display my
+          projects. This data is publicly available and does not require authentication. GitHub may
+          log API requests including IP addresses and user agents for their own analytics and rate
+          limiting purposes.
         </p>
 
-        <h3 className="text-lg md:text-xl font-semibold mb-3 text-silver">
-          Hosting & CDN
-        </h3>
+        <h3 className="text-silver mb-3 text-lg font-semibold md:text-xl">Hosting & CDN</h3>
         <p className="text-silver leading-relaxed">
-          My website is hosted on Vercel and fronted by Cloudflare CDN. These
-          services may collect standard web server logs including IP addresses,
-          user agents, and access times for security and performance purposes.
-          Both services process data in accordance with their respective privacy
-          policies and GDPR compliance standards.
+          My website is hosted on Vercel and fronted by Cloudflare CDN. These services may collect
+          standard web server logs including IP addresses, user agents, and access times for
+          security and performance purposes. Both services process data in accordance with their
+          respective privacy policies and GDPR compliance standards.
         </p>
       </PrivacySection>
 
       {/* Data Retention */}
       <PrivacySection title="Data Retention">
-        <p className="text-silver leading-relaxed mb-6">
-          The table below outlines how long different types of data are
-          retained, who controls that retention, and links to relevant privacy
-          policies for more details.
+        <p className="text-silver mb-6 leading-relaxed">
+          The table below outlines how long different types of data are retained, who controls that
+          retention, and links to relevant privacy policies for more details.
         </p>
         <Card variant="glass">
           <CardContent className="p-6">
             <div className="overflow-x-auto">
-              <table className="w-full text-left text-silver border-collapse">
+              <table className="text-silver w-full border-collapse text-left">
                 <thead>
-                  <tr className="border-b border-electric-cyan/30">
-                    <th className="py-4 px-4 font-semibold text-silver">
-                      Service
-                    </th>
-                    <th className="py-4 px-4 font-semibold text-silver">
-                      Data Processed
-                    </th>
-                    <th className="py-4 px-4 font-semibold text-silver">
-                      Retention Period
-                    </th>
-                    <th className="py-4 px-4 font-semibold text-silver">
-                      Privacy Policy
-                    </th>
+                  <tr className="border-electric-cyan/30 border-b">
+                    <th className="text-silver px-4 py-4 font-semibold">Service</th>
+                    <th className="text-silver px-4 py-4 font-semibold">Data Processed</th>
+                    <th className="text-silver px-4 py-4 font-semibold">Retention Period</th>
+                    <th className="text-silver px-4 py-4 font-semibold">Privacy Policy</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr className="border-b border-electric-cyan/10">
-                    <td className="py-4 px-4 text-silver leading-relaxed">
-                      Vercel Analytics
-                    </td>
-                    <td className="py-4 px-4 text-silver leading-relaxed">
+                  <tr className="border-electric-cyan/10 border-b">
+                    <td className="text-silver px-4 py-4 leading-relaxed">Vercel Analytics</td>
+                    <td className="text-silver px-4 py-4 leading-relaxed">
                       Usage data (anonymized)
                     </td>
-                    <td className="py-4 px-4 text-silver leading-relaxed">
+                    <td className="text-silver px-4 py-4 leading-relaxed">
                       Per Vercel&apos;s policy
                     </td>
-                    <td className="py-4 px-4 text-silver leading-relaxed">
+                    <td className="text-silver px-4 py-4 leading-relaxed">
                       <a
                         href="https://vercel.com/legal/privacy-policy"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-electric-cyan hover:text-safety-orange transition-colors underline"
+                        className="text-electric-cyan hover:text-safety-orange underline transition-colors"
                       >
                         Vercel Privacy Policy
                       </a>
                     </td>
                   </tr>
-                  <tr className="border-b border-electric-cyan/10">
-                    <td className="py-4 px-4 text-silver leading-relaxed">
+                  <tr className="border-electric-cyan/10 border-b">
+                    <td className="text-silver px-4 py-4 leading-relaxed">
                       Cloudflare Web Analytics
                     </td>
-                    <td className="py-4 px-4 text-silver leading-relaxed">
+                    <td className="text-silver px-4 py-4 leading-relaxed">
                       Usage data (anonymized)
                     </td>
-                    <td className="py-4 px-4 text-silver leading-relaxed">
+                    <td className="text-silver px-4 py-4 leading-relaxed">
                       Per Cloudflare&apos;s policy
                     </td>
-                    <td className="py-4 px-4 text-silver leading-relaxed">
+                    <td className="text-silver px-4 py-4 leading-relaxed">
                       <a
                         href="https://www.cloudflare.com/privacypolicy/"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-electric-cyan hover:text-safety-orange transition-colors underline"
+                        className="text-electric-cyan hover:text-safety-orange underline transition-colors"
                       >
                         Cloudflare Privacy Policy
                       </a>
                     </td>
                   </tr>
-                  <tr className="border-b border-electric-cyan/10">
-                    <td className="py-4 px-4 text-silver leading-relaxed">
-                      Cloudflare Turnstile
-                    </td>
-                    <td className="py-4 px-4 text-silver leading-relaxed">
-                      Bot detection data
-                    </td>
-                    <td className="py-4 px-4 text-silver leading-relaxed">
+                  <tr className="border-electric-cyan/10 border-b">
+                    <td className="text-silver px-4 py-4 leading-relaxed">Cloudflare Turnstile</td>
+                    <td className="text-silver px-4 py-4 leading-relaxed">Bot detection data</td>
+                    <td className="text-silver px-4 py-4 leading-relaxed">
                       Ephemeral (not stored by me)
                     </td>
-                    <td className="py-4 px-4 text-silver leading-relaxed">
+                    <td className="text-silver px-4 py-4 leading-relaxed">
                       <a
                         href="https://www.cloudflare.com/privacypolicy/"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-electric-cyan hover:text-safety-orange transition-colors underline"
+                        className="text-electric-cyan hover:text-safety-orange underline transition-colors"
                       >
                         Cloudflare Privacy Policy
                       </a>
                     </td>
                   </tr>
-                  <tr className="border-b border-electric-cyan/10">
-                    <td className="py-4 px-4 text-silver leading-relaxed">
-                      SendGrid (Twilio)
-                    </td>
-                    <td className="py-4 px-4 text-silver leading-relaxed">
+                  <tr className="border-electric-cyan/10 border-b">
+                    <td className="text-silver px-4 py-4 leading-relaxed">SendGrid (Twilio)</td>
+                    <td className="text-silver px-4 py-4 leading-relaxed">
                       Email address, message content
                     </td>
-                    <td className="py-4 px-4 text-silver leading-relaxed">
+                    <td className="text-silver px-4 py-4 leading-relaxed">
                       Per SendGrid&apos;s policy
                     </td>
-                    <td className="py-4 px-4 text-silver leading-relaxed">
+                    <td className="text-silver px-4 py-4 leading-relaxed">
                       <a
                         href="https://www.twilio.com/legal/privacy"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-electric-cyan hover:text-safety-orange transition-colors underline"
+                        className="text-electric-cyan hover:text-safety-orange underline transition-colors"
                       >
                         Twilio Privacy Policy
                       </a>
                     </td>
                   </tr>
-                  <tr className="border-b border-electric-cyan/10">
-                    <td className="py-4 px-4 text-silver leading-relaxed">
-                      GitHub API
-                    </td>
-                    <td className="py-4 px-4 text-silver leading-relaxed">
+                  <tr className="border-electric-cyan/10 border-b">
+                    <td className="text-silver px-4 py-4 leading-relaxed">GitHub API</td>
+                    <td className="text-silver px-4 py-4 leading-relaxed">
                       Public repository data
                     </td>
-                    <td className="py-4 px-4 text-silver leading-relaxed">
+                    <td className="text-silver px-4 py-4 leading-relaxed">
                       1 hour cache, then refreshed
                     </td>
-                    <td className="py-4 px-4 text-silver leading-relaxed">
+                    <td className="text-silver px-4 py-4 leading-relaxed">
                       <a
                         href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-electric-cyan hover:text-safety-orange transition-colors underline"
+                        className="text-electric-cyan hover:text-safety-orange underline transition-colors"
                       >
                         GitHub Privacy Policy
                       </a>
                     </td>
                   </tr>
-                  <tr className="border-b border-electric-cyan/10">
-                    <td className="py-4 px-4 text-silver leading-relaxed">
+                  <tr className="border-electric-cyan/10 border-b">
+                    <td className="text-silver px-4 py-4 leading-relaxed">
                       Contact Form (My Site)
                     </td>
-                    <td className="py-4 px-4 text-silver leading-relaxed">
-                      Name, email, message
-                    </td>
-                    <td className="py-4 px-4 text-silver leading-relaxed">
+                    <td className="text-silver px-4 py-4 leading-relaxed">Name, email, message</td>
+                    <td className="text-silver px-4 py-4 leading-relaxed">
                       Stored in email inbox indefinitely
                     </td>
-                    <td className="py-4 px-4 text-silver leading-relaxed">
+                    <td className="text-silver px-4 py-4 leading-relaxed">
                       N/A (Contact me to request deletion)
                     </td>
                   </tr>
                   <tr>
-                    <td className="py-4 px-4 text-silver leading-relaxed">
-                      Server Logs
-                    </td>
-                    <td className="py-4 px-4 text-silver leading-relaxed">
+                    <td className="text-silver px-4 py-4 leading-relaxed">Server Logs</td>
+                    <td className="text-silver px-4 py-4 leading-relaxed">
                       Access logs, IP addresses
                     </td>
-                    <td className="py-4 px-4 text-silver leading-relaxed">
+                    <td className="text-silver px-4 py-4 leading-relaxed">
                       Per Vercel and Cloudflare policies
                     </td>
-                    <td className="py-4 px-4 text-silver leading-relaxed">
+                    <td className="text-silver px-4 py-4 leading-relaxed">
                       <a
                         href="https://vercel.com/legal/privacy-policy"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-electric-cyan hover:text-safety-orange transition-colors underline"
+                        className="text-electric-cyan hover:text-safety-orange underline transition-colors"
                       >
                         Vercel
                       </a>
@@ -354,7 +301,7 @@ export default function PrivacyPage(): JSX.Element {
                         href="https://www.cloudflare.com/privacypolicy/"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-electric-cyan hover:text-safety-orange transition-colors underline"
+                        className="text-electric-cyan hover:text-safety-orange underline transition-colors"
                       >
                         Cloudflare
                       </a>
@@ -369,17 +316,15 @@ export default function PrivacyPage(): JSX.Element {
 
       {/* Your Rights */}
       <PrivacySection title="Your Rights">
-        <p className="text-silver leading-relaxed mb-4">
+        <p className="text-silver mb-4 leading-relaxed">
           You have the following rights regarding your personal data:
         </p>
 
-        <h3 className="text-lg md:text-xl font-semibold mb-3 text-silver">
-          Data I Control
-        </h3>
-        <p className="text-silver leading-relaxed mb-4">
+        <h3 className="text-silver mb-3 text-lg font-semibold md:text-xl">Data I Control</h3>
+        <p className="text-silver mb-4 leading-relaxed">
           For data I directly collect and control (contact form submissions):
         </p>
-        <ul className="list-disc list-inside text-silver space-y-2 mb-6 ml-4">
+        <ul className="text-silver mb-6 ml-4 list-inside list-disc space-y-2">
           <li>Request access to your personal data</li>
           <li>Request correction of inaccurate data</li>
           <li>Request deletion of your data</li>
@@ -387,77 +332,63 @@ export default function PrivacyPage(): JSX.Element {
           <li>Request data portability</li>
         </ul>
 
-        <h3 className="text-lg md:text-xl font-semibold mb-3 text-silver">
-          Third-Party Services
-        </h3>
-        <p className="text-silver leading-relaxed mb-4">
-          For data processed by third-party services (analytics, email,
-          hosting), you&apos;ll need to contact those services directly:
+        <h3 className="text-silver mb-3 text-lg font-semibold md:text-xl">Third-Party Services</h3>
+        <p className="text-silver mb-4 leading-relaxed">
+          For data processed by third-party services (analytics, email, hosting), you&apos;ll need
+          to contact those services directly:
         </p>
-        <ul className="list-disc list-inside text-silver space-y-2 ml-4">
+        <ul className="text-silver ml-4 list-inside list-disc space-y-2">
           <li>
-            <strong>Analytics Data:</strong> Contact Vercel or Cloudflare
-            directly for data access/deletion requests
+            <strong>Analytics Data:</strong> Contact Vercel or Cloudflare directly for data
+            access/deletion requests
           </li>
           <li>
-            <strong>Email Data:</strong> Contact SendGrid for email-related data
-            requests
+            <strong>Email Data:</strong> Contact SendGrid for email-related data requests
           </li>
           <li>
-            <strong>Cloudflare Turnstile Data:</strong> Contact Cloudflare for
-            data requests
+            <strong>Cloudflare Turnstile Data:</strong> Contact Cloudflare for data requests
           </li>
           <li>
-            <strong>GitHub Data:</strong> Contact GitHub directly for repository
-            data requests
+            <strong>GitHub Data:</strong> Contact GitHub directly for repository data requests
           </li>
         </ul>
       </PrivacySection>
 
       {/* Cookies */}
       <PrivacySection title="Cookies">
-        <p className="text-silver leading-relaxed mb-4">
-          My website does not use cookies for analytics or advertising. However,
-          a single strictly necessary cookie may be set by our security
-          provider:
+        <p className="text-silver mb-4 leading-relaxed">
+          My website does not use cookies for analytics or advertising. However, a single strictly
+          necessary cookie may be set by our security provider:
         </p>
 
-        <h3 className="text-lg md:text-xl font-semibold mb-3 text-silver">
+        <h3 className="text-silver mb-3 text-lg font-semibold md:text-xl">
           Cloudflare Security Cookie
         </h3>
-        <p className="text-silver leading-relaxed mb-4">
-          Cloudflare Turnstile (my bot protection service) may set a cookie
-          named <code className="text-electric-cyan">__cf_bm</code> to help
-          distinguish between human visitors and automated traffic. This cookie
-          is:
+        <p className="text-silver mb-4 leading-relaxed">
+          Cloudflare Turnstile (my bot protection service) may set a cookie named{' '}
+          <code className="text-electric-cyan">__cf_bm</code> to help distinguish between human
+          visitors and automated traffic. This cookie is:
         </p>
-        <ul className="list-disc list-inside text-silver space-y-2 mb-6 ml-4">
+        <ul className="text-silver mb-6 ml-4 list-inside list-disc space-y-2">
           <li>
-            <strong>Strictly necessary</strong> for protecting my contact form
-            from spam and abuse
+            <strong>Strictly necessary</strong> for protecting my contact form from spam and abuse
           </li>
           <li>
-            <strong>Exempt from consent requirements</strong> under privacy
-            regulations (ePrivacy Directive, GDPR)
+            <strong>Exempt from consent requirements</strong> under privacy regulations (ePrivacy
+            Directive, GDPR)
           </li>
           <li>
             <strong>Short-lived</strong> and expires after a brief period
           </li>
           <li>
-            <strong>Security-focused</strong> and does not track users across
-            websites
+            <strong>Security-focused</strong> and does not track users across websites
           </li>
         </ul>
 
-        <h3 className="text-lg md:text-xl font-semibold mb-3 text-silver">
-          What I Don&apos;t Use
-        </h3>
-        <ul className="list-disc list-inside text-silver space-y-2 ml-4">
+        <h3 className="text-silver mb-3 text-lg font-semibold md:text-xl">What I Don&apos;t Use</h3>
+        <ul className="text-silver ml-4 list-inside list-disc space-y-2">
           <li>No tracking cookies or third-party advertising cookies</li>
-          <li>
-            No analytics cookies (Vercel and Cloudflare analytics are
-            cookie-free)
-          </li>
+          <li>No analytics cookies (Vercel and Cloudflare analytics are cookie-free)</li>
           <li>No social media tracking pixels</li>
           <li>No persistent user identification cookies</li>
         </ul>
@@ -465,42 +396,38 @@ export default function PrivacyPage(): JSX.Element {
 
       {/* Security */}
       <PrivacySection title="Security">
-        <p className="text-silver leading-relaxed mb-4">
-          I implement comprehensive security measures to protect your personal
-          information:
+        <p className="text-silver mb-4 leading-relaxed">
+          I implement comprehensive security measures to protect your personal information:
         </p>
 
-        <h3 className="text-lg md:text-xl font-semibold mb-3 text-silver">
+        <h3 className="text-silver mb-3 text-lg font-semibold md:text-xl">
           Technical Security Measures
         </h3>
-        <ul className="list-disc list-inside text-silver space-y-2 mb-6 ml-4">
+        <ul className="text-silver mb-6 ml-4 list-inside list-disc space-y-2">
           <li>
-            <strong>HTTPS Everywhere:</strong> All data transmission is
-            encrypted using TLS/SSL with HSTS headers
+            <strong>HTTPS Everywhere:</strong> All data transmission is encrypted using TLS/SSL with
+            HSTS headers
           </li>
           <li>
-            <strong>Content Security Policy (CSP):</strong> Strict CSP headers
-            prevent XSS attacks and unauthorized script execution
+            <strong>Content Security Policy (CSP):</strong> Strict CSP headers prevent XSS attacks
+            and unauthorized script execution
           </li>
           <li>
-            <strong>Input Sanitization:</strong> All user inputs are sanitized
-            using multiple layers of XSS protection
+            <strong>Input Sanitization:</strong> All user inputs are sanitized using multiple layers
+            of XSS protection
           </li>
           <li>
-            <strong>Security Headers:</strong> X-Frame-Options,
-            X-Content-Type-Options, and other security headers protect against
-            common attacks
+            <strong>Security Headers:</strong> X-Frame-Options, X-Content-Type-Options, and other
+            security headers protect against common attacks
           </li>
           <li>
-            <strong>Bot Protection:</strong> Cloudflare Turnstile prevents
-            automated attacks and spam
+            <strong>Bot Protection:</strong> Cloudflare Turnstile prevents automated attacks and
+            spam
           </li>
         </ul>
 
-        <h3 className="text-lg md:text-xl font-semibold mb-3 text-silver">
-          Data Protection
-        </h3>
-        <ul className="list-disc list-inside text-silver space-y-2 mb-4 ml-4">
+        <h3 className="text-silver mb-3 text-lg font-semibold md:text-xl">Data Protection</h3>
+        <ul className="text-silver mb-4 ml-4 list-inside list-disc space-y-2">
           <li>Contact form data is processed server-side only</li>
           <li>No client-side storage of personal information</li>
           <li>Environment variables are validated using Zod schemas</li>
@@ -508,67 +435,65 @@ export default function PrivacyPage(): JSX.Element {
         </ul>
 
         <p className="text-silver leading-relaxed">
-          While I implement these security measures, no method of transmission
-          over the internet is 100% secure. I cannot guarantee absolute security
-          but strive to use industry best practices.
+          While I implement these security measures, no method of transmission over the internet is
+          100% secure. I cannot guarantee absolute security but strive to use industry best
+          practices.
         </p>
       </PrivacySection>
 
       {/* International Data Transfers */}
       <PrivacySection title="International Data Transfers">
-        <p className="text-silver leading-relaxed mb-4">
-          My website uses third-party services that may process your data in
-          countries outside your own, including the United States and European
-          Union. These international data transfers are necessary to provide the
-          services described in this policy.
+        <p className="text-silver mb-4 leading-relaxed">
+          My website uses third-party services that may process your data in countries outside your
+          own, including the United States and European Union. These international data transfers
+          are necessary to provide the services described in this policy.
         </p>
 
-        <h3 className="text-lg md:text-xl font-semibold mb-3 text-silver">
+        <h3 className="text-silver mb-3 text-lg font-semibold md:text-xl">
           Data Protection Safeguards
         </h3>
-        <p className="text-silver leading-relaxed mb-4">
-          All third-party services I use maintain appropriate safeguards for
-          international data transfers:
+        <p className="text-silver mb-4 leading-relaxed">
+          All third-party services I use maintain appropriate safeguards for international data
+          transfers:
         </p>
-        <ul className="list-disc list-inside text-silver space-y-2 mb-4 ml-4">
+        <ul className="text-silver mb-4 ml-4 list-inside list-disc space-y-2">
           <li>
-            <strong>Vercel:</strong> Uses Standard Contractual Clauses (SCCs)
-            approved by the European Commission for GDPR compliance
+            <strong>Vercel:</strong> Uses Standard Contractual Clauses (SCCs) approved by the
+            European Commission for GDPR compliance
           </li>
           <li>
-            <strong>Cloudflare:</strong> Operates globally with data processing
-            agreements and SCCs for GDPR compliance
+            <strong>Cloudflare:</strong> Operates globally with data processing agreements and SCCs
+            for GDPR compliance
           </li>
           <li>
-            <strong>SendGrid (Twilio):</strong> Maintains GDPR compliance
-            through SCCs and Privacy Shield frameworks
+            <strong>SendGrid (Twilio):</strong> Maintains GDPR compliance through SCCs and Privacy
+            Shield frameworks
           </li>
         </ul>
         <p className="text-silver leading-relaxed">
-          These safeguards ensure that your data receives the same level of
-          protection regardless of where it is processed. For more details about
-          how each service handles international transfers, please refer to the
-          Privacy Policy links in the Data Retention table above.
+          These safeguards ensure that your data receives the same level of protection regardless of
+          where it is processed. For more details about how each service handles international
+          transfers, please refer to the Privacy Policy links in the Data Retention table above.
         </p>
       </PrivacySection>
 
       {/* Changes to This Policy */}
       <PrivacySection title="Changes to This Policy">
         <p className="text-silver leading-relaxed">
-          I may update this Privacy Policy from time to time. I will notify you
-          of any changes by posting the new Privacy Policy on this page and
-          updating the &quot;Last updated&quot; date.
+          I may update this Privacy Policy from time to time. I will notify you of any changes by
+          posting the new Privacy Policy on this page and updating the &quot;Last updated&quot;
+          date.
         </p>
       </PrivacySection>
 
       {/* Contact Me */}
       <PrivacySection title="Contact Me" hasBorder={false}>
         <p className="text-silver leading-relaxed">
-          If you have any questions about this Privacy Policy or wish to
-          exercise your rights, please contact me through my{' '}
+          If you have any questions about this Privacy Policy or wish to exercise your rights,
+          please contact me through my{' '}
           <a
             href="/contact"
-            className="text-electric-cyan hover:text-safety-orange transition-colors underline"
+            className="text-electric-cyan hover:text-safety-orange underline transition-colors"
           >
             contact form
           </a>{' '}

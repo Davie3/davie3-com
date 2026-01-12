@@ -20,9 +20,7 @@ const clientSchema = z.object({
     .string()
     .min(1, 'NEXT_PUBLIC_TURNSTILE_SITE_KEY is required for production'),
   NEXT_PUBLIC_ENABLE_ANALYTICS: z.string().optional(),
-  NEXT_PUBLIC_VERCEL_ENV: z
-    .enum(['production', 'preview', 'development'])
-    .optional(),
+  NEXT_PUBLIC_VERCEL_ENV: z.enum(['production', 'preview', 'development']).optional(),
 });
 
 /**
@@ -51,8 +49,7 @@ const validatedProcessEnv = process.env as unknown as ClientParsedEnv;
  * Next.js inlines these values at build time by detecting direct process.env access
  */
 export const env = {
-  NEXT_PUBLIC_TURNSTILE_SITE_KEY:
-    validatedProcessEnv.NEXT_PUBLIC_TURNSTILE_SITE_KEY,
+  NEXT_PUBLIC_TURNSTILE_SITE_KEY: validatedProcessEnv.NEXT_PUBLIC_TURNSTILE_SITE_KEY,
 
   NEXT_PUBLIC_ENABLE_ANALYTICS:
     validatedProcessEnv.NEXT_PUBLIC_ENABLE_ANALYTICS === 'true' ||

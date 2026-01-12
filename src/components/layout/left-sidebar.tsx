@@ -13,7 +13,7 @@ export function LeftSidebar(): JSX.Element {
 
   return (
     <motion.aside
-      className="hidden md:flex flex-col items-center fixed bottom-0 left-10 w-10 z-40"
+      className="fixed bottom-0 left-10 z-40 hidden w-10 flex-col items-center md:flex"
       initial={{ opacity: 0, x: shouldReduceMotion ? 0 : -20 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{
@@ -29,17 +29,14 @@ export function LeftSidebar(): JSX.Element {
             href={link.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-muted-foreground transition-transform duration-300 hover:text-primary hover:-translate-y-1"
+            className="text-muted-foreground hover:text-primary transition-transform duration-300 hover:-translate-y-1"
             aria-label={link.name}
           >
             {getSocialIcon(link.iconName, 20)}
           </a>
         ))}
       </div>
-      <div
-        className="mt-6 h-24 w-px bg-[color:var(--color-slate-dark)]"
-        aria-hidden="true"
-      ></div>
+      <div className="mt-6 h-24 w-px bg-[color:var(--color-slate-dark)]" aria-hidden="true"></div>
     </motion.aside>
   );
 }

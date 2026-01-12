@@ -19,19 +19,7 @@ type FormFieldProps = {
 } & React.HTMLAttributes<HTMLDivElement>;
 
 export const FormField = forwardRef<HTMLDivElement, FormFieldProps>(
-  (
-    {
-      label,
-      name,
-      error,
-      required = false,
-      helperText,
-      className,
-      children,
-      ...props
-    },
-    ref,
-  ) => {
+  ({ label, name, error, required = false, helperText, className, children, ...props }, ref) => {
     return (
       <div ref={ref} className={cn('space-y-2', className)} {...props}>
         <Label
@@ -48,7 +36,7 @@ export const FormField = forwardRef<HTMLDivElement, FormFieldProps>(
         {error && (
           <p
             id={`${name}-error`}
-            className="text-sm text-safety-orange font-medium animate-[slideIn_0.2s_ease-out]"
+            className="text-safety-orange animate-[slideIn_0.2s_ease-out] text-sm font-medium"
             role="alert"
           >
             {error}

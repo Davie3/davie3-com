@@ -9,10 +9,7 @@ import { PAGE_STAGGER_DELAYS } from '@/constants/config/animation-config';
 import { EXTERNAL_API } from '@/constants/config/external-api-config';
 import { GITHUB_CONFIG } from '@/constants/config/github-config';
 import { PAGE_METADATA } from '@/constants/config/site-metadata';
-import {
-  PORTFOLIO_PAGE,
-  PORTFOLIO_CONTENT,
-} from '@/constants/pages/portfolio-page';
+import { PORTFOLIO_PAGE, PORTFOLIO_CONTENT } from '@/constants/pages/portfolio-page';
 import { GITHUB_REPO_SCHEMA } from '@/types/api-types';
 
 import type { GitHubRepo } from '@/types/api-types';
@@ -86,12 +83,12 @@ export default async function PortfolioPage(): Promise<JSX.Element> {
               headingLevel="h1"
               className="mb-3"
             />
-            <p className="text-xl text-electric-cyan font-semibold mb-4">
+            <p className="text-electric-cyan mb-4 text-xl font-semibold">
               {PORTFOLIO_CONTENT.HERO_SUBTITLE}
             </p>
           </div>
 
-          <p className="text-lg md:text-xl leading-relaxed text-silver max-w-3xl">
+          <p className="text-silver max-w-3xl text-lg leading-relaxed md:text-xl">
             {PORTFOLIO_CONTENT.PAGE_INTRO}
           </p>
         </div>
@@ -105,7 +102,7 @@ export default async function PortfolioPage(): Promise<JSX.Element> {
         className="mb-12"
       >
         {projects.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
             {projects.map((project, index) => (
               <Link
                 key={project.name}
@@ -117,34 +114,31 @@ export default async function PortfolioPage(): Promise<JSX.Element> {
                   animationDelay: `${(index * PAGE_STAGGER_DELAYS.PORTFOLIO_REPOS).toString()}ms`,
                 }}
               >
-                <Card className="h-full p-4 hover:shadow-md hover:border-electric-cyan">
+                <Card className="hover:border-electric-cyan h-full p-4 hover:shadow-md">
                   {/* Project header */}
                   <div className="mb-2">
-                    <h3 className="text-lg md:text-xl font-display text-cream group-hover:text-electric-cyan transition-colors duration-300 leading-tight mb-2">
+                    <h3 className="font-display text-cream group-hover:text-electric-cyan mb-2 text-lg leading-tight transition-colors duration-300 md:text-xl">
                       {project.name}
                     </h3>
-                    <p className="text-silver leading-snug text-md">
-                      {project.description ??
-                        PORTFOLIO_PAGE.PROJECT_NO_DESCRIPTION}
+                    <p className="text-silver text-md leading-snug">
+                      {project.description ?? PORTFOLIO_PAGE.PROJECT_NO_DESCRIPTION}
                     </p>
                   </div>
 
                   {/* Language badge */}
                   {project.language && (
                     <div className="mb-3">
-                      <span className="inline-block px-2 py-0.5 bg-safety-orange/10 border border-safety-orange/30 text-safety-orange text-xs font-bold tracking-wide uppercase rounded-full">
+                      <span className="bg-safety-orange/10 border-safety-orange/30 text-safety-orange inline-block rounded-full border px-2 py-0.5 text-xs font-bold tracking-wide uppercase">
                         {project.language}
                       </span>
                     </div>
                   )}
 
                   {/* Project footer - stats */}
-                  <div className="flex items-center gap-3 pt-3 border-t border-electric-cyan/10 text-xs text-silver">
+                  <div className="border-electric-cyan/10 text-silver flex items-center gap-3 border-t pt-3 text-xs">
                     <div className="flex items-center gap-1">
                       <Star size={14} className="text-electric-cyan" />
-                      <span className="font-medium">
-                        {project.stargazers_count}
-                      </span>
+                      <span className="font-medium">{project.stargazers_count}</span>
                     </div>
                     <div className="flex items-center gap-1">
                       <GitFork size={14} className="text-safety-orange" />
@@ -156,16 +150,14 @@ export default async function PortfolioPage(): Promise<JSX.Element> {
             ))}
           </div>
         ) : (
-          <div className=" p-12 text-center border-2 border-electric-cyan/20 bg-navy-accent/20">
-            <div className="w-20 h-20 bg-safety-orange/20 border-4 border-safety-orange flex items-center justify-center mx-auto mb-4">
+          <div className="border-electric-cyan/20 bg-navy-accent/20 border-2 p-12 text-center">
+            <div className="bg-safety-orange/20 border-safety-orange mx-auto mb-4 flex h-20 w-20 items-center justify-center border-4">
               <span className="text-3xl">🔧</span>
             </div>
-            <h3 className="text-2xl font-display text-cream mb-2">
+            <h3 className="font-display text-cream mb-2 text-2xl">
               {PORTFOLIO_PAGE.EMPTY_STATE_HEADING}
             </h3>
-            <p className="text-silver text-lg">
-              {PORTFOLIO_PAGE.EMPTY_STATE_MESSAGE}
-            </p>
+            <p className="text-silver text-lg">{PORTFOLIO_PAGE.EMPTY_STATE_MESSAGE}</p>
           </div>
         )}
 
@@ -175,10 +167,10 @@ export default async function PortfolioPage(): Promise<JSX.Element> {
             href="https://github.com/davie3"
             target="_blank"
             rel="noopener noreferrer"
-            className="group inline-flex items-center gap-3 px-8 py-4 bg-electric-cyan text-navy font-semibold text-lg transition-all duration-300 hover:bg-safety-orange hover:scale-105 active:scale-95"
+            className="group bg-electric-cyan text-navy hover:bg-safety-orange inline-flex items-center gap-3 px-8 py-4 text-lg font-semibold transition-all duration-300 hover:scale-105 active:scale-95"
           >
             <span>{PORTFOLIO_PAGE.VIEW_ALL_BUTTON}</span>
-            <ExternalLink className="w-5 h-5 transition-transform duration-300 group-hover:scale-110" />
+            <ExternalLink className="h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
           </Link>
         </div>
       </BorderedSection>

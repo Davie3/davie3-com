@@ -17,15 +17,8 @@ export function PrivacySection({
 }: PrivacySectionProps) {
   return (
     <section className={cn('mb-12', className)}>
-      <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-cream mb-6">
-        {title}
-      </h2>
-      <div
-        className={cn(
-          'space-y-6',
-          hasBorder && 'border-l-4 border-safety-orange pl-8',
-        )}
-      >
+      <h2 className="font-display text-cream mb-6 text-4xl md:text-5xl lg:text-6xl">{title}</h2>
+      <div className={cn('space-y-6', hasBorder && 'border-safety-orange border-l-4 pl-8')}>
         {children}
       </div>
     </section>

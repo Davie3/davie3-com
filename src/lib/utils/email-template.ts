@@ -8,13 +8,8 @@ import type { ContactFormTemplateData } from '@/types/email-types';
 /**
  * Renders the contact form email template with provided data.
  */
-export const renderContactFormTemplate = (
-  data: ContactFormTemplateData,
-): string => {
-  const templatePath = join(
-    process.cwd(),
-    'src/templates/email/contact-form.html',
-  );
+export const renderContactFormTemplate = (data: ContactFormTemplateData): string => {
+  const templatePath = join(process.cwd(), 'src/templates/email/contact-form.html');
   const template = readFileSync(templatePath, 'utf-8');
 
   // Convert newlines to HTML breaks for proper email display
@@ -31,9 +26,7 @@ export const renderContactFormTemplate = (
 /**
  * Generates the contact form email text version.
  */
-export const generateContactFormText = (
-  data: ContactFormTemplateData,
-): string => {
+export const generateContactFormText = (data: ContactFormTemplateData): string => {
   const { TEXT_TEMPLATE } = EMAIL_CONFIG.CONTACT_FORM;
 
   return `

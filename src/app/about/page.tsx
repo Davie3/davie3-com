@@ -5,12 +5,7 @@ import { SectionHeader } from '@/components/ui/section-header';
 import { PAGE_STAGGER_DELAYS } from '@/constants/config/animation-config';
 import { PAGE_METADATA } from '@/constants/config/site-metadata';
 import { SOCIAL_LINKS_DATA } from '@/constants/config/social-config';
-import {
-  EXPERIENCES,
-  EDUCATION,
-  ABOUT_CONTENT,
-  SKILLS,
-} from '@/constants/pages/about-page';
+import { EXPERIENCES, EDUCATION, ABOUT_CONTENT, SKILLS } from '@/constants/pages/about-page';
 import { getSocialIcon } from '@/utils/social-icons';
 
 import type { Metadata } from 'next';
@@ -29,24 +24,24 @@ export default function AboutPage(): JSX.Element {
     <main className="container mx-auto max-w-6xl px-4 py-16">
       {/* Hero Section - Editorial style */}
       <section className="relative mb-24">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+        <div className="mb-12 grid grid-cols-1 gap-8 md:grid-cols-3">
           {/* Left - Image */}
           <div className="md:col-span-1">
             <div className="relative">
-              <div className="absolute -inset-2 bg-electric-cyan/10 transform rotate-2" />
+              <div className="bg-electric-cyan/10 absolute -inset-2 rotate-2 transform" />
               <Image
                 src="/images/profile_square.webp"
                 alt="David Griffin"
                 width={300}
                 height={300}
-                className="relative z-10 w-full border-2 border-electric-cyan/30 shadow-lg"
+                className="border-electric-cyan/30 relative z-10 w-full border-2 shadow-lg"
                 sizes="(max-width: 768px) 100vw, 300px"
               />
             </div>
           </div>
 
           {/* Right - Title and intro */}
-          <div className="md:col-span-2 space-y-6">
+          <div className="space-y-6 md:col-span-2">
             <div>
               <SectionHeader
                 label="About"
@@ -54,12 +49,12 @@ export default function AboutPage(): JSX.Element {
                 headingLevel="h1"
                 className="mb-2"
               />
-              <p className="text-xl text-electric-cyan font-semibold">
+              <p className="text-electric-cyan text-xl font-semibold">
                 {ABOUT_CONTENT.HERO_SUBTITLE}
               </p>
             </div>
 
-            <p className="text-lg md:text-xl leading-relaxed text-silver">
+            <p className="text-silver text-lg leading-relaxed md:text-xl">
               {ABOUT_CONTENT.CAREER_JOURNEY}
             </p>
 
@@ -71,7 +66,7 @@ export default function AboutPage(): JSX.Element {
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-4 py-2 border border-electric-cyan/30 text-cream hover:border-electric-cyan hover:text-electric-cyan transition-all duration-300"
+                  className="border-electric-cyan/30 text-cream hover:border-electric-cyan hover:text-electric-cyan flex items-center gap-2 border px-4 py-2 transition-all duration-300"
                 >
                   {getSocialIcon(link.iconName, 18)}
                   <span className="text-sm font-medium">{link.name}</span>
@@ -83,19 +78,14 @@ export default function AboutPage(): JSX.Element {
       </section>
 
       {/* Skills Section - Tag cloud style */}
-      <BorderedSection
-        label="Skills"
-        heading="Technologies"
-        headingLevel="h2"
-        className="mb-24"
-      >
+      <BorderedSection label="Skills" heading="Technologies" headingLevel="h2" className="mb-24">
         <p className="text-silver mb-8">{ABOUT_CONTENT.SKILLS_SUBTITLE}</p>
 
         <div className="flex flex-wrap gap-3">
           {SKILLS.map((skill, index) => (
             <span
               key={skill}
-              className="px-4 py-2 bg-navy-accent/50 border border-electric-cyan/20 text-cream hover:border-electric-cyan hover:text-electric-cyan transition-all duration-300 text-sm md:text-base font-medium"
+              className="bg-navy-accent/50 border-electric-cyan/20 text-cream hover:border-electric-cyan hover:text-electric-cyan border px-4 py-2 text-sm font-medium transition-all duration-300 md:text-base"
               style={{
                 animationDelay: `${(index * PAGE_STAGGER_DELAYS.ABOUT_SKILLS).toString()}ms`,
               }}
@@ -109,11 +99,11 @@ export default function AboutPage(): JSX.Element {
       {/* Experience Section - Timeline style */}
       <section id="experience" className="mb-24">
         <div className="mb-12">
-          <div className="flex items-center gap-3 mb-3">
-            <div className="h-px w-12 bg-safety-orange" />
+          <div className="mb-3 flex items-center gap-3">
+            <div className="bg-safety-orange h-px w-12" />
             <span className="section-label">Experience</span>
           </div>
-          <h2 className="font-display text-3xl md:text-4xl leading-tight text-cream mb-2">
+          <h2 className="font-display text-cream mb-2 text-3xl leading-tight md:text-4xl">
             Work History
           </h2>
           <p className="text-silver">{ABOUT_CONTENT.EXPERIENCE_SUBTITLE}</p>
@@ -123,26 +113,22 @@ export default function AboutPage(): JSX.Element {
           {EXPERIENCES.map((exp) => (
             <div
               key={`${exp.company}-${exp.role}-${exp.period}`}
-              className="relative pl-8 border-l-4 border-electric-cyan/30"
+              className="border-electric-cyan/30 relative border-l-4 pl-8"
             >
               {/* Timeline dot */}
-              <div className="absolute -left-[10px] top-0 w-4 h-4 bg-safety-orange rounded-full border-4 border-navy" />
+              <div className="bg-safety-orange border-navy absolute top-0 -left-[10px] h-4 w-4 rounded-full border-4" />
 
               <div className="space-y-3">
                 <div>
-                  <span className="inline-block px-3 py-1 bg-navy-accent/50 border border-electric-cyan/20 text-silver text-sm mb-3">
+                  <span className="bg-navy-accent/50 border-electric-cyan/20 text-silver mb-3 inline-block border px-3 py-1 text-sm">
                     {exp.period}
                   </span>
-                  <h3 className="text-2xl md:text-3xl font-display text-cream leading-tight">
+                  <h3 className="font-display text-cream text-2xl leading-tight md:text-3xl">
                     {exp.role}
                   </h3>
-                  <p className="text-electric-cyan font-semibold text-lg mt-1">
-                    {exp.company}
-                  </p>
+                  <p className="text-electric-cyan mt-1 text-lg font-semibold">{exp.company}</p>
                 </div>
-                <p className="text-silver leading-relaxed text-lg">
-                  {exp.description}
-                </p>
+                <p className="text-silver text-lg leading-relaxed">{exp.description}</p>
               </div>
             </div>
           ))}
@@ -150,33 +136,27 @@ export default function AboutPage(): JSX.Element {
       </section>
 
       {/* Education Section */}
-      <BorderedSection
-        label="Education"
-        heading="Academic Background"
-        headingLevel="h2"
-      >
+      <BorderedSection label="Education" heading="Academic Background" headingLevel="h2">
         <p className="text-silver mb-8">{ABOUT_CONTENT.EDUCATION_SUBTITLE}</p>
 
         <div className="space-y-8">
           {EDUCATION.map((edu) => (
             <div key={edu.institution} className="space-y-3">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-safety-orange/20 flex items-center justify-center flex-shrink-0">
+                <div className="bg-safety-orange/20 flex h-12 w-12 flex-shrink-0 items-center justify-center">
                   <span className="text-2xl">{edu.emoji}</span>
                 </div>
                 <div>
-                  <span className="inline-block px-3 py-1 bg-navy-accent/50 border border-electric-cyan/20 text-silver text-sm">
+                  <span className="bg-navy-accent/50 border-electric-cyan/20 text-silver inline-block border px-3 py-1 text-sm">
                     {edu.period}
                   </span>
                 </div>
               </div>
               <div>
-                <h3 className="text-2xl md:text-3xl font-display text-cream leading-tight">
+                <h3 className="font-display text-cream text-2xl leading-tight md:text-3xl">
                   {edu.degree}
                 </h3>
-                <p className="text-electric-cyan font-semibold text-lg mt-1">
-                  {edu.institution}
-                </p>
+                <p className="text-electric-cyan mt-1 text-lg font-semibold">{edu.institution}</p>
               </div>
             </div>
           ))}

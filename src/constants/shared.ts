@@ -71,12 +71,7 @@ export const TECHNOLOGIES = {
   DEVELOPMENT: ['System Development'],
   DEVELOPMENT_EXTENDED: ['System Development Engineering'],
   CONTENT: ['Content Creation', 'YouTube', 'Gaming'],
-  GENERAL: [
-    'Cloud Architecture',
-    'Software Development',
-    'Web Development',
-    'Technology',
-  ],
+  GENERAL: ['Cloud Architecture', 'Software Development', 'Web Development', 'Technology'],
 } as const;
 
 /**
@@ -89,8 +84,7 @@ export const UI_MESSAGES = {
   FORM_SUBMIT: 'Send Message',
 
   ERROR_DEFAULT_TITLE: 'Something went wrong',
-  ERROR_DEFAULT_DESCRIPTION:
-    'An unexpected error occurred. Please try refreshing the page.',
+  ERROR_DEFAULT_DESCRIPTION: 'An unexpected error occurred. Please try refreshing the page.',
   ERROR_BUTTON_REFRESH: 'Refresh Page',
   ERROR_BUTTON_HOME: 'Go Home',
 

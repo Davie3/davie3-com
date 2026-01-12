@@ -27,12 +27,10 @@ export default function ContactPage(): JSX.Element {
             headingLevel="h1"
             className="mb-6"
           />
-          <p className="text-2xl text-electric-cyan font-semibold mb-6">
+          <p className="text-electric-cyan mb-6 text-2xl font-semibold">
             {CONTACT_CONTENT.HERO_SUBTITLE}
           </p>
-          <p className="text-xl leading-relaxed text-silver">
-            {CONTACT_CONTENT.PAGE_INTRO}
-          </p>
+          <p className="text-silver text-xl leading-relaxed">{CONTACT_CONTENT.PAGE_INTRO}</p>
         </div>
       </section>
 
@@ -43,9 +41,7 @@ export default function ContactPage(): JSX.Element {
         headingLevel="h2"
         className="mb-8"
       >
-        <p className="text-silver leading-relaxed mb-8">
-          {CONTACT_CONTENT.FORM_HELP}
-        </p>
+        <p className="text-silver mb-8 leading-relaxed">{CONTACT_CONTENT.FORM_HELP}</p>
         <ContactForm />
       </BorderedSection>
     </main>

@@ -35,7 +35,7 @@ export function BorderedSection({
       )}
     >
       {/* Section label */}
-      <span className="font-accent text-sm tracking-wider uppercase text-silver block mb-2">
+      <span className="font-accent text-silver mb-2 block text-sm tracking-wider uppercase">
         {label}
       </span>
 

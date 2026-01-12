@@ -72,16 +72,16 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${fontVariables} antialiased pt-16 bg-black text-white flex flex-col min-h-screen`}
+        className={`${fontVariables} flex min-h-screen flex-col bg-black pt-16 text-white antialiased`}
       >
         {/* Skip to main content link for keyboard navigation */}
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-blue-accent focus:text-navy focus:rounded-lg focus:font-semibold"
+          className="focus:bg-blue-accent focus:text-navy sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:rounded-lg focus:px-4 focus:py-2 focus:font-semibold"
         >
           Skip to main content
         </a>
-        <div className="flex-1 flex flex-col">
+        <div className="flex flex-1 flex-col">
           <ClientLayout>{children}</ClientLayout>
           <AppFooter />
         </div>

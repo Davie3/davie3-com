@@ -68,10 +68,8 @@ export function ClientMobileNav(): JSX.Element {
                     href={link.href}
                     target={link.openInNewTab ? '_blank' : undefined}
                     rel={link.openInNewTab ? 'noopener noreferrer' : undefined}
-                    className={`text-2xl transition-colors-standard ${
-                      isActive
-                        ? 'text-blue-accent'
-                        : 'text-slate-light hover:text-blue-accent'
+                    className={`transition-colors-standard text-2xl ${
+                      isActive ? 'text-blue-accent' : 'text-slate-light hover:text-blue-accent'
                     }`}
                   >
                     {link.name}
@@ -89,20 +87,20 @@ export function ClientMobileNav(): JSX.Element {
     <div className="md:hidden">
       <button
         onClick={toggleMenu}
-        className="z-50 relative p-2 rounded-lg border-0 bg-transparent cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-accent"
+        className="focus:ring-blue-accent relative z-50 cursor-pointer rounded-lg border-0 bg-transparent p-2 focus:ring-2 focus:outline-none"
         aria-label={isOpen ? 'Close navigation menu' : 'Open navigation menu'}
         aria-expanded={isOpen}
         aria-controls="mobile-menu"
       >
         <div className="flex flex-col gap-1.5">
           <span
-            className={`block w-6 h-0.5 bg-white transition-standard ${isOpen ? 'rotate-45 translate-y-1.5' : ''}`}
+            className={`transition-standard block h-0.5 w-6 bg-white ${isOpen ? 'translate-y-1.5 rotate-45' : ''}`}
           ></span>
           <span
-            className={`block w-6 h-0.5 bg-white transition-standard ${isOpen ? 'opacity-0' : ''}`}
+            className={`transition-standard block h-0.5 w-6 bg-white ${isOpen ? 'opacity-0' : ''}`}
           ></span>
           <span
-            className={`block w-6 h-0.5 bg-white transition-standard ${isOpen ? '-rotate-45 -translate-y-1.5' : ''}`}
+            className={`transition-standard block h-0.5 w-6 bg-white ${isOpen ? '-translate-y-1.5 -rotate-45' : ''}`}
           ></span>
         </div>
       </button>

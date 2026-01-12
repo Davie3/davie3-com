@@ -22,9 +22,9 @@ Enforced via `engines` field in package.json.
 ### Development
 
 ```bash
-npm run dev          # Start dev server with Turbopack
-npm run build        # Full production build (format:check → lint → type-check → build)
-npm run start        # Start production server
+npm run dev   # Start dev server with Turbopack
+npm run build # Full production build (format:check → lint → type-check → build)
+npm run start # Start production server
 ```
 
 ### Code Quality

@@ -13,13 +13,7 @@ type NavLinkProps = {
   className?: string;
 };
 
-export function NavLink({
-  href,
-  children,
-  target,
-  rel,
-  className,
-}: NavLinkProps): JSX.Element {
+export function NavLink({ href, children, target, rel, className }: NavLinkProps): JSX.Element {
   const pathname = usePathname();
   const isActive = pathname === href;
 
@@ -37,7 +31,7 @@ export function NavLink({
     >
       {children}
       {isActive && (
-        <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-blue-accent rounded-full" />
+        <div className="bg-blue-accent absolute bottom-0 left-1/2 h-1 w-1 -translate-x-1/2 transform rounded-full" />
       )}
     </Link>
   );

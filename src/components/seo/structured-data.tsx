@@ -1,11 +1,7 @@
 import Script from 'next/script';
 
 import { SEO_DATA } from '@/constants/config/seo-config';
-import {
-  PERSONAL_INFO,
-  PAGE_DESCRIPTIONS,
-  PROFESSIONAL_TITLES,
-} from '@/constants/shared';
+import { PERSONAL_INFO, PAGE_DESCRIPTIONS, PROFESSIONAL_TITLES } from '@/constants/shared';
 import { EXTERNAL_URLS, ALL_PLATFORMS } from '@/constants/urls';
 
 import type { JSX } from 'react';
@@ -29,8 +25,7 @@ export function StructuredData({
   const baseStructuredData = {
     '@context': 'https://schema.org',
     '@type': pageType === 'person' ? 'Person' : 'WebSite',
-    name:
-      title ?? `${PERSONAL_INFO.FULL_NAME} - ${PROFESSIONAL_TITLES.CURRENT}`,
+    name: title ?? `${PERSONAL_INFO.FULL_NAME} - ${PROFESSIONAL_TITLES.CURRENT}`,
     description: description ?? PAGE_DESCRIPTIONS.SEO_DESCRIPTION,
     url,
     author: {
@@ -58,8 +53,7 @@ export function StructuredData({
     sameAs: ALL_PLATFORMS,
   };
 
-  const structuredData =
-    pageType === 'person' ? personStructuredData : baseStructuredData;
+  const structuredData = pageType === 'person' ? personStructuredData : baseStructuredData;
 
   return (
     <Script

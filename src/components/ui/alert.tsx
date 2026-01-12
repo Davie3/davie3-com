@@ -1,12 +1,6 @@
 'use client';
 
-import {
-  AlertCircle,
-  CheckCircle2,
-  Info,
-  AlertTriangle,
-  X,
-} from 'lucide-react';
+import { AlertCircle, CheckCircle2, Info, AlertTriangle, X } from 'lucide-react';
 import { forwardRef, useState } from 'react';
 
 import { cn } from '@/lib/utils/class-utils';
@@ -23,17 +17,7 @@ type AlertProps = {
 } & React.HTMLAttributes<HTMLDivElement>;
 
 export const Alert = forwardRef<HTMLDivElement, AlertProps>(
-  (
-    {
-      variant = 'info',
-      dismissible = false,
-      onDismiss,
-      className,
-      children,
-      ...props
-    },
-    ref,
-  ) => {
+  ({ variant = 'info', dismissible = false, onDismiss, className, children, ...props }, ref) => {
     const [isVisible, setIsVisible] = useState(true);
 
     const handleDismiss = () => {
@@ -58,29 +42,25 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
         role="alert"
         className={cn(
           // Base styles
-          'relative p-4 rounded-lg border-2',
+          'relative rounded-lg border-2 p-4',
           'flex items-start gap-3',
           'animate-[slideIn_0.3s_ease-out]',
 
           // Variant styles
-          variant === 'success' &&
-            cn('bg-electric-cyan/10 border-electric-cyan/30', 'text-cream'),
-          variant === 'error' &&
-            cn('bg-safety-orange/10 border-safety-orange/50', 'text-cream'),
-          variant === 'warning' &&
-            cn('bg-safety-orange/5 border-safety-orange/30', 'text-silver'),
-          variant === 'info' &&
-            cn('bg-navy-accent/60 border-electric-cyan/20', 'text-silver'),
+          variant === 'success' && cn('bg-electric-cyan/10 border-electric-cyan/30', 'text-cream'),
+          variant === 'error' && cn('bg-safety-orange/10 border-safety-orange/50', 'text-cream'),
+          variant === 'warning' && cn('bg-safety-orange/5 border-safety-orange/30', 'text-silver'),
+          variant === 'info' && cn('bg-navy-accent/60 border-electric-cyan/20', 'text-silver'),
 
           className,
         )}
         {...props}
       >
         {/* Icon */}
-        <div className="flex-shrink-0 mt-0.5">
+        <div className="mt-0.5 flex-shrink-0">
           <Icon
             className={cn(
-              'w-5 h-5',
+              'h-5 w-5',
               variant === 'success' && 'text-electric-cyan',
               variant === 'error' && 'text-safety-orange',
               variant === 'warning' && 'text-safety-orange',
@@ -90,17 +70,15 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
         </div>
 
         {/* Content */}
-        <div className="flex-1 text-sm font-medium leading-relaxed">
-          {children}
-        </div>
+        <div className="flex-1 text-sm leading-relaxed font-medium">{children}</div>
 
         {/* Dismiss button */}
         {dismissible && (
           <button
             onClick={handleDismiss}
             className={cn(
-              'flex-shrink-0 p-1 rounded transition-colors duration-200',
-              'hover:bg-white/10 focus:outline-none focus:ring-2',
+              'flex-shrink-0 rounded p-1 transition-colors duration-200',
+              'hover:bg-white/10 focus:ring-2 focus:outline-none',
               variant === 'success' && 'focus:ring-electric-cyan/50',
               variant === 'error' && 'focus:ring-safety-orange/50',
               variant === 'warning' && 'focus:ring-safety-orange/50',
@@ -108,7 +86,7 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
             )}
             aria-label="Dismiss alert"
           >
-            <X className="w-4 h-4" />
+            <X className="h-4 w-4" />
           </button>
         )}
       </div>

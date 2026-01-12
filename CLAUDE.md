@@ -58,9 +58,9 @@ Verify both servers are active before proceeding. If missing, notify user.
 ### Key Commands
 
 ```bash
-npm run dev          # Dev server with Turbopack
-npm run build        # Full production build (format → lint → type-check → build)
-npm run fix          # Format + lint --fix
+npm run dev   # Dev server with Turbopack
+npm run build # Full production build (format → lint → type-check → build)
+npm run fix   # Format + lint --fix
 ```
 
 ### Architecture Pointers
