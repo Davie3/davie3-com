@@ -176,39 +176,62 @@ jobs:
         uses: actions/github-script@v8
         with:
           script: |
-            // Add review label
-            await github.rest.issues.addLabels({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: context.payload.pull_request.number,
-              labels: ['review']
-            });
+            const COMMENT_MARKER_CI_FAILURE = '<!-- dependabot-ci-failure -->';
+            const prNumber = context.payload.pull_request.number;
 
-            // Request review from davie3
-            await github.rest.pulls.requestReviewers({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              pull_number: context.payload.pull_request.number,
-              reviewers: ['davie3']
-            });
-
-            // Post failure comment
-            const comment = [
+            const newCommentBody = [
               '⚠️ CI checks have failed for this Dependabot PR.',
               '',
               '**This PR was eligible for auto-merge but CI checks did not pass.**',
               '',
-              'Please review the failures. If you approve this PR after fixing/reviewing, it will be automatically merged.'
+              'Please review the failures. If you approve this PR after fixing/reviewing, it will be automatically merged.',
+              COMMENT_MARKER_CI_FAILURE
             ].join('\n');
 
-            await github.rest.issues.createComment({
+            const { data: comments } = await github.rest.issues.listComments({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              issue_number: context.payload.pull_request.number,
-              body: comment
+              issue_number: prNumber,
             });
 
-            // Exit with error to prevent auto-merge from continuing
+            const existingComment = comments.find(c => c.user.type === 'Bot' && c.body.includes(COMMENT_MARKER_CI_FAILURE));
+
+            if (existingComment) {
+              if (existingComment.body !== newCommentBody) {
+                await github.rest.issues.updateComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  comment_id: existingComment.id,
+                  body: newCommentBody,
+                });
+                console.log(`Updated existing CI failure comment #${existingComment.id}`);
+              } else {
+                console.log(`CI failure comment #${existingComment.id} already exists and is up-to-date. Skipping.`);
+              }
+            } else {
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: prNumber,
+                labels: ['review']
+              });
+
+              await github.rest.pulls.requestReviewers({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: prNumber,
+                reviewers: ['davie3']
+              });
+
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: prNumber,
+                body: newCommentBody,
+              });
+              console.log('Created new CI failure comment.');
+            }
+
             core.setFailed('CI checks failed - auto-merge blocked');
 
       - name: Auto-approve PR
@@ -222,6 +245,8 @@ jobs:
         uses: actions/github-script@v8
         with:
           script: |
+            const COMMENT_MARKER_AUTOMERGE_STATUS = '<!-- dependabot-automerge-status -->';
+            const prNumber = context.payload.pull_request.number;
             const metadata = {
               updateType: '${{ steps.metadata.outputs.update-type }}',
               alertState: '${{ steps.metadata.outputs.alert-state }}',
@@ -260,7 +285,7 @@ jobs:
               ? `\n- **Version:** ${metadata.previousVersion} → ${metadata.newVersion}`
               : '';
 
-            const comment = [
+            const newCommentBody = [
               '🤖 Auto-merge enabled with squash method. PR will merge automatically once all checks pass.',
               '',
               '**Auto-merge criteria met:**',
@@ -268,15 +293,39 @@ jobs:
               '- ✅ All CI checks passing',
               `- ✅ Trusted per semantic versioning${versionInfo}${additionalInfo}`,
               '',
-              '**Note:** Major updates (except security) require manual review.'
+              '**Note:** Major updates (except security) require manual review.',
+              COMMENT_MARKER_AUTOMERGE_STATUS
             ].join('\n');
 
-            await github.rest.issues.createComment({
+            const { data: comments } = await github.rest.issues.listComments({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              issue_number: context.payload.pull_request.number,
-              body: comment
+              issue_number: prNumber,
             });
+
+            const existingComment = comments.find(c => c.user.type === 'Bot' && c.body.includes(COMMENT_MARKER_AUTOMERGE_STATUS));
+
+            if (existingComment) {
+              if (existingComment.body !== newCommentBody) {
+                await github.rest.issues.updateComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  comment_id: existingComment.id,
+                  body: newCommentBody,
+                });
+                console.log(`Updated existing auto-merge status comment #${existingComment.id}`);
+              } else {
+                console.log(`Auto-merge status comment #${existingComment.id} already exists and is up-to-date. Skipping.`);
+              }
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: prNumber,
+                body: newCommentBody,
+              });
+              console.log('Created new auto-merge status comment.');
+            }
 
       - name: Enable auto-merge with squash
         if: steps.check-approval.outputs.review-decision != 'APPROVED' && steps.check-automerge.outputs.should-merge == 'true' && steps.wait-for-checks.outcome == 'success'
@@ -303,6 +352,8 @@ jobs:
         uses: actions/github-script@v8
         with:
           script: |
+            const COMMENT_MARKER_MANUAL_REVIEW = '<!-- dependabot-manual-review -->';
+            const prNumber = context.payload.pull_request.number;
             const metadata = {
               updateType: '${{ steps.metadata.outputs.update-type }}',
               dependencyNames: '${{ steps.metadata.outputs.dependency-names }}',
@@ -327,34 +378,55 @@ jobs:
               ? `\n- **Version:** ${metadata.previousVersion} → ${metadata.newVersion}`
               : '';
 
-            const comment = [
+            const newCommentBody = [
               '👀 This PR requires manual review before merging.',
               '',
               `**Reason:** ${reason}${versionInfo}`,
               '',
-              'Please review this update. If approved, the PR will be automatically merged.'
+              'Please review this update. If approved, the PR will be automatically merged.',
+              COMMENT_MARKER_MANUAL_REVIEW
             ].join('\n');
 
-            // Add review label
-            await github.rest.issues.addLabels({
+            const { data: comments } = await github.rest.issues.listComments({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              issue_number: context.payload.pull_request.number,
-              labels: ['review']
+              issue_number: prNumber,
             });
 
-            // Request review from davie3
-            await github.rest.pulls.requestReviewers({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              pull_number: context.payload.pull_request.number,
-              reviewers: ['davie3']
-            });
+            const existingComment = comments.find(c => c.user.type === 'Bot' && c.body.includes(COMMENT_MARKER_MANUAL_REVIEW));
 
-            // Post comment
-            await github.rest.issues.createComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: context.payload.pull_request.number,
-              body: comment
-            });
+            if (existingComment) {
+              if (existingComment.body !== newCommentBody) {
+                await github.rest.issues.updateComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  comment_id: existingComment.id,
+                  body: newCommentBody,
+                });
+                console.log(`Updated existing manual review comment #${existingComment.id}`);
+              } else {
+                console.log(`Manual review comment #${existingComment.id} already exists and is up-to-date. Skipping.`);
+              }
+            } else {
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: prNumber,
+                labels: ['review']
+              });
+
+              await github.rest.pulls.requestReviewers({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: prNumber,
+                reviewers: ['davie3']
+              });
+
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: prNumber,
+                body: newCommentBody,
+              });
+              console.log('Created new manual review comment.');
+            }
