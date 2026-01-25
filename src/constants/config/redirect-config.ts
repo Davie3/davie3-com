@@ -51,5 +51,7 @@ export const URL_MAPPINGS: readonly UrlMapping[] = [
   { source: '/davie3', destination: '/', permanent: true },
   { source: '/lemons-and-limes', destination: '/', permanent: true },
   { source: '/links', destination: '/', permanent: true },
+  { source: '/links/', destination: '/', permanent: true },
   { source: '/home', destination: '/', permanent: true },
+  { source: '/home/', destination: '/', permanent: true },
 ] as const;
