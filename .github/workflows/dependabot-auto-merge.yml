@@ -12,7 +12,10 @@ permissions:
 jobs:
   auto-merge:
     runs-on: ubuntu-latest
-    if: github.actor == 'dependabot[bot]'
+    # Use github.event.pull_request.user.login instead of github.actor to prevent
+    # confused deputy attacks where malicious actors could trigger workflow execution
+    # via @dependabot recreate commands after injecting malicious commits
+    if: github.event.pull_request.user.login == 'dependabot[bot]'
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
@@ -51,13 +54,14 @@ jobs:
 
             // Add ecosystem-specific labels
             const depGroup = metadata.dependencyGroup || '';
-            if (depGroup.includes('react') || metadata.packageEcosystem === 'npm' && depGroup.match(/react/i)) {
+            // Use consistent case-insensitive matching for robustness
+            if (depGroup.match(/react/i)) {
               labels.push('react');
-            } else if (depGroup.includes('next')) {
+            } else if (depGroup.match(/next/i)) {
               labels.push('next');
-            } else if (depGroup.includes('tailwind')) {
+            } else if (depGroup.match(/tailwind/i)) {
               labels.push('tailwind');
-            } else if (depGroup.includes('typescript')) {
+            } else if (depGroup.match(/typescript/i)) {
               labels.push('typescript');
             } else if (metadata.packageEcosystem === 'github-actions') {
               labels.push('github-actions');
@@ -236,9 +240,17 @@ jobs:
 
       - name: Auto-approve PR
         if: steps.check-approval.outputs.review-decision != 'APPROVED' && steps.check-automerge.outputs.should-merge == 'true' && steps.wait-for-checks.outcome == 'success'
-        uses: hmarr/auto-approve-action@v4
+        uses: actions/github-script@v8
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            await github.rest.pulls.createReview({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.payload.pull_request.number,
+              event: 'APPROVE',
+              body: '✅ Automatically approved by Dependabot workflow.'
+            });
+            console.log('✅ PR approved successfully');
 
       - name: Enable auto-merge and post status
         if: steps.check-approval.outputs.review-decision != 'APPROVED' && steps.check-automerge.outputs.should-merge == 'true' && steps.wait-for-checks.outcome == 'success'
@@ -269,7 +281,18 @@ jobs:
                 additionalInfo += `\n- **Advisory:** ${metadata.ghsaId}`;
               }
               if (metadata.cvss) {
-                additionalInfo += `\n- **CVSS Score:** ${metadata.cvss}`;
+                const cvssScore = parseFloat(metadata.cvss);
+                let severityBadge = '';
+                if (cvssScore >= 9.0) {
+                  severityBadge = `\n- 🚨 **CRITICAL SEVERITY** (CVSS ${metadata.cvss})`;
+                } else if (cvssScore >= 7.0) {
+                  severityBadge = `\n- ⚠️ **HIGH SEVERITY** (CVSS ${metadata.cvss})`;
+                } else if (cvssScore >= 4.0) {
+                  severityBadge = `\n- ⚡ **MEDIUM SEVERITY** (CVSS ${metadata.cvss})`;
+                } else {
+                  severityBadge = `\n- ℹ️ **LOW SEVERITY** (CVSS ${metadata.cvss})`;
+                }
+                additionalInfo += severityBadge;
               }
             } else if (metadata.updateType === 'version-update:semver-patch') {
               updateTypeLabel = '🔧 Patch update (backwards compatible)';
