@@ -65,7 +65,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             variant === 'default' &&
               cn(
                 'border-electric-cyan/20',
-                'focus:border-electric-cyan focus:ring-electric-cyan/30 focus:ring-2',
+                'focus:border-electric-cyan focus:ring-electric-cyan/30 focus:shadow-[0_0_12px_rgba(0,212,255,0.15)] focus:ring-2',
                 'hover:border-electric-cyan/40',
               ),
             variant === 'error' &&

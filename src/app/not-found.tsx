@@ -34,18 +34,14 @@ export default function NotFound(): JSX.Element {
         </div>
 
         {/* Error Message */}
-        <h1 className="text-slate-light mb-4 text-3xl font-bold md:text-4xl">
-          {NOT_FOUND_PAGE.TITLE}
-        </h1>
-        <p className="text-slate-dark mx-auto mb-8 max-w-md text-lg">
-          {NOT_FOUND_PAGE.DESCRIPTION}
-        </p>
+        <h1 className="text-cream mb-4 text-3xl font-bold md:text-4xl">{NOT_FOUND_PAGE.TITLE}</h1>
+        <p className="text-silver mx-auto mb-8 max-w-md text-lg">{NOT_FOUND_PAGE.DESCRIPTION}</p>
 
         {/* Action Buttons */}
         <div className="flex flex-col justify-center gap-4 sm:flex-row">
           <Link
             href="/"
-            className="group bg-electric-cyan text-navy hover:bg-safety-orange hover:shadow-electric-cyan/25 inline-flex items-center gap-2 rounded-xl px-6 py-3 font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg"
+            className="group border-electric-cyan bg-electric-cyan text-navy shadow-electric-cyan/20 hover:border-safety-orange hover:bg-safety-orange hover:shadow-safety-orange/20 inline-flex items-center gap-2 rounded-lg border-2 px-6 py-3 font-bold tracking-wide uppercase shadow-lg transition-all duration-200 active:scale-95"
           >
             <Home className="h-5 w-5" />
             <span>{NOT_FOUND_PAGE.BUTTONS.HOME}</span>
@@ -54,7 +50,7 @@ export default function NotFound(): JSX.Element {
             onClick={() => {
               window.history.back();
             }}
-            className="group glass text-slate-light inline-flex items-center gap-2 rounded-xl px-6 py-3 font-semibold transition-all duration-300 hover:scale-105"
+            className="group border-electric-cyan text-electric-cyan hover:bg-electric-cyan/10 inline-flex items-center gap-2 rounded-lg border-2 bg-transparent px-6 py-3 font-bold tracking-wide uppercase transition-all duration-200 active:scale-95"
           >
             <ArrowLeft className="h-5 w-5 transition-transform group-hover:-translate-x-1" />
             <span>{NOT_FOUND_PAGE.BUTTONS.BACK}</span>
@@ -63,7 +59,7 @@ export default function NotFound(): JSX.Element {
 
         {/* Helpful Links */}
         <div className="border-navy-accent/30 mt-12 border-t pt-8">
-          <p className="text-slate-dark mb-4 text-sm">{NOT_FOUND_PAGE.HELPFUL_LINKS_LABEL}</p>
+          <p className="text-silver mb-4 text-sm">{NOT_FOUND_PAGE.HELPFUL_LINKS_LABEL}</p>
           <div className="flex flex-wrap justify-center gap-4">
             {NOT_FOUND_PAGE.NAVIGATION_LINKS.map((link) => (
               <Link
