@@ -1,4 +1,4 @@
-import { GitFork, Star, ExternalLink } from 'lucide-react';
+import { ExternalLink, GitFork, Star } from 'lucide-react';
 import Link from 'next/link';
 import { z } from 'zod';
 
@@ -84,6 +84,12 @@ async function getGitHubRepos(): Promise<GitHubRepo[]> {
   }
 }
 
+/** Resolves the language color for a project, falling back to silver */
+function getLanguageColor(language: string | null): string {
+  if (!language) return 'var(--color-silver)';
+  return LANGUAGE_COLORS[language] ?? 'var(--color-silver)';
+}
+
 /**
  * Renders the portfolio page, showcasing public software projects.
  * Design: Bento-box grid with varying card sizes
@@ -124,56 +130,78 @@ export default async function PortfolioPage(): Promise<JSX.Element> {
         className="mb-12"
       >
         {projects.length > 0 ? (
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {projects.map((project, index) => (
-              <Link
-                key={project.name}
-                href={project.html_url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="animate-stagger-fade-in group block"
-                style={{
-                  animationDelay: `${(index * PAGE_STAGGER_DELAYS.PORTFOLIO_REPOS).toString()}ms`,
-                }}
-              >
-                <Card className="h-full p-4 transition-all duration-300 hover:border-[rgba(0,212,255,0.4)] hover:shadow-[0_8px_30px_rgba(0,212,255,0.15)]">
-                  {/* Project header */}
-                  <div className="mb-3">
-                    <h3 className="font-display text-cream group-hover:text-electric-cyan mb-2 text-lg leading-tight transition-colors duration-300 md:text-xl">
-                      {project.name}
-                    </h3>
-                    <p className="text-silver text-md leading-snug">
-                      {project.description ?? PORTFOLIO_PAGE.PROJECT_NO_DESCRIPTION}
-                    </p>
-                  </div>
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {projects.map((project, index) => {
+              const languageColor = getLanguageColor(project.language);
 
-                  {/* Project footer - language + stats */}
-                  <div className="border-electric-cyan/10 text-silver flex items-center gap-4 border-t pt-3 text-xs">
-                    {project.language && (
-                      <div className="flex items-center gap-1.5">
-                        <span
-                          className="inline-block h-3 w-3 rounded-full"
-                          style={{
-                            backgroundColor:
-                              LANGUAGE_COLORS[project.language] ?? 'var(--color-silver)',
-                          }}
+              return (
+                <Link
+                  key={project.name}
+                  href={project.html_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="animate-stagger-fade-in group block"
+                  style={{
+                    animationDelay: `${(index * PAGE_STAGGER_DELAYS.PORTFOLIO_REPOS).toString()}ms`,
+                  }}
+                >
+                  <Card languageColor={languageColor} className="flex h-full flex-col p-4">
+                    {/* Project header */}
+                    <div className="mb-3">
+                      <div className="flex items-start justify-between gap-2">
+                        <h3 className="font-display text-cream group-hover:text-electric-cyan mb-2 text-lg leading-tight transition-colors duration-300 md:text-xl">
+                          {project.name}
+                        </h3>
+                        <ExternalLink
+                          size={14}
+                          className="group-hover:text-electric-cyan mt-1 shrink-0 opacity-0 transition-all duration-300 group-hover:opacity-100"
                           aria-hidden="true"
                         />
-                        <span className="font-medium">{project.language}</span>
                       </div>
-                    )}
-                    <div className="flex items-center gap-1">
-                      <Star size={14} className="text-electric-cyan" />
-                      <span className="font-medium">{project.stargazers_count}</span>
+                      <p className="text-silver text-md line-clamp-2 leading-snug">
+                        {project.description ?? PORTFOLIO_PAGE.PROJECT_NO_DESCRIPTION}
+                      </p>
                     </div>
-                    <div className="flex items-center gap-1">
-                      <GitFork size={14} className="text-safety-orange" />
-                      <span className="font-medium">{project.forks_count}</span>
+
+                    {/* Glowing separator */}
+                    <div
+                      className="bg-electric-cyan/10 group-hover:bg-electric-cyan/30 mt-auto h-px transition-colors duration-300"
+                      aria-hidden="true"
+                    />
+
+                    {/* Project footer - language + stats */}
+                    <div className="text-silver flex items-center gap-4 pt-3 text-xs">
+                      {project.language && (
+                        <div className="flex items-center gap-1.5">
+                          <span
+                            className="inline-block h-3 w-3 rounded-full transition-transform duration-300 motion-safe:group-hover:scale-125"
+                            style={{
+                              backgroundColor: languageColor,
+                            }}
+                            aria-hidden="true"
+                          />
+                          <span className="font-medium">{project.language}</span>
+                        </div>
+                      )}
+                      <div className="flex items-center gap-1">
+                        <Star
+                          size={14}
+                          className="text-electric-cyan transition-transform duration-300 motion-safe:group-hover:scale-110"
+                        />
+                        <span className="font-medium">{project.stargazers_count}</span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <GitFork
+                          size={14}
+                          className="text-safety-orange transition-transform duration-300 motion-safe:group-hover:scale-110"
+                        />
+                        <span className="font-medium">{project.forks_count}</span>
+                      </div>
                     </div>
-                  </div>
-                </Card>
-              </Link>
-            ))}
+                  </Card>
+                </Link>
+              );
+            })}
           </div>
         ) : (
           <div className="border-electric-cyan/20 bg-navy-accent/20 border-2 p-12 text-center">
