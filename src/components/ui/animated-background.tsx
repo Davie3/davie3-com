@@ -112,6 +112,7 @@ export function AnimatedBackground(): JSX.Element {
       });
       return () => {
         window.removeEventListener('resize', resizeCanvas);
+        window.removeEventListener('scroll', handleScroll);
       };
     }
 
