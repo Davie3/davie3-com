@@ -21,7 +21,7 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
         ref={ref}
         className={cn(
           // Base styles
-          'relative transform-gpu overflow-hidden rounded-xl transition-all duration-300',
+          'group relative transform-gpu overflow-hidden rounded-xl transition-all duration-300',
           // Hover lift (respects reduced motion)
           'motion-safe:hover:-translate-y-1',
 
