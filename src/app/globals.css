@@ -467,6 +467,11 @@ select {
   animation: fadeInUp var(--animation-duration-normal) ease-out both;
 }
 
+/* Timeline track glow effect for industrial aesthetic */
+.timeline-entry {
+  border-image: linear-gradient(to bottom, rgba(0, 212, 255, 0.3), rgba(0, 212, 255, 0.1)) 1;
+}
+
 /* Optimized mobile menu backdrop for low-end devices */
 @media (max-width: 768px) and (max-resolution: 150dpi) {
   .mobile-menu-backdrop {

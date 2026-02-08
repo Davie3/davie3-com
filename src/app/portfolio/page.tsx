@@ -16,6 +16,28 @@ import type { GitHubRepo } from '@/types/api-types';
 import type { Metadata } from 'next';
 import type { JSX } from 'react';
 
+/** GitHub linguist language colors for indicator dots */
+const LANGUAGE_COLORS: Record<string, string> = {
+  TypeScript: '#3178c6',
+  JavaScript: '#f1e05a',
+  Python: '#3572a5',
+  Go: '#00add8',
+  Rust: '#dea584',
+  HTML: '#e34c26',
+  CSS: '#563d7c',
+  Shell: '#89e051',
+  Ruby: '#701516',
+  Java: '#b07219',
+  C: '#555555',
+  'C++': '#f34b7d',
+  'C#': '#178600',
+  Swift: '#f05138',
+  Kotlin: '#a97bff',
+  Dart: '#00b4ab',
+  PHP: '#4f5d95',
+  Lua: '#000080',
+};
+
 export const metadata: Metadata = PAGE_METADATA.PORTFOLIO;
 
 const GITHUB_API = EXTERNAL_API.GITHUB.USER_REPOS_ENDPOINT;
@@ -114,9 +136,9 @@ export default async function PortfolioPage(): Promise<JSX.Element> {
                   animationDelay: `${(index * PAGE_STAGGER_DELAYS.PORTFOLIO_REPOS).toString()}ms`,
                 }}
               >
-                <Card className="hover:border-electric-cyan h-full p-4 hover:shadow-md">
+                <Card className="h-full p-4 transition-all duration-300 hover:border-[rgba(0,212,255,0.4)] hover:shadow-[0_8px_30px_rgba(0,212,255,0.15)]">
                   {/* Project header */}
-                  <div className="mb-2">
+                  <div className="mb-3">
                     <h3 className="font-display text-cream group-hover:text-electric-cyan mb-2 text-lg leading-tight transition-colors duration-300 md:text-xl">
                       {project.name}
                     </h3>
@@ -125,17 +147,21 @@ export default async function PortfolioPage(): Promise<JSX.Element> {
                     </p>
                   </div>
 
-                  {/* Language badge */}
-                  {project.language && (
-                    <div className="mb-3">
-                      <span className="bg-safety-orange/10 border-safety-orange/30 text-safety-orange inline-block rounded-full border px-2 py-0.5 text-xs font-bold tracking-wide uppercase">
-                        {project.language}
-                      </span>
-                    </div>
-                  )}
-
-                  {/* Project footer - stats */}
-                  <div className="border-electric-cyan/10 text-silver flex items-center gap-3 border-t pt-3 text-xs">
+                  {/* Project footer - language + stats */}
+                  <div className="border-electric-cyan/10 text-silver flex items-center gap-4 border-t pt-3 text-xs">
+                    {project.language && (
+                      <div className="flex items-center gap-1.5">
+                        <span
+                          className="inline-block h-3 w-3 rounded-full"
+                          style={{
+                            backgroundColor:
+                              LANGUAGE_COLORS[project.language] ?? 'var(--color-silver)',
+                          }}
+                          aria-hidden="true"
+                        />
+                        <span className="font-medium">{project.language}</span>
+                      </div>
+                    )}
                     <div className="flex items-center gap-1">
                       <Star size={14} className="text-electric-cyan" />
                       <span className="font-medium">{project.stargazers_count}</span>

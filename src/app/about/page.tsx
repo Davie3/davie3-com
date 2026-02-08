@@ -85,7 +85,7 @@ export default function AboutPage(): JSX.Element {
           {SKILLS.map((skill, index) => (
             <span
               key={skill}
-              className="animate-stagger-fade-in bg-navy-accent/50 border-electric-cyan/20 text-cream hover:border-electric-cyan hover:text-electric-cyan border px-4 py-2 text-sm font-medium transition-all duration-300 md:text-base"
+              className="animate-stagger-fade-in bg-navy-accent/50 border-electric-cyan/20 text-cream hover:border-electric-cyan hover:text-electric-cyan border px-4 py-2 text-sm font-medium transition-all duration-300 hover:scale-105 hover:shadow-[0_0_12px_rgba(0,212,255,0.2)] md:text-base"
               style={{
                 animationDelay: `${(index * PAGE_STAGGER_DELAYS.ABOUT_SKILLS).toString()}ms`,
               }}
@@ -109,14 +109,14 @@ export default function AboutPage(): JSX.Element {
           <p className="text-silver">{ABOUT_CONTENT.EXPERIENCE_SUBTITLE}</p>
         </div>
 
-        <div className="space-y-12">
+        <div className="timeline-track relative space-y-12">
           {EXPERIENCES.map((exp) => (
             <div
               key={`${exp.company}-${exp.role}-${exp.period}`}
-              className="border-electric-cyan/30 relative border-l-4 pl-8"
+              className="timeline-entry relative border-l-2 border-[rgba(0,212,255,0.25)] pl-8"
             >
-              {/* Timeline dot */}
-              <div className="bg-safety-orange border-navy absolute top-0 -left-[10px] h-4 w-4 rounded-full border-4" />
+              {/* Timeline dot with glow */}
+              <div className="border-navy bg-safety-orange absolute top-0 -left-[9px] h-4 w-4 rounded-full border-4 shadow-[0_0_8px_rgba(255,107,53,0.4)]" />
 
               <div className="space-y-3">
                 <div>
