@@ -44,13 +44,13 @@ export default function Home(): JSX.Element {
               {PAGE_DESCRIPTIONS.HOME_DESCRIPTION}
             </p>
 
-            {/* CTA Buttons - Industrial style */}
+            {/* CTA Buttons - Industrial style, consistent with Button component */}
             <div className="flex flex-col items-center gap-4 pt-4 sm:flex-row sm:items-start">
               <Link
                 href={INTERNAL_ROUTES.ABOUT}
-                className="group bg-electric-cyan text-navy hover:bg-safety-orange relative px-8 py-4 text-lg font-semibold transition-all duration-300 hover:scale-105 active:scale-95"
+                className="group border-electric-cyan bg-electric-cyan text-navy shadow-electric-cyan/20 hover:border-safety-orange hover:bg-safety-orange hover:shadow-safety-orange/20 relative inline-flex items-center gap-2.5 overflow-hidden rounded-lg border-2 px-8 py-4 text-base font-bold tracking-wide uppercase shadow-lg transition-all duration-200 active:scale-95"
               >
-                <span className="flex items-center gap-2">
+                <span className="inline-flex items-center gap-2">
                   About Me
                   <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
                 </span>
@@ -58,9 +58,9 @@ export default function Home(): JSX.Element {
 
               <Link
                 href={INTERNAL_ROUTES.PORTFOLIO}
-                className="group bg-electric-cyan text-navy hover:bg-safety-orange relative px-8 py-4 text-lg font-semibold transition-all duration-300 hover:scale-105 active:scale-95"
+                className="group border-electric-cyan text-electric-cyan hover:border-electric-cyan hover:bg-electric-cyan/10 relative inline-flex items-center gap-2.5 overflow-hidden rounded-lg border-2 bg-transparent px-8 py-4 text-base font-bold tracking-wide uppercase transition-all duration-200 active:scale-95"
               >
-                <span className="flex items-center gap-2">
+                <span className="inline-flex items-center gap-2">
                   View Work
                   <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
                 </span>
@@ -70,7 +70,7 @@ export default function Home(): JSX.Element {
                 href={EXTERNAL_URLS.GITHUB_PROFILE}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group text-silver hover:text-electric-cyan flex items-center gap-3 px-6 py-4 text-lg font-semibold transition-all duration-300"
+                className="group text-cream hover:bg-navy-accent/50 inline-flex items-center gap-2.5 rounded-lg border-2 border-transparent bg-transparent px-6 py-4 text-base font-bold tracking-wide uppercase transition-all duration-200 active:scale-95"
               >
                 <span>GitHub</span>
                 <ExternalLink className="h-5 w-5 transition-transform duration-300 group-hover:scale-110" />

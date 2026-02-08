@@ -407,6 +407,8 @@ select {
   z-index: var(--z-modal);
   transform: translateX(100%);
   transition: transform 0.3s ease-in-out;
+  border-left: 2px solid rgba(0, 212, 255, 0.2);
+  box-shadow: -8px 0 32px rgba(0, 0, 0, 0.5);
 }
 
 .mobile-menu-close {
@@ -443,6 +445,33 @@ select {
 /* Mobile navigation item animation */
 .mobile-nav-item {
   animation: fadeInUp 0.3s ease-out both;
+}
+
+/* Animation delay utilities for staggered animations */
+.animate-delay-1 {
+  animation-delay: 100ms;
+}
+.animate-delay-2 {
+  animation-delay: 200ms;
+}
+.animate-delay-3 {
+  animation-delay: 300ms;
+}
+.animate-delay-4 {
+  animation-delay: 400ms;
+}
+.animate-delay-5 {
+  animation-delay: 500ms;
+}
+
+/* Staggered fade-in-up animation for page elements */
+.animate-stagger-fade-in {
+  animation: fadeInUp var(--animation-duration-normal) ease-out both;
+}
+
+/* Timeline track glow effect for industrial aesthetic */
+.timeline-entry {
+  border-image: linear-gradient(to bottom, rgba(0, 212, 255, 0.3), rgba(0, 212, 255, 0.1)) 1;
 }
 
 /* Optimized mobile menu backdrop for low-end devices */

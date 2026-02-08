@@ -10,4 +10,4 @@ export type IconPosition = 'left' | 'right';
 export type AlertVariant = 'success' | 'error' | 'warning' | 'info';
 
 // Card variant types
-export type CardVariant = 'default' | 'glass' | 'elevated';
+export type CardVariant = 'default' | 'glass' | 'elevated' | 'featured';

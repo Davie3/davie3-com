@@ -2,17 +2,20 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState, useEffect, type JSX } from 'react';
+import { useState, useEffect, useRef, useCallback, type JSX } from 'react';
 import { createPortal } from 'react-dom';
 
 import { NAV_LINKS, type NavLink } from '@/constants/config/navigation-config';
+import { useFocusTrap } from '@/hooks/use-focus-trap';
 import { useLockBody } from '@/hooks/use-lock-body';
 
 export function ClientMobileNav(): JSX.Element {
   const [isOpen, setIsOpen] = useState(false);
   const [mounted] = useState(true);
   const pathname = usePathname();
+  const dialogRef = useRef<HTMLDivElement>(null);
   useLockBody(isOpen);
+  useFocusTrap(dialogRef, isOpen);
 
   // Close menu when pathname changes - intentional pattern for navigation reset
   useEffect(() => {
@@ -20,25 +23,43 @@ export function ClientMobileNav(): JSX.Element {
     setIsOpen(false);
   }, [pathname]);
 
-  const toggleMenu = (): void => {
-    setIsOpen(!isOpen);
-  };
+  const toggleMenu = useCallback((): void => {
+    setIsOpen((prev) => !prev);
+  }, []);
+
+  const closeMenu = useCallback((): void => {
+    setIsOpen(false);
+  }, []);
+
+  // Close on Escape key
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleKeyDown = (e: KeyboardEvent): void => {
+      if (e.key === 'Escape') closeMenu();
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isOpen, closeMenu]);
 
   const mobileMenu = (
     <div className={`mobile-menu-overlay ${isOpen ? 'open' : ''}`}>
       <button
         className="mobile-menu-backdrop"
-        onClick={toggleMenu}
+        onClick={closeMenu}
         aria-label="Close navigation menu"
       />
       <div
+        ref={dialogRef}
         id="mobile-menu"
         className="mobile-menu-panel"
-        role="navigation"
+        role="dialog"
+        aria-modal="true"
         aria-label="Mobile navigation menu"
       >
         <button
-          onClick={toggleMenu}
+          onClick={closeMenu}
           className="mobile-menu-close"
           aria-label="Close navigation menu"
         >
@@ -69,7 +90,7 @@ export function ClientMobileNav(): JSX.Element {
                     target={link.openInNewTab ? '_blank' : undefined}
                     rel={link.openInNewTab ? 'noopener noreferrer' : undefined}
                     className={`transition-colors-standard text-2xl ${
-                      isActive ? 'text-blue-accent' : 'text-slate-light hover:text-blue-accent'
+                      isActive ? 'text-electric-cyan' : 'text-cream hover:text-electric-cyan'
                     }`}
                   >
                     {link.name}
@@ -87,7 +108,7 @@ export function ClientMobileNav(): JSX.Element {
     <div className="md:hidden">
       <button
         onClick={toggleMenu}
-        className="focus:ring-blue-accent relative z-50 cursor-pointer rounded-lg border-0 bg-transparent p-2 focus:ring-2 focus:outline-none"
+        className="focus:ring-electric-cyan relative z-50 cursor-pointer rounded-lg border-0 bg-transparent p-2 focus:ring-2 focus:outline-none"
         aria-label={isOpen ? 'Close navigation menu' : 'Open navigation menu'}
         aria-expanded={isOpen}
         aria-controls="mobile-menu"

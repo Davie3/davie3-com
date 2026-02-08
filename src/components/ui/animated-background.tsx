@@ -87,6 +87,35 @@ export function AnimatedBackground(): JSX.Element {
     // Check for reduced motion
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+    // Star layer config shared between static render and animation loop
+    const layers = [
+      {
+        stars: particles.stars.background,
+        speed: CANVAS_CONFIG.layers.background.speed,
+      },
+      {
+        stars: particles.stars.middle,
+        speed: CANVAS_CONFIG.layers.middle.speed,
+      },
+      {
+        stars: particles.stars.foreground,
+        speed: CANVAS_CONFIG.layers.foreground.speed,
+      },
+    ];
+
+    // Reduced motion: render stars once statically, skip animation loop entirely
+    if (prefersReducedMotion) {
+      layers.forEach(({ stars }) => {
+        stars.forEach((star) => {
+          spriteRenderer.drawStar(ctx, star, star.baseOpacity, 0);
+        });
+      });
+      return () => {
+        window.removeEventListener('resize', resizeCanvas);
+        window.removeEventListener('scroll', handleScroll);
+      };
+    }
+
     // Animation loop
     const animate = (timestamp: number): void => {
       const deltaTime = timestamp - lastFrameTimeRef.current;
@@ -96,43 +125,24 @@ export function AnimatedBackground(): JSX.Element {
 
       const scrollY = scrollYRef.current;
 
-      // 1. Render stars by layer using pre-rendered sprites
-      const layers = [
-        {
-          stars: particles.stars.background,
-          speed: CANVAS_CONFIG.layers.background.speed,
-        },
-        {
-          stars: particles.stars.middle,
-          speed: CANVAS_CONFIG.layers.middle.speed,
-        },
-        {
-          stars: particles.stars.foreground,
-          speed: CANVAS_CONFIG.layers.foreground.speed,
-        },
-      ];
-
+      // Render stars by layer using pre-rendered sprites
       layers.forEach(({ stars, speed }) => {
         const layerScrollOffset = scrollY * speed;
         stars.forEach((star) => {
           if (
             isInViewport(star.y, layerScrollOffset, canvas.height, CANVAS_CONFIG.viewportBuffer)
           ) {
-            const currentOpacity = prefersReducedMotion
-              ? star.baseOpacity
-              : updateStarTwinkle(star, deltaTime);
+            const currentOpacity = updateStarTwinkle(star, deltaTime);
             spriteRenderer.drawStar(ctx, star, currentOpacity, layerScrollOffset);
           }
         });
       });
 
-      // 2. Update and render shooting stars
-      if (!prefersReducedMotion) {
-        particles.shootingStarPool.update(deltaTime, canvas.width, canvas.height);
-        particles.shootingStarPool.getActiveStars().forEach((shootingStar) => {
-          drawShootingStar(ctx, shootingStar);
-        });
-      }
+      // Update and render shooting stars
+      particles.shootingStarPool.update(deltaTime, canvas.width, canvas.height);
+      particles.shootingStarPool.getActiveStars().forEach((shootingStar) => {
+        drawShootingStar(ctx, shootingStar);
+      });
 
       animationFrameRef.current = requestAnimationFrame(animate);
     };
