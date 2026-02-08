@@ -34,7 +34,8 @@ export function ClientMobileNav(): JSX.Element {
       <div
         id="mobile-menu"
         className="mobile-menu-panel"
-        role="navigation"
+        role="dialog"
+        aria-modal="true"
         aria-label="Mobile navigation menu"
       >
         <button
@@ -69,7 +70,7 @@ export function ClientMobileNav(): JSX.Element {
                     target={link.openInNewTab ? '_blank' : undefined}
                     rel={link.openInNewTab ? 'noopener noreferrer' : undefined}
                     className={`transition-colors-standard text-2xl ${
-                      isActive ? 'text-blue-accent' : 'text-slate-light hover:text-blue-accent'
+                      isActive ? 'text-electric-cyan' : 'text-cream hover:text-electric-cyan'
                     }`}
                   >
                     {link.name}
@@ -87,7 +88,7 @@ export function ClientMobileNav(): JSX.Element {
     <div className="md:hidden">
       <button
         onClick={toggleMenu}
-        className="focus:ring-blue-accent relative z-50 cursor-pointer rounded-lg border-0 bg-transparent p-2 focus:ring-2 focus:outline-none"
+        className="focus:ring-electric-cyan relative z-50 cursor-pointer rounded-lg border-0 bg-transparent p-2 focus:ring-2 focus:outline-none"
         aria-label={isOpen ? 'Close navigation menu' : 'Open navigation menu'}
         aria-expanded={isOpen}
         aria-controls="mobile-menu"
