@@ -85,7 +85,7 @@ export default function AboutPage(): JSX.Element {
           {SKILLS.map((skill, index) => (
             <span
               key={skill}
-              className="bg-navy-accent/50 border-electric-cyan/20 text-cream hover:border-electric-cyan hover:text-electric-cyan border px-4 py-2 text-sm font-medium transition-all duration-300 md:text-base"
+              className="animate-stagger-fade-in bg-navy-accent/50 border-electric-cyan/20 text-cream hover:border-electric-cyan hover:text-electric-cyan border px-4 py-2 text-sm font-medium transition-all duration-300 md:text-base"
               style={{
                 animationDelay: `${(index * PAGE_STAGGER_DELAYS.ABOUT_SKILLS).toString()}ms`,
               }}

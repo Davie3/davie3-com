@@ -109,7 +109,7 @@ export default async function PortfolioPage(): Promise<JSX.Element> {
                 href={project.html_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group block"
+                className="animate-stagger-fade-in group block"
                 style={{
                   animationDelay: `${(index * PAGE_STAGGER_DELAYS.PORTFOLIO_REPOS).toString()}ms`,
                 }}

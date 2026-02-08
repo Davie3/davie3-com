@@ -44,7 +44,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           'flex-center relative inline-flex gap-2.5',
           'text-sm font-bold tracking-wide uppercase',
           'rounded-lg border-2 transition-all duration-200',
-          'overflow-hidden',
+          'group overflow-hidden',
 
           // Focus styles
           'focus:ring-offset-navy focus:ring-2 focus:ring-offset-2 focus:outline-none',

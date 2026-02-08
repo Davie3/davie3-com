@@ -445,6 +445,28 @@ select {
   animation: fadeInUp 0.3s ease-out both;
 }
 
+/* Animation delay utilities for staggered animations */
+.animate-delay-1 {
+  animation-delay: 100ms;
+}
+.animate-delay-2 {
+  animation-delay: 200ms;
+}
+.animate-delay-3 {
+  animation-delay: 300ms;
+}
+.animate-delay-4 {
+  animation-delay: 400ms;
+}
+.animate-delay-5 {
+  animation-delay: 500ms;
+}
+
+/* Staggered fade-in-up animation for page elements */
+.animate-stagger-fade-in {
+  animation: fadeInUp var(--animation-duration-normal) ease-out both;
+}
+
 /* Optimized mobile menu backdrop for low-end devices */
 @media (max-width: 768px) and (max-resolution: 150dpi) {
   .mobile-menu-backdrop {
