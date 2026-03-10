@@ -41,7 +41,7 @@ npm run fix          # Run format + lint --fix
 
 ### Version Strategy
 
-- **Next.js Ecosystem:** Exact pinning (`next`, `eslint-config-next`)
+- **Next.js Ecosystem:** Exact pinning (`next`)
 - **All Other Dependencies:** Caret ranges (`^x.y.z`)
 
 ### Rationale
