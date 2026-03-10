@@ -87,6 +87,7 @@ export default defineConfig(
       // TypeScript strict rules - adjusted for Next.js
       '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
       '@typescript-eslint/no-explicit-any': 'error',
+      '@typescript-eslint/no-non-null-assertion': 'error',
 
       // Relax these for Next.js APIs that use `any`
       '@typescript-eslint/no-unsafe-assignment': 'warn',
