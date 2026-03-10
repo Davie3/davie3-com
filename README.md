@@ -50,5 +50,6 @@ npm run build # Full validation + production build
 
 ## License
 
-This code is provided for educational and portfolio demonstration purposes only.
-All rights reserved. Please do not use this code for your own projects.
+All rights reserved. Copyright David Griffin.
+
+This source code is published for educational reference and portfolio demonstration only. You may not copy, modify, distribute, or use this code in your own projects without explicit written permission.
