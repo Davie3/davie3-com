@@ -1,8 +1,11 @@
 import eslint from '@eslint/js';
-import next from 'eslint-config-next';
+import nextPlugin from '@next/eslint-plugin-next';
 import prettier from 'eslint-config-prettier';
 import importPlugin from 'eslint-plugin-import-x';
+import jsxA11y from 'eslint-plugin-jsx-a11y';
 import prettierPlugin from 'eslint-plugin-prettier';
+import react from 'eslint-plugin-react';
+import reactHooks from 'eslint-plugin-react-hooks';
 import tseslint from 'typescript-eslint';
 
 export default tseslint.config(
@@ -18,7 +21,6 @@ export default tseslint.config(
   {
     files: ['src/**/*.ts', 'src/**/*.tsx'],
     extends: [
-      ...next,
       ...tseslint.configs.strictTypeChecked,
       ...tseslint.configs.stylisticTypeChecked,
       prettier,
@@ -28,12 +30,22 @@ export default tseslint.config(
         project: './tsconfig.json',
         tsconfigRootDir: import.meta.dirname,
       },
+      globals: {
+        React: 'readonly',
+      },
     },
     plugins: {
+      '@next/next': nextPlugin,
+      react,
+      'react-hooks': reactHooks,
+      'jsx-a11y': jsxA11y,
       'import-x': importPlugin,
       prettier: prettierPlugin,
     },
     settings: {
+      react: {
+        version: 'detect',
+      },
       'import-x/resolver': {
         typescript: {
           alwaysTryTypes: true,
@@ -42,6 +54,27 @@ export default tseslint.config(
       },
     },
     rules: {
+      // Next.js rules
+      ...nextPlugin.configs.recommended.rules,
+
+      // React rules (from recommended, with Next.js overrides)
+      ...react.configs.recommended.rules,
+      'react/react-in-jsx-scope': 'off',
+      'react/prop-types': 'off',
+      'react/no-unknown-property': 'off',
+      'react/jsx-no-target-blank': 'off',
+
+      // React Hooks
+      ...reactHooks.configs.recommended.rules,
+
+      // Accessibility
+      'jsx-a11y/alt-text': ['warn', { elements: ['img'], img: ['Image'] }],
+      'jsx-a11y/aria-props': 'warn',
+      'jsx-a11y/aria-proptypes': 'warn',
+      'jsx-a11y/aria-unsupported-elements': 'warn',
+      'jsx-a11y/role-has-required-aria-props': 'warn',
+      'jsx-a11y/role-supports-aria-props': 'warn',
+
       // Prettier integration
       'prettier/prettier': 'error',
 
@@ -67,6 +100,7 @@ export default tseslint.config(
       // Import organization rules
       'import-x/first': 'error',
       'import-x/no-duplicates': 'error',
+      'import-x/no-anonymous-default-export': 'warn',
       'import-x/newline-after-import': 'error',
       'import-x/order': [
         'error',
