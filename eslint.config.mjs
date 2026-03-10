@@ -1,7 +1,7 @@
 import eslint from '@eslint/js';
 import next from 'eslint-config-next';
 import prettier from 'eslint-config-prettier';
-import importPlugin from 'eslint-plugin-import';
+import importPlugin from 'eslint-plugin-import-x';
 import prettierPlugin from 'eslint-plugin-prettier';
 import tseslint from 'typescript-eslint';
 
@@ -30,11 +30,11 @@ export default tseslint.config(
       },
     },
     plugins: {
-      import: importPlugin,
+      'import-x': importPlugin,
       prettier: prettierPlugin,
     },
     settings: {
-      'import/resolver': {
+      'import-x/resolver': {
         typescript: {
           alwaysTryTypes: true,
           project: './tsconfig.json',
@@ -65,10 +65,10 @@ export default tseslint.config(
       '@typescript-eslint/unbound-method': 'off',
 
       // Import organization rules
-      'import/first': 'error',
-      'import/no-duplicates': 'error',
-      'import/newline-after-import': 'error',
-      'import/order': [
+      'import-x/first': 'error',
+      'import-x/no-duplicates': 'error',
+      'import-x/newline-after-import': 'error',
+      'import-x/order': [
         'error',
         {
           groups: [
