@@ -23,23 +23,11 @@ export default function RootLayout({
         <StructuredData pageType="website" />
         {/* Preconnect hints for analytics domains */}
         {shouldEnableAnalytics && (
-          <>
-            <link
-              rel="preconnect"
-              href="https://static.cloudflareinsights.com"
-              crossOrigin="anonymous"
-            />
-            <link
-              rel="preconnect"
-              href="https://vitals.vercel-insights.com"
-              crossOrigin="anonymous"
-            />
-            <link
-              rel="preconnect"
-              href="https://vitals.vercel-analytics.com"
-              crossOrigin="anonymous"
-            />
-          </>
+          <link
+            rel="preconnect"
+            href="https://static.cloudflareinsights.com"
+            crossOrigin="anonymous"
+          />
         )}
 
         {/* Speculation rules for internal route prefetching */}

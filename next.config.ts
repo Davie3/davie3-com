@@ -5,7 +5,7 @@ const cspHeader = `
     default-src 'self';
     script-src 'self' 'unsafe-eval' 'unsafe-inline'
         static.cloudflareinsights.com challenges.cloudflare.com *.cloudflare.com
-        *.vercel-insights.com *.vercel-analytics.com https://vercel.live *.vercel.app
+        https://vercel.live *.vercel.app
         https://www.davie3.com/cdn-cgi/ https://davie3.com/cdn-cgi/
         'wasm-unsafe-eval';
     style-src 'self' 'unsafe-inline'
@@ -23,9 +23,7 @@ const cspHeader = `
         https://vercel.live;
     connect-src 'self'
         cloudflareinsights.com challenges.cloudflare.com *.cloudflare.com
-        *.vercel-insights.com *.vercel-analytics.com vitals.vercel-insights.com
-        https://vercel.live *.vercel.app wss://ws-us3.pusher.com
-        https://vitals.vercel-analytics.com;
+        https://vercel.live *.vercel.app wss://ws-us3.pusher.com;
     worker-src 'self' blob:;
     upgrade-insecure-requests;
 `;
