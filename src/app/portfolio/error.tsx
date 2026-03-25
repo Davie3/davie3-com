@@ -1,6 +1,6 @@
 'use client';
 
-import { AlertCircle, RefreshCw } from 'lucide-react';
+import { CircleAlert, RefreshCw } from 'lucide-react';
 
 import type { JSX } from 'react';
 
@@ -21,7 +21,7 @@ export default function Error({ error, reset }: ErrorProps): JSX.Element {
     <main className="container mx-auto max-w-4xl px-4 py-16">
       <section id="portfolio-error" className="text-center">
         <div className="mb-4 flex justify-center">
-          <AlertCircle className="text-destructive h-16 w-16" />
+          <CircleAlert className="text-destructive h-16 w-16" />
         </div>
         <h1 className="text-primary mb-4 text-4xl font-bold">Failed to Load Portfolio</h1>
         <p className="text-muted-foreground mb-6 text-lg">

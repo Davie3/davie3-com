@@ -2,7 +2,7 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { motion, useReducedMotion } from 'framer-motion';
-import { User, Mail, MessageSquare, CheckCircle2 } from 'lucide-react';
+import { CircleCheck, Mail, MessageSquare, User } from 'lucide-react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
@@ -120,7 +120,7 @@ export default function ContactForm(): JSX.Element {
         <Card variant="elevated" className="mx-auto max-w-3xl">
           <CardContent className="space-y-6 py-12 text-center">
             <div className="bg-electric-cyan/10 border-electric-cyan flex-center mx-auto h-20 w-20 rounded-lg border-2">
-              <CheckCircle2 className="text-electric-cyan h-10 w-10" />
+              <CircleCheck className="text-electric-cyan h-10 w-10" />
             </div>
             <div className="space-y-3">
               <h3 className="font-display text-cream text-3xl">{CONTACT_FORM.SUCCESS_HEADING}</h3>

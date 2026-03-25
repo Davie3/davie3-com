@@ -1,6 +1,6 @@
 'use client';
 
-import { Home, ArrowLeft } from 'lucide-react';
+import { ArrowLeft, House } from 'lucide-react';
 import Link from 'next/link';
 
 import { NOT_FOUND_PAGE } from '@/constants/config/error-pages-config';
@@ -43,7 +43,7 @@ export default function NotFound(): JSX.Element {
             href="/"
             className="group border-electric-cyan bg-electric-cyan text-navy shadow-electric-cyan/20 hover:border-safety-orange hover:bg-safety-orange hover:shadow-safety-orange/20 inline-flex items-center gap-2 rounded-lg border-2 px-6 py-3 font-bold tracking-wide uppercase shadow-lg transition-all duration-200 active:scale-95"
           >
-            <Home className="h-5 w-5" />
+            <House className="h-5 w-5" />
             <span>{NOT_FOUND_PAGE.BUTTONS.HOME}</span>
           </Link>
           <button
