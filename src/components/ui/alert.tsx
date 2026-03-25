@@ -1,6 +1,6 @@
 'use client';
 
-import { AlertCircle, CheckCircle2, Info, AlertTriangle, X } from 'lucide-react';
+import { CircleAlert, CircleCheck, Info, TriangleAlert, X } from 'lucide-react';
 import { forwardRef, useState } from 'react';
 
 import { cn } from '@/lib/utils/class-utils';
@@ -28,9 +28,9 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
     if (!isVisible) return null;
 
     const icons = {
-      success: CheckCircle2,
-      error: AlertCircle,
-      warning: AlertTriangle,
+      success: CircleCheck,
+      error: CircleAlert,
+      warning: TriangleAlert,
       info: Info,
     };
 
