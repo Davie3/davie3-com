@@ -48,7 +48,6 @@ updates:
           - 'patch'
         patterns:
           - 'next'
-          - 'eslint-config-next'
 
       # Next.js major updates
       next-major:
@@ -57,7 +56,33 @@ updates:
           - 'major'
         patterns:
           - 'next'
+
+      # ESLint ecosystem (minor/patch only)
+      eslint-minor-patch:
+        applies-to: version-updates
+        update-types:
+          - 'minor'
+          - 'patch'
+        patterns:
+          - 'eslint'
+          - 'eslint-*'
+          - '@eslint/*'
           - 'eslint-config-next'
+          - '@next/eslint-plugin-next'
+          - 'typescript-eslint'
+
+      # ESLint major updates
+      eslint-major:
+        applies-to: version-updates
+        update-types:
+          - 'major'
+        patterns:
+          - 'eslint'
+          - 'eslint-*'
+          - '@eslint/*'
+          - 'eslint-config-next'
+          - '@next/eslint-plugin-next'
+          - 'typescript-eslint'
 
       # Tailwind ecosystem (minor/patch only)
       tailwind-minor-patch:
@@ -117,12 +142,17 @@ updates:
           - '@types/react*'
           - 'react-*'
           - 'next'
-          - 'eslint-config-next'
           - 'tailwindcss'
           - '@tailwindcss/*'
           - 'tailwind-*'
           - 'typescript'
           - '@types/*'
+          - 'eslint'
+          - 'eslint-*'
+          - '@eslint/*'
+          - 'eslint-config-next'
+          - '@next/eslint-plugin-next'
+          - 'typescript-eslint'
 
       # All other major updates
       all-other-major:
@@ -137,12 +167,17 @@ updates:
           - '@types/react*'
           - 'react-*'
           - 'next'
-          - 'eslint-config-next'
           - 'tailwindcss'
           - '@tailwindcss/*'
           - 'tailwind-*'
           - 'typescript'
           - '@types/*'
+          - 'eslint'
+          - 'eslint-*'
+          - '@eslint/*'
+          - 'eslint-config-next'
+          - '@next/eslint-plugin-next'
+          - 'typescript-eslint'
 
     # Commit message configuration
     commit-message:
