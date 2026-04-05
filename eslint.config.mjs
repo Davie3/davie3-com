@@ -4,7 +4,6 @@ import prettier from 'eslint-config-prettier';
 import importPlugin from 'eslint-plugin-import-x';
 import jsxA11y from 'eslint-plugin-jsx-a11y';
 import prettierPlugin from 'eslint-plugin-prettier';
-import react from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
 import { defineConfig } from 'eslint/config';
 import tseslint from 'typescript-eslint';
@@ -37,16 +36,12 @@ export default defineConfig(
     },
     plugins: {
       '@next/next': nextPlugin,
-      react,
       'react-hooks': reactHooks,
       'jsx-a11y': jsxA11y,
       'import-x': importPlugin,
       prettier: prettierPlugin,
     },
     settings: {
-      react: {
-        version: 'detect',
-      },
       'import-x/resolver': {
         typescript: {
           alwaysTryTypes: true,
@@ -57,13 +52,6 @@ export default defineConfig(
     rules: {
       // Next.js rules
       ...nextPlugin.configs.recommended.rules,
-
-      // React rules (from recommended, with Next.js overrides)
-      ...react.configs.recommended.rules,
-      'react/react-in-jsx-scope': 'off',
-      'react/prop-types': 'off',
-      'react/no-unknown-property': 'off',
-      'react/jsx-no-target-blank': 'warn',
 
       // React Hooks
       ...reactHooks.configs.recommended.rules,
