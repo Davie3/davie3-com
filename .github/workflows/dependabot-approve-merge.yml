@@ -21,7 +21,7 @@ jobs:
 
       - name: Check if review label exists
         id: check-label
-        uses: actions/github-script@v8
+        uses: actions/github-script@v9
         with:
           script: |
             const labels = context.payload.pull_request.labels.map(label => label.name);
@@ -34,7 +34,7 @@ jobs:
 
       - name: Post approval comment
         if: steps.check-label.outputs.has-review-label == 'true'
-        uses: actions/github-script@v8
+        uses: actions/github-script@v9
         with:
           script: |
             await github.rest.issues.createComment({

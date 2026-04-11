@@ -40,7 +40,7 @@ jobs:
 
       - name: Add labels to PR
         if: steps.check-approval.outputs.review-decision != 'APPROVED'
-        uses: actions/github-script@v8
+        uses: actions/github-script@v9
         with:
           script: |
             const metadata = {
@@ -87,7 +87,7 @@ jobs:
       - name: Determine auto-merge eligibility
         if: steps.check-approval.outputs.review-decision != 'APPROVED'
         id: check-automerge
-        uses: actions/github-script@v8
+        uses: actions/github-script@v9
         with:
           script: |
             const metadata = {
@@ -177,7 +177,7 @@ jobs:
 
       - name: Handle CI check failures
         if: steps.check-approval.outputs.review-decision != 'APPROVED' && steps.check-automerge.outputs.should-merge == 'true' && steps.wait-for-checks.outcome == 'failure'
-        uses: actions/github-script@v8
+        uses: actions/github-script@v9
         with:
           script: |
             const COMMENT_MARKER_CI_FAILURE = '<!-- dependabot-ci-failure -->';
@@ -240,7 +240,7 @@ jobs:
 
       - name: Auto-approve PR
         if: steps.check-approval.outputs.review-decision != 'APPROVED' && steps.check-automerge.outputs.should-merge == 'true' && steps.wait-for-checks.outcome == 'success'
-        uses: actions/github-script@v8
+        uses: actions/github-script@v9
         with:
           script: |
             await github.rest.pulls.createReview({
@@ -254,7 +254,7 @@ jobs:
 
       - name: Enable auto-merge and post status
         if: steps.check-approval.outputs.review-decision != 'APPROVED' && steps.check-automerge.outputs.should-merge == 'true' && steps.wait-for-checks.outcome == 'success'
-        uses: actions/github-script@v8
+        uses: actions/github-script@v9
         with:
           script: |
             const COMMENT_MARKER_AUTOMERGE_STATUS = '<!-- dependabot-automerge-status -->';
@@ -372,7 +372,7 @@ jobs:
 
       - name: Add manual review comment and request review
         if: steps.check-approval.outputs.review-decision != 'APPROVED' && steps.check-automerge.outputs.should-merge == 'false'
-        uses: actions/github-script@v8
+        uses: actions/github-script@v9
         with:
           script: |
             const COMMENT_MARKER_MANUAL_REVIEW = '<!-- dependabot-manual-review -->';
