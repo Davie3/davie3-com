@@ -42,6 +42,8 @@ next-env.d.ts
 
 # text files
 *.txt
+!public/llms.txt
+!src/app/llms-full.txt/
 
 # misc
 brainstorm/
