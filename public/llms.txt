@@ -1,0 +1,16 @@
+# David Griffin — Davie3
+
+> Personal site of David Griffin (Davie3), a System Development Engineer at Twitch building cloud-native systems with TypeScript, Node.js, and AWS. This site covers my background, skills, open-source projects, and contact information.
+
+## Pages
+
+- [Home](https://davie3.com/): Landing page with intro and links to the main sections.
+- [About](https://davie3.com/about): Bio, career journey, skills, professional experience, and education.
+- [Portfolio](https://davie3.com/portfolio): Public open-source projects pulled live from my GitHub profile.
+- [Contact](https://davie3.com/contact): Contact form to get in touch.
+
+## Optional
+
+- [Privacy Policy](https://davie3.com/privacy): How I collect, use, and protect visitor data, including third-party services, retention, and rights.
+- [GitHub profile](https://github.com/davie3): Source of the projects shown on the portfolio page.
+- [LinkedIn](https://www.linkedin.com/in/davie3): Professional profile.
