@@ -167,7 +167,7 @@ jobs:
         if: steps.check-approval.outputs.review-decision != 'APPROVED' && steps.check-automerge.outputs.should-merge == 'true'
         id: wait-for-checks
         continue-on-error: true
-        uses: lewagon/wait-on-check-action@v1.6.1
+        uses: lewagon/wait-on-check-action@v1.7.0
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           repo-token: ${{ secrets.GITHUB_TOKEN }}
