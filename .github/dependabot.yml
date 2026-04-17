@@ -10,6 +10,12 @@ updates:
     labels:
       - 'dependencies'
 
+    ignore:
+      # Keep @types/node aligned with the Node runtime in package.json `engines`.
+      - dependency-name: '@types/node'
+        update-types:
+          - 'version-update:semver-major'
+
     groups:
       # Security updates (all dependencies, auto-merge)
       security-updates:

@@ -23,8 +23,9 @@
     ]
   },
   "overrides": {
-    "@types/react": "^19.2.2",
-    "@types/react-dom": "^19.2.2"
+    "eslint-plugin-jsx-a11y": {
+      "eslint": "$eslint"
+    }
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
@@ -48,19 +49,20 @@
     "zod": "^4.3.6"
   },
   "devDependencies": {
-    "@next/eslint-plugin-next": "^16.2.1",
+    "@eslint/js": "^10.0.1",
+    "@next/eslint-plugin-next": "^16.2.4",
     "@tailwindcss/postcss": "^4.2.2",
-    "@types/node": "^25",
+    "@types/node": "^24.12.2",
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.2",
     "@types/sanitize-html": "^2.16.1",
-    "eslint": "^9.39.2",
+    "eslint": "^10.2.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-import-resolver-typescript": "^4.4.4",
     "eslint-plugin-import-x": "^4.16.2",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-prettier": "^5.5.5",
-    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-hooks": "^7.1.0",
     "husky": "^9.1.7",
     "lint-staged": "^16.4.0",
     "prettier": "^3.8.3",
@@ -68,8 +70,8 @@
     "prettier-plugin-sh": "^0.18.1",
     "prettier-plugin-tailwindcss": "^0.7.2",
     "tailwindcss": "^4.1.13",
-    "typescript": "^5.9.3",
-    "typescript-eslint": "^8.57.1"
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.58.2"
   },
   "engines": {
     "node": "24.x",

@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { motion, useReducedMotion } from 'framer-motion';
 import { CircleCheck, Mail, MessageSquare, User } from 'lucide-react';
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 
 import { Alert } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
@@ -22,6 +22,30 @@ import { CONTACT_FORM_SCHEMA } from '@/types/form-types';
 
 import type { ContactFormValues } from '@/types/form-types';
 import type { JSX } from 'react';
+import type { Control, UseFormRegister } from 'react-hook-form';
+
+type MessageFieldProps = {
+  control: Control<ContactFormValues>;
+  register: UseFormRegister<ContactFormValues>;
+  hasError: boolean;
+};
+
+function MessageField({ control, register, hasError }: MessageFieldProps): JSX.Element {
+  const messageValue = useWatch({ control, name: 'message', defaultValue: '' });
+
+  return (
+    <Textarea
+      id="message"
+      {...register('message')}
+      variant={hasError ? 'error' : 'default'}
+      placeholder={CONTACT_FORM.PLACEHOLDER_MESSAGE}
+      rows={6}
+      maxLength={CONTACT_FORM_CONSTRAINTS.MESSAGE.MAX_LENGTH}
+      showCharCount
+      value={messageValue}
+    />
+  );
+}
 
 /**
  * Client-side contact form component with validation and submission handling.
@@ -58,12 +82,10 @@ export default function ContactForm(): JSX.Element {
     handleSubmit,
     formState: { errors },
     reset,
-    watch,
+    control,
   } = useForm<ContactFormValues>({
     resolver: zodResolver(CONTACT_FORM_SCHEMA),
   });
-
-  const messageValue = watch('message', '');
 
   const onSubmit = async (data: ContactFormValues) => {
     if (!token) {
@@ -231,15 +253,10 @@ export default function ContactForm(): JSX.Element {
               error={errors.message?.message}
               required
             >
-              <Textarea
-                id="message"
-                {...register('message')}
-                variant={errors.message ? 'error' : 'default'}
-                placeholder={CONTACT_FORM.PLACEHOLDER_MESSAGE}
-                rows={6}
-                maxLength={CONTACT_FORM_CONSTRAINTS.MESSAGE.MAX_LENGTH}
-                showCharCount
-                value={messageValue}
+              <MessageField
+                control={control}
+                register={register}
+                hasError={Boolean(errors.message)}
               />
             </FormField>
           </motion.div>
