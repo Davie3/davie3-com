@@ -7,6 +7,11 @@ updates:
     open-pull-requests-limit: 10
     versioning-strategy: auto
 
+    # Supply chain protection: delay version-update PRs by 7 days.
+    # Security update PRs bypass this cooldown automatically.
+    cooldown:
+      default-days: 7
+
     labels:
       - 'dependencies'
 
@@ -196,6 +201,8 @@ updates:
     directory: '/'
     schedule:
       interval: 'weekly'
+    cooldown:
+      default-days: 7
     labels:
       - 'dependencies'
       - 'github-actions'
