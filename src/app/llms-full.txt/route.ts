@@ -11,16 +11,16 @@ function buildLlmsFullText(): string {
   const baseUrl = EXTERNAL_URLS.MAIN;
 
   const experienceBlocks = EXPERIENCES.map(
-    (exp) => `**${exp.role} — ${exp.company} (${exp.period})**\n${exp.description}`,
+    (exp) => `**${exp.role} - ${exp.company} (${exp.period})**\n${exp.description}`,
   ).join('\n\n');
 
   const educationBlocks = EDUCATION.map(
-    (edu) => `- ${edu.degree} — ${edu.institution} (${edu.period})`,
+    (edu) => `- ${edu.degree} - ${edu.institution} (${edu.period})`,
   ).join('\n');
 
   const skillsList = SKILLS.map((skill) => `- ${skill}`).join('\n');
 
-  return `# ${PERSONAL_INFO.FULL_NAME} — ${PERSONAL_INFO.NICKNAME}
+  return `# ${PERSONAL_INFO.FULL_NAME} - ${PERSONAL_INFO.NICKNAME}
 
 > Personal site of ${PERSONAL_INFO.FULL_NAME} (${PERSONAL_INFO.NICKNAME}), a ${PROFESSIONAL_TITLES.CURRENT} at Twitch building cloud-native systems with TypeScript, Node.js, and AWS. This site covers background, skills, open-source projects, and contact information.
 
@@ -28,7 +28,7 @@ function buildLlmsFullText(): string {
 
 URL: ${baseUrl}${INTERNAL_ROUTES.HOME}
 
-${PERSONAL_INFO.FULL_NAME} — ${PROFESSIONAL_TITLES.CURRENT}.
+${PERSONAL_INFO.FULL_NAME} - ${PROFESSIONAL_TITLES.CURRENT}.
 
 ${PAGE_DESCRIPTIONS.HOME_DESCRIPTION}
 
