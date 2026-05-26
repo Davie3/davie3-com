@@ -3,7 +3,11 @@ import { useEffect, useRef, type RefObject } from 'react';
 const FOCUSABLE_SELECTOR =
   'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
-export function useFocusTrap(containerRef: RefObject<HTMLElement | null>, isActive: boolean): void {
+export function useFocusTrap(
+  containerRef: RefObject<HTMLElement | null>,
+  isActive: boolean,
+  onEscape?: () => void,
+): void {
   const previousFocusRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
@@ -23,8 +27,9 @@ export function useFocusTrap(containerRef: RefObject<HTMLElement | null>, isActi
 
     const handleKeyDown = (e: KeyboardEvent): void => {
       if (e.key === 'Escape') {
-        // Restore focus to trigger element — the component handles closing
+        // Restore focus to the trigger element, then let the caller close.
         previousFocusRef.current?.focus();
+        onEscape?.();
         return;
       }
 
@@ -52,5 +57,5 @@ export function useFocusTrap(containerRef: RefObject<HTMLElement | null>, isActi
       // Restore focus when trap deactivates
       previousFocusRef.current?.focus();
     };
-  }, [isActive, containerRef]);
+  }, [isActive, containerRef, onEscape]);
 }

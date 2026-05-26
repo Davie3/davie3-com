@@ -11,17 +11,8 @@ import { useLockBody } from '@/hooks/use-lock-body';
 
 export function ClientMobileNav(): JSX.Element {
   const [isOpen, setIsOpen] = useState(false);
-  const [mounted] = useState(true);
   const pathname = usePathname();
   const dialogRef = useRef<HTMLDivElement>(null);
-  useLockBody(isOpen);
-  useFocusTrap(dialogRef, isOpen);
-
-  // Close menu when pathname changes - intentional pattern for navigation reset
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setIsOpen(false);
-  }, [pathname]);
 
   const toggleMenu = useCallback((): void => {
     setIsOpen((prev) => !prev);
@@ -31,17 +22,15 @@ export function ClientMobileNav(): JSX.Element {
     setIsOpen(false);
   }, []);
 
-  // Close on Escape key
+  useLockBody(isOpen);
+  // Focus trap also handles Escape: it restores focus to the trigger, then closes the menu.
+  useFocusTrap(dialogRef, isOpen, closeMenu);
+
+  // Close menu when pathname changes - intentional pattern for navigation reset
   useEffect(() => {
-    if (!isOpen) return;
-    const handleKeyDown = (e: KeyboardEvent): void => {
-      if (e.key === 'Escape') closeMenu();
-    };
-    document.addEventListener('keydown', handleKeyDown);
-    return () => {
-      document.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [isOpen, closeMenu]);
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setIsOpen(false);
+  }, [pathname]);
 
   const mobileMenu = (
     <div className={`mobile-menu-overlay ${isOpen ? 'open' : ''}`}>
@@ -126,10 +115,7 @@ export function ClientMobileNav(): JSX.Element {
         </div>
       </button>
 
-      {mounted &&
-        typeof document !== 'undefined' &&
-        isOpen &&
-        createPortal(mobileMenu, document.body)}
+      {isOpen && typeof document !== 'undefined' && createPortal(mobileMenu, document.body)}
     </div>
   );
 }
