@@ -8,7 +8,7 @@ import { CLOUDFLARE_API } from '@/constants/config/external-api-config';
 import { getServerEnv } from '@/env';
 import { formatEmailTimestamp } from '@/lib/utils/date-utils';
 import { renderContactFormTemplate, generateContactFormText } from '@/lib/utils/email-template';
-import { sanitizeInput } from '@/lib/utils/sanitize';
+import { sanitizeToPlainText } from '@/lib/utils/sanitize';
 import { CONTACT_FORM_FIELDS, emailsMatch, EMAILS_MATCH_ERROR } from '@/types/form-types';
 
 import type { NextRequest } from 'next/server';
@@ -62,10 +62,13 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       );
     }
 
-    const sanitizedName = sanitizeInput(name);
-    const sanitizedEmail = sanitizeInput(email);
-    const sanitizedSubject = sanitizeInput(subject);
-    const sanitizedMessage = sanitizeInput(message);
+    // Strip markup to clean plain text. HTML-escaping happens later, only when
+    // these values are interpolated into the HTML email template — escaping here
+    // would corrupt the subject/replyTo headers and the plain-text body.
+    const sanitizedName = sanitizeToPlainText(name);
+    const sanitizedEmail = sanitizeToPlainText(email);
+    const sanitizedSubject = sanitizeToPlainText(subject);
+    const sanitizedMessage = sanitizeToPlainText(message);
 
     const timestamp = formatEmailTimestamp();
 

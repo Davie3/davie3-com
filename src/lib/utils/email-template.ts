@@ -2,25 +2,31 @@ import { readFileSync } from 'fs';
 import { join } from 'path';
 
 import { EMAIL_CONFIG } from '@/constants/config/email-config';
+import { escapeHtml } from '@/lib/utils/sanitize';
 
 import type { ContactFormTemplateData } from '@/types/email-types';
 
 /**
  * Renders the contact form email template with provided data.
+ *
+ * Values arrive as clean plain text (markup already stripped upstream), so we
+ * HTML-escape each one here — at the HTML boundary — before interpolating it
+ * into the template. The message is escaped first, then its newlines become
+ * `<br>` tags (escaping after would neutralize the breaks).
  */
 export const renderContactFormTemplate = (data: ContactFormTemplateData): string => {
   const templatePath = join(process.cwd(), 'src/templates/email/contact-form.html');
   const template = readFileSync(templatePath, 'utf-8');
 
-  // Convert newlines to HTML breaks for proper email display
-  const messageWithBreaks = data.message.replace(/\n/g, '<br>');
+  // Escape, then convert newlines to HTML breaks for proper email display.
+  const messageWithBreaks = escapeHtml(data.message).replace(/\n/g, '<br>');
 
   return template
-    .replace(/\{\{name\}\}/g, data.name)
-    .replace(/\{\{email\}\}/g, data.email)
-    .replace(/\{\{subject\}\}/g, data.subject)
+    .replace(/\{\{name\}\}/g, escapeHtml(data.name))
+    .replace(/\{\{email\}\}/g, escapeHtml(data.email))
+    .replace(/\{\{subject\}\}/g, escapeHtml(data.subject))
     .replace(/\{\{message\}\}/g, messageWithBreaks)
-    .replace(/\{\{timestamp\}\}/g, data.timestamp);
+    .replace(/\{\{timestamp\}\}/g, escapeHtml(data.timestamp));
 };
 
 /**

@@ -1,18 +1,23 @@
+import { decode } from 'entities';
 import sanitizeHtml from 'sanitize-html';
-import xss from 'xss';
 
 /**
- * Sanitizes user input to prevent XSS attacks and HTML injection.
+ * Strips all HTML/script content from user input and returns clean **plain text**.
  *
- * Two-pass defense: first strip all HTML via sanitize-html (no tags, attributes,
- * or URL schemes permitted), then run the result through xss as defense-in-depth.
+ * sanitize-html removes every tag, attribute, and URL scheme; we then decode the
+ * HTML entities it emits (e.g. `&amp;` -> `&`) back to raw characters. Decoding is
+ * safe because the dangerous structure (tags/scripts) has already been discarded —
+ * so the result cannot reintroduce markup.
+ *
+ * Use this for plain-text sinks where HTML escaping would corrupt the value:
+ * email headers (`subject`, `replyTo`) and the plain-text email body.
+ * `o'neill@example.com` and `Tom & Jerry` survive unchanged; `<script>` is removed.
  *
  * @param input - The string to sanitize
- * @returns Sanitized string safe for use in emails and responses
+ * @returns Clean plain-text string with markup removed
  */
-export function sanitizeInput(input: string): string {
-  // First pass: strip all HTML tags
-  const htmlStripped = sanitizeHtml(input, {
+export function sanitizeToPlainText(input: string): string {
+  const stripped = sanitizeHtml(input, {
     allowedTags: [], // No HTML tags allowed
     allowedAttributes: {}, // No attributes allowed
     disallowedTagsMode: 'discard', // Remove disallowed tags entirely
@@ -23,10 +28,24 @@ export function sanitizeInput(input: string): string {
     enforceHtmlBoundary: false,
   });
 
-  // Second pass: additional XSS protection
-  return xss(htmlStripped, {
-    allowList: {}, // No tags allowed
-    stripIgnoreTag: true,
-    stripIgnoreTagBody: ['script'],
-  }).trim();
+  return decode(stripped).trim();
+}
+
+/**
+ * Escapes a plain-text string for safe interpolation into HTML.
+ *
+ * Apply this only at the HTML boundary (i.e. when injecting a sanitized value
+ * into the HTML email template), so that characters like `&`, `<`, and quotes
+ * render literally instead of being interpreted as markup.
+ *
+ * @param input - Plain-text string (should already be run through {@link sanitizeToPlainText})
+ * @returns HTML-escaped string
+ */
+export function escapeHtml(input: string): string {
+  return input
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
 }

@@ -30,6 +30,18 @@ describe('renderContactFormTemplate', () => {
     const html = renderContactFormTemplate(data);
     expect(html).not.toMatch(/\{\{\w+\}\}/);
   });
+
+  it('HTML-escapes interpolated values at the HTML boundary', () => {
+    const html = renderContactFormTemplate({
+      ...data,
+      name: 'Tom & Jerry',
+      message: 'a < b & c',
+    });
+    expect(html).toContain('Tom &amp; Jerry');
+    expect(html).toContain('a &lt; b &amp; c');
+    // The raw, unescaped form must not leak into the markup.
+    expect(html).not.toContain('Tom & Jerry');
+  });
 });
 
 describe('generateContactFormText', () => {
@@ -40,5 +52,11 @@ describe('generateContactFormText', () => {
     expect(text).toContain('Nanoseconds');
     expect(text).toContain('Line one');
     expect(text).toContain(data.timestamp);
+  });
+
+  it('does NOT HTML-escape the plain-text version', () => {
+    const text = generateContactFormText({ ...data, name: 'Tom & Jerry' });
+    expect(text).toContain('Tom & Jerry');
+    expect(text).not.toContain('Tom &amp; Jerry');
   });
 });
