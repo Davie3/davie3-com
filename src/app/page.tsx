@@ -25,7 +25,7 @@ export default function Home(): JSX.Element {
           {/* Left column - Typography dominance */}
           <div className="space-y-6 lg:col-span-7">
             {/* Name - Huge serif display */}
-            <h1 className="font-display text-cream text-7xl leading-[0.9] tracking-tight sm:text-8xl md:text-9xl lg:text-[10rem]">
+            <h1 className="font-display text-cream text-7xl leading-[0.9] tracking-tight sm:text-8xl md:text-9xl lg:text-[9rem] xl:text-[10rem]">
               David
               <br />
               <span className="text-electric-cyan">Griffin</span>

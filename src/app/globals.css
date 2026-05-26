@@ -157,6 +157,27 @@ a:hover {
   text-shadow: 0 0 8px rgba(0, 212, 255, 0.3);
 }
 
+/**
+ * Opt-in animated underline for prose / text links.
+ *
+ * Applied via className (not the global `a` rule) so it never collides with
+ * nav links, button-styled links, or card links that own their hover states.
+ * Uses a background-image gradient that grows from left on hover; the global
+ * prefers-reduced-motion block already neutralizes the transition.
+ */
+.link-underline {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  background-size: 0% 1.5px;
+  transition: background-size 0.25s ease;
+}
+
+.link-underline:hover,
+.link-underline:focus-visible {
+  background-size: 100% 1.5px;
+}
+
 /* Glass morphism effect - Updated for Midnight Industrial */
 .glass {
   background: rgba(21, 34, 56, 0.7);
