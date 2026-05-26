@@ -11,6 +11,9 @@
     "lint": "eslint .",
     "prepare": "husky",
     "start": "next start",
+    "test": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "test:run": "vitest run",
     "type-check": "tsc --noEmit"
   },
   "lint-staged": {
@@ -56,6 +59,7 @@
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.2",
     "@types/sanitize-html": "^2.16.1",
+    "@vitest/coverage-v8": "^4.1.6",
     "eslint": "^10.4.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-import-resolver-typescript": "^4.4.4",
@@ -71,7 +75,8 @@
     "prettier-plugin-tailwindcss": "^0.8.0",
     "tailwindcss": "^4.1.13",
     "typescript": "^6.0.3",
-    "typescript-eslint": "^8.59.4"
+    "typescript-eslint": "^8.59.4",
+    "vitest": "^4.1.6"
   },
   "engines": {
     "node": "24.x",
