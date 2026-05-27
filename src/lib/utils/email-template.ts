@@ -21,12 +21,15 @@ export const renderContactFormTemplate = (data: ContactFormTemplateData): string
   // Escape, then convert newlines to HTML breaks for proper email display.
   const messageWithBreaks = escapeHtml(data.message).replace(/\n/g, '<br>');
 
+  // Use function replacements: string replacements would interpret `$&`, `$$`,
+  // etc. in the (user-supplied) value as special patterns. Callbacks insert the
+  // string literally.
   return template
-    .replace(/\{\{name\}\}/g, escapeHtml(data.name))
-    .replace(/\{\{email\}\}/g, escapeHtml(data.email))
-    .replace(/\{\{subject\}\}/g, escapeHtml(data.subject))
-    .replace(/\{\{message\}\}/g, messageWithBreaks)
-    .replace(/\{\{timestamp\}\}/g, escapeHtml(data.timestamp));
+    .replace(/\{\{name\}\}/g, () => escapeHtml(data.name))
+    .replace(/\{\{email\}\}/g, () => escapeHtml(data.email))
+    .replace(/\{\{subject\}\}/g, () => escapeHtml(data.subject))
+    .replace(/\{\{message\}\}/g, () => messageWithBreaks)
+    .replace(/\{\{timestamp\}\}/g, () => escapeHtml(data.timestamp));
 };
 
 /**

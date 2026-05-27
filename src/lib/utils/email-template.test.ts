@@ -31,6 +31,23 @@ describe('renderContactFormTemplate', () => {
     expect(html).not.toMatch(/\{\{\w+\}\}/);
   });
 
+  it('inserts special $-patterns literally (no replacement-pattern expansion)', () => {
+    // `$&`, `$$`, etc. in user input must not be treated as regex replacement
+    // patterns — otherwise they expand to the matched placeholder text.
+    const html = renderContactFormTemplate({
+      ...data,
+      name: '$&',
+      subject: 'cost $$ today',
+      message: "weird $' and $` chars",
+    });
+    expect(html).not.toContain('{{name}}');
+    expect(html).not.toContain('{{subject}}');
+    expect(html).not.toContain('{{message}}');
+    // The `&` in `$&` is escaped, so the literal value lands as `$&amp;`.
+    expect(html).toContain('$&amp;');
+    expect(html).toContain('cost $$ today');
+  });
+
   it('HTML-escapes interpolated values at the HTML boundary', () => {
     const html = renderContactFormTemplate({
       ...data,
