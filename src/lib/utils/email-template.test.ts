@@ -1,5 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
+import { EMAIL_CONFIG } from '@/constants/config/email-config';
+
 import { generateContactFormText, renderContactFormTemplate } from './email-template';
 
 import type { ContactFormTemplateData } from '@/types/email-types';
@@ -59,6 +61,16 @@ describe('renderContactFormTemplate', () => {
     // The raw, unescaped form must not leak into the markup.
     expect(html).not.toContain('Tom & Jerry');
   });
+
+  it('stays clean: no emoji chrome and no monospace message font', () => {
+    // The template is quoted back to the sender when David replies, so it must
+    // read as plain professional prose — guard against reintroducing the old
+    // emoji header/labels or the code-style message font.
+    const html = renderContactFormTemplate(data);
+    expect(html).not.toMatch(/\p{Extended_Pictographic}/u);
+    expect(html).not.toContain('SF Mono');
+    expect(html).not.toContain('monospace');
+  });
 });
 
 describe('generateContactFormText', () => {
@@ -75,5 +87,12 @@ describe('generateContactFormText', () => {
     const text = generateContactFormText({ ...data, name: 'Tom & Jerry' });
     expect(text).toContain('Tom & Jerry');
     expect(text).not.toContain('Tom &amp; Jerry');
+  });
+});
+
+describe('EMAIL_CONFIG.CONTACT_FORM.SUBJECT_TEMPLATE', () => {
+  it('formats the subject as "[davie3.com] {subject} — {name}"', () => {
+    const subject = EMAIL_CONFIG.CONTACT_FORM.SUBJECT_TEMPLATE('Project inquiry', 'Jane Doe');
+    expect(subject).toBe('[davie3.com] Project inquiry — Jane Doe');
   });
 });

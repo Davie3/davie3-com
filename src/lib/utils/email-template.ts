@@ -24,11 +24,17 @@ export const renderContactFormTemplate = (data: ContactFormTemplateData): string
   // Use function replacements: string replacements would interpret `$&`, `$$`,
   // etc. in the (user-supplied) value as special patterns. Callbacks insert the
   // string literally.
+  //
+  // The message lands in a `white-space: pre-wrap` block, so the template's own
+  // indentation around the `{{message}}` placeholder would render as visible
+  // whitespace. Consume that surrounding whitespace in the match (the formatter
+  // keeps the placeholder on its own indented line) so only the sender's text
+  // — and its internal breaks — survives.
   return template
     .replace(/\{\{name\}\}/g, () => escapeHtml(data.name))
     .replace(/\{\{email\}\}/g, () => escapeHtml(data.email))
     .replace(/\{\{subject\}\}/g, () => escapeHtml(data.subject))
-    .replace(/\{\{message\}\}/g, () => messageWithBreaks)
+    .replace(/>\s*\{\{message\}\}\s*<\/div>/, () => `>${messageWithBreaks}</div>`)
     .replace(/\{\{timestamp\}\}/g, () => escapeHtml(data.timestamp));
 };
 
@@ -53,5 +59,6 @@ ${data.message}
 
 ${TEXT_TEMPLATE.DIVIDER}
 ${TEXT_TEMPLATE.FOOTER_TEMPLATE(data.name)}
+${TEXT_TEMPLATE.SIGNATURE}
   `.trim();
 };

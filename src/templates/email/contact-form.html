@@ -1,184 +1,202 @@
 <!doctype html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light dark" />
     <meta name="supported-color-schemes" content="light dark" />
-    <title>Contact Form Submission</title>
+    <title>New contact form message</title>
     <style>
       @media (prefers-color-scheme: dark) {
-        .header-bg {
-          background: #1a202c !important;
+        .body-bg {
+          background-color: #0f1115 !important;
         }
-        .header-text {
-          color: #ffffff !important;
+        .card {
+          background-color: #181b21 !important;
+          border-color: #2a2f3a !important;
         }
-        .header-subtitle {
-          color: #e2e8f0 !important;
+        .title {
+          color: #f3f4f6 !important;
+        }
+        .label,
+        .footer {
+          color: #9aa3b2 !important;
+        }
+        .value,
+        .message {
+          color: #e5e7eb !important;
+        }
+        .divider {
+          border-color: #2a2f3a !important;
+        }
+        .link {
+          color: #6ea8fe !important;
         }
       }
     </style>
   </head>
   <body
+    class="body-bg"
     style="
+      margin: 0;
+      padding: 24px;
+      background-color: #f4f5f7;
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
       line-height: 1.6;
-      color: #2d3748;
-      margin: 0;
-      padding: 20px;
-      background-color: #f7fafc;
+      color: #1f2933;
     "
   >
-    <div
-      style="
-        max-width: 600px;
-        margin: 0 auto;
-        background: white;
-        border-radius: 12px;
-        overflow: hidden;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-      "
-    >
-      <!-- Header -->
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td
-            bgcolor="#1f1f1f"
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+      <tr>
+        <td align="center">
+          <table
+            role="presentation"
+            class="card"
+            width="100%"
+            cellpadding="0"
+            cellspacing="0"
+            border="0"
             style="
-              background: #1f1f1f !important;
-              background-color: #1f1f1f !important;
-              color: #fefefe !important;
-              padding: 40px 30px;
-              text-align: center;
+              max-width: 600px;
+              background-color: #ffffff;
+              border: 1px solid #e3e6ea;
+              border-radius: 10px;
             "
           >
-            <h1
-              style="
-                margin: 0;
-                font-size: 28px;
-                font-weight: 600;
-                letter-spacing: -0.025em;
-                color: #fefefe !important;
-              "
-            >
-              💬 New Contact Message
-            </h1>
-            <p style="margin: 12px 0 0 0; font-size: 16px; color: #efefef !important">davie3.com</p>
-          </td>
-        </tr>
-      </table>
-
-      <!-- Content -->
-      <div style="padding: 30px">
-        <!-- Contact Details -->
-        <div
-          style="
-            background: #f8fafc;
-            padding: 24px;
-            margin-bottom: 24px;
-            border-radius: 8px;
-            border: 1px solid #e2e8f0;
-          "
-        >
-          <h2
-            style="
-              margin: 0 0 18px 0;
-              color: #1a202c;
-              font-size: 18px;
-              font-weight: 600;
-              border-bottom: 2px solid #e2e8f0;
-              padding-bottom: 12px;
-            "
-          >
-            Contact Details
-          </h2>
-
-          <table style="width: 100%; border-collapse: collapse">
+            <!-- Header -->
             <tr>
-              <td style="padding: 12px 0; width: 100px; color: #4a5568; font-weight: 600">
-                👤 Name:
-              </td>
-              <td style="padding: 12px 0; color: #1a202c; font-weight: 500">{{name}}</td>
-            </tr>
-            <tr>
-              <td style="padding: 12px 0; width: 100px; color: #4a5568; font-weight: 600">
-                📧 Email:
-              </td>
-              <td style="padding: 12px 0">
-                <a
-                  href="mailto:{{email}}"
-                  style="color: #3182ce; text-decoration: none; font-weight: 500"
-                  >{{email}}</a
+              <td style="padding: 28px 32px 0 32px">
+                <p
+                  class="title"
+                  style="margin: 0; font-size: 18px; font-weight: 600; color: #1f2933"
                 >
+                  New message from your contact form
+                </p>
               </td>
             </tr>
+
+            <!-- Details -->
             <tr>
-              <td style="padding: 12px 0; width: 100px; color: #4a5568; font-weight: 600">
-                📝 Subject:
+              <td style="padding: 24px 32px 4px 32px">
+                <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                  <tr>
+                    <td
+                      class="label"
+                      width="96"
+                      valign="top"
+                      style="padding: 6px 0; font-size: 14px; color: #6b7280; font-weight: 600"
+                    >
+                      Name
+                    </td>
+                    <td
+                      class="value"
+                      valign="top"
+                      style="padding: 6px 0; font-size: 14px; color: #1f2933"
+                    >
+                      {{name}}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td
+                      class="label"
+                      width="96"
+                      valign="top"
+                      style="padding: 6px 0; font-size: 14px; color: #6b7280; font-weight: 600"
+                    >
+                      Email
+                    </td>
+                    <td valign="top" style="padding: 6px 0; font-size: 14px">
+                      <a
+                        href="mailto:{{email}}"
+                        class="link"
+                        style="color: #2563eb; text-decoration: none"
+                        >{{email}}</a
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td
+                      class="label"
+                      width="96"
+                      valign="top"
+                      style="padding: 6px 0; font-size: 14px; color: #6b7280; font-weight: 600"
+                    >
+                      Subject
+                    </td>
+                    <td
+                      class="value"
+                      valign="top"
+                      style="padding: 6px 0; font-size: 14px; color: #1f2933"
+                    >
+                      {{subject}}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td
+                      class="label"
+                      width="96"
+                      valign="top"
+                      style="padding: 6px 0; font-size: 14px; color: #6b7280; font-weight: 600"
+                    >
+                      Received
+                    </td>
+                    <td
+                      class="value"
+                      valign="top"
+                      style="padding: 6px 0; font-size: 14px; color: #1f2933"
+                    >
+                      {{timestamp}}
+                    </td>
+                  </tr>
+                </table>
               </td>
-              <td style="padding: 12px 0; color: #1a202c; font-weight: 500">{{subject}}</td>
             </tr>
+
+            <!-- Divider -->
             <tr>
-              <td style="padding: 12px 0; color: #4a5568; font-weight: 600">🕒 Time:</td>
-              <td style="padding: 12px 0; color: #718096; font-size: 14px">{{timestamp}}</td>
+              <td style="padding: 20px 32px 0 32px">
+                <hr
+                  class="divider"
+                  style="border: none; border-top: 1px solid #e3e6ea; margin: 0"
+                />
+              </td>
+            </tr>
+
+            <!-- Message -->
+            <tr>
+              <td style="padding: 20px 32px 0 32px">
+                <p
+                  class="label"
+                  style="margin: 0 0 10px 0; font-size: 14px; color: #6b7280; font-weight: 600"
+                >
+                  Message
+                </p>
+                <div
+                  class="message"
+                  style="
+                    font-size: 15px;
+                    line-height: 1.6;
+                    color: #1f2933;
+                    white-space: pre-wrap;
+                    word-break: break-word;
+                  "
+                >
+                  {{message}}
+                </div>
+              </td>
+            </tr>
+
+            <!-- Footer -->
+            <tr>
+              <td style="padding: 28px 32px 28px 32px">
+                <p class="footer" style="margin: 0; font-size: 12px; color: #9ca3af">
+                  Sent from the davie3.com contact form
+                </p>
+              </td>
             </tr>
           </table>
-        </div>
-
-        <!-- Message -->
-        <div
-          style="
-            background: #f8fafc;
-            padding: 24px;
-            margin-bottom: 24px;
-            border-radius: 8px;
-            border: 1px solid #e2e8f0;
-          "
-        >
-          <h2
-            style="
-              margin: 0 0 18px 0;
-              color: #1a202c;
-              font-size: 18px;
-              font-weight: 600;
-              border-bottom: 2px solid #e2e8f0;
-              padding-bottom: 12px;
-            "
-          >
-            💭 Message
-          </h2>
-          <div
-            style="
-              background: white;
-              padding: 20px;
-              border-radius: 6px;
-              border-left: 4px solid #3182ce;
-              white-space: pre-wrap;
-              font-family: 'SF Mono', Monaco, Consolas, monospace;
-              font-size: 14px;
-              line-height: 1.5;
-              color: #2d3748;
-            "
-          >
-            {{message}}
-          </div>
-        </div>
-
-        <!-- Quick Reply Notice -->
-        <div
-          style="
-            background: #fef5e7;
-            border: 1px solid #f6ad55;
-            padding: 18px;
-            border-radius: 8px;
-            color: #744210;
-          "
-        >
-          <strong style="color: #744210">💡 Quick Reply:</strong> Simply reply to this email to
-          respond directly to {{name}}.
-        </div>
-      </div>
-    </div>
+        </td>
+      </tr>
+    </table>
   </body>
 </html>
