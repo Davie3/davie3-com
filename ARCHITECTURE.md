@@ -57,6 +57,21 @@ npm run fix          # Run format + lint --fix
 - Run `npm install` after pulling changes
 - CI/CD validates compatibility
 
+### Component Library Strategy
+
+- **Current:** No component library. UI primitives in `src/components/ui/` are
+  hand-built — they are cohesive, accessible (ARIA, focus management), and match
+  the "Midnight Industrial" palette exactly. At the current scope this is simpler
+  than adopting and customizing a library.
+- **Icon libraries (both intentional, not redundant):**
+  - `lucide-react` — UI glyphs (arrows, mail, stars, etc.)
+  - `react-icons` — brand logos Lucide lacks (GitHub, X, Bluesky, Twitch, …),
+    used only in `src/utils/social-icons.tsx`
+- **When to revisit:** adopt **shadcn/ui** (Radix + Tailwind, copy-paste, React 19
+  compatible — best fit for this stack) once complex primitives are needed:
+  Dialog, Select, Dropdown, Tabs, Tooltip, Popover, or a data table. Until then,
+  keep building bespoke components.
+
 ## File Organization
 
 ```

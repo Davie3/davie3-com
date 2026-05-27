@@ -24,7 +24,7 @@ export function AppHeader(): JSX.Element {
   return (
     <header className="glass app-header-animation border-electric-cyan/10 fixed top-0 right-0 left-0 z-50 border-b">
       <nav
-        className="container mx-auto flex items-center justify-between p-4"
+        className="container mx-auto flex items-center justify-between p-4 pt-[max(1rem,env(safe-area-inset-top))]"
         aria-label="Main navigation"
       >
         <Link href="/" className="group flex items-center gap-2" aria-label="DG - Go to homepage">
@@ -43,7 +43,7 @@ export function AppHeader(): JSX.Element {
                   href={link.href}
                   target={link.openInNewTab ? '_blank' : undefined}
                   rel={link.openInNewTab ? 'noopener noreferrer' : undefined}
-                  className="text-cream hover:text-electric-cyan relative px-4 py-2 font-medium transition-all duration-300"
+                  className="text-cream hover:text-electric-cyan relative px-5 py-3 font-medium transition-all duration-300"
                 >
                   {link.name}
                 </ClientNavLink>

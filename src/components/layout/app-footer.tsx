@@ -63,7 +63,7 @@ export function AppFooter(): JSX.Element {
                   href="https://github.com/Davie3"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-cream hover:text-electric-cyan block font-semibold transition-colors duration-300"
+                  className="link-underline text-cream hover:text-electric-cyan inline-block font-semibold transition-colors duration-300"
                 >
                   David Griffin
                 </a>

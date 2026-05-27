@@ -6,11 +6,19 @@ import { SITE_METADATA } from '@/constants/config/site-metadata';
 import { fontVariables } from '@/lib/fonts';
 import { shouldEnableAnalytics } from '@/lib/utils/environment';
 
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import type { JSX } from 'react';
 import './globals.css';
 
 export const metadata: Metadata = SITE_METADATA;
+
+/**
+ * `viewport-fit=cover` lets content extend into the iOS safe-area (notch /
+ * home indicator); components opt back in with `env(safe-area-inset-*)`.
+ */
+export const viewport: Viewport = {
+  viewportFit: 'cover',
+};
 
 export default function RootLayout({
   children,
