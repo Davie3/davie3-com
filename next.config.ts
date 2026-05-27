@@ -23,6 +23,7 @@ const cspHeader = `
         https://vercel.live;
     connect-src 'self'
         cloudflareinsights.com challenges.cloudflare.com *.cloudflare.com
+        https://vitals.vercel-analytics.com
         https://vercel.live *.vercel.app wss://ws-us3.pusher.com;
     worker-src 'self' blob:;
     upgrade-insecure-requests;
