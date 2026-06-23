@@ -1,11 +1,14 @@
 import Image from 'next/image';
 
+import { StructuredData, buildProfilePageNode } from '@/components/seo/structured-data';
 import { BorderedSection } from '@/components/ui/bordered-section';
 import { SectionHeader } from '@/components/ui/section-header';
 import { PAGE_STAGGER_DELAYS } from '@/constants/config/animation-config';
 import { PAGE_METADATA } from '@/constants/config/site-metadata';
 import { SOCIAL_LINKS_DATA } from '@/constants/config/social-config';
 import { EXPERIENCES, EDUCATION, ABOUT_CONTENT, SKILLS } from '@/constants/pages/about-page';
+import { PERSONAL_INFO, PAGE_DESCRIPTIONS } from '@/constants/shared';
+import { INTERNAL_ROUTES } from '@/constants/urls';
 import { getSocialIcon } from '@/utils/social-icons';
 
 import type { Metadata } from 'next';
@@ -22,6 +25,16 @@ export const metadata: Metadata = PAGE_METADATA.ABOUT;
 export default function AboutPage(): JSX.Element {
   return (
     <main className="container mx-auto max-w-6xl px-4 py-16">
+      <StructuredData
+        id="structured-data-about"
+        nodes={[
+          buildProfilePageNode({
+            path: INTERNAL_ROUTES.ABOUT,
+            name: `About ${PERSONAL_INFO.FULL_NAME}`,
+            description: PAGE_DESCRIPTIONS.ABOUT_PAGE_INTRO,
+          }),
+        ]}
+      />
       {/* Hero Section - Editorial style */}
       <section className="relative mb-24">
         <div className="mb-12 grid grid-cols-1 gap-8 md:grid-cols-3">

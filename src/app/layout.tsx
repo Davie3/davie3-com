@@ -28,7 +28,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full">
       <head>
-        <StructuredData pageType="website" />
+        <StructuredData websiteVariant="full" />
         {/* Preconnect hints for analytics domains */}
         {shouldEnableAnalytics && (
           <link
