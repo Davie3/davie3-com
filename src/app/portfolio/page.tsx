@@ -2,6 +2,11 @@ import { ExternalLink, GitFork, Star } from 'lucide-react';
 import Link from 'next/link';
 import { z } from 'zod';
 
+import {
+  StructuredData,
+  buildCollectionPageNode,
+  buildSoftwareApplicationNode,
+} from '@/components/seo/structured-data';
 import { BorderedSection } from '@/components/ui/bordered-section';
 import { Card } from '@/components/ui/card';
 import { SectionHeader } from '@/components/ui/section-header';
@@ -10,6 +15,7 @@ import { EXTERNAL_API } from '@/constants/config/external-api-config';
 import { GITHUB_CONFIG } from '@/constants/config/github-config';
 import { PAGE_METADATA } from '@/constants/config/site-metadata';
 import { PORTFOLIO_PAGE, PORTFOLIO_CONTENT } from '@/constants/pages/portfolio-page';
+import { INTERNAL_ROUTES } from '@/constants/urls';
 import { GITHUB_REPO_SCHEMA } from '@/types/api-types';
 
 import type { GitHubRepo } from '@/types/api-types';
@@ -101,6 +107,17 @@ export default async function PortfolioPage(): Promise<JSX.Element> {
 
   return (
     <main className="container mx-auto max-w-7xl px-4 py-16">
+      <StructuredData
+        id="structured-data-portfolio"
+        nodes={[
+          buildCollectionPageNode({
+            path: INTERNAL_ROUTES.PORTFOLIO,
+            name: PORTFOLIO_PAGE.HEADING,
+            description: PORTFOLIO_CONTENT.HERO_SUBTITLE,
+          }),
+          ...projects.map(buildSoftwareApplicationNode),
+        ]}
+      />
       {/* Hero Section - Editorial */}
       <section className="relative mb-16">
         <div className="space-y-6">
