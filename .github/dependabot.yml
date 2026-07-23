@@ -3,7 +3,8 @@ updates:
   - package-ecosystem: 'npm'
     directory: '/'
     schedule:
-      interval: 'daily'
+      interval: 'weekly'
+      day: 'saturday'
     open-pull-requests-limit: 10
     versioning-strategy: auto
 
@@ -201,6 +202,7 @@ updates:
     directory: '/'
     schedule:
       interval: 'weekly'
+      day: 'saturday'
     cooldown:
       default-days: 7
     labels:
