@@ -38,13 +38,3 @@ export type NavLink = {
 export type GitHubConfig = {
   readonly revalidateInterval: number;
 };
-
-export type SitemapPageConfig = {
-  readonly changeFrequency: 'yearly' | 'monthly' | 'weekly' | 'daily';
-  readonly priority: number;
-};
-
-export type NavigationLinkConfig = {
-  readonly href: string;
-  readonly label: string;
-};

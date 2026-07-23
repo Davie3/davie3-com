@@ -17,7 +17,7 @@ type StructuredDataProps = {
 const ROOT = EXTERNAL_URLS.MAIN;
 const INLANG = 'en';
 
-export const SCHEMA_IDS = {
+const SCHEMA_IDS = {
   website: `${ROOT}/#website`,
   person: `${ROOT}/#person`,
   webpage: (path: string) => `${ROOT}${path}#webpage`,
