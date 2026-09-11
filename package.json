@@ -75,7 +75,7 @@
     "tailwindcss": "^4.1.13",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.68.0",
-    "vitest": "^4.1.6"
+    "vitest": "^5.0.0"
   },
   "engines": {
     "node": "24.x",
