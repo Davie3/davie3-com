@@ -6,7 +6,7 @@ export default defineConfig({
   resolve: {
     alias: {
       // Mirror the `@/*` path alias from tsconfig.json.
-      '@': resolve(__dirname, './src'),
+      '@': resolve(import.meta.dirname, './src'),
     },
   },
   test: {
