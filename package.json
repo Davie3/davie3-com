@@ -32,7 +32,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "5.9.1",
-    "@marsidev/react-turnstile": "1.6.1",
+    "@marsidev/react-turnstile": "1.6.2",
     "@sendgrid/mail": "8.1.6",
     "@vercel/analytics": "2.0.1",
     "@vercel/speed-insights": "2.0.0",
