@@ -1,0 +1,102 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended"],
+  "ignorePresets": [":semanticPrefixFixDepsChoreOthers"],
+  "enabledManagers": ["npm", "mise", "nvm", "github-actions"],
+  "minimumReleaseAge": "7 days",
+  "prHourlyLimit": 0,
+  "labels": ["dependencies"],
+  "reviewers": ["Davie3"],
+  "platformAutomerge": false,
+  "automergeStrategy": "squash",
+  "semanticCommits": "enabled",
+  "semanticCommitType": "chore",
+  "osvVulnerabilityAlerts": true,
+  "vulnerabilityAlerts": { "addLabels": ["security"] },
+  "lockFileMaintenance": { "enabled": true, "automerge": true },
+  "postUpgradeTasks": {
+    "commands": ["npm ci --ignore-scripts", "npm run fix"],
+    "fileFilters": ["**/*"],
+    "executionMode": "branch"
+  },
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["minor", "patch", "pin", "pinDigest", "digest"],
+      "automerge": true
+    },
+    {
+      "description": "Majors always wait for review, including security fixes",
+      "matchUpdateTypes": ["major"],
+      "automerge": false,
+      "addLabels": ["major", "review"]
+    },
+    { "matchUpdateTypes": ["replacement"], "addLabels": ["review"] },
+    {
+      "description": "Lockfile refreshes and pins have no release timestamp, so stability-days would stay pending forever; pins don't change versions, and npm enforces the cooldown for lockfiles via min-release-age in .npmrc",
+      "matchUpdateTypes": ["lockFileMaintenance", "pin"],
+      "minimumReleaseAge": null
+    },
+    {
+      "description": "Pin direct deps to exact versions so lock file maintenance only moves transitive deps",
+      "matchManagers": ["npm"],
+      "matchDepTypes": ["dependencies", "devDependencies"],
+      "rangeStrategy": "pin"
+    },
+    {
+      "matchManagers": ["npm"],
+      "matchDepTypes": ["dependencies"],
+      "semanticCommitType": "deps"
+    },
+    {
+      "matchManagers": ["npm"],
+      "matchDepTypes": ["devDependencies"],
+      "semanticCommitType": "dev-deps"
+    },
+    {
+      "matchManagers": ["github-actions"],
+      "semanticCommitType": "ci"
+    },
+    {
+      "description": "Keep the Node runtime on one version across mise and .nvmrc",
+      "matchPackageNames": ["node"],
+      "groupName": "node"
+    },
+    {
+      "description": "Lint tooling tracks the eslint core",
+      "matchPackageNames": ["eslint", "@eslint/*", "eslint-*", "typescript-eslint"],
+      "groupName": "eslint"
+    },
+    {
+      "description": "Next and its lint plugin release in lockstep",
+      "matchPackageNames": ["next", "@next/eslint-plugin-next"],
+      "groupName": "next"
+    },
+    {
+      "matchPackageNames": ["react", "react-dom", "@types/react", "@types/react-dom"],
+      "groupName": "react"
+    },
+    {
+      "description": "Formatter changes land together so npm run fix reformats once",
+      "matchPackageNames": ["prettier", "prettier-plugin-*"],
+      "groupName": "prettier"
+    },
+    {
+      "matchPackageNames": ["tailwindcss", "@tailwindcss/*"],
+      "groupName": "tailwind"
+    },
+    {
+      "matchPackageNames": ["vitest", "@vitest/*"],
+      "groupName": "vitest"
+    },
+    {
+      "description": "Hold TypeScript on 6.x",
+      "matchPackageNames": ["typescript"],
+      "allowedVersions": "<7"
+    },
+    {
+      "description": "Keep @types/node aligned with the Node 24 runtime",
+      "matchPackageNames": ["@types/node"],
+      "allowedVersions": "<25"
+    }
+  ]
+}

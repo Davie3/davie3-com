@@ -41,15 +41,16 @@ npm run fix          # Run format + lint --fix
 
 ### Version Strategy
 
-- **Next.js Ecosystem:** Exact pinning (`next`)
-- **All Other Dependencies:** Caret ranges (`^x.y.z`)
+- **All Direct Dependencies:** Exact pinning (no `^`/`~`)
+- **Toolchain:** Node and npm pinned in `.mise.toml` and `.nvmrc` (npm also in `engines`)
+- **Updates:** Self-hosted Renovate (`renovate.json`), grouped by ecosystem (Next, React, ESLint, Prettier, Tailwind, Vitest)
 
 ### Rationale
 
-- **Security:** Immediate patch updates without waiting for Dependabot
-- **Reproducibility:** `package-lock.json` ensures consistency
-- **Stability:** Next.js pinning prevents breaking changes
-- **Safety:** CI/CD pipeline catches regressions
+- **Reproducibility:** Exact pins mean weekly lock file maintenance only moves transitive deps
+- **Supply chain:** 7-day cooldown in Renovate (`minimumReleaseAge`) and npm (`min-release-age` in `.npmrc`)
+- **Stability:** Minor/patch PRs automerge once the Vercel check passes; majors wait for review
+- **Safety:** Renovate runs `npm run fix` on every branch, and the Vercel build runs tests, lint and type-check
 
 ### Lock File Discipline
 
