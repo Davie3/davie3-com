@@ -109,7 +109,8 @@ Key locations:
 
 ### Dependency Management
 
-- **Next.js ecosystem:** Exact versions (breaking changes in minors)
-- **All others:** Caret ranges (`^x.y.z`) for immediate security patches
+- **All direct deps:** Exact versions (no `^`/`~`), so lock file maintenance only moves transitive deps
+- **Updates:** Self-hosted Renovate (`renovate.json`) opens and automerges minor/patch PRs after a 7-day cooldown; majors need review
+- **Toolchain:** Node and npm pinned in `.mise.toml` and `.nvmrc` (npm also in `engines`); Renovate keeps them in sync
 - Always commit `package-lock.json`
 - CI/CD validates compatibility
