@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useReducedMotion } from 'framer-motion';
+import { motion, useReducedMotion } from 'motion/react';
 import { usePathname } from 'next/navigation';
 
 import { PAGE_ANIMATION } from '@/constants/config/animation-config';

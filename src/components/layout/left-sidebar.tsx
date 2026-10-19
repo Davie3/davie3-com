@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useReducedMotion } from 'framer-motion';
+import { motion, useReducedMotion } from 'motion/react';
 
 import { ANIMATION_DURATIONS } from '@/constants/config/animation-config';
 import { SOCIAL_LINKS_DATA } from '@/constants/config/social-config';
