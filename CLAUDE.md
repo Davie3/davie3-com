@@ -98,7 +98,7 @@ Key locations:
 
 - Tailwind utility classes via `cn()` helper
 - CSS variables for theming
-- Framer Motion for animations
+- Motion (`motion/react`, formerly Framer Motion) for animations
 - Respect `prefers-reduced-motion`
 
 **Git:**

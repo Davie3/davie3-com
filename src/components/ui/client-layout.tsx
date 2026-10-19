@@ -1,6 +1,6 @@
 'use client';
 
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence } from 'motion/react';
 
 import { AppHeader } from '@/components/layout/app-header';
 import { LeftSidebar } from '@/components/layout/left-sidebar';

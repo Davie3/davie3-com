@@ -1,8 +1,8 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { motion, useReducedMotion } from 'framer-motion';
 import { CircleCheck, Mail, MessageSquare, User } from 'lucide-react';
+import { motion, useReducedMotion } from 'motion/react';
 import { useState } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
 
