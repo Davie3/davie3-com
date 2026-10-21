@@ -40,9 +40,9 @@ export const URL_MAPPINGS: readonly UrlMapping[] = [
   { source: '/demos', destination: '/portfolio', permanent: true },
   { source: '/examples', destination: '/portfolio', permanent: true },
 
-  // External subdomain redirects
-  { source: '/blog', destination: 'http://blog.davie3.com', permanent: true },
-  { source: '/tech', destination: 'http://tech.davie3.com', permanent: true },
+  // Retired blog/tech subdomains -> Home (the subdomains themselves redirect there)
+  { source: '/blog', destination: '/', permanent: true },
+  { source: '/tech', destination: '/', permanent: true },
 
   // Legacy Squarespace pages -> Home
   { source: '/photos', destination: '/', permanent: true },
