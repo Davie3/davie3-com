@@ -155,12 +155,10 @@ Standard order:
 
 ### Input Sanitization
 
-Location: `src/app/api/contact/route.ts`
+Location: `src/lib/utils/sanitize.ts`, used by `src/app/api/contact/route.ts` and `src/lib/utils/email-template.ts`
 
-Two-layer approach:
-
-1. `sanitize-html` - Remove dangerous HTML
-2. `xss` - Additional XSS protection
+1. `sanitizeToPlainText()` - `sanitize-html` strips every tag and attribute, then entities are decoded back to plain text. Used for the subject, reply-to and plain-text body.
+2. `escapeHtml()` - Escapes values only where they're inserted into the HTML email template.
 
 Applied to all user input before email send.
 
@@ -179,7 +177,7 @@ Configured in:
 
 ### Content Security Policy
 
-Strict CSP with nonces for inline scripts and styles. Configured in `next.config.ts`.
+Configured in `next.config.ts` and applied to every route. Allowlists the Cloudflare (Web Analytics, Turnstile) and Vercel (Live, Analytics) hosts the site loads from. No nonces: `script-src` allows `'unsafe-inline'` and `'unsafe-eval'`, and `style-src` allows `'unsafe-inline'`.
 
 ## Data Fetching Patterns
 
@@ -312,7 +310,7 @@ Vercel CI/CD runs this automatically.
 
 1. Client submits form with Turnstile token
 2. API route validates Turnstile with Cloudflare
-3. Two-layer input sanitization (sanitize-html → xss)
+3. Input stripped to plain text (sanitize-html), then HTML-escaped where it enters the HTML template
 4. Email template generation (HTML + plain text)
 5. SendGrid API sends email
 6. Success/error response to client
