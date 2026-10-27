@@ -95,7 +95,7 @@
       "groupName": "vitest"
     },
     {
-      "description": "Hold TypeScript on 6.x",
+      "description": "Hold TypeScript on 6.x until the repo's tooling (e.g. typescript-eslint) supports 7; then lift this hold",
       "matchPackageNames": ["typescript"],
       "allowedVersions": "<7"
     },
