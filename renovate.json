@@ -57,9 +57,15 @@
       "semanticCommitType": "ci"
     },
     {
-      "description": "Keep the Node runtime on one version across mise and .nvmrc",
+      "description": "Keep the Node runtime on one version across mise, .nvmrc and engines; hold on Node 24 until the next major is chosen",
       "matchPackageNames": ["node"],
-      "groupName": "node"
+      "groupName": "node",
+      "allowedVersions": "<25"
+    },
+    {
+      "description": "Move npm in .mise.toml and engines together",
+      "matchPackageNames": ["npm"],
+      "groupName": "npm"
     },
     {
       "description": "Lint tooling tracks the eslint core",
