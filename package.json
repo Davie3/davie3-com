@@ -31,7 +31,7 @@
     }
   },
   "dependencies": {
-    "@hookform/resolvers": "5.9.2",
+    "@hookform/resolvers": "6.0.0",
     "@marsidev/react-turnstile": "1.6.3",
     "@sendgrid/mail": "8.1.6",
     "@vercel/analytics": "2.0.1",
