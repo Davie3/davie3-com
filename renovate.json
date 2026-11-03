@@ -17,7 +17,8 @@
   "postUpgradeTasks": {
     "commands": ["npm ci --ignore-scripts", "npm run fix"],
     "fileFilters": ["**/*"],
-    "executionMode": "branch"
+    "executionMode": "branch",
+    "installTools": { "node": {}, "npm": {} }
   },
   "packageRules": [
     {
