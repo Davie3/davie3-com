@@ -41,7 +41,7 @@
     "@vercel/speed-insights": "2.0.0",
     "clsx": "2.1.1",
     "entities": "8.1.0",
-    "lucide-react": "1.66.0",
+    "lucide-react": "1.67.0",
     "motion": "14.9.0",
     "next": "16.4.4",
     "postcss": "8.5.32",
