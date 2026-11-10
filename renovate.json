@@ -4,6 +4,7 @@
   "ignorePresets": [":semanticPrefixFixDepsChoreOthers"],
   "enabledManagers": ["npm", "mise", "nvm", "github-actions"],
   "minimumReleaseAge": "7 days",
+  "timezone": "America/Los_Angeles",
   "prHourlyLimit": 0,
   "labels": ["dependencies"],
   "reviewers": ["Davie3"],
@@ -13,7 +14,12 @@
   "semanticCommitType": "chore",
   "osvVulnerabilityAlerts": true,
   "vulnerabilityAlerts": { "addLabels": ["security"] },
-  "lockFileMaintenance": { "enabled": true, "automerge": true },
+  "lockFileMaintenance": {
+    "enabled": true,
+    "automerge": true,
+    "schedule": ["* 4 * * 1"],
+    "automergeSchedule": ["* 0-3,5-23 * * *"]
+  },
   "postUpgradeTasks": {
     "commands": ["npm ci --ignore-scripts", "npm run fix"],
     "fileFilters": ["**/*"],
