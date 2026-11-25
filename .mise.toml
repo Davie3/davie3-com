@@ -4,5 +4,5 @@ minimum_release_age = "7d"
 [tools]
 gh = "latest"
 node = "24.22.3"
-npm = "12.2.2"
+npm = "12.2.3"
 vercel = "latest"
